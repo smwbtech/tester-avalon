@@ -1,0 +1,42 @@
+{
+  "name": "tester",
+  "version": "0.1.0",
+  "description": "Tester is SPA that allows you to create tests and polls. Final project for avalon.ru",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smwbtech/tester-avalon.git"
+  },
+  "keywords": [
+    "test",
+    "polls"
+  ],
+  "author": "Roman Privalov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smwbtech/tester-avalon/issues"
+  },
+  "homepage": "https://github.com/smwbtech/tester-avalon#readme",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.37",
+    "@babel/preset-env": "^7.0.0-beta.37",
+    "babel-loader": "^7.1.2",
+    "css-loader": "^0.28.8",
+    "file-loader": "^1.1.6",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-import": "^11.0.0",
+    "postcss-loader": "^2.0.10",
+    "style-loader": "^0.19.1",
+    "url-loader": "^0.6.2",
+    "vue-loader": "^13.7.0",
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "vue": "^2.5.13",
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "^2.5.13"
+  }
+}
