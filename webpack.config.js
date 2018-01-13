@@ -4,7 +4,7 @@ module.exports = {
     entry: './src/App.js',
     output: {
         filename: 'build.js',
-        path: path.resolve(__dirname, 'public/js')
+        path: path.resolve(__dirname, 'dist/js')
     },
 
     devtool: 'source-map',

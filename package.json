@@ -4,7 +4,8 @@
   "description": "Tester is SPA that allows you to create tests and polls. Final project for avalon.ru",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,9 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.37",
     "@babel/preset-env": "^7.0.0-beta.37",
-    "babel-loader": "^7.1.2",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^8.0.0-beta.0",
+    "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.8",
     "file-loader": "^1.1.6",
     "postcss-cssnext": "^3.0.2",
@@ -35,6 +38,7 @@
     "webpack": "^3.10.0"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.13"
