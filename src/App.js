@@ -8,6 +8,7 @@ import Auth from './js/auth.js';
 
 import login from './vue-comp/login.vue';
 import tester from './vue-comp/tester.vue';
+import newTest from './vue-comp/new-test.vue';
 
 
 
@@ -34,6 +35,14 @@ const router = new Router({
         {
             path: '/tester',
             component: tester,
+            meta: {
+                requiredAuth: true
+            }
+        },
+
+        {
+            path: '/newtest',
+            component: newTest,
             meta: {
                 requiredAuth: true
             }
@@ -75,7 +84,8 @@ let app = new Vue({
 
     components: {
         'login': login,
-        'tester': tester
+        'tester': tester,
+        'new-test': newTest
     },
 
     methods: {

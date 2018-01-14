@@ -3,6 +3,9 @@
     <div class="tester-page">
 
         <side-menu></side-menu>
+        <section class="content">
+
+        </section>
 
     </div>
 
@@ -11,6 +14,7 @@
 <script>
 
 import sideMenu from './side-menu.vue';
+import newTest from './new-test.vue';
 
 export default {
 
@@ -26,6 +30,10 @@ export default {
 
 .tester-page {
     width: 100%;
+}
+
+.content {
+    /* margin-left: calc(var(--column) * 6); */
 }
 
 </style>

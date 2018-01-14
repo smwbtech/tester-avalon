@@ -1,23 +1,26 @@
 <template lang="html">
 
-    <aside class="side-menu">
-        <p><a href="#">profile</a></p>
+    <div class="menu">
 
-        <nav class="side-menu-nav">
-            <ul>
-                <li><router-link to="/tester">Мои тесты</router-link></li>
-                <li><router-link to="/tester/newtest">Новый тест</router-link></li>
-                <li><router-link to="/tester/respondents">Респонденты</router-link></li>
-                <li><router-link to="/tester/statistic">Статистика</router-link></li>
-                <li><a
-                        href="exit"
-                        @click.prevent="logout"
-                    >
-                    Выход</a></li>
-            </ul>
-        </nav>
+        <aside class="side-menu">
+            <p><a href="#">profile</a></p>
 
-    </aside>
+            <nav class="side-menu-nav">
+                <ul>
+                    <li><router-link to="/tester">Мои тесты</router-link></li>
+                    <li><router-link to="/newtest">Новый тест</router-link></li>
+                    <li><router-link to="/tester/respondents">Респонденты</router-link></li>
+                    <li><router-link to="/tester/statistic">Статистика</router-link></li>
+                    <li><a
+                            href="exit"
+                            @click.prevent="logout"
+                        >
+                        Выход</a></li>
+                </ul>
+            </nav>
+
+        </aside>
+    </div>
 
 </template>
 
@@ -45,7 +48,13 @@ export default {
 
 @import './../css/variables.css';
 
+.menu {
+    width: calc(var(--column) * 4);
+    height: 100vh;
+}
+
 .side-menu {
+    z-index: 102;
     position: fixed;
     top: 0;
     left: 0;
