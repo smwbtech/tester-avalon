@@ -134,16 +134,24 @@ export default {
 
         // Обработчик события регистрации пользователя
         registration(e) {
-            // console.log(this.regFormData);
             let res = Registration.checkData(this.regFormData);
             if(!res.success) {
                 this.regFormErr = res.errorMsg;
                 //TODO: Сброс текст ошибки по таймауту
             }
             else {
-                axios.post('php/auth.php', this.regFormData)
-                .then( (res) => console.log(res))
-                .catch( (err) => console.log(err));
+                axios.post('php/reg.php', this.regFormData)
+                .then( (res) => {
+                    if(!res.data.success) {
+                        throw new Error(res.data.errorMsg);
+                    }
+                    else {
+                        this.$emit('login');
+                    }
+                })
+                .catch( (err) => {
+                    this.regFormErr = err.message;
+                });
             }
         }
     }

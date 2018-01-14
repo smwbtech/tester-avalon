@@ -1,7 +1,9 @@
 <?php
 
+    session_start();
+
     include_once "config.php";
-    include_once "jwt_functions.php";
+    include_once "functions.php";
 
     // axios отправляет данные в виде json файла, принимаем его из потока и сохраняем, как глобальны массив $_POST
     $_POST = json_decode(file_get_contents('php://input'), true);
@@ -26,21 +28,24 @@
                         $res["errorMsg"] = "Ошибка соединения с базой данных, попробуйте зарегистрироваться позже";
         	            $res["errorText"] = mysqli_connect_error();
                         echo json_encode($res);
+                        exit();
                 }
                 else {
                     mysqli_set_charset($db, 'UTF8');
-			        $userEmail = mysqli_real_escape_string($db, htmlspecialchars($userEmail));
+
 
                     // Проверяем, есть ли пользователь с таким Email в базе данных
-                    $check = mysqli_query('
-                        SELECT 1 FROM user
-                        WHERE user_email = "' . $userEmail . ';"
+                    $check = mysqli_query($db, '
+                        SELECT * FROM user
+                        WHERE user_email = "' . $userEmail . '";
                     ');
 
                     // Если есть то вернем ошибку
                     if(mysqli_num_rows($check)) {
                         $res["success"] = false;
                         $res["errorMsg"] = "Пользователь с таким email уже существует, введите другой email";
+                        echo json_encode($res);
+                        exit();
                     }
 
                     else {
@@ -48,6 +53,7 @@
                         // Проверяем пароль
                         if(userPasswordCheck($userPassword)) {
                             $userPassword = password_hash($userPassword, PASSWORD_BCRYPT);
+                            $userEmail = mysqli_real_escape_string($db, htmlspecialchars($userEmail));
 
                             mysqli_query($db, '
 		                        INSERT INTO user SET
@@ -58,6 +64,22 @@
                                 user_company = "' . $userCompany . '";
 	                       ');
 
+                            $id      = mysqli_insert_id($db);
+                            $expire  = time() + 1000 * 60 * 60 * 24;
+                            $session = $_COOKIE['PHPSESSID'];
+                            $token   = generator();
+
+                            mysqli_query($db, '
+                                INSERT INTO connect SET
+                                session = "' . $session . '",
+                                token   = "' . $token   . '",
+                                user_id = "' . $id      . '",
+                                expire  = "FROM_UNIXTIME(' . $expire . ')";
+                            ');
+
+                            setcookie('token', $token, time() + 60 * 60 * 24, '/');
+
+                            echo json_encode($res);
 
                         }
 

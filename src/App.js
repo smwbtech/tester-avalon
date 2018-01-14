@@ -45,23 +45,21 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiredAuth) {
-    if (!Auth.checkUser()) {
-        console.log(to.path)
+    if (to.meta.requiredAuth) {
         console.log(Auth.checkUser());
-        router.push('/auth')
-    }
+        if (!Auth.checkUser()) {
+            console.log(to.path)
+            console.log(Auth.checkUser());
+            router.push('/auth')
+        }
+        else {
+            next()
+        }
+  }
     else {
         next()
     }
-  } else {
-    next()
-  }
 });
-
-
-console.log(router);
-
 
 
 let app = new Vue({
@@ -79,14 +77,14 @@ let app = new Vue({
     },
 
     methods: {
-        menuHandler(state, msg) {
-            this.menuState = state;
-            this.menuMsg = msg;
-        },
-        //Событие обрабатывающее клик по call-action-button
-        openSidemenuForm(msg) {
-            console.log(this);
-            this.menuHandler(true, msg);
+        //Событие успешной авторизации или регистрации
+        loginHandler() {
+            console.log('вот тут должна сработать переадресация');
+            this.authinticate = true;
+            // DELETE
+            localStorage.setItem('tester_token', true);
+            // DELETEEND
+            router.push({path: '/tester'});
         }
     }
 }).$mount('#app');
