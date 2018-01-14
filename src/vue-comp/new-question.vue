@@ -19,6 +19,7 @@
             :key="variant.id"
             @removeVar="vars.splice(index, 1)"
             @updateVar="updateVarHandler"
+            @updateRightVar="updateRightVarHandler"
             ></single>
             <multiple v-else></multiple>
         </div>
@@ -77,14 +78,26 @@ export default {
         },
         //Удаляем вариант ответа
         removeVarHandler(index) {
-            // console.log(this.vars);
-            // console.log(index);
-            // console.log(this.vars[index]);
             this.vars.splice(index, 1);
         },
         //Обновляем текст варианта
         updateVarHandler(index, text) {
             this.vars[index].text = text;
+        },
+        //Выбираем правильный вариант вопроса
+        updateRightVarHandler(index) {
+
+
+            this.$children.forEach( (v,i) => {
+                if(i === index) {
+                    v.isRight ? v.isRight = false : v.isRight = true;
+                    this.vars[index].isRight ? this.vars[index].isRight = false : this.vars[index].isRight = true;
+                }
+                else {
+                    v.isRight = false;
+                    this.vars[i].isRight = false;
+                }
+            })
         }
     }
 

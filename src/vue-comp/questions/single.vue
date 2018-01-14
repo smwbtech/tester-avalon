@@ -3,7 +3,7 @@
     <div class="question-var">
         <input type="text" name="" value="" placeholder="Вариант ответа" :placeholder="placeholderText" v-model="varText" @input="updateInfo">
         <img @click="deleteVar" src="img/cross.svg" alt="">
-        <label for="right_var">правильный</label>
+        <label @click="rightVar" for="right_var" :class="{active: isRight}">правильный</label>
         <input type="checkbox" name="" value="" id="right_var">
     </div>
 
@@ -17,7 +17,8 @@ export default {
     data() {
         return {
             varText: '',
-            placeholderText: this.text
+            placeholderText: this.text,
+            isRight: this.status
         }
     },
 
@@ -32,6 +33,13 @@ export default {
         updateInfo() {
             let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
             this.$emit('updateVar', index, this.varText);
+        },
+
+        // Обнавляем статус правильного ответа варианта
+        rightVar() {
+            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
+            // console.log(this.$parent);
+            this.$emit('updateRightVar', index);
         }
     }
 }
