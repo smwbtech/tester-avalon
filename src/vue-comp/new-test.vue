@@ -40,7 +40,14 @@
 
                 </div>
 
-                <new-question v-for="n in questionsNum" :key="n"></new-question>
+                <new-question
+                    v-for="question in questions"
+                    :key="question.id"
+                    :questiontype="question.type"
+                    :questiontext="question.text"
+                    :questionid="question.id"
+                    @delete-question="deleteQuestionHandler"
+                ></new-question>
 
                 <button
                     type="button"
@@ -72,12 +79,19 @@ export default {
 
    data() {
        return {
-           questionsNum: 1,
+           questions: [
+               {
+                   type: 1,
+                   text: 'Введите свое описание вопроса',
+                   id: 1
+               }
+           ],
            testOptions: {
                timeLimit: false,
                time: 60,
                anonym: false
-           }
+           },
+           nextQuestionId: 2
        }
    },
 
@@ -106,8 +120,23 @@ export default {
    },
 
    methods: {
+       // Добавление нового вопроса
        addQuestion() {
-           this.questionsNum++;
+           this.questions.push( {
+                type: 1,
+                text: 'Введите свое описание вопроса',
+                id: this.nextQuestionId
+            });
+            this.nextQuestionId++;
+       },
+       // Удаляем вопрос
+       deleteQuestionHandler(id) {
+           console.log('ded');
+           let index = this.questions.map( (v,i) => {
+               if(v.id === id) return i;
+           });
+           index.length > 1 ? index = index.filter( (v) => {if(typeof v == 'number') return v})[0] : index = index[0];
+           this.questions.splice(index, 1);
        }
    }
 

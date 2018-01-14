@@ -38,7 +38,6 @@ export default {
         // Обнавляем статус правильного ответа варианта
         rightVar() {
             let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
-            // console.log(this.$parent);
             this.$emit('updateRightVar', index);
         }
     }

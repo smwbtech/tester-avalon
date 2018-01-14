@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 16);
+/******/ 	return __webpack_require__(__webpack_require__.s = 18);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -165,7 +165,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(30)
+var listToStyles = __webpack_require__(32)
 
 /*
 type StyleObject = {
@@ -2139,7 +2139,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(19);
+var	fixUrls = __webpack_require__(21);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -2683,7 +2683,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _reg = _interopRequireDefault(__webpack_require__(31));
+var _reg = _interopRequireDefault(__webpack_require__(33));
 
 var _axios = _interopRequireDefault(__webpack_require__(3));
 
@@ -2920,11 +2920,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_55efab35_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_side_menu_vue__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_55efab35_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_side_menu_vue__ = __webpack_require__(40);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(36)
+  __webpack_require__(38)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -3033,14 +3033,14 @@ exports.default = _default;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f85ad0a2_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_test_vue__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f85ad0a2_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_test_vue__ = __webpack_require__(55);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(39)
+  __webpack_require__(41)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -3087,6 +3087,31 @@ if (false) {(function () {
 
 /***/ }),
 /* 12 */
+/***/ (function(module, exports) {
+
+module.exports = function escape(url) {
+    // If url is already wrapped in quotes, remove them
+    if (/^['"].*['"]$/.test(url)) {
+        url = url.slice(1, -1);
+    }
+    // Should url be wrapped?
+    // See https://drafts.csswg.org/css-values-3/#urls
+    if (/["'() \t\n]/.test(url)) {
+        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
+    }
+
+    return url
+}
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+module.exports = "img/../img/add.svg";
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3099,10 +3124,17 @@ exports.default = void 0;
 
 var _sideMenu = _interopRequireDefault(__webpack_require__(9));
 
-var _newQuestion = _interopRequireDefault(__webpack_require__(41));
+var _newQuestion = _interopRequireDefault(__webpack_require__(43));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3170,12 +3202,17 @@ var _default = {
   },
   data: function data() {
     return {
-      questionsNum: 1,
+      questions: [{
+        type: 1,
+        text: 'Введите свое описание вопроса',
+        id: 1
+      }],
       testOptions: {
         timeLimit: false,
         time: 60,
         anonym: false
-      }
+      },
+      nextQuestionId: 2
     };
   },
   computed: {
@@ -3199,15 +3236,32 @@ var _default = {
     }
   },
   methods: {
+    // Добавление нового вопроса
     addQuestion: function addQuestion() {
-      this.questionsNum++;
+      this.questions.push({
+        type: 1,
+        text: 'Введите свое описание вопроса',
+        id: this.nextQuestionId
+      });
+      this.nextQuestionId++;
+    },
+    // Удаляем вопрос
+    deleteQuestionHandler: function deleteQuestionHandler(id) {
+      console.log('ded');
+      var index = this.questions.map(function (v, i) {
+        if (v.id === id) return i;
+      });
+      index.length > 1 ? index = index.filter(function (v) {
+        if (typeof v == 'number') return v;
+      })[0] : index = index[0];
+      this.questions.splice(index, 1);
     }
   }
 };
 exports.default = _default;
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3218,9 +3272,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _single = _interopRequireDefault(__webpack_require__(44));
+var _single = _interopRequireDefault(__webpack_require__(46));
 
-var _multiple = _interopRequireDefault(__webpack_require__(48));
+var _multiple = _interopRequireDefault(__webpack_require__(50));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3267,13 +3321,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 var _default = {
+  props: ['questiontype', 'questiontext', 'questionid'],
   components: {
     'single': _single.default,
     'multiple': _multiple.default
   },
   data: function data() {
     return {
-      questionType: 1,
+      questionType: this.questiontype ? this.questiontype : 1,
+      id: this.questionid,
       vars: [{
         text: 'Вариант ответа',
         isRight: false,
@@ -3313,13 +3369,17 @@ var _default = {
           _this.vars[i].isRight = false;
         }
       });
+    },
+    //Событие удаления вопроса
+    deleteQuestion: function deleteQuestion() {
+      this.$emit('delete-question', this.id);
     }
   }
 };
 exports.default = _default;
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3362,8 +3422,7 @@ var _default = {
     },
     // Обнавляем статус правильного ответа варианта
     rightVar: function rightVar() {
-      var index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el); // console.log(this.$parent);
-
+      var index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
       this.$emit('updateRightVar', index);
     }
   }
@@ -3371,7 +3430,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3396,25 +3455,25 @@ var _default = {};
 exports.default = _default;
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _variables = _interopRequireDefault(__webpack_require__(17));
+var _variables = _interopRequireDefault(__webpack_require__(19));
 
-var _style = _interopRequireDefault(__webpack_require__(20));
+var _style = _interopRequireDefault(__webpack_require__(22));
 
-var _vue = _interopRequireDefault(__webpack_require__(22));
+var _vue = _interopRequireDefault(__webpack_require__(24));
 
-var _vueRouter = _interopRequireDefault(__webpack_require__(25));
+var _vueRouter = _interopRequireDefault(__webpack_require__(27));
 
-var _auth = _interopRequireDefault(__webpack_require__(26));
+var _auth = _interopRequireDefault(__webpack_require__(28));
 
-var _login = _interopRequireDefault(__webpack_require__(27));
+var _login = _interopRequireDefault(__webpack_require__(29));
 
-var _tester = _interopRequireDefault(__webpack_require__(33));
+var _tester = _interopRequireDefault(__webpack_require__(35));
 
 var _newTest = _interopRequireDefault(__webpack_require__(11));
 
@@ -3492,13 +3551,13 @@ var app = new _vue.default({
 }).$mount('#app');
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(18);
+var content = __webpack_require__(20);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -3523,7 +3582,7 @@ if(false) {
 }
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -3537,7 +3596,7 @@ exports.push([module.i, ":root{font-family:Marta;font-size:16px;line-height:1.4;
 
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports) {
 
 
@@ -3632,13 +3691,13 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(21);
+var content = __webpack_require__(23);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -3663,7 +3722,7 @@ if(false) {
 }
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -3671,13 +3730,13 @@ exports = module.exports = __webpack_require__(0)(false);
 exports.push([module.i, "@import url(http://fonts.fontstorage.com/import/marta.css);", ""]);
 
 // module
-exports.push([module.i, "button:focus,input:focus,select:focus,textarea:focus{outline:none}h1,h2,h3,h4,h5,h6{margin:0;padding:0}body{margin:0}a{color:var(--blue);text-decoration:none}ul{margin:0;padding:0}", ""]);
+exports.push([module.i, "button:focus,input:focus,select:focus,textarea:focus{outline:none}input{font-family:marta}h1,h2,h3,h4,h5,h6{margin:0;padding:0}body{margin:0}a{color:var(--blue);text-decoration:none}ul{margin:0;padding:0}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
@@ -14479,10 +14538,10 @@ return Vue$3;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(23).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(25).setImmediate))
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -14535,13 +14594,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(24);
+__webpack_require__(26);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -14734,7 +14793,7 @@ exports.clearImmediate = clearImmediate;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(6)))
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -17371,7 +17430,7 @@ return VueRouter;
 
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17399,7 +17458,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17407,11 +17466,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_71257c89_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_login_vue__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_71257c89_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_login_vue__ = __webpack_require__(34);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(28)
+  __webpack_require__(30)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -17457,13 +17516,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(29);
+var content = __webpack_require__(31);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17483,7 +17542,7 @@ if(false) {
 }
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -17497,7 +17556,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports) {
 
 /**
@@ -17530,7 +17589,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17591,7 +17650,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17941,7 +18000,7 @@ if (false) {
 }
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17949,11 +18008,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b8444c62_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_tester_vue__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b8444c62_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_tester_vue__ = __webpack_require__(56);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(34)
+  __webpack_require__(36)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -17999,13 +18058,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(35);
+var content = __webpack_require__(37);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18025,7 +18084,7 @@ if(false) {
 }
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -18039,13 +18098,13 @@ exports.push([module.i, "\n.tester-page{width:100%\n}", "", {"version":3,"source
 
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(37);
+var content = __webpack_require__(39);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18065,7 +18124,7 @@ if(false) {
 }
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -18079,7 +18138,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18172,13 +18231,13 @@ if (false) {
 }
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(40);
+var content = __webpack_require__(42);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18198,34 +18257,34 @@ if(false) {
 }
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var escape = __webpack_require__(55);
+var escape = __webpack_require__(12);
 exports = module.exports = __webpack_require__(0)(true);
 // imports
 
 
 // module
-exports.push([module.i, "\n.newtest-page{display:flex\n}\n.newtest-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16)\n}\n.new-test-nav{z-index:101;position:fixed;top:0;left:0;width:100%;padding:20px 0;padding-left:calc(var(--column) * 6);background-color:#fff\n}\n.new-test-nav li{list-style:none;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test-nav li:hover{opacity:1\n}\n.new-test-nav li:last-child{padding-left:40px\n}\n.new-test-form{padding-top:calc(var(--column) * 2)\n}\n.new-test-form__title{display:block;width:100%;border:none;border-bottom:1px solid var(--blue);margin-bottom:40px;font-family:marta;font-size:3rem;color:var(--blue)\n}\n.new-test-form__options{background-color:#dddde8;padding:20px\n}\n.new-test-form__options h3{padding:0;margin:0;margin-bottom:20px;color:#8496b1\n}\n.new-test-form__description{font-family:marta;background-color:#dddde8;border:none;margin-bottom:20px;width:100%;max-width:100%;min-width:100%;max-height:calc(var(--row) * 2);min-height:calc(var(--row) * 2);height:calc(var(--row) * 2);border:1px solid var(--blue)\n}\n.new-test-form__options label{color:#8496b1\n}\n.new-test-form__options label.active{color:var(--purple)\n}\n.new-test-form__inputs>*{display:inline-block\n}\n.new-test-form__inputs img{max-width:30px;margin-bottom:-10px;padding-left:20px\n}\n.new-test-form__inputs img:first-child{padding-left:0\n}\n.new-test-form__inputs input[type=text]{background-color:#dddde8;border:none;border-bottom:1px solid var(--blue);width:50px;text-align:center\n}\n.new-test-form__inputs input[type=checkbox]{display:none\n}\n.new-test__add-question{border:none;margin:40px 0;padding-left:40px;font-family:marta;font-size:1.2rem;font-weight:700;cursor:pointer;background-image:url(" + escape(__webpack_require__(56)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test__add-question:hover{opacity:1\n}\n.fade-enter-active,.fade-leave-active{transition:opacity .3s ease-in-out\n}\n.fade-enter,.fade-leave-to{opacity:0\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-test.vue"],"names":[],"mappings":";AAqHA,cAGA,YAAA;CACA;AAEA,uBACA,oCAAA,qCACA,8BACA;CACA;AAEA,cACA,YAAA,eACA,MACA,OACA,WACA,eACA,qCACA,qBACA;CACA;AAEA,iBACA,gBAAA,qBACA,WACA,kCAGA;CACA;AAEA,uBACA,SAAA;CACA;AAEA,4BACA,iBAAA;CACA;AAEA,eACA,mCAAA;CACA;AAEA,sBACA,cAAA,WACA,YACA,oCACA,mBACA,kBACA,eACA,iBACA;CACA;AAEA,wBACA,yBAAA,YACA;CACA;AAEA,2BACA,UAAA,SACA,mBACA,aACA;CACA;AAEA,4BACA,kBAAA,yBACA,YACA,mBACA,WACA,eACA,eACA,gCACA,gCACA,4BACA,4BACA;CACA;AAEA,8BACA,aAAA;CACA;AAEA,qCACA,mBAAA;CACA;AAEA,yBACA,oBAAA;CACA;AAEA,2BACA,eAAA,oBACA,iBACA;CACA;AAEA,uCACA,cAAA;CACA;AAEA,wCACA,yBAAA,YACA,oCACA,WACA,iBACA;CACA;AAEA,4CACA,YAAA;CACA;AAEA,wBACA,YAAA,cACA,kBACA,kBACA,iBACA,gBACA,eACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,8BACA,SAAA;CACA;AAEA,sCACA,kCAAA;CACA;AAEA,2BACA,SAAA;CACA","file":"new-test.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"newtest-page\">\r\n\r\n        <side-menu></side-menu>\r\n        <section class=\"content\">\r\n\r\n            <nav class=\"new-test-nav\">\r\n                <ul>\r\n                    <li><a href=\"save\">Сохранить</a></li>\r\n                    <li><a href=\"publish\">Опубликовать</a></li>\r\n                </ul>\r\n            </nav>\r\n\r\n            <form class=\"new-test-form\">\r\n\r\n                <input type=\"text\" class=\"new-test-form__title\" placeholder=\"Название теста\">\r\n\r\n                <div class=\"new-test-form__options\">\r\n                    <h3>Описание:</h3>\r\n                    <textarea class=\"new-test-form__description\" name=\"test_description\"></textarea>\r\n\r\n                    <div class=\"new-test-form__inputs\">\r\n                        <img :src=\"timeToggle\" alt=\"\">\r\n                        <label for=\"time_limit\" :class=\"labelTime\">Лимит по времени</label>\r\n                        <input type=\"checkbox\" name=\"time_limit\" id=\"time_limit\" v-model=\"testOptions.timeLimit\">\r\n                        <transition name=\"fade\">\r\n                        <img src=\"img/stopwatch.svg\" alt=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <label class=\"active\" for=\"time\" v-if=\"testOptions.timeLimit\">Время в мин.:</label>\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <input type=\"text\" name=\"time\" id=\"time\" value=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <img :src=\"anonymToggle\" alt=\"\">\r\n                        <label for=\"anonym\" :class=\"labelAnonym\">Анонимное прохождение</label>\r\n                        <input type=\"checkbox\" name=\"anonym\" id=\"anonym\" v-model=\"testOptions.anonym\">\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <new-question v-for=\"n in questionsNum\" :key=\"n\"></new-question>\r\n\r\n                <button\r\n                    type=\"button\"\r\n                    name=\"button\"\r\n                    @click=\"addQuestion\"\r\n                    class=\"new-test__add-question\"\r\n                >\r\n                добавить вопрос</button>\r\n\r\n            </form>\r\n\r\n        </section>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport sideMenu from './side-menu.vue';\r\nimport newQuestion from './new-question.vue';\r\n\r\nexport default {\r\n\r\n    components: {\r\n       'side-menu': sideMenu,\r\n       'new-question': newQuestion\r\n   },\r\n\r\n   data() {\r\n       return {\r\n           questionsNum: 1,\r\n           testOptions: {\r\n               timeLimit: false,\r\n               time: 60,\r\n               anonym: false\r\n           }\r\n       }\r\n   },\r\n\r\n   computed: {\r\n       // Объект класса переключателя ограничения по вреиени\r\n       timeToggle() {\r\n           return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       // Объект класса переключателя анонимного прохождения\r\n       anonymToggle() {\r\n           return this.testOptions.anonym === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       labelTime() {\r\n           return {\r\n               'active': this.testOptions.timeLimit\r\n           }\r\n       },\r\n\r\n       labelAnonym() {\r\n           return {\r\n               'active' : this.testOptions.anonym\r\n           }\r\n       }\r\n   },\r\n\r\n   methods: {\r\n       addQuestion() {\r\n           this.questionsNum++;\r\n       }\r\n   }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .newtest-page {\r\n        /* margin-left: calc(var(--column) * 6); */\r\n\r\n        display: flex;\r\n    }\r\n\r\n    .newtest-page .content {\r\n        margin-left: calc(var(--column) * 2);\r\n        margin-right: calc(var(--column) * 2);\r\n        width: calc(var(--column) * 16);\r\n    }\r\n\r\n    .new-test-nav {\r\n        z-index: 101;\r\n        position: fixed;\r\n        top: 0px;\r\n        left: 0px;\r\n        width: 100%;\r\n        padding: 20px 0px;\r\n        padding-left: calc(var(--column) * 6);\r\n        background-color: #fff;\r\n    }\r\n\r\n    .new-test-nav li {\r\n        list-style: none;\r\n        display: inline-block;\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test-nav li:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .new-test-nav li:last-child{\r\n        padding-left: 40px;\r\n    }\r\n\r\n    .new-test-form {\r\n        padding-top: calc(var(--column) * 2);\r\n    }\r\n\r\n    .new-test-form__title {\r\n        display: block;\r\n        width: 100%;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        margin-bottom: 40px;\r\n        font-family: 'marta';\r\n        font-size: 3rem;\r\n        color: var(--blue);\r\n    }\r\n\r\n    .new-test-form__options {\r\n        background-color: #dddde8;\r\n        padding: 20px;\r\n    }\r\n\r\n    .new-test-form__options h3 {\r\n        padding: 0;\r\n        margin: 0;\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__description {\r\n        font-family: 'marta';\r\n        background-color: #dddde8;\r\n        border: none;\r\n        margin-bottom: 20px;\r\n        width: 100%;\r\n        max-width: 100%;\r\n        min-width: 100%;\r\n        max-height: calc(var(--row) * 2);\r\n        min-height: calc(var(--row) * 2);\r\n        height: calc(var(--row) * 2);\r\n        border: 1px solid var(--blue);\r\n    }\r\n\r\n    .new-test-form__options label {\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__options label.active {\r\n        color: var(--purple);\r\n    }\r\n\r\n    .new-test-form__inputs > * {\r\n        display: inline-block;\r\n    }\r\n\r\n    .new-test-form__inputs img {\r\n        max-width: 30px;\r\n        margin-bottom: -10px;\r\n        padding-left: 20px;\r\n    }\r\n\r\n    .new-test-form__inputs img:first-child {\r\n        padding-left: 0px;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"text\"] {\r\n        background-color: #dddde8;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        width: 50px;\r\n        text-align: center;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    .new-test__add-question {\r\n        border: none;\r\n        margin: 40px 0px;\r\n        padding-left: 40px;\r\n        font-family: 'marta';\r\n        font-size: 1.2rem;\r\n        font-weight: bold;\r\n        cursor: pointer;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test__add-question:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .fade-enter-active, .fade-leave-active {\r\n        transition: opacity .3s ease-in-out;\r\n    }\r\n\r\n    .fade-enter, .fade-leave-to {\r\n        opacity: 0;\r\n    }\r\n\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.newtest-page{display:flex\n}\n.newtest-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16)\n}\n.new-test-nav{z-index:101;position:fixed;top:0;left:0;width:100%;padding:20px 0;padding-left:calc(var(--column) * 6);background-color:#fff\n}\n.new-test-nav li{list-style:none;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test-nav li:hover{opacity:1\n}\n.new-test-nav li:last-child{padding-left:40px\n}\n.new-test-form{padding-top:calc(var(--column) * 2)\n}\n.new-test-form__title{display:block;width:100%;border:none;border-bottom:1px solid var(--blue);margin-bottom:40px;font-family:marta;font-size:3rem;color:var(--blue)\n}\n.new-test-form__options{background-color:#dddde8;padding:20px\n}\n.new-test-form__options h3{padding:0;margin:0;margin-bottom:20px;color:#8496b1\n}\n.new-test-form__description{font-family:marta;background-color:#dddde8;border:none;margin-bottom:20px;width:100%;max-width:100%;min-width:100%;max-height:calc(var(--row) * 2);min-height:calc(var(--row) * 2);height:calc(var(--row) * 2);border:1px solid var(--blue)\n}\n.new-test-form__options label{color:#8496b1\n}\n.new-test-form__options label.active{color:var(--purple)\n}\n.new-test-form__inputs>*{display:inline-block\n}\n.new-test-form__inputs img{max-width:30px;margin-bottom:-10px;padding-left:20px\n}\n.new-test-form__inputs img:first-child{padding-left:0\n}\n.new-test-form__inputs input[type=text]{background-color:#dddde8;border:none;border-bottom:1px solid var(--blue);width:50px;text-align:center\n}\n.new-test-form__inputs input[type=checkbox]{display:none\n}\n.new-test__add-question{border:none;margin:40px 0;padding-left:40px;font-family:marta;font-size:1.2rem;font-weight:700;cursor:pointer;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test__add-question:hover{opacity:1\n}\n.fade-enter-active,.fade-leave-active{transition:opacity .3s ease-in-out\n}\n.fade-enter,.fade-leave-to{opacity:0\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-test.vue"],"names":[],"mappings":";AAkJA,cAGA,YAAA;CACA;AAEA,uBACA,oCAAA,qCACA,8BACA;CACA;AAEA,cACA,YAAA,eACA,MACA,OACA,WACA,eACA,qCACA,qBACA;CACA;AAEA,iBACA,gBAAA,qBACA,WACA,kCAGA;CACA;AAEA,uBACA,SAAA;CACA;AAEA,4BACA,iBAAA;CACA;AAEA,eACA,mCAAA;CACA;AAEA,sBACA,cAAA,WACA,YACA,oCACA,mBACA,kBACA,eACA,iBACA;CACA;AAEA,wBACA,yBAAA,YACA;CACA;AAEA,2BACA,UAAA,SACA,mBACA,aACA;CACA;AAEA,4BACA,kBAAA,yBACA,YACA,mBACA,WACA,eACA,eACA,gCACA,gCACA,4BACA,4BACA;CACA;AAEA,8BACA,aAAA;CACA;AAEA,qCACA,mBAAA;CACA;AAEA,yBACA,oBAAA;CACA;AAEA,2BACA,eAAA,oBACA,iBACA;CACA;AAEA,uCACA,cAAA;CACA;AAEA,wCACA,yBAAA,YACA,oCACA,WACA,iBACA;CACA;AAEA,4CACA,YAAA;CACA;AAEA,wBACA,YAAA,cACA,kBACA,kBACA,iBACA,gBACA,eACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,8BACA,SAAA;CACA;AAEA,sCACA,kCAAA;CACA;AAEA,2BACA,SAAA;CACA","file":"new-test.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"newtest-page\">\r\n\r\n        <side-menu></side-menu>\r\n        <section class=\"content\">\r\n\r\n            <nav class=\"new-test-nav\">\r\n                <ul>\r\n                    <li><a href=\"save\">Сохранить</a></li>\r\n                    <li><a href=\"publish\">Опубликовать</a></li>\r\n                </ul>\r\n            </nav>\r\n\r\n            <form class=\"new-test-form\">\r\n\r\n                <input type=\"text\" class=\"new-test-form__title\" placeholder=\"Название теста\">\r\n\r\n                <div class=\"new-test-form__options\">\r\n                    <h3>Описание:</h3>\r\n                    <textarea class=\"new-test-form__description\" name=\"test_description\"></textarea>\r\n\r\n                    <div class=\"new-test-form__inputs\">\r\n                        <img :src=\"timeToggle\" alt=\"\">\r\n                        <label for=\"time_limit\" :class=\"labelTime\">Лимит по времени</label>\r\n                        <input type=\"checkbox\" name=\"time_limit\" id=\"time_limit\" v-model=\"testOptions.timeLimit\">\r\n                        <transition name=\"fade\">\r\n                        <img src=\"img/stopwatch.svg\" alt=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <label class=\"active\" for=\"time\" v-if=\"testOptions.timeLimit\">Время в мин.:</label>\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <input type=\"text\" name=\"time\" id=\"time\" value=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <img :src=\"anonymToggle\" alt=\"\">\r\n                        <label for=\"anonym\" :class=\"labelAnonym\">Анонимное прохождение</label>\r\n                        <input type=\"checkbox\" name=\"anonym\" id=\"anonym\" v-model=\"testOptions.anonym\">\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <new-question\r\n                    v-for=\"question in questions\"\r\n                    :key=\"question.id\"\r\n                    :questiontype=\"question.type\"\r\n                    :questiontext=\"question.text\"\r\n                    :questionid=\"question.id\"\r\n                    @delete-question=\"deleteQuestionHandler\"\r\n                ></new-question>\r\n\r\n                <button\r\n                    type=\"button\"\r\n                    name=\"button\"\r\n                    @click=\"addQuestion\"\r\n                    class=\"new-test__add-question\"\r\n                >\r\n                добавить вопрос</button>\r\n\r\n            </form>\r\n\r\n        </section>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport sideMenu from './side-menu.vue';\r\nimport newQuestion from './new-question.vue';\r\n\r\nexport default {\r\n\r\n    components: {\r\n       'side-menu': sideMenu,\r\n       'new-question': newQuestion\r\n   },\r\n\r\n   data() {\r\n       return {\r\n           questions: [\r\n               {\r\n                   type: 1,\r\n                   text: 'Введите свое описание вопроса',\r\n                   id: 1\r\n               }\r\n           ],\r\n           testOptions: {\r\n               timeLimit: false,\r\n               time: 60,\r\n               anonym: false\r\n           },\r\n           nextQuestionId: 2\r\n       }\r\n   },\r\n\r\n   computed: {\r\n       // Объект класса переключателя ограничения по вреиени\r\n       timeToggle() {\r\n           return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       // Объект класса переключателя анонимного прохождения\r\n       anonymToggle() {\r\n           return this.testOptions.anonym === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       labelTime() {\r\n           return {\r\n               'active': this.testOptions.timeLimit\r\n           }\r\n       },\r\n\r\n       labelAnonym() {\r\n           return {\r\n               'active' : this.testOptions.anonym\r\n           }\r\n       }\r\n   },\r\n\r\n   methods: {\r\n       // Добавление нового вопроса\r\n       addQuestion() {\r\n           this.questions.push( {\r\n                type: 1,\r\n                text: 'Введите свое описание вопроса',\r\n                id: this.nextQuestionId\r\n            });\r\n            this.nextQuestionId++;\r\n       },\r\n       // Удаляем вопрос\r\n       deleteQuestionHandler(id) {\r\n           console.log('ded');\r\n           let index = this.questions.map( (v,i) => {\r\n               if(v.id === id) return i;\r\n           });\r\n           index.length > 1 ? index = index.filter( (v) => {if(typeof v == 'number') return v})[0] : index = index[0];\r\n           this.questions.splice(index, 1);\r\n       }\r\n   }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .newtest-page {\r\n        /* margin-left: calc(var(--column) * 6); */\r\n\r\n        display: flex;\r\n    }\r\n\r\n    .newtest-page .content {\r\n        margin-left: calc(var(--column) * 2);\r\n        margin-right: calc(var(--column) * 2);\r\n        width: calc(var(--column) * 16);\r\n    }\r\n\r\n    .new-test-nav {\r\n        z-index: 101;\r\n        position: fixed;\r\n        top: 0px;\r\n        left: 0px;\r\n        width: 100%;\r\n        padding: 20px 0px;\r\n        padding-left: calc(var(--column) * 6);\r\n        background-color: #fff;\r\n    }\r\n\r\n    .new-test-nav li {\r\n        list-style: none;\r\n        display: inline-block;\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test-nav li:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .new-test-nav li:last-child{\r\n        padding-left: 40px;\r\n    }\r\n\r\n    .new-test-form {\r\n        padding-top: calc(var(--column) * 2);\r\n    }\r\n\r\n    .new-test-form__title {\r\n        display: block;\r\n        width: 100%;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        margin-bottom: 40px;\r\n        font-family: 'marta';\r\n        font-size: 3rem;\r\n        color: var(--blue);\r\n    }\r\n\r\n    .new-test-form__options {\r\n        background-color: #dddde8;\r\n        padding: 20px;\r\n    }\r\n\r\n    .new-test-form__options h3 {\r\n        padding: 0;\r\n        margin: 0;\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__description {\r\n        font-family: 'marta';\r\n        background-color: #dddde8;\r\n        border: none;\r\n        margin-bottom: 20px;\r\n        width: 100%;\r\n        max-width: 100%;\r\n        min-width: 100%;\r\n        max-height: calc(var(--row) * 2);\r\n        min-height: calc(var(--row) * 2);\r\n        height: calc(var(--row) * 2);\r\n        border: 1px solid var(--blue);\r\n    }\r\n\r\n    .new-test-form__options label {\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__options label.active {\r\n        color: var(--purple);\r\n    }\r\n\r\n    .new-test-form__inputs > * {\r\n        display: inline-block;\r\n    }\r\n\r\n    .new-test-form__inputs img {\r\n        max-width: 30px;\r\n        margin-bottom: -10px;\r\n        padding-left: 20px;\r\n    }\r\n\r\n    .new-test-form__inputs img:first-child {\r\n        padding-left: 0px;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"text\"] {\r\n        background-color: #dddde8;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        width: 50px;\r\n        text-align: center;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    .new-test__add-question {\r\n        border: none;\r\n        margin: 40px 0px;\r\n        padding-left: 40px;\r\n        font-family: 'marta';\r\n        font-size: 1.2rem;\r\n        font-weight: bold;\r\n        cursor: pointer;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test__add-question:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .fade-enter-active, .fade-leave-active {\r\n        transition: opacity .3s ease-in-out;\r\n    }\r\n\r\n    .fade-enter, .fade-leave-to {\r\n        opacity: 0;\r\n    }\r\n\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 41 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cd0f0afa_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_question_vue__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cd0f0afa_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_question_vue__ = __webpack_require__(54);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(42)
+  __webpack_require__(44)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -18271,13 +18330,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 42 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(43);
+var content = __webpack_require__(45);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18297,34 +18356,34 @@ if(false) {
 }
 
 /***/ }),
-/* 43 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var escape = __webpack_require__(55);
+var escape = __webpack_require__(12);
 exports = module.exports = __webpack_require__(0)(true);
 // imports
 
 
 // module
-exports.push([module.i, "\n.question{position:relative;border:1px solid var(--blue);margin-top:40px;padding:20px\n}\n.question h3{margin-bottom:20px;color:#8496b1\n}\n.question-type{position:absolute;right:-1px;top:-1px;background-color:var(--purple);color:#fff;font-family:marta;padding:10px\n}\n.question-type option{padding:10px\n}\n.question__description{width:calc(var(--column) * 10);max-width:calc(var(--column) * 10);min-width:calc(var(--column) * 10);height:calc(var(--row) * 1);min-height:calc(var(--row) * 1);max-height:calc(var(--row) * 1);margin-bottom:20px;border:none;background-color:#dddde8\n}\n.question-controls{position:absolute;bottom:20px;right:0;width:calc(var(--column) * 2)\n}\n.question-controls img{cursor:pointer;max-width:30px;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-controls img:hover{opacity:1\n}\n.question-controls img:nth-child(2){padding:0 10px\n}\n.question__add-var-button{border:none;padding-left:30px;cursor:pointer;font-family:marta;font-weight:700;background-image:url(" + escape(__webpack_require__(56)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question__add-var-button:hover{opacity:1\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-question.vue"],"names":[],"mappings":";AAyGA,UACA,kBAAA,6BACA,gBACA,YACA;CACA;AAEA,aACA,mBAAA,aACA;CACA;AAEA,eACA,kBAAA,WACA,SACA,+BACA,WACA,kBACA,YACA;CACA;AAEA,sBACA,YAAA;CACA;AAEA,uBACA,+BAAA,mCACA,mCACA,4BACA,gCACA,gCACA,mBACA,YACA,wBACA;CACA;AAEA,mBACA,kBAAA,YACA,QACA,6BACA;CACA;AACA,uBACA,eAAA,eACA,qBACA,WACA,kCAGA;CACA;AAEA,6BACA,SAAA;CACA;AAEA,oCACA,cAAA;CACA;AAEA,0BACA,YAAA,kBACA,eACA,kBACA,gBACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,gCACA,SAAA;CACA","file":"new-question.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question\">\r\n\r\n        <h3>Текст вопроса:</h3>\r\n        <textarea class=\"question__description\" name=\"name\" rows=\"8\" cols=\"80\"></textarea>\r\n\r\n        <select class=\"\" name=\"\" class=\"question-type\" v-model=\"questionType\">\r\n            <option value=\"1\">Один из списка</option>\r\n            <option value=\"2\">Несколько из списка</option>\r\n        </select>\r\n\r\n        <div class=\"variants\">\r\n            <single\r\n            v-if=\"questionType === 1\"\r\n            v-for=\"(variant, index) in vars\"\r\n            :text=\"variant.text\"\r\n            :status=\"variant.isRight\"\r\n            :key=\"variant.id\"\r\n            @removeVar=\"vars.splice(index, 1)\"\r\n            @updateVar=\"updateVarHandler\"\r\n            @updateRightVar=\"updateRightVarHandler\"\r\n            ></single>\r\n            <multiple v-else></multiple>\r\n        </div>\r\n\r\n        <button class=\"question__add-var-button\" type=\"button\" name=\"button\" @click=\"addVar\">добавить вариант</button>\r\n\r\n\r\n        <div class=\"question-controls\">\r\n            <img src=\"img/success.svg\" alt=\"\">\r\n            <img src=\"img/edit.svg\" alt=\"\">\r\n            <img src=\"img/dustbin.svg\" alt=\"\">\r\n\r\n        </div>\r\n\r\n\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport single from './questions/single.vue';\r\nimport multiple from './questions/multiple.vue';\r\n\r\nexport default {\r\n\r\n    components: {\r\n       'single': single,\r\n       'multiple': multiple\r\n   },\r\n\r\n    data() {\r\n        return {\r\n            questionType: 1,\r\n            vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n            nextVarId: 2\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        //Добавляем вариант ответа\r\n        addVar() {\r\n            this.vars.push({\r\n                    text: 'Вариант ответа',\r\n                    isRight: false,\r\n                    id: this.nextVarId\r\n                });\r\n            this.nextVarId++;\r\n        },\r\n        //Удаляем вариант ответа\r\n        removeVarHandler(index) {\r\n            this.vars.splice(index, 1);\r\n        },\r\n        //Обновляем текст варианта\r\n        updateVarHandler(index, text) {\r\n            this.vars[index].text = text;\r\n        },\r\n        //Выбираем правильный вариант вопроса\r\n        updateRightVarHandler(index) {\r\n            this.$children.forEach( (v,i) => {\r\n                if(i === index) {\r\n                    v.isRight ? v.isRight = false : v.isRight = true;\r\n                    this.vars[index].isRight ? this.vars[index].isRight = false : this.vars[index].isRight = true;\r\n                }\r\n                else {\r\n                    v.isRight = false;\r\n                    this.vars[i].isRight = false;\r\n                }\r\n            });\r\n        }\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question {\r\n        position: relative;\r\n        border: 1px solid var(--blue);\r\n        margin-top: 40px;\r\n        padding: 20px;\r\n    }\r\n\r\n    .question h3 {\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .question-type {\r\n        position: absolute;\r\n        right: -1px;\r\n        top: -1px;\r\n        background-color: var(--purple);\r\n        color: #fff;\r\n        font-family: 'marta';\r\n        padding: 10px;\r\n    }\r\n\r\n    .question-type option{\r\n        padding: 10px;\r\n    }\r\n\r\n    .question__description {\r\n        width: calc(var(--column) * 10);\r\n        max-width: calc(var(--column) * 10);\r\n        min-width: calc(var(--column) * 10);\r\n        height: calc(var(--row) * 1);\r\n        min-height: calc(var(--row) * 1);\r\n        max-height: calc(var(--row) * 1);\r\n        margin-bottom: 20px;\r\n        border: none;\r\n        background-color: #dddde8;\r\n    }\r\n\r\n    .question-controls {\r\n        position: absolute;\r\n        bottom: 20px;\r\n        right: 0px;\r\n        width: calc(var(--column) * 2);\r\n    }\r\n    .question-controls img {\r\n        cursor: pointer;\r\n        max-width: 30px;\r\n        display: inline-block;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity 0.2s ease-in-out;\r\n        -o-transition: opacity 0.2s ease-in-out;\r\n        transition: opacity 0.2s ease-in-out;\r\n    }\r\n\r\n    .question-controls img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-controls img:nth-child(2) {\r\n        padding: 0 10px;\r\n    }\r\n\r\n    .question__add-var-button {\r\n        border: none;\r\n        padding-left: 30px;\r\n        cursor: pointer;\r\n        font-family: 'marta';\r\n        font-weight: bold;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question__add-var-button:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.question{position:relative;border:1px solid var(--blue);margin-top:40px;padding:20px\n}\n.question h3{margin-bottom:20px;color:#8496b1\n}\n.question-type{position:absolute;right:-1px;top:-1px;background-color:var(--purple);color:#fff;font-family:marta;padding:10px\n}\n.question-type option{padding:10px\n}\n.question__description{width:calc(var(--column) * 10);max-width:calc(var(--column) * 10);min-width:calc(var(--column) * 10);height:calc(var(--row) * 1);min-height:calc(var(--row) * 1);max-height:calc(var(--row) * 1);margin-bottom:20px;border:none;background-color:#dddde8\n}\n.question-controls{position:absolute;bottom:20px;right:0;width:calc(var(--column) * 2)\n}\n.question-controls img{cursor:pointer;max-width:30px;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-controls img:hover{opacity:1\n}\n.question-controls img:nth-child(2){padding:0 10px\n}\n.question__add-var-button{border:none;padding-left:30px;cursor:pointer;font-family:marta;font-weight:700;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question__add-var-button:hover{opacity:1\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-question.vue"],"names":[],"mappings":";AAgHA,UACA,kBAAA,6BACA,gBACA,YACA;CACA;AAEA,aACA,mBAAA,aACA;CACA;AAEA,eACA,kBAAA,WACA,SACA,+BACA,WACA,kBACA,YACA;CACA;AAEA,sBACA,YAAA;CACA;AAEA,uBACA,+BAAA,mCACA,mCACA,4BACA,gCACA,gCACA,mBACA,YACA,wBACA;CACA;AAEA,mBACA,kBAAA,YACA,QACA,6BACA;CACA;AACA,uBACA,eAAA,eACA,qBACA,WACA,kCAGA;CACA;AAEA,6BACA,SAAA;CACA;AAEA,oCACA,cAAA;CACA;AAEA,0BACA,YAAA,kBACA,eACA,kBACA,gBACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,gCACA,SAAA;CACA","file":"new-question.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question\">\r\n\r\n        <h3>Текст вопроса:</h3>\r\n        <textarea class=\"question__description\" name=\"name\" rows=\"8\" cols=\"80\"></textarea>\r\n\r\n        <select class=\"\" name=\"\" class=\"question-type\" v-model=\"questionType\">\r\n            <option value=\"1\">Один из списка</option>\r\n            <option value=\"2\">Несколько из списка</option>\r\n        </select>\r\n\r\n        <div class=\"variants\">\r\n            <single\r\n            v-if=\"questionType === 1\"\r\n            v-for=\"(variant, index) in vars\"\r\n            :text=\"variant.text\"\r\n            :status=\"variant.isRight\"\r\n            :key=\"variant.id\"\r\n            @removeVar=\"vars.splice(index, 1)\"\r\n            @updateVar=\"updateVarHandler\"\r\n            @updateRightVar=\"updateRightVarHandler\"\r\n            ></single>\r\n            <multiple v-else></multiple>\r\n        </div>\r\n\r\n        <button class=\"question__add-var-button\" type=\"button\" name=\"button\" @click=\"addVar\">добавить вариант</button>\r\n\r\n\r\n        <div class=\"question-controls\">\r\n            <img src=\"img/success.svg\" alt=\"\">\r\n            <img src=\"img/edit.svg\" alt=\"\">\r\n            <img @click=\"deleteQuestion\" src=\"img/dustbin.svg\" alt=\"\">\r\n\r\n        </div>\r\n\r\n\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport single from './questions/single.vue';\r\nimport multiple from './questions/multiple.vue';\r\n\r\nexport default {\r\n\r\n    props: ['questiontype', 'questiontext', 'questionid'],\r\n\r\n    components: {\r\n       'single': single,\r\n       'multiple': multiple\r\n   },\r\n\r\n    data() {\r\n        return {\r\n            questionType: this.questiontype ? this.questiontype : 1,\r\n            id: this.questionid,\r\n            vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n            nextVarId: 2\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        //Добавляем вариант ответа\r\n        addVar() {\r\n            this.vars.push({\r\n                    text: 'Вариант ответа',\r\n                    isRight: false,\r\n                    id: this.nextVarId\r\n                });\r\n            this.nextVarId++;\r\n        },\r\n        //Удаляем вариант ответа\r\n        removeVarHandler(index) {\r\n            this.vars.splice(index, 1);\r\n        },\r\n        //Обновляем текст варианта\r\n        updateVarHandler(index, text) {\r\n            this.vars[index].text = text;\r\n        },\r\n        //Выбираем правильный вариант вопроса\r\n        updateRightVarHandler(index) {\r\n            this.$children.forEach( (v,i) => {\r\n                if(i === index) {\r\n                    v.isRight ? v.isRight = false : v.isRight = true;\r\n                    this.vars[index].isRight ? this.vars[index].isRight = false : this.vars[index].isRight = true;\r\n                }\r\n                else {\r\n                    v.isRight = false;\r\n                    this.vars[i].isRight = false;\r\n                }\r\n            });\r\n        },\r\n        //Событие удаления вопроса\r\n        deleteQuestion() {\r\n            this.$emit('delete-question', this.id);\r\n        }\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question {\r\n        position: relative;\r\n        border: 1px solid var(--blue);\r\n        margin-top: 40px;\r\n        padding: 20px;\r\n    }\r\n\r\n    .question h3 {\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .question-type {\r\n        position: absolute;\r\n        right: -1px;\r\n        top: -1px;\r\n        background-color: var(--purple);\r\n        color: #fff;\r\n        font-family: 'marta';\r\n        padding: 10px;\r\n    }\r\n\r\n    .question-type option{\r\n        padding: 10px;\r\n    }\r\n\r\n    .question__description {\r\n        width: calc(var(--column) * 10);\r\n        max-width: calc(var(--column) * 10);\r\n        min-width: calc(var(--column) * 10);\r\n        height: calc(var(--row) * 1);\r\n        min-height: calc(var(--row) * 1);\r\n        max-height: calc(var(--row) * 1);\r\n        margin-bottom: 20px;\r\n        border: none;\r\n        background-color: #dddde8;\r\n    }\r\n\r\n    .question-controls {\r\n        position: absolute;\r\n        bottom: 20px;\r\n        right: 0px;\r\n        width: calc(var(--column) * 2);\r\n    }\r\n    .question-controls img {\r\n        cursor: pointer;\r\n        max-width: 30px;\r\n        display: inline-block;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity 0.2s ease-in-out;\r\n        -o-transition: opacity 0.2s ease-in-out;\r\n        transition: opacity 0.2s ease-in-out;\r\n    }\r\n\r\n    .question-controls img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-controls img:nth-child(2) {\r\n        padding: 0 10px;\r\n    }\r\n\r\n    .question__add-var-button {\r\n        border: none;\r\n        padding-left: 30px;\r\n        cursor: pointer;\r\n        font-family: 'marta';\r\n        font-weight: bold;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question__add-var-button:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 44 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_662f00c7_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_single_vue__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_662f00c7_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_single_vue__ = __webpack_require__(49);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(45)
+  __webpack_require__(47)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -18370,13 +18429,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 45 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(46);
+var content = __webpack_require__(48);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18396,7 +18455,7 @@ if(false) {
 }
 
 /***/ }),
-/* 46 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -18404,13 +18463,13 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n.question-var{display:flex;width:calc(var(--column) * 10);max-height:40px;margin-bottom:20px;justify-content:space-between\n}\n.question-var>*{display:block;max-width:calc(var(--column) * 10);align-self:center\n}\n.question-var input[type=text]{max-width:calc(var(--column) * 6);border:none;border-bottom:1px solid var(--blue)\n}\n.question-var img{max-width:20px;cursor:pointer;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var img:hover{opacity:1\n}\n.question-var input[type=checkbox]{display:none\n}\nlabel[for=right_var]{cursor:pointer;color:var(--blue);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var label.active,label[for=right_var]:hover{opacity:1\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/questions/src/vue-comp/questions/single.vue"],"names":[],"mappings":";AAgDA,cACA,aAAA,+BACA,gBACA,mBACA,6BACA;CACA;AAEA,gBACA,cAAA,mCACA,iBACA;CACA;AAEA,+BACA,kCAAA,YACA,mCACA;CACA;AAEA,kBACA,eAAA,eACA,WACA,kCAGA;CACA;AAEA,wBACA,SAAA;CACA;AAEA,mCACA,YAAA;CACA;AAEA,qBACA,eAAA,kBACA,WACA,kCAGA;CACA;AAMA,sDACA,SAAA;CACA","file":"single.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question-var\">\r\n        <input type=\"text\" name=\"\" value=\"\" placeholder=\"Вариант ответа\" :placeholder=\"placeholderText\" v-model=\"varText\" @input=\"updateInfo\">\r\n        <img @click=\"deleteVar\" src=\"img/cross.svg\" alt=\"\">\r\n        <label @click=\"rightVar\" for=\"right_var\" :class=\"{active: isRight}\">правильный</label>\r\n        <input type=\"checkbox\" name=\"\" value=\"\" id=\"right_var\">\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n\r\n    props: ['text', 'status'],\r\n\r\n    data() {\r\n        return {\r\n            varText: '',\r\n            placeholderText: this.text,\r\n            isRight: this.status\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        //Удаление варианта\r\n        deleteVar(e) {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('removeVar', index);\r\n        },\r\n\r\n        // Обнавляем текст варианта\r\n        updateInfo() {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('updateVar', index, this.varText);\r\n        },\r\n\r\n        // Обнавляем статус правильного ответа варианта\r\n        rightVar() {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            // console.log(this.$parent);\r\n            this.$emit('updateRightVar', index);\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question-var {\r\n        display: flex;\r\n        width: calc(var(--column) * 10);\r\n        max-height: 40px;\r\n        margin-bottom: 20px;\r\n        justify-content: space-between;\r\n    }\r\n\r\n    .question-var > * {\r\n        display: block;\r\n        max-width: calc(var(--column) * 10);\r\n        align-self: center;\r\n    }\r\n\r\n    .question-var input[type=\"text\"] {\r\n        max-width: calc(var(--column) * 6);\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n    }\r\n\r\n    .question-var img{\r\n        max-width: 20px;\r\n        cursor: pointer;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question-var img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    label[for=\"right_var\"] {\r\n        cursor: pointer;\r\n        color: var(--blue);\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    label[for=\"right_var\"]:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var label.active {\r\n        opacity: 1;\r\n    }\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.question-var{display:flex;width:calc(var(--column) * 10);max-height:40px;margin-bottom:20px;justify-content:space-between\n}\n.question-var>*{display:block;max-width:calc(var(--column) * 10);align-self:center\n}\n.question-var input[type=text]{max-width:calc(var(--column) * 6);border:none;border-bottom:1px solid var(--blue)\n}\n.question-var img{max-width:20px;cursor:pointer;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var img:hover{opacity:1\n}\n.question-var input[type=checkbox]{display:none\n}\nlabel[for=right_var]{cursor:pointer;color:var(--blue);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var label.active,label[for=right_var]:hover{opacity:1\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/questions/src/vue-comp/questions/single.vue"],"names":[],"mappings":";AA+CA,cACA,aAAA,+BACA,gBACA,mBACA,6BACA;CACA;AAEA,gBACA,cAAA,mCACA,iBACA;CACA;AAEA,+BACA,kCAAA,YACA,mCACA;CACA;AAEA,kBACA,eAAA,eACA,WACA,kCAGA;CACA;AAEA,wBACA,SAAA;CACA;AAEA,mCACA,YAAA;CACA;AAEA,qBACA,eAAA,kBACA,WACA,kCAGA;CACA;AAMA,sDACA,SAAA;CACA","file":"single.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question-var\">\r\n        <input type=\"text\" name=\"\" value=\"\" placeholder=\"Вариант ответа\" :placeholder=\"placeholderText\" v-model=\"varText\" @input=\"updateInfo\">\r\n        <img @click=\"deleteVar\" src=\"img/cross.svg\" alt=\"\">\r\n        <label @click=\"rightVar\" for=\"right_var\" :class=\"{active: isRight}\">правильный</label>\r\n        <input type=\"checkbox\" name=\"\" value=\"\" id=\"right_var\">\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n\r\n    props: ['text', 'status'],\r\n\r\n    data() {\r\n        return {\r\n            varText: '',\r\n            placeholderText: this.text,\r\n            isRight: this.status\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        //Удаление варианта\r\n        deleteVar(e) {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('removeVar', index);\r\n        },\r\n\r\n        // Обнавляем текст варианта\r\n        updateInfo() {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('updateVar', index, this.varText);\r\n        },\r\n\r\n        // Обнавляем статус правильного ответа варианта\r\n        rightVar() {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('updateRightVar', index);\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question-var {\r\n        display: flex;\r\n        width: calc(var(--column) * 10);\r\n        max-height: 40px;\r\n        margin-bottom: 20px;\r\n        justify-content: space-between;\r\n    }\r\n\r\n    .question-var > * {\r\n        display: block;\r\n        max-width: calc(var(--column) * 10);\r\n        align-self: center;\r\n    }\r\n\r\n    .question-var input[type=\"text\"] {\r\n        max-width: calc(var(--column) * 6);\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n    }\r\n\r\n    .question-var img{\r\n        max-width: 20px;\r\n        cursor: pointer;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question-var img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    label[for=\"right_var\"] {\r\n        cursor: pointer;\r\n        color: var(--blue);\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    label[for=\"right_var\"]:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var label.active {\r\n        opacity: 1;\r\n    }\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 47 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18481,19 +18540,19 @@ if (false) {
 }
 
 /***/ }),
-/* 48 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_78e520cf_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_multiple_vue__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_78e520cf_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_multiple_vue__ = __webpack_require__(53);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(49)
+  __webpack_require__(51)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -18539,13 +18598,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 49 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(50);
+var content = __webpack_require__(52);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18565,7 +18624,7 @@ if(false) {
 }
 
 /***/ }),
-/* 50 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -18579,7 +18638,7 @@ exports.push([module.i, "\n.question-var{display:flex;width:calc(var(--column) *
 
 
 /***/ }),
-/* 51 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18625,7 +18684,7 @@ if (false) {
 }
 
 /***/ }),
-/* 52 */
+/* 54 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18707,23 +18766,19 @@ var render = function() {
       [_vm._v("добавить вариант")]
     ),
     _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "question-controls" }, [
+    _c("div", { staticClass: "question-controls" }, [
       _c("img", { attrs: { src: "img/success.svg", alt: "" } }),
       _vm._v(" "),
       _c("img", { attrs: { src: "img/edit.svg", alt: "" } }),
       _vm._v(" "),
-      _c("img", { attrs: { src: "img/dustbin.svg", alt: "" } })
+      _c("img", {
+        attrs: { src: "img/dustbin.svg", alt: "" },
+        on: { click: _vm.deleteQuestion }
+      })
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -18735,7 +18790,7 @@ if (false) {
 }
 
 /***/ }),
-/* 53 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18906,8 +18961,16 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._l(_vm.questionsNum, function(n) {
-              return _c("new-question", { key: n })
+            _vm._l(_vm.questions, function(question) {
+              return _c("new-question", {
+                key: question.id,
+                attrs: {
+                  questiontype: question.type,
+                  questiontext: question.text,
+                  questionid: question.id
+                },
+                on: { "delete-question": _vm.deleteQuestionHandler }
+              })
             }),
             _vm._v(" "),
             _c(
@@ -18954,7 +19017,7 @@ if (false) {
 }
 
 /***/ }),
-/* 54 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18979,31 +19042,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-b8444c62", esExports)
   }
 }
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports) {
-
-module.exports = function escape(url) {
-    // If url is already wrapped in quotes, remove them
-    if (/^['"].*['"]$/.test(url)) {
-        url = url.slice(1, -1);
-    }
-    // Should url be wrapped?
-    // See https://drafts.csswg.org/css-values-3/#urls
-    if (/["'() \t\n]/.test(url)) {
-        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
-    }
-
-    return url
-}
-
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports) {
-
-module.exports = "img/../img/add.svg";
 
 /***/ })
 /******/ ]);

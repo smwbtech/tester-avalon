@@ -30,7 +30,7 @@
         <div class="question-controls">
             <img src="img/success.svg" alt="">
             <img src="img/edit.svg" alt="">
-            <img src="img/dustbin.svg" alt="">
+            <img @click="deleteQuestion" src="img/dustbin.svg" alt="">
 
         </div>
 
@@ -47,6 +47,8 @@ import multiple from './questions/multiple.vue';
 
 export default {
 
+    props: ['questiontype', 'questiontext', 'questionid'],
+
     components: {
        'single': single,
        'multiple': multiple
@@ -54,7 +56,8 @@ export default {
 
     data() {
         return {
-            questionType: 1,
+            questionType: this.questiontype ? this.questiontype : 1,
+            id: this.questionid,
             vars: [
                     {
                         text: 'Вариант ответа',
@@ -96,6 +99,10 @@ export default {
                     this.vars[i].isRight = false;
                 }
             });
+        },
+        //Событие удаления вопроса
+        deleteQuestion() {
+            this.$emit('delete-question', this.id);
         }
     }
 
