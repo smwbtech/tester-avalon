@@ -5,26 +5,42 @@
         <h3>Текст вопроса:</h3>
         <textarea class="question__description" name="name" rows="8" cols="80"></textarea>
 
-        <select class="" name="" class="question-type" v-model="questionType">
+        <select class="" name="" class="question-type" v-model="questionType" @change="changeType">
             <option value="1">Один из списка</option>
             <option value="2">Несколько из списка</option>
         </select>
 
         <div class="variants">
-            <single
-            v-if="questionType === 1"
-            v-for="(variant, index) in vars"
-            :text="variant.text"
-            :status="variant.isRight"
-            :key="variant.id"
-            @removeVar="vars.splice(index, 1)"
-            @updateVar="updateVarHandler"
-            @updateRightVar="updateRightVarHandler"
-            ></single>
-            <multiple v-else></multiple>
+
+            <div v-if="questionType === 1" key="single-question">
+                <single
+                    v-for="(variant, index) in single.vars"
+                    :text="variant.text"
+                    :status="variant.isRight"
+                    :key="variant.id"
+                    @removeVar="single.vars.splice(index, 1)"
+                    @updateVar="singleUpdateVarHandler"
+                    @updateRightVar="singleUpdateRightVarHandler"
+                ></single>
+                <button  class="question__add-var-button" type="button" name="button" @click="singleAddVar">добавить вариант</button>
+            </div>
+
+            <div v-else key="multiple-question">
+                <multiple
+                    v-for="(variant, index) in multiple.vars"
+                    :text="variant.text"
+                    :status="variant.isRight"
+                    :key="variant.id"
+                    @removeVar="multiple.vars.splice(index, 1)"
+                    @updateVar="multipleUpdateVarHandler"
+                    @updateRightVar="multipleUpdateRightVarHandler"
+                >
+                </multiple>
+                <button class="question__add-var-button" type="button" name="button" @click="multipleAddVar">добавить вариант</button>
+            </div>
+
         </div>
 
-        <button class="question__add-var-button" type="button" name="button" @click="addVar">добавить вариант</button>
 
 
         <div class="question-controls">
@@ -58,48 +74,108 @@ export default {
         return {
             questionType: this.questiontype ? this.questiontype : 1,
             id: this.questionid,
-            vars: [
+            // Вопросы с одним вариантом
+            single: {
+                vars: [
                     {
                         text: 'Вариант ответа',
                         isRight: false,
                         id: 1
                     }
                 ],
-            nextVarId: 2
+                nextVarId: 2
+            },
+            // Вопросы с несколькими вариантами ответа
+            multiple: {
+                vars: [
+                    {
+                        text: 'Вариант ответа',
+                        isRight: false,
+                        id: 1
+                    }
+                ],
+                nextVarId: 2
+            }
+
         }
     },
 
     methods: {
-        //Добавляем вариант ответа
-        addVar() {
-            this.vars.push({
-                    text: 'Вариант ответа',
-                    isRight: false,
-                    id: this.nextVarId
-                });
-            this.nextVarId++;
+
+        changeType() {
+            this.single = {
+                vars: [
+                    {
+                        text: 'Вариант ответа',
+                        isRight: false,
+                        id: 1
+                    }
+                ],
+                nextVarId: 2
+            };
+
+            this.multiple = {
+                vars: [
+                    {
+                        text: 'Вариант ответа',
+                        isRight: false,
+                        id: 1
+                    }
+                ],
+                nextVarId: 2
+            };
         },
-        //Удаляем вариант ответа
-        removeVarHandler(index) {
-            this.vars.splice(index, 1);
+
+        /*Вопросы с одним варианторм*/
+
+        //Добавляем вариант ответа
+        singleAddVar() {
+            this.single.vars.push({
+                text: 'Вариант ответа',
+                isRight: false,
+                id: this.nextVarId
+            });
+            this.single.nextVarId++;
         },
         //Обновляем текст варианта
-        updateVarHandler(index, text) {
-            this.vars[index].text = text;
+        singleUpdateVarHandler(index, text) {
+            this.single.vars[index].text = text;
         },
         //Выбираем правильный вариант вопроса
-        updateRightVarHandler(index) {
+        singleUpdateRightVarHandler(index) {
+            console.log(this.$children);
             this.$children.forEach( (v,i) => {
                 if(i === index) {
                     v.isRight ? v.isRight = false : v.isRight = true;
-                    this.vars[index].isRight ? this.vars[index].isRight = false : this.vars[index].isRight = true;
+                    this.single.vars[index].isRight ? this.single.vars[index].isRight = false : this.single.vars[index].isRight = true;
                 }
                 else {
                     v.isRight = false;
-                    this.vars[i].isRight = false;
+                    this.single.vars[i].isRight = false;
                 }
             });
         },
+
+        /*Вопросы с несолькими вариантами*/
+        //Добавляем вариант ответа
+        multipleAddVar() {
+            this.multiple.vars.push({
+                text: 'Вариант ответа',
+                isRight: false,
+                id: this.nextVarId
+            });
+            this.multiple.nextVarId++;
+        },
+
+        multipleUpdateVarHandler(index, text) {
+            this.multiple.vars[index].text = text;
+        },
+
+        //Выбираем правильный вариант вопроса
+        multipleUpdateRightVarHandler(index) {
+            console.log(this.$children);
+        },
+
         //Событие удаления вопроса
         deleteQuestion() {
             this.$emit('delete-question', this.id);

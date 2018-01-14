@@ -213,7 +213,7 @@ export default {
     }
 
     .new-test-form__description {
-        font-family: 'marta';
+        padding: 10px;
         background-color: #dddde8;
         border: none;
         margin-bottom: 20px;

@@ -3320,6 +3320,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   props: ['questiontype', 'questiontext', 'questionid'],
   components: {
@@ -3330,45 +3346,92 @@ var _default = {
     return {
       questionType: this.questiontype ? this.questiontype : 1,
       id: this.questionid,
-      vars: [{
-        text: 'Вариант ответа',
-        isRight: false,
-        id: 1
-      }],
-      nextVarId: 2
+      // Вопросы с одним вариантом
+      single: {
+        vars: [{
+          text: 'Вариант ответа',
+          isRight: false,
+          id: 1
+        }],
+        nextVarId: 2
+      },
+      // Вопросы с несколькими вариантами ответа
+      multiple: {
+        vars: [{
+          text: 'Вариант ответа',
+          isRight: false,
+          id: 1
+        }],
+        nextVarId: 2
+      }
     };
   },
   methods: {
+    changeType: function changeType() {
+      this.single = {
+        vars: [{
+          text: 'Вариант ответа',
+          isRight: false,
+          id: 1
+        }],
+        nextVarId: 2
+      };
+      this.multiple = {
+        vars: [{
+          text: 'Вариант ответа',
+          isRight: false,
+          id: 1
+        }],
+        nextVarId: 2
+      };
+    },
+
+    /*Вопросы с одним варианторм*/
     //Добавляем вариант ответа
-    addVar: function addVar() {
-      this.vars.push({
+    singleAddVar: function singleAddVar() {
+      this.single.vars.push({
         text: 'Вариант ответа',
         isRight: false,
         id: this.nextVarId
       });
-      this.nextVarId++;
-    },
-    //Удаляем вариант ответа
-    removeVarHandler: function removeVarHandler(index) {
-      this.vars.splice(index, 1);
+      this.single.nextVarId++;
     },
     //Обновляем текст варианта
-    updateVarHandler: function updateVarHandler(index, text) {
-      this.vars[index].text = text;
+    singleUpdateVarHandler: function singleUpdateVarHandler(index, text) {
+      this.single.vars[index].text = text;
     },
     //Выбираем правильный вариант вопроса
-    updateRightVarHandler: function updateRightVarHandler(index) {
+    singleUpdateRightVarHandler: function singleUpdateRightVarHandler(index) {
       var _this = this;
 
+      console.log(this.$children);
       this.$children.forEach(function (v, i) {
         if (i === index) {
           v.isRight ? v.isRight = false : v.isRight = true;
-          _this.vars[index].isRight ? _this.vars[index].isRight = false : _this.vars[index].isRight = true;
+          _this.single.vars[index].isRight ? _this.single.vars[index].isRight = false : _this.single.vars[index].isRight = true;
         } else {
           v.isRight = false;
-          _this.vars[i].isRight = false;
+          _this.single.vars[i].isRight = false;
         }
       });
+    },
+
+    /*Вопросы с несолькими вариантами*/
+    //Добавляем вариант ответа
+    multipleAddVar: function multipleAddVar() {
+      this.multiple.vars.push({
+        text: 'Вариант ответа',
+        isRight: false,
+        id: this.nextVarId
+      });
+      this.multiple.nextVarId++;
+    },
+    multipleUpdateVarHandler: function multipleUpdateVarHandler(index, text) {
+      this.multiple.vars[index].text = text;
+    },
+    //Выбираем правильный вариант вопроса
+    multipleUpdateRightVarHandler: function multipleUpdateRightVarHandler(index) {
+      console.log(this.$children);
     },
     //Событие удаления вопроса
     deleteQuestion: function deleteQuestion() {
@@ -3412,6 +3475,7 @@ var _default = {
   methods: {
     //Удаление варианта
     deleteVar: function deleteVar(e) {
+      console.log(1);
       var index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
       this.$emit('removeVar', index);
     },
@@ -18266,7 +18330,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n.newtest-page{display:flex\n}\n.newtest-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16)\n}\n.new-test-nav{z-index:101;position:fixed;top:0;left:0;width:100%;padding:20px 0;padding-left:calc(var(--column) * 6);background-color:#fff\n}\n.new-test-nav li{list-style:none;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test-nav li:hover{opacity:1\n}\n.new-test-nav li:last-child{padding-left:40px\n}\n.new-test-form{padding-top:calc(var(--column) * 2)\n}\n.new-test-form__title{display:block;width:100%;border:none;border-bottom:1px solid var(--blue);margin-bottom:40px;font-family:marta;font-size:3rem;color:var(--blue)\n}\n.new-test-form__options{background-color:#dddde8;padding:20px\n}\n.new-test-form__options h3{padding:0;margin:0;margin-bottom:20px;color:#8496b1\n}\n.new-test-form__description{font-family:marta;background-color:#dddde8;border:none;margin-bottom:20px;width:100%;max-width:100%;min-width:100%;max-height:calc(var(--row) * 2);min-height:calc(var(--row) * 2);height:calc(var(--row) * 2);border:1px solid var(--blue)\n}\n.new-test-form__options label{color:#8496b1\n}\n.new-test-form__options label.active{color:var(--purple)\n}\n.new-test-form__inputs>*{display:inline-block\n}\n.new-test-form__inputs img{max-width:30px;margin-bottom:-10px;padding-left:20px\n}\n.new-test-form__inputs img:first-child{padding-left:0\n}\n.new-test-form__inputs input[type=text]{background-color:#dddde8;border:none;border-bottom:1px solid var(--blue);width:50px;text-align:center\n}\n.new-test-form__inputs input[type=checkbox]{display:none\n}\n.new-test__add-question{border:none;margin:40px 0;padding-left:40px;font-family:marta;font-size:1.2rem;font-weight:700;cursor:pointer;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test__add-question:hover{opacity:1\n}\n.fade-enter-active,.fade-leave-active{transition:opacity .3s ease-in-out\n}\n.fade-enter,.fade-leave-to{opacity:0\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-test.vue"],"names":[],"mappings":";AAkJA,cAGA,YAAA;CACA;AAEA,uBACA,oCAAA,qCACA,8BACA;CACA;AAEA,cACA,YAAA,eACA,MACA,OACA,WACA,eACA,qCACA,qBACA;CACA;AAEA,iBACA,gBAAA,qBACA,WACA,kCAGA;CACA;AAEA,uBACA,SAAA;CACA;AAEA,4BACA,iBAAA;CACA;AAEA,eACA,mCAAA;CACA;AAEA,sBACA,cAAA,WACA,YACA,oCACA,mBACA,kBACA,eACA,iBACA;CACA;AAEA,wBACA,yBAAA,YACA;CACA;AAEA,2BACA,UAAA,SACA,mBACA,aACA;CACA;AAEA,4BACA,kBAAA,yBACA,YACA,mBACA,WACA,eACA,eACA,gCACA,gCACA,4BACA,4BACA;CACA;AAEA,8BACA,aAAA;CACA;AAEA,qCACA,mBAAA;CACA;AAEA,yBACA,oBAAA;CACA;AAEA,2BACA,eAAA,oBACA,iBACA;CACA;AAEA,uCACA,cAAA;CACA;AAEA,wCACA,yBAAA,YACA,oCACA,WACA,iBACA;CACA;AAEA,4CACA,YAAA;CACA;AAEA,wBACA,YAAA,cACA,kBACA,kBACA,iBACA,gBACA,eACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,8BACA,SAAA;CACA;AAEA,sCACA,kCAAA;CACA;AAEA,2BACA,SAAA;CACA","file":"new-test.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"newtest-page\">\r\n\r\n        <side-menu></side-menu>\r\n        <section class=\"content\">\r\n\r\n            <nav class=\"new-test-nav\">\r\n                <ul>\r\n                    <li><a href=\"save\">Сохранить</a></li>\r\n                    <li><a href=\"publish\">Опубликовать</a></li>\r\n                </ul>\r\n            </nav>\r\n\r\n            <form class=\"new-test-form\">\r\n\r\n                <input type=\"text\" class=\"new-test-form__title\" placeholder=\"Название теста\">\r\n\r\n                <div class=\"new-test-form__options\">\r\n                    <h3>Описание:</h3>\r\n                    <textarea class=\"new-test-form__description\" name=\"test_description\"></textarea>\r\n\r\n                    <div class=\"new-test-form__inputs\">\r\n                        <img :src=\"timeToggle\" alt=\"\">\r\n                        <label for=\"time_limit\" :class=\"labelTime\">Лимит по времени</label>\r\n                        <input type=\"checkbox\" name=\"time_limit\" id=\"time_limit\" v-model=\"testOptions.timeLimit\">\r\n                        <transition name=\"fade\">\r\n                        <img src=\"img/stopwatch.svg\" alt=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <label class=\"active\" for=\"time\" v-if=\"testOptions.timeLimit\">Время в мин.:</label>\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <input type=\"text\" name=\"time\" id=\"time\" value=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <img :src=\"anonymToggle\" alt=\"\">\r\n                        <label for=\"anonym\" :class=\"labelAnonym\">Анонимное прохождение</label>\r\n                        <input type=\"checkbox\" name=\"anonym\" id=\"anonym\" v-model=\"testOptions.anonym\">\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <new-question\r\n                    v-for=\"question in questions\"\r\n                    :key=\"question.id\"\r\n                    :questiontype=\"question.type\"\r\n                    :questiontext=\"question.text\"\r\n                    :questionid=\"question.id\"\r\n                    @delete-question=\"deleteQuestionHandler\"\r\n                ></new-question>\r\n\r\n                <button\r\n                    type=\"button\"\r\n                    name=\"button\"\r\n                    @click=\"addQuestion\"\r\n                    class=\"new-test__add-question\"\r\n                >\r\n                добавить вопрос</button>\r\n\r\n            </form>\r\n\r\n        </section>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport sideMenu from './side-menu.vue';\r\nimport newQuestion from './new-question.vue';\r\n\r\nexport default {\r\n\r\n    components: {\r\n       'side-menu': sideMenu,\r\n       'new-question': newQuestion\r\n   },\r\n\r\n   data() {\r\n       return {\r\n           questions: [\r\n               {\r\n                   type: 1,\r\n                   text: 'Введите свое описание вопроса',\r\n                   id: 1\r\n               }\r\n           ],\r\n           testOptions: {\r\n               timeLimit: false,\r\n               time: 60,\r\n               anonym: false\r\n           },\r\n           nextQuestionId: 2\r\n       }\r\n   },\r\n\r\n   computed: {\r\n       // Объект класса переключателя ограничения по вреиени\r\n       timeToggle() {\r\n           return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       // Объект класса переключателя анонимного прохождения\r\n       anonymToggle() {\r\n           return this.testOptions.anonym === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       labelTime() {\r\n           return {\r\n               'active': this.testOptions.timeLimit\r\n           }\r\n       },\r\n\r\n       labelAnonym() {\r\n           return {\r\n               'active' : this.testOptions.anonym\r\n           }\r\n       }\r\n   },\r\n\r\n   methods: {\r\n       // Добавление нового вопроса\r\n       addQuestion() {\r\n           this.questions.push( {\r\n                type: 1,\r\n                text: 'Введите свое описание вопроса',\r\n                id: this.nextQuestionId\r\n            });\r\n            this.nextQuestionId++;\r\n       },\r\n       // Удаляем вопрос\r\n       deleteQuestionHandler(id) {\r\n           console.log('ded');\r\n           let index = this.questions.map( (v,i) => {\r\n               if(v.id === id) return i;\r\n           });\r\n           index.length > 1 ? index = index.filter( (v) => {if(typeof v == 'number') return v})[0] : index = index[0];\r\n           this.questions.splice(index, 1);\r\n       }\r\n   }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .newtest-page {\r\n        /* margin-left: calc(var(--column) * 6); */\r\n\r\n        display: flex;\r\n    }\r\n\r\n    .newtest-page .content {\r\n        margin-left: calc(var(--column) * 2);\r\n        margin-right: calc(var(--column) * 2);\r\n        width: calc(var(--column) * 16);\r\n    }\r\n\r\n    .new-test-nav {\r\n        z-index: 101;\r\n        position: fixed;\r\n        top: 0px;\r\n        left: 0px;\r\n        width: 100%;\r\n        padding: 20px 0px;\r\n        padding-left: calc(var(--column) * 6);\r\n        background-color: #fff;\r\n    }\r\n\r\n    .new-test-nav li {\r\n        list-style: none;\r\n        display: inline-block;\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test-nav li:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .new-test-nav li:last-child{\r\n        padding-left: 40px;\r\n    }\r\n\r\n    .new-test-form {\r\n        padding-top: calc(var(--column) * 2);\r\n    }\r\n\r\n    .new-test-form__title {\r\n        display: block;\r\n        width: 100%;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        margin-bottom: 40px;\r\n        font-family: 'marta';\r\n        font-size: 3rem;\r\n        color: var(--blue);\r\n    }\r\n\r\n    .new-test-form__options {\r\n        background-color: #dddde8;\r\n        padding: 20px;\r\n    }\r\n\r\n    .new-test-form__options h3 {\r\n        padding: 0;\r\n        margin: 0;\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__description {\r\n        font-family: 'marta';\r\n        background-color: #dddde8;\r\n        border: none;\r\n        margin-bottom: 20px;\r\n        width: 100%;\r\n        max-width: 100%;\r\n        min-width: 100%;\r\n        max-height: calc(var(--row) * 2);\r\n        min-height: calc(var(--row) * 2);\r\n        height: calc(var(--row) * 2);\r\n        border: 1px solid var(--blue);\r\n    }\r\n\r\n    .new-test-form__options label {\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__options label.active {\r\n        color: var(--purple);\r\n    }\r\n\r\n    .new-test-form__inputs > * {\r\n        display: inline-block;\r\n    }\r\n\r\n    .new-test-form__inputs img {\r\n        max-width: 30px;\r\n        margin-bottom: -10px;\r\n        padding-left: 20px;\r\n    }\r\n\r\n    .new-test-form__inputs img:first-child {\r\n        padding-left: 0px;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"text\"] {\r\n        background-color: #dddde8;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        width: 50px;\r\n        text-align: center;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    .new-test__add-question {\r\n        border: none;\r\n        margin: 40px 0px;\r\n        padding-left: 40px;\r\n        font-family: 'marta';\r\n        font-size: 1.2rem;\r\n        font-weight: bold;\r\n        cursor: pointer;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test__add-question:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .fade-enter-active, .fade-leave-active {\r\n        transition: opacity .3s ease-in-out;\r\n    }\r\n\r\n    .fade-enter, .fade-leave-to {\r\n        opacity: 0;\r\n    }\r\n\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.newtest-page{display:flex\n}\n.newtest-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16)\n}\n.new-test-nav{z-index:101;position:fixed;top:0;left:0;width:100%;padding:20px 0;padding-left:calc(var(--column) * 6);background-color:#fff\n}\n.new-test-nav li{list-style:none;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test-nav li:hover{opacity:1\n}\n.new-test-nav li:last-child{padding-left:40px\n}\n.new-test-form{padding-top:calc(var(--column) * 2)\n}\n.new-test-form__title{display:block;width:100%;border:none;border-bottom:1px solid var(--blue);margin-bottom:40px;font-family:marta;font-size:3rem;color:var(--blue)\n}\n.new-test-form__options{background-color:#dddde8;padding:20px\n}\n.new-test-form__options h3{padding:0;margin:0;margin-bottom:20px;color:#8496b1\n}\n.new-test-form__description{padding:10px;background-color:#dddde8;border:none;margin-bottom:20px;width:100%;max-width:100%;min-width:100%;max-height:calc(var(--row) * 2);min-height:calc(var(--row) * 2);height:calc(var(--row) * 2);border:1px solid var(--blue)\n}\n.new-test-form__options label{color:#8496b1\n}\n.new-test-form__options label.active{color:var(--purple)\n}\n.new-test-form__inputs>*{display:inline-block\n}\n.new-test-form__inputs img{max-width:30px;margin-bottom:-10px;padding-left:20px\n}\n.new-test-form__inputs img:first-child{padding-left:0\n}\n.new-test-form__inputs input[type=text]{background-color:#dddde8;border:none;border-bottom:1px solid var(--blue);width:50px;text-align:center\n}\n.new-test-form__inputs input[type=checkbox]{display:none\n}\n.new-test__add-question{border:none;margin:40px 0;padding-left:40px;font-family:marta;font-size:1.2rem;font-weight:700;cursor:pointer;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test__add-question:hover{opacity:1\n}\n.fade-enter-active,.fade-leave-active{transition:opacity .3s ease-in-out\n}\n.fade-enter,.fade-leave-to{opacity:0\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-test.vue"],"names":[],"mappings":";AAkJA,cAGA,YAAA;CACA;AAEA,uBACA,oCAAA,qCACA,8BACA;CACA;AAEA,cACA,YAAA,eACA,MACA,OACA,WACA,eACA,qCACA,qBACA;CACA;AAEA,iBACA,gBAAA,qBACA,WACA,kCAGA;CACA;AAEA,uBACA,SAAA;CACA;AAEA,4BACA,iBAAA;CACA;AAEA,eACA,mCAAA;CACA;AAEA,sBACA,cAAA,WACA,YACA,oCACA,mBACA,kBACA,eACA,iBACA;CACA;AAEA,wBACA,yBAAA,YACA;CACA;AAEA,2BACA,UAAA,SACA,mBACA,aACA;CACA;AAEA,4BACA,aAAA,yBACA,YACA,mBACA,WACA,eACA,eACA,gCACA,gCACA,4BACA,4BACA;CACA;AAEA,8BACA,aAAA;CACA;AAEA,qCACA,mBAAA;CACA;AAEA,yBACA,oBAAA;CACA;AAEA,2BACA,eAAA,oBACA,iBACA;CACA;AAEA,uCACA,cAAA;CACA;AAEA,wCACA,yBAAA,YACA,oCACA,WACA,iBACA;CACA;AAEA,4CACA,YAAA;CACA;AAEA,wBACA,YAAA,cACA,kBACA,kBACA,iBACA,gBACA,eACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,8BACA,SAAA;CACA;AAEA,sCACA,kCAAA;CACA;AAEA,2BACA,SAAA;CACA","file":"new-test.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"newtest-page\">\r\n\r\n        <side-menu></side-menu>\r\n        <section class=\"content\">\r\n\r\n            <nav class=\"new-test-nav\">\r\n                <ul>\r\n                    <li><a href=\"save\">Сохранить</a></li>\r\n                    <li><a href=\"publish\">Опубликовать</a></li>\r\n                </ul>\r\n            </nav>\r\n\r\n            <form class=\"new-test-form\">\r\n\r\n                <input type=\"text\" class=\"new-test-form__title\" placeholder=\"Название теста\">\r\n\r\n                <div class=\"new-test-form__options\">\r\n                    <h3>Описание:</h3>\r\n                    <textarea class=\"new-test-form__description\" name=\"test_description\"></textarea>\r\n\r\n                    <div class=\"new-test-form__inputs\">\r\n                        <img :src=\"timeToggle\" alt=\"\">\r\n                        <label for=\"time_limit\" :class=\"labelTime\">Лимит по времени</label>\r\n                        <input type=\"checkbox\" name=\"time_limit\" id=\"time_limit\" v-model=\"testOptions.timeLimit\">\r\n                        <transition name=\"fade\">\r\n                        <img src=\"img/stopwatch.svg\" alt=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <label class=\"active\" for=\"time\" v-if=\"testOptions.timeLimit\">Время в мин.:</label>\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <input type=\"text\" name=\"time\" id=\"time\" value=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <img :src=\"anonymToggle\" alt=\"\">\r\n                        <label for=\"anonym\" :class=\"labelAnonym\">Анонимное прохождение</label>\r\n                        <input type=\"checkbox\" name=\"anonym\" id=\"anonym\" v-model=\"testOptions.anonym\">\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <new-question\r\n                    v-for=\"question in questions\"\r\n                    :key=\"question.id\"\r\n                    :questiontype=\"question.type\"\r\n                    :questiontext=\"question.text\"\r\n                    :questionid=\"question.id\"\r\n                    @delete-question=\"deleteQuestionHandler\"\r\n                ></new-question>\r\n\r\n                <button\r\n                    type=\"button\"\r\n                    name=\"button\"\r\n                    @click=\"addQuestion\"\r\n                    class=\"new-test__add-question\"\r\n                >\r\n                добавить вопрос</button>\r\n\r\n            </form>\r\n\r\n        </section>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport sideMenu from './side-menu.vue';\r\nimport newQuestion from './new-question.vue';\r\n\r\nexport default {\r\n\r\n    components: {\r\n       'side-menu': sideMenu,\r\n       'new-question': newQuestion\r\n   },\r\n\r\n   data() {\r\n       return {\r\n           questions: [\r\n               {\r\n                   type: 1,\r\n                   text: 'Введите свое описание вопроса',\r\n                   id: 1\r\n               }\r\n           ],\r\n           testOptions: {\r\n               timeLimit: false,\r\n               time: 60,\r\n               anonym: false\r\n           },\r\n           nextQuestionId: 2\r\n       }\r\n   },\r\n\r\n   computed: {\r\n       // Объект класса переключателя ограничения по вреиени\r\n       timeToggle() {\r\n           return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       // Объект класса переключателя анонимного прохождения\r\n       anonymToggle() {\r\n           return this.testOptions.anonym === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       labelTime() {\r\n           return {\r\n               'active': this.testOptions.timeLimit\r\n           }\r\n       },\r\n\r\n       labelAnonym() {\r\n           return {\r\n               'active' : this.testOptions.anonym\r\n           }\r\n       }\r\n   },\r\n\r\n   methods: {\r\n       // Добавление нового вопроса\r\n       addQuestion() {\r\n           this.questions.push( {\r\n                type: 1,\r\n                text: 'Введите свое описание вопроса',\r\n                id: this.nextQuestionId\r\n            });\r\n            this.nextQuestionId++;\r\n       },\r\n       // Удаляем вопрос\r\n       deleteQuestionHandler(id) {\r\n           console.log('ded');\r\n           let index = this.questions.map( (v,i) => {\r\n               if(v.id === id) return i;\r\n           });\r\n           index.length > 1 ? index = index.filter( (v) => {if(typeof v == 'number') return v})[0] : index = index[0];\r\n           this.questions.splice(index, 1);\r\n       }\r\n   }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .newtest-page {\r\n        /* margin-left: calc(var(--column) * 6); */\r\n\r\n        display: flex;\r\n    }\r\n\r\n    .newtest-page .content {\r\n        margin-left: calc(var(--column) * 2);\r\n        margin-right: calc(var(--column) * 2);\r\n        width: calc(var(--column) * 16);\r\n    }\r\n\r\n    .new-test-nav {\r\n        z-index: 101;\r\n        position: fixed;\r\n        top: 0px;\r\n        left: 0px;\r\n        width: 100%;\r\n        padding: 20px 0px;\r\n        padding-left: calc(var(--column) * 6);\r\n        background-color: #fff;\r\n    }\r\n\r\n    .new-test-nav li {\r\n        list-style: none;\r\n        display: inline-block;\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test-nav li:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .new-test-nav li:last-child{\r\n        padding-left: 40px;\r\n    }\r\n\r\n    .new-test-form {\r\n        padding-top: calc(var(--column) * 2);\r\n    }\r\n\r\n    .new-test-form__title {\r\n        display: block;\r\n        width: 100%;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        margin-bottom: 40px;\r\n        font-family: 'marta';\r\n        font-size: 3rem;\r\n        color: var(--blue);\r\n    }\r\n\r\n    .new-test-form__options {\r\n        background-color: #dddde8;\r\n        padding: 20px;\r\n    }\r\n\r\n    .new-test-form__options h3 {\r\n        padding: 0;\r\n        margin: 0;\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__description {\r\n        padding: 10px;\r\n        background-color: #dddde8;\r\n        border: none;\r\n        margin-bottom: 20px;\r\n        width: 100%;\r\n        max-width: 100%;\r\n        min-width: 100%;\r\n        max-height: calc(var(--row) * 2);\r\n        min-height: calc(var(--row) * 2);\r\n        height: calc(var(--row) * 2);\r\n        border: 1px solid var(--blue);\r\n    }\r\n\r\n    .new-test-form__options label {\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__options label.active {\r\n        color: var(--purple);\r\n    }\r\n\r\n    .new-test-form__inputs > * {\r\n        display: inline-block;\r\n    }\r\n\r\n    .new-test-form__inputs img {\r\n        max-width: 30px;\r\n        margin-bottom: -10px;\r\n        padding-left: 20px;\r\n    }\r\n\r\n    .new-test-form__inputs img:first-child {\r\n        padding-left: 0px;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"text\"] {\r\n        background-color: #dddde8;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        width: 50px;\r\n        text-align: center;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    .new-test__add-question {\r\n        border: none;\r\n        margin: 40px 0px;\r\n        padding-left: 40px;\r\n        font-family: 'marta';\r\n        font-size: 1.2rem;\r\n        font-weight: bold;\r\n        cursor: pointer;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test__add-question:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .fade-enter-active, .fade-leave-active {\r\n        transition: opacity .3s ease-in-out;\r\n    }\r\n\r\n    .fade-enter, .fade-leave-to {\r\n        opacity: 0;\r\n    }\r\n\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -18365,7 +18429,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n.question{position:relative;border:1px solid var(--blue);margin-top:40px;padding:20px\n}\n.question h3{margin-bottom:20px;color:#8496b1\n}\n.question-type{position:absolute;right:-1px;top:-1px;background-color:var(--purple);color:#fff;font-family:marta;padding:10px\n}\n.question-type option{padding:10px\n}\n.question__description{width:calc(var(--column) * 10);max-width:calc(var(--column) * 10);min-width:calc(var(--column) * 10);height:calc(var(--row) * 1);min-height:calc(var(--row) * 1);max-height:calc(var(--row) * 1);margin-bottom:20px;border:none;background-color:#dddde8\n}\n.question-controls{position:absolute;bottom:20px;right:0;width:calc(var(--column) * 2)\n}\n.question-controls img{cursor:pointer;max-width:30px;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-controls img:hover{opacity:1\n}\n.question-controls img:nth-child(2){padding:0 10px\n}\n.question__add-var-button{border:none;padding-left:30px;cursor:pointer;font-family:marta;font-weight:700;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question__add-var-button:hover{opacity:1\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-question.vue"],"names":[],"mappings":";AAgHA,UACA,kBAAA,6BACA,gBACA,YACA;CACA;AAEA,aACA,mBAAA,aACA;CACA;AAEA,eACA,kBAAA,WACA,SACA,+BACA,WACA,kBACA,YACA;CACA;AAEA,sBACA,YAAA;CACA;AAEA,uBACA,+BAAA,mCACA,mCACA,4BACA,gCACA,gCACA,mBACA,YACA,wBACA;CACA;AAEA,mBACA,kBAAA,YACA,QACA,6BACA;CACA;AACA,uBACA,eAAA,eACA,qBACA,WACA,kCAGA;CACA;AAEA,6BACA,SAAA;CACA;AAEA,oCACA,cAAA;CACA;AAEA,0BACA,YAAA,kBACA,eACA,kBACA,gBACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,gCACA,SAAA;CACA","file":"new-question.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question\">\r\n\r\n        <h3>Текст вопроса:</h3>\r\n        <textarea class=\"question__description\" name=\"name\" rows=\"8\" cols=\"80\"></textarea>\r\n\r\n        <select class=\"\" name=\"\" class=\"question-type\" v-model=\"questionType\">\r\n            <option value=\"1\">Один из списка</option>\r\n            <option value=\"2\">Несколько из списка</option>\r\n        </select>\r\n\r\n        <div class=\"variants\">\r\n            <single\r\n            v-if=\"questionType === 1\"\r\n            v-for=\"(variant, index) in vars\"\r\n            :text=\"variant.text\"\r\n            :status=\"variant.isRight\"\r\n            :key=\"variant.id\"\r\n            @removeVar=\"vars.splice(index, 1)\"\r\n            @updateVar=\"updateVarHandler\"\r\n            @updateRightVar=\"updateRightVarHandler\"\r\n            ></single>\r\n            <multiple v-else></multiple>\r\n        </div>\r\n\r\n        <button class=\"question__add-var-button\" type=\"button\" name=\"button\" @click=\"addVar\">добавить вариант</button>\r\n\r\n\r\n        <div class=\"question-controls\">\r\n            <img src=\"img/success.svg\" alt=\"\">\r\n            <img src=\"img/edit.svg\" alt=\"\">\r\n            <img @click=\"deleteQuestion\" src=\"img/dustbin.svg\" alt=\"\">\r\n\r\n        </div>\r\n\r\n\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport single from './questions/single.vue';\r\nimport multiple from './questions/multiple.vue';\r\n\r\nexport default {\r\n\r\n    props: ['questiontype', 'questiontext', 'questionid'],\r\n\r\n    components: {\r\n       'single': single,\r\n       'multiple': multiple\r\n   },\r\n\r\n    data() {\r\n        return {\r\n            questionType: this.questiontype ? this.questiontype : 1,\r\n            id: this.questionid,\r\n            vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n            nextVarId: 2\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        //Добавляем вариант ответа\r\n        addVar() {\r\n            this.vars.push({\r\n                    text: 'Вариант ответа',\r\n                    isRight: false,\r\n                    id: this.nextVarId\r\n                });\r\n            this.nextVarId++;\r\n        },\r\n        //Удаляем вариант ответа\r\n        removeVarHandler(index) {\r\n            this.vars.splice(index, 1);\r\n        },\r\n        //Обновляем текст варианта\r\n        updateVarHandler(index, text) {\r\n            this.vars[index].text = text;\r\n        },\r\n        //Выбираем правильный вариант вопроса\r\n        updateRightVarHandler(index) {\r\n            this.$children.forEach( (v,i) => {\r\n                if(i === index) {\r\n                    v.isRight ? v.isRight = false : v.isRight = true;\r\n                    this.vars[index].isRight ? this.vars[index].isRight = false : this.vars[index].isRight = true;\r\n                }\r\n                else {\r\n                    v.isRight = false;\r\n                    this.vars[i].isRight = false;\r\n                }\r\n            });\r\n        },\r\n        //Событие удаления вопроса\r\n        deleteQuestion() {\r\n            this.$emit('delete-question', this.id);\r\n        }\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question {\r\n        position: relative;\r\n        border: 1px solid var(--blue);\r\n        margin-top: 40px;\r\n        padding: 20px;\r\n    }\r\n\r\n    .question h3 {\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .question-type {\r\n        position: absolute;\r\n        right: -1px;\r\n        top: -1px;\r\n        background-color: var(--purple);\r\n        color: #fff;\r\n        font-family: 'marta';\r\n        padding: 10px;\r\n    }\r\n\r\n    .question-type option{\r\n        padding: 10px;\r\n    }\r\n\r\n    .question__description {\r\n        width: calc(var(--column) * 10);\r\n        max-width: calc(var(--column) * 10);\r\n        min-width: calc(var(--column) * 10);\r\n        height: calc(var(--row) * 1);\r\n        min-height: calc(var(--row) * 1);\r\n        max-height: calc(var(--row) * 1);\r\n        margin-bottom: 20px;\r\n        border: none;\r\n        background-color: #dddde8;\r\n    }\r\n\r\n    .question-controls {\r\n        position: absolute;\r\n        bottom: 20px;\r\n        right: 0px;\r\n        width: calc(var(--column) * 2);\r\n    }\r\n    .question-controls img {\r\n        cursor: pointer;\r\n        max-width: 30px;\r\n        display: inline-block;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity 0.2s ease-in-out;\r\n        -o-transition: opacity 0.2s ease-in-out;\r\n        transition: opacity 0.2s ease-in-out;\r\n    }\r\n\r\n    .question-controls img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-controls img:nth-child(2) {\r\n        padding: 0 10px;\r\n    }\r\n\r\n    .question__add-var-button {\r\n        border: none;\r\n        padding-left: 30px;\r\n        cursor: pointer;\r\n        font-family: 'marta';\r\n        font-weight: bold;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question__add-var-button:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.question{position:relative;border:1px solid var(--blue);margin-top:40px;padding:20px\n}\n.question h3{margin-bottom:20px;color:#8496b1\n}\n.question-type{position:absolute;right:-1px;top:-1px;background-color:var(--purple);color:#fff;font-family:marta;padding:10px\n}\n.question-type option{padding:10px\n}\n.question__description{width:calc(var(--column) * 10);max-width:calc(var(--column) * 10);min-width:calc(var(--column) * 10);height:calc(var(--row) * 1);min-height:calc(var(--row) * 1);max-height:calc(var(--row) * 1);margin-bottom:20px;border:none;background-color:#dddde8\n}\n.question-controls{position:absolute;bottom:20px;right:0;width:calc(var(--column) * 2)\n}\n.question-controls img{cursor:pointer;max-width:30px;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-controls img:hover{opacity:1\n}\n.question-controls img:nth-child(2){padding:0 10px\n}\n.question__add-var-button{border:none;padding-left:30px;cursor:pointer;font-family:marta;font-weight:700;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question__add-var-button:hover{opacity:1\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-question.vue"],"names":[],"mappings":";AA4LA,UACA,kBAAA,6BACA,gBACA,YACA;CACA;AAEA,aACA,mBAAA,aACA;CACA;AAEA,eACA,kBAAA,WACA,SACA,+BACA,WACA,kBACA,YACA;CACA;AAEA,sBACA,YAAA;CACA;AAEA,uBACA,+BAAA,mCACA,mCACA,4BACA,gCACA,gCACA,mBACA,YACA,wBACA;CACA;AAEA,mBACA,kBAAA,YACA,QACA,6BACA;CACA;AACA,uBACA,eAAA,eACA,qBACA,WACA,kCAGA;CACA;AAEA,6BACA,SAAA;CACA;AAEA,oCACA,cAAA;CACA;AAEA,0BACA,YAAA,kBACA,eACA,kBACA,gBACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,gCACA,SAAA;CACA","file":"new-question.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question\">\r\n\r\n        <h3>Текст вопроса:</h3>\r\n        <textarea class=\"question__description\" name=\"name\" rows=\"8\" cols=\"80\"></textarea>\r\n\r\n        <select class=\"\" name=\"\" class=\"question-type\" v-model=\"questionType\" @change=\"changeType\">\r\n            <option value=\"1\">Один из списка</option>\r\n            <option value=\"2\">Несколько из списка</option>\r\n        </select>\r\n\r\n        <div class=\"variants\">\r\n\r\n            <div v-if=\"questionType === 1\" key=\"single-question\">\r\n                <single\r\n                    v-for=\"(variant, index) in single.vars\"\r\n                    :text=\"variant.text\"\r\n                    :status=\"variant.isRight\"\r\n                    :key=\"variant.id\"\r\n                    @removeVar=\"single.vars.splice(index, 1)\"\r\n                    @updateVar=\"singleUpdateVarHandler\"\r\n                    @updateRightVar=\"singleUpdateRightVarHandler\"\r\n                ></single>\r\n                <button  class=\"question__add-var-button\" type=\"button\" name=\"button\" @click=\"singleAddVar\">добавить вариант</button>\r\n            </div>\r\n\r\n            <div v-else key=\"multiple-question\">\r\n                <multiple\r\n                    v-for=\"(variant, index) in multiple.vars\"\r\n                    :text=\"variant.text\"\r\n                    :status=\"variant.isRight\"\r\n                    :key=\"variant.id\"\r\n                    @removeVar=\"multiple.vars.splice(index, 1)\"\r\n                    @updateVar=\"multipleUpdateVarHandler\"\r\n                    @updateRightVar=\"multipleUpdateRightVarHandler\"\r\n                >\r\n                </multiple>\r\n                <button class=\"question__add-var-button\" type=\"button\" name=\"button\" @click=\"multipleAddVar\">добавить вариант</button>\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n\r\n        <div class=\"question-controls\">\r\n            <img src=\"img/success.svg\" alt=\"\">\r\n            <img src=\"img/edit.svg\" alt=\"\">\r\n            <img @click=\"deleteQuestion\" src=\"img/dustbin.svg\" alt=\"\">\r\n\r\n        </div>\r\n\r\n\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport single from './questions/single.vue';\r\nimport multiple from './questions/multiple.vue';\r\n\r\nexport default {\r\n\r\n    props: ['questiontype', 'questiontext', 'questionid'],\r\n\r\n    components: {\r\n       'single': single,\r\n       'multiple': multiple\r\n   },\r\n\r\n    data() {\r\n        return {\r\n            questionType: this.questiontype ? this.questiontype : 1,\r\n            id: this.questionid,\r\n            // Вопросы с одним вариантом\r\n            single: {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            },\r\n            // Вопросы с несколькими вариантами ответа\r\n            multiple: {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            }\r\n\r\n        }\r\n    },\r\n\r\n    methods: {\r\n\r\n        changeType() {\r\n            this.single = {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            };\r\n\r\n            this.multiple = {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            };\r\n        },\r\n\r\n        /*Вопросы с одним варианторм*/\r\n\r\n        //Добавляем вариант ответа\r\n        singleAddVar() {\r\n            this.single.vars.push({\r\n                text: 'Вариант ответа',\r\n                isRight: false,\r\n                id: this.nextVarId\r\n            });\r\n            this.single.nextVarId++;\r\n        },\r\n        //Обновляем текст варианта\r\n        singleUpdateVarHandler(index, text) {\r\n            this.single.vars[index].text = text;\r\n        },\r\n        //Выбираем правильный вариант вопроса\r\n        singleUpdateRightVarHandler(index) {\r\n            console.log(this.$children);\r\n            this.$children.forEach( (v,i) => {\r\n                if(i === index) {\r\n                    v.isRight ? v.isRight = false : v.isRight = true;\r\n                    this.single.vars[index].isRight ? this.single.vars[index].isRight = false : this.single.vars[index].isRight = true;\r\n                }\r\n                else {\r\n                    v.isRight = false;\r\n                    this.single.vars[i].isRight = false;\r\n                }\r\n            });\r\n        },\r\n\r\n        /*Вопросы с несолькими вариантами*/\r\n        //Добавляем вариант ответа\r\n        multipleAddVar() {\r\n            this.multiple.vars.push({\r\n                text: 'Вариант ответа',\r\n                isRight: false,\r\n                id: this.nextVarId\r\n            });\r\n            this.multiple.nextVarId++;\r\n        },\r\n\r\n        multipleUpdateVarHandler(index, text) {\r\n            this.multiple.vars[index].text = text;\r\n        },\r\n\r\n        //Выбираем правильный вариант вопроса\r\n        multipleUpdateRightVarHandler(index) {\r\n            console.log(this.$children);\r\n        },\r\n\r\n        //Событие удаления вопроса\r\n        deleteQuestion() {\r\n            this.$emit('delete-question', this.id);\r\n        }\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question {\r\n        position: relative;\r\n        border: 1px solid var(--blue);\r\n        margin-top: 40px;\r\n        padding: 20px;\r\n    }\r\n\r\n    .question h3 {\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .question-type {\r\n        position: absolute;\r\n        right: -1px;\r\n        top: -1px;\r\n        background-color: var(--purple);\r\n        color: #fff;\r\n        font-family: 'marta';\r\n        padding: 10px;\r\n    }\r\n\r\n    .question-type option{\r\n        padding: 10px;\r\n    }\r\n\r\n    .question__description {\r\n        width: calc(var(--column) * 10);\r\n        max-width: calc(var(--column) * 10);\r\n        min-width: calc(var(--column) * 10);\r\n        height: calc(var(--row) * 1);\r\n        min-height: calc(var(--row) * 1);\r\n        max-height: calc(var(--row) * 1);\r\n        margin-bottom: 20px;\r\n        border: none;\r\n        background-color: #dddde8;\r\n    }\r\n\r\n    .question-controls {\r\n        position: absolute;\r\n        bottom: 20px;\r\n        right: 0px;\r\n        width: calc(var(--column) * 2);\r\n    }\r\n    .question-controls img {\r\n        cursor: pointer;\r\n        max-width: 30px;\r\n        display: inline-block;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity 0.2s ease-in-out;\r\n        -o-transition: opacity 0.2s ease-in-out;\r\n        transition: opacity 0.2s ease-in-out;\r\n    }\r\n\r\n    .question-controls img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-controls img:nth-child(2) {\r\n        padding: 0 10px;\r\n    }\r\n\r\n    .question__add-var-button {\r\n        border: none;\r\n        padding-left: 30px;\r\n        cursor: pointer;\r\n        font-family: 'marta';\r\n        font-weight: bold;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question__add-var-button:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -18463,7 +18527,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n.question-var{display:flex;width:calc(var(--column) * 10);max-height:40px;margin-bottom:20px;justify-content:space-between\n}\n.question-var>*{display:block;max-width:calc(var(--column) * 10);align-self:center\n}\n.question-var input[type=text]{max-width:calc(var(--column) * 6);border:none;border-bottom:1px solid var(--blue)\n}\n.question-var img{max-width:20px;cursor:pointer;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var img:hover{opacity:1\n}\n.question-var input[type=checkbox]{display:none\n}\nlabel[for=right_var]{cursor:pointer;color:var(--blue);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var label.active,label[for=right_var]:hover{opacity:1\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/questions/src/vue-comp/questions/single.vue"],"names":[],"mappings":";AA+CA,cACA,aAAA,+BACA,gBACA,mBACA,6BACA;CACA;AAEA,gBACA,cAAA,mCACA,iBACA;CACA;AAEA,+BACA,kCAAA,YACA,mCACA;CACA;AAEA,kBACA,eAAA,eACA,WACA,kCAGA;CACA;AAEA,wBACA,SAAA;CACA;AAEA,mCACA,YAAA;CACA;AAEA,qBACA,eAAA,kBACA,WACA,kCAGA;CACA;AAMA,sDACA,SAAA;CACA","file":"single.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question-var\">\r\n        <input type=\"text\" name=\"\" value=\"\" placeholder=\"Вариант ответа\" :placeholder=\"placeholderText\" v-model=\"varText\" @input=\"updateInfo\">\r\n        <img @click=\"deleteVar\" src=\"img/cross.svg\" alt=\"\">\r\n        <label @click=\"rightVar\" for=\"right_var\" :class=\"{active: isRight}\">правильный</label>\r\n        <input type=\"checkbox\" name=\"\" value=\"\" id=\"right_var\">\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n\r\n    props: ['text', 'status'],\r\n\r\n    data() {\r\n        return {\r\n            varText: '',\r\n            placeholderText: this.text,\r\n            isRight: this.status\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        //Удаление варианта\r\n        deleteVar(e) {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('removeVar', index);\r\n        },\r\n\r\n        // Обнавляем текст варианта\r\n        updateInfo() {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('updateVar', index, this.varText);\r\n        },\r\n\r\n        // Обнавляем статус правильного ответа варианта\r\n        rightVar() {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('updateRightVar', index);\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question-var {\r\n        display: flex;\r\n        width: calc(var(--column) * 10);\r\n        max-height: 40px;\r\n        margin-bottom: 20px;\r\n        justify-content: space-between;\r\n    }\r\n\r\n    .question-var > * {\r\n        display: block;\r\n        max-width: calc(var(--column) * 10);\r\n        align-self: center;\r\n    }\r\n\r\n    .question-var input[type=\"text\"] {\r\n        max-width: calc(var(--column) * 6);\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n    }\r\n\r\n    .question-var img{\r\n        max-width: 20px;\r\n        cursor: pointer;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question-var img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    label[for=\"right_var\"] {\r\n        cursor: pointer;\r\n        color: var(--blue);\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    label[for=\"right_var\"]:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var label.active {\r\n        opacity: 1;\r\n    }\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.question-var{display:flex;width:calc(var(--column) * 10);max-height:40px;margin-bottom:20px;justify-content:space-between\n}\n.question-var>*{display:block;max-width:calc(var(--column) * 10);align-self:center\n}\n.question-var input[type=text]{max-width:calc(var(--column) * 6);border:none;border-bottom:1px solid var(--blue)\n}\n.question-var img{max-width:20px;cursor:pointer;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var img:hover{opacity:1\n}\n.question-var input[type=checkbox]{display:none\n}\nlabel[for=right_var]{cursor:pointer;color:var(--blue);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var label.active,label[for=right_var]:hover{opacity:1\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/questions/src/vue-comp/questions/single.vue"],"names":[],"mappings":";AAgDA,cACA,aAAA,+BACA,gBACA,mBACA,6BACA;CACA;AAEA,gBACA,cAAA,mCACA,iBACA;CACA;AAEA,+BACA,kCAAA,YACA,mCACA;CACA;AAEA,kBACA,eAAA,eACA,WACA,kCAGA;CACA;AAEA,wBACA,SAAA;CACA;AAEA,mCACA,YAAA;CACA;AAEA,qBACA,eAAA,kBACA,WACA,kCAGA;CACA;AAMA,sDACA,SAAA;CACA","file":"single.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question-var\">\r\n        <input type=\"text\" name=\"\" value=\"\" placeholder=\"Вариант ответа\" :placeholder=\"placeholderText\" v-model=\"varText\" @input=\"updateInfo\">\r\n        <img @click=\"deleteVar\" src=\"img/cross.svg\" alt=\"\">\r\n        <label @click=\"rightVar\" for=\"right_var\" :class=\"{active: isRight}\">правильный</label>\r\n        <input type=\"checkbox\" name=\"\" value=\"\" id=\"right_var\">\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n\r\n    props: ['text', 'status'],\r\n\r\n    data() {\r\n        return {\r\n            varText: '',\r\n            placeholderText: this.text,\r\n            isRight: this.status\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        //Удаление варианта\r\n        deleteVar(e) {\r\n            console.log(1);\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('removeVar', index);\r\n        },\r\n\r\n        // Обнавляем текст варианта\r\n        updateInfo() {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('updateVar', index, this.varText);\r\n        },\r\n\r\n        // Обнавляем статус правильного ответа варианта\r\n        rightVar() {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('updateRightVar', index);\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question-var {\r\n        display: flex;\r\n        width: calc(var(--column) * 10);\r\n        max-height: 40px;\r\n        margin-bottom: 20px;\r\n        justify-content: space-between;\r\n    }\r\n\r\n    .question-var > * {\r\n        display: block;\r\n        max-width: calc(var(--column) * 10);\r\n        align-self: center;\r\n    }\r\n\r\n    .question-var input[type=\"text\"] {\r\n        max-width: calc(var(--column) * 6);\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n    }\r\n\r\n    .question-var img{\r\n        max-width: 20px;\r\n        cursor: pointer;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question-var img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    label[for=\"right_var\"] {\r\n        cursor: pointer;\r\n        color: var(--blue);\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    label[for=\"right_var\"]:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var label.active {\r\n        opacity: 1;\r\n    }\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -18714,19 +18778,22 @@ var render = function() {
         staticClass: "question-type",
         attrs: { name: "", class: "question-type" },
         on: {
-          change: function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.questionType = $event.target.multiple
-              ? $$selectedVal
-              : $$selectedVal[0]
-          }
+          change: [
+            function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.questionType = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
+            _vm.changeType
+          ]
         }
       },
       [
@@ -18736,35 +18803,69 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "variants" },
-      _vm._l(_vm.vars, function(variant, index) {
-        return _vm.questionType === 1
-          ? _c("single", {
-              key: variant.id,
-              attrs: { text: variant.text, status: variant.isRight },
-              on: {
-                removeVar: function($event) {
-                  _vm.vars.splice(index, 1)
+    _c("div", { staticClass: "variants" }, [
+      _vm.questionType === 1
+        ? _c(
+            "div",
+            { key: "single-question" },
+            [
+              _vm._l(_vm.single.vars, function(variant, index) {
+                return _c("single", {
+                  key: variant.id,
+                  attrs: { text: variant.text, status: variant.isRight },
+                  on: {
+                    removeVar: function($event) {
+                      _vm.single.vars.splice(index, 1)
+                    },
+                    updateVar: _vm.singleUpdateVarHandler,
+                    updateRightVar: _vm.singleUpdateRightVarHandler
+                  }
+                })
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "question__add-var-button",
+                  attrs: { type: "button", name: "button" },
+                  on: { click: _vm.singleAddVar }
                 },
-                updateVar: _vm.updateVarHandler,
-                updateRightVar: _vm.updateRightVarHandler
-              }
-            })
-          : _c("multiple")
-      })
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "question__add-var-button",
-        attrs: { type: "button", name: "button" },
-        on: { click: _vm.addVar }
-      },
-      [_vm._v("добавить вариант")]
-    ),
+                [_vm._v("добавить вариант")]
+              )
+            ],
+            2
+          )
+        : _c(
+            "div",
+            { key: "multiple-question" },
+            [
+              _vm._l(_vm.multiple.vars, function(variant, index) {
+                return _c("multiple", {
+                  key: variant.id,
+                  attrs: { text: variant.text, status: variant.isRight },
+                  on: {
+                    removeVar: function($event) {
+                      _vm.multiple.vars.splice(index, 1)
+                    },
+                    updateVar: _vm.multipleUpdateVarHandler,
+                    updateRightVar: _vm.multipleUpdateRightVarHandler
+                  }
+                })
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "question__add-var-button",
+                  attrs: { type: "button", name: "button" },
+                  on: { click: _vm.multipleAddVar }
+                },
+                [_vm._v("добавить вариант")]
+              )
+            ],
+            2
+          )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "question-controls" }, [
       _c("img", { attrs: { src: "img/success.svg", alt: "" } }),

@@ -25,6 +25,7 @@ export default {
     methods: {
         //Удаление варианта
         deleteVar(e) {
+            console.log(1);
             let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
             this.$emit('removeVar', index);
         },
