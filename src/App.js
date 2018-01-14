@@ -6,8 +6,9 @@ import Auth from './js/auth.js';
 
 // компоненты
 
-import auth from './vue-comp/auth.vue';
+import login from './vue-comp/login.vue';
 import tester from './vue-comp/tester.vue';
+
 
 
 // Маршруты
@@ -27,7 +28,7 @@ const router = new Router({
 
         {
             path: '/auth',
-            component: auth
+            component: login
         },
 
         {
@@ -46,15 +47,16 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
     if (to.meta.requiredAuth) {
-        console.log(Auth.checkUser());
-        if (!Auth.checkUser()) {
-            console.log(to.path)
-            console.log(Auth.checkUser());
-            router.push('/auth')
-        }
-        else {
-            next()
-        }
+        Auth.checkUser()
+        .then( (res) => {
+            console.log(res);
+            if (!res) {
+                router.push('/auth')
+            }
+            else {
+                next()
+            }
+        });
   }
     else {
         next()
@@ -72,7 +74,7 @@ let app = new Vue({
     },
 
     components: {
-        'auth': auth,
+        'login': login,
         'tester': tester
     },
 

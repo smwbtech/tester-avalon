@@ -25,11 +25,16 @@
 
             </div>
 
-            <form :class="authForm" method="post">
+            <form
+                :class="authForm"
+                @submit.prevent="authorize"
+            >
 
-                <input type="text" name="user_email" id="user_email" value="" placeholder="Email">
-                <input type="password" name="user_password" id="user_password" value="" placeholder="Пароль">
+                <input type="text" name="user_email_login" id="user_email_login" value="" placeholder="Email" v-model="loginFormData.userEmail" required>
+                <input type="password" name="user_password_login" id="user_password_login" value="" placeholder="Пароль" v-model="loginFormData.userPassword" required>
                 <input type="submit" name="Enter" value="Войти">
+
+                <p :class="loginErrClass">{{loginFormErr}}</p>
 
             </form>
 
@@ -82,8 +87,17 @@ export default {
             // Активный таб
             activeTab: 'auth',
 
+            // Ошибки формы авторизации
+            loginFormErr: '',
+
             // Ошибки формы регистрации
             regFormErr: '',
+
+            // Данные авторизации
+            loginFormData: {
+                userEmail: '',
+                userPassword: ''
+            },
 
             // Данные регистрации
             regFormData: {
@@ -115,6 +129,13 @@ export default {
             }
         },
 
+        loginErrClass() {
+            return {
+                'log-form__flashmsg': true,
+                'log-form__flashmsg_inactive': this.regFormErr.length === 0
+            }
+        },
+
         // Объект класса поля ошибок формы регистрации
         regErrClass() {
             return {
@@ -132,6 +153,25 @@ export default {
             e.target.classList.contains
         },
 
+        // Обработчик события авторизации пользователя
+        authorize(e) {
+
+            axios.post('php/auth.php',this.loginFormData)
+            .then( (res) => {
+                console.log(res);
+                if(!res.data.success) {
+                    throw new Error(res.data.errorMsg);
+                }
+                else {
+                    this.$router.push({path: '/tester'});
+                }
+            })
+            .catch( (err) => {
+                console.log(err);
+                this.loginFormErr = err.message;
+            });
+        },
+
         // Обработчик события регистрации пользователя
         registration(e) {
             let res = Registration.checkData(this.regFormData);
@@ -142,14 +182,16 @@ export default {
             else {
                 axios.post('php/reg.php', this.regFormData)
                 .then( (res) => {
+                    console.log(res);
                     if(!res.data.success) {
                         throw new Error(res.data.errorMsg);
                     }
                     else {
-                        this.$emit('login');
+                        this.$router.push({path: '/tester'});
                     }
                 })
                 .catch( (err) => {
+                    console.log(err);
                     this.regFormErr = err.message;
                 });
             }
@@ -244,7 +286,7 @@ export default {
         font-weight: bold;
     }
 
-
+    .log-form__flashmsg,
     .reg-form__flashmsg {
         width: 50%;
         opacity: 1;
