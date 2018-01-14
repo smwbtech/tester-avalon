@@ -46,8 +46,9 @@
                     type="button"
                     name="button"
                     @click="addQuestion"
+                    class="new-test__add-question"
                 >
-                Добавить вопрос</button>
+                добавить вопрос</button>
 
             </form>
 
@@ -228,6 +229,29 @@ export default {
 
     .new-test-form__inputs input[type="checkbox"] {
         display: none;
+    }
+
+    .new-test__add-question {
+        border: none;
+        margin: 40px 0px;
+        padding-left: 40px;
+        font-family: 'marta';
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        background-image: url('./../img/add.svg');
+        background-repeat: no-repeat;
+        background-position: left;
+        background-color: #fff;
+        color: var(--purple);
+        opacity: 0.5;
+        -webkit-transition: opacity .2s ease-in-out;
+        -o-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+    }
+
+    .new-test__add-question:hover {
+        opacity: 1;
     }
 
     .fade-enter-active, .fade-leave-active {

@@ -24,7 +24,7 @@
             <multiple v-else></multiple>
         </div>
 
-        <button type="button" name="button" @click="addVar">добавить вариант</button>
+        <button class="question__add-var-button" type="button" name="button" @click="addVar">добавить вариант</button>
 
 
         <div class="question-controls">
@@ -86,8 +86,6 @@ export default {
         },
         //Выбираем правильный вариант вопроса
         updateRightVarHandler(index) {
-
-
             this.$children.forEach( (v,i) => {
                 if(i === index) {
                     v.isRight ? v.isRight = false : v.isRight = true;
@@ -97,7 +95,7 @@ export default {
                     v.isRight = false;
                     this.vars[i].isRight = false;
                 }
-            })
+            });
         }
     }
 
@@ -151,12 +149,42 @@ export default {
         width: calc(var(--column) * 2);
     }
     .question-controls img {
+        cursor: pointer;
         max-width: 30px;
         display: inline-block;
+        opacity: 0.5;
+        -webkit-transition: opacity 0.2s ease-in-out;
+        -o-transition: opacity 0.2s ease-in-out;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .question-controls img:hover {
+        opacity: 1;
     }
 
     .question-controls img:nth-child(2) {
         padding: 0 10px;
+    }
+
+    .question__add-var-button {
+        border: none;
+        padding-left: 30px;
+        cursor: pointer;
+        font-family: 'marta';
+        font-weight: bold;
+        background-image: url('./../img/add.svg');
+        background-repeat: no-repeat;
+        background-position: left;
+        background-color: #fff;
+        color: var(--purple);
+        opacity: 0.5;
+        -webkit-transition: opacity .2s ease-in-out;
+        -o-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+    }
+
+    .question__add-var-button:hover {
+        opacity: 1;
     }
 
 </style>
