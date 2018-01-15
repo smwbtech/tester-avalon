@@ -3195,6 +3195,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   components: {
     'side-menu': _sideMenu.default,
@@ -3202,16 +3209,18 @@ var _default = {
   },
   data: function data() {
     return {
-      questions: [{
-        type: 1,
-        text: 'Введите свое описание вопроса',
-        id: 1
-      }],
+      testTitle: '',
+      testDescription: '',
       testOptions: {
         timeLimit: false,
         time: 60,
         anonym: false
       },
+      questions: [{
+        type: 1,
+        text: 'Введите свое описание вопроса',
+        id: 1
+      }],
       nextQuestionId: 2
     };
   },
@@ -3255,7 +3264,9 @@ var _default = {
         if (typeof v == 'number') return v;
       })[0] : index = index[0];
       this.questions.splice(index, 1);
-    }
+    },
+    // Сохраняем тест
+    saveTest: function saveTest() {}
   }
 };
 exports.default = _default;
@@ -3276,8 +3287,19 @@ var _single = _interopRequireDefault(__webpack_require__(46));
 
 var _multiple = _interopRequireDefault(__webpack_require__(50));
 
+var _string = _interopRequireDefault(__webpack_require__(57));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3340,7 +3362,8 @@ var _default = {
   props: ['questiontype', 'questiontext', 'questionid'],
   components: {
     'single': _single.default,
-    'multiple': _multiple.default
+    'multiple': _multiple.default,
+    'string': _string.default
   },
   data: function data() {
     return {
@@ -3363,11 +3386,16 @@ var _default = {
           id: 1
         }],
         nextVarId: 2
+      },
+      //Вопрос с вводом строки
+      string: {
+        answer: ''
       }
     };
   },
   methods: {
-    changeType: function changeType() {
+    changeType: function changeType(e) {
+      this.questionType = +e.target.value;
       this.single = {
         vars: [{
           text: 'Вариант ответа',
@@ -3392,19 +3420,34 @@ var _default = {
       this.single.vars.push({
         text: 'Вариант ответа',
         isRight: false,
-        id: this.nextVarId
+        id: this.single.nextVarId
       });
       this.single.nextVarId++;
     },
+    // Удаление вариантами
+    removeVarHandler: function removeVarHandler(id) {
+      var index;
+
+      for (var i = 0; i < this.single.vars.length; i++) {
+        if (this.single.vars[i].id === id) index = i;
+      }
+
+      this.single.vars.splice(index, 1);
+    },
     //Обновляем текст варианта
-    singleUpdateVarHandler: function singleUpdateVarHandler(index, text) {
+    singleUpdateVarHandler: function singleUpdateVarHandler(id, text) {
+      var index;
+
+      for (var i = 0; i < this.single.vars.length; i++) {
+        if (this.single.vars[i].id === id) index = i;
+      }
+
       this.single.vars[index].text = text;
     },
     //Выбираем правильный вариант вопроса
     singleUpdateRightVarHandler: function singleUpdateRightVarHandler(index) {
       var _this = this;
 
-      console.log(this.$children);
       this.$children.forEach(function (v, i) {
         if (i === index) {
           v.isRight ? v.isRight = false : v.isRight = true;
@@ -3422,16 +3465,44 @@ var _default = {
       this.multiple.vars.push({
         text: 'Вариант ответа',
         isRight: false,
-        id: this.nextVarId
+        id: this.multiple.nextVarId
       });
       this.multiple.nextVarId++;
     },
-    multipleUpdateVarHandler: function multipleUpdateVarHandler(index, text) {
+    // Удаляем вариант ответа
+    multipleRemoveVarHandler: function multipleRemoveVarHandler(id) {
+      var index;
+
+      for (var i = 0; i < this.multiple.vars.length; i++) {
+        if (this.multiple.vars[i].id === id) index = i;
+      }
+
+      this.multiple.vars.splice(index, 1);
+    },
+    multipleUpdateVarHandler: function multipleUpdateVarHandler(id, text) {
+      var index;
+
+      for (var i = 0; i < this.multiple.vars.length; i++) {
+        if (this.multiple.vars[i].id === id) index = i;
+      }
+
       this.multiple.vars[index].text = text;
     },
     //Выбираем правильный вариант вопроса
     multipleUpdateRightVarHandler: function multipleUpdateRightVarHandler(index) {
-      console.log(this.$children);
+      var _this2 = this;
+
+      this.$children.forEach(function (v, i) {
+        if (i === index) {
+          v.isRight ? v.isRight = false : v.isRight = true;
+          _this2.single.vars[index].isRight ? _this2.single.vars[index].isRight = false : _this2.single.vars[index].isRight = true;
+        }
+      });
+    },
+
+    /*Вопрос - строка*/
+    stringUpdateVarHandler: function stringUpdateVarHandler(text) {
+      this.string.answer = text;
     },
     //Событие удаления вопроса
     deleteQuestion: function deleteQuestion() {
@@ -3464,25 +3535,23 @@ exports.default = void 0;
 //
 //
 var _default = {
-  props: ['text', 'status'],
+  props: ['text', 'status', 'id'],
   data: function data() {
     return {
       varText: '',
       placeholderText: this.text,
-      isRight: this.status
+      isRight: this.status,
+      questionId: this.id
     };
   },
   methods: {
     //Удаление варианта
     deleteVar: function deleteVar(e) {
-      console.log(1);
-      var index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
-      this.$emit('removeVar', index);
+      this.$emit('removeVar', this.id);
     },
     // Обнавляем текст варианта
     updateInfo: function updateInfo() {
-      var index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
-      this.$emit('updateVar', index, this.varText);
+      this.$emit('updateVar', this.id, this.varText);
     },
     // Обнавляем статус правильного ответа варианта
     rightVar: function rightVar() {
@@ -3515,7 +3584,32 @@ exports.default = void 0;
 //
 //
 //
-var _default = {};
+var _default = {
+  props: ['text', 'status', 'id'],
+  data: function data() {
+    return {
+      varText: '',
+      placeholderText: this.text,
+      isRight: this.status,
+      questionId: this.id
+    };
+  },
+  methods: {
+    //Удаление варианта
+    deleteVar: function deleteVar(e) {
+      this.$emit('removeVar', this.id);
+    },
+    // Обнавляем текст варианта
+    updateInfo: function updateInfo() {
+      this.$emit('updateVar', this.id, this.varText);
+    },
+    // Обнавляем статус правильного ответа варианта
+    rightVar: function rightVar() {
+      var index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
+      this.$emit('updateRightVar', index);
+    }
+  }
+};
 exports.default = _default;
 
 /***/ }),
@@ -17614,7 +17708,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4;--blue:#092e64;--purple:#656695;--marine:#3493a8;--yellow:#efda7b;--green:#9dbe87;--red:#c74545;--column:4.16667vw;--row:8.33333vh;--column-mobile:8.33333vw;--row-mobile:4.16667vh\n}\n.auth-page{width:100%;height:100vh;display:flex\n}\n.forms,.info{width:50%;padding-top:15%;padding-left:calc(var(--column) * 2);padding-right:calc(var(--column) * 2)\n}\n.info{background-color:var(--purple);color:#fff\n}\n.forms-nav{text-align:center;height:2rem\n}\n.forms-nav a{color:var(--blue);font-size:2rem;transition:all .2s ease-in-out\n}\n.forms-nav a.from-nav__link_inactive{color:var(--blue);font-size:1.4rem;opacity:.5\n}\n.auth-form_inactive,.reg-form_inactive{display:none\n}\n.auth-form,.reg-form{padding-top:20px\n}\n.auth-form input,.reg-form input{display:block;width:50%;margin:0 auto;margin-bottom:10px;background:none;background-color:#fff;border:none;border-bottom:1px solid var(--blue);text-align:center;transition:width .2s ease-in-out\n}\n.auth-form input:focus,.reg-form input:focus{width:60%\n}\n.auth-form input[type=submit],.reg-form input[type=submit]{width:30%;margin-top:40px;padding:10px;background-color:var(--blue);color:#fff;font-weight:700\n}\n.log-form__flashmsg,.reg-form__flashmsg{width:50%;opacity:1;margin:0 auto;padding-top:40px;font-size:.8rem;text-align:center;color:var(--red)\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/css/variables.css","C:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/login.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,gBACC,eACD,iBACE,iBACA,iBACA,gBACD,cACF,mBACY,gBACH,0BACU,sBACH;CAClC;ACgMD,WACA,WAAA,aACA,YACA;CAEA;AAEA,aAEA,UAAA,gBACA,qCACA,qCACA;CACA;AAEA,MACA,+BAAA,UACA;CACA;AAEA,WACA,kBAAA,WACA;CACA;AAEA,aACA,kBAAA,eACA,8BAGA;CACA;AAGA,qCACA,kBAAA,iBACA,UACA;CACA;AAEA,uCAEA,YAAA;CACA;AAEA,qBAEA,gBAAA;CACA;AAEA,iCAEA,cAAA,UACA,cACA,mBACA,gBACA,sBACA,YACA,oCACA,kBACA,gCAGA;CACA;AAEA,6CAEA,SAAA;CACA;AAEA,2DAEA,UAAA,gBACA,aACA,6BACA,WACA,eACA;CACA;AAEA,wCAEA,UAAA,UACA,cACA,iBACA,gBACA,kBACA,gBACA;CACA","file":"login.vue","sourcesContent":[":root {\r\n    font-family: 'Marta';\r\n    font-size: 16px;\r\n    line-height: 1.4;\r\n    --blue: #092E64;\r\n    --purple: #656695;\r\n    --marine: #3493A8;\r\n    --yellow: #EFDA7B;\r\n    --green: #9DBE87;\r\n    --red: #c74545;\r\n    --column: calc(100vw / 24);\r\n    --row: calc(100vh / 12);\r\n    --column-mobile: calc(100vw / 12);\r\n    --row-mobile: calc(100vh / 24);\r\n}\r\n","<template lang=\"html\">\r\n    <div class=\"auth-page\">\r\n\r\n        <div class=\"forms\">\r\n\r\n            <div class=\"forms-nav\">\r\n\r\n                <a\r\n                    href=\"/auth\"\r\n                    :class=\"[activeTab == 'auth' ? '' : 'from-nav__link_inactive']\"\r\n                    @click.prevent=\"changeTab\"\r\n                >\r\n                Авторизация\r\n                </a>\r\n\r\n                <span>/</span>\r\n\r\n                <a\r\n                    href=\"/reg\"\r\n                    :class=\"[activeTab == 'reg' ? '' : 'from-nav__link_inactive']\"\r\n                    @click.prevent=\"changeTab\"\r\n                >\r\n                Регистрация\r\n                </a>\r\n\r\n            </div>\r\n\r\n            <form\r\n                :class=\"authForm\"\r\n                @submit.prevent=\"authorize\"\r\n            >\r\n\r\n                <input type=\"text\" name=\"user_email_login\" id=\"user_email_login\" value=\"\" placeholder=\"Email\" v-model=\"loginFormData.userEmail\" required>\r\n                <input type=\"password\" name=\"user_password_login\" id=\"user_password_login\" value=\"\" placeholder=\"Пароль\" v-model=\"loginFormData.userPassword\" required>\r\n                <input type=\"submit\" name=\"Enter\" value=\"Войти\">\r\n\r\n                <p :class=\"loginErrClass\">{{loginFormErr}}</p>\r\n\r\n            </form>\r\n\r\n            <form\r\n                :class=\"regForm\"\r\n                @submit.prevent=\"registration\"\r\n            >\r\n\r\n                <input type=\"text\" name=\"user_email\" id=\"user_email\" value=\"\" placeholder=\"Email\" v-model=\"regFormData.userEmail\" required>\r\n                <input type=\"password\" name=\"user_password\" id=\"user_password\" value=\"\" placeholder=\"Пароль\" v-model=\"regFormData.userPassword\" required>\r\n                <input type=\"password\" name=\"user_password_re\" id=\"user_password_re\" value=\"\" placeholder=\"Повторите пароль\" v-model=\"regFormData.userPassword_re\" required>\r\n                <input type=\"text\" name=\"user_name\" id=\"user_name\" value=\"\" placeholder=\"Имя\" v-model=\"regFormData.userName\">\r\n                <input type=\"text\" name=\"user_last_name\" id=\"user_last_name\" value=\"\" placeholder=\"Фамилия\" v-model=\"regFormData.userLastName\">\r\n                <input type=\"text\" name=\"user_company\" id=\"user_company\" value=\"\" placeholder=\"Компания\" v-model=\"regFormData.userComapny\">\r\n                <input type=\"submit\" name=\"Enter\" value=\"Регистрация\">\r\n\r\n                <p :class=\"regErrClass\">{{regFormErr}}</p>\r\n\r\n            </form>\r\n\r\n        </div>\r\n\r\n        <div class=\"info\">\r\n            <h1>Добро пожаловать в Tester</h1>\r\n            <p>Tester – это удобная платформа для быстрого создания опроса или тестирования. Вы можете быстро создать свой тест через веб-интерфейс и посмотреть статистику ответов. Гибкая настройка вопросов, возможность ограничить тестирование по времени. </p>\r\n            <ul>\r\n                <li>Гибкая настройка вопросов</li>\r\n                <li>Общая статистика по каждому тесту</li>\r\n                <li>Возможность ограничить тестирование по времени</li>\r\n            </ul>\r\n        </div>\r\n\r\n    </div>\r\n\r\n\r\n\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport Registration from './../js/reg.js';\r\nimport axios from './../../node_modules/axios/dist/axios.js';\r\n\r\n\r\nexport default {\r\n\r\n    data() {\r\n        return {\r\n            // Активный таб\r\n            activeTab: 'auth',\r\n\r\n            // Ошибки формы авторизации\r\n            loginFormErr: '',\r\n\r\n            // Ошибки формы регистрации\r\n            regFormErr: '',\r\n\r\n            // Данные авторизации\r\n            loginFormData: {\r\n                userEmail: '',\r\n                userPassword: ''\r\n            },\r\n\r\n            // Данные регистрации\r\n            regFormData: {\r\n                userEmail: '',\r\n                userPassword: '',\r\n                userPassword_re: '',\r\n                userName: '',\r\n                userLastName: '',\r\n                userCompany: ''\r\n            }\r\n        }\r\n\r\n    },\r\n\r\n    computed: {\r\n        // Объект класса формы авторизации\r\n        authForm() {\r\n            return {\r\n                'auth-form': true,\r\n                'auth-form_inactive': this.activeTab === 'reg'\r\n            }\r\n        },\r\n\r\n        // Объект класса формы регистрации\r\n        regForm() {\r\n            return {\r\n                'reg-form': true,\r\n                'reg-form_inactive': this.activeTab === 'auth'\r\n            }\r\n        },\r\n\r\n        loginErrClass() {\r\n            return {\r\n                'log-form__flashmsg': true,\r\n                'log-form__flashmsg_inactive': this.regFormErr.length === 0\r\n            }\r\n        },\r\n\r\n        // Объект класса поля ошибок формы регистрации\r\n        regErrClass() {\r\n            return {\r\n                'reg-form__flashmsg': true,\r\n                'reg-form__flashmsg_inactive': this.regFormErr.length === 0\r\n            }\r\n        }\r\n\r\n    },\r\n\r\n    methods: {\r\n        // Обработчик события переключения табов Авторизация/Регистрация\r\n        changeTab(e) {\r\n            this.activeTab = e.target.getAttribute('href').slice(1);\r\n            e.target.classList.contains\r\n        },\r\n\r\n        // Обработчик события авторизации пользователя\r\n        authorize(e) {\r\n\r\n            axios.post('php/auth.php',this.loginFormData)\r\n            .then( (res) => {\r\n                console.log(res);\r\n                if(!res.data.success) {\r\n                    throw new Error(res.data.errorMsg);\r\n                }\r\n                else {\r\n                    this.$router.push({path: '/tester'});\r\n                }\r\n            })\r\n            .catch( (err) => {\r\n                console.log(err);\r\n                this.loginFormErr = err.message;\r\n            });\r\n        },\r\n\r\n        // Обработчик события регистрации пользователя\r\n        registration(e) {\r\n            let res = Registration.checkData(this.regFormData);\r\n            if(!res.success) {\r\n                this.regFormErr = res.errorMsg;\r\n                //TODO: Сброс текст ошибки по таймауту\r\n            }\r\n            else {\r\n                axios.post('php/reg.php', this.regFormData)\r\n                .then( (res) => {\r\n                    console.log(res);\r\n                    if(!res.data.success) {\r\n                        throw new Error(res.data.errorMsg);\r\n                    }\r\n                    else {\r\n                        this.$router.push({path: '/tester'});\r\n                    }\r\n                })\r\n                .catch( (err) => {\r\n                    console.log(err);\r\n                    this.regFormErr = err.message;\r\n                });\r\n            }\r\n        }\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    @import './../css/variables.css';\r\n\r\n    .auth-page {\r\n        width: 100%;\r\n        height: 100vh;\r\n        display: flex;\r\n\r\n    }\r\n\r\n    .forms,\r\n    .info {\r\n        width: 50%;\r\n        padding-top: 15%;\r\n        padding-left: calc(var(--column) * 2);\r\n        padding-right: calc(var(--column) * 2);\r\n    }\r\n\r\n    .info {\r\n        background-color: var(--purple);\r\n        color: #fff;\r\n    }\r\n\r\n    .forms-nav {\r\n        text-align: center;\r\n        height: 2rem;\r\n    }\r\n\r\n    .forms-nav a {\r\n        color: var(--blue);\r\n        font-size: 2rem;\r\n        -webkit-transition: all .2s ease-in-out;\r\n        -o-transition: all .2s ease-in-out;\r\n        transition: all .2s ease-in-out;\r\n    }\r\n\r\n\r\n    .forms-nav a.from-nav__link_inactive {\r\n        color: var(--blue);\r\n        font-size: 1.4rem;\r\n        opacity: 0.5;\r\n    }\r\n\r\n    .auth-form_inactive,\r\n    .reg-form_inactive {\r\n        display: none;\r\n    }\r\n\r\n    .auth-form,\r\n    .reg-form {\r\n        padding-top: 20px;\r\n    }\r\n\r\n    .auth-form input,\r\n    .reg-form input {\r\n        display: block;\r\n        width: 50%;\r\n        margin: 0 auto;\r\n        margin-bottom: 10px;\r\n        background: none;\r\n        background-color: #fff;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        text-align: center;\r\n        -webkit-transition: width .2s ease-in-out;\r\n        -o-transition: width .2s ease-in-out;\r\n        transition: width .2s ease-in-out;\r\n    }\r\n\r\n    .auth-form input:focus,\r\n    .reg-form input:focus {\r\n        width: 60%;\r\n    }\r\n\r\n    .auth-form input[type=\"submit\"],\r\n    .reg-form input[type=\"submit\"] {\r\n        width: 30%;\r\n        margin-top: 40px;\r\n        padding: 10px;\r\n        background-color: var(--blue);\r\n        color: #fff;\r\n        font-weight: bold;\r\n    }\r\n\r\n    .log-form__flashmsg,\r\n    .reg-form__flashmsg {\r\n        width: 50%;\r\n        opacity: 1;\r\n        margin: 0 auto;\r\n        padding-top: 40px;\r\n        font-size: .8rem;\r\n        text-align: center;\r\n        color: var(--red);\r\n    }\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4;--blue:#092e64;--purple:#656695;--marine:#3493a8;--yellow:#efda7b;--green:#9dbe87;--red:#c74545;--column:4.16667vw;--row:8.33333vh;--column-mobile:8.33333vw;--row-mobile:4.16667vh\n}\n.auth-page{width:100%;height:100vh;display:flex\n}\n.forms,.info{width:50%;padding-top:15%;padding-left:calc(var(--column) * 2);padding-right:calc(var(--column) * 2)\n}\n.info{background-color:var(--purple);color:#fff\n}\n.forms-nav{text-align:center;height:2rem\n}\n.forms-nav a{color:var(--blue);font-size:2rem;transition:all .2s ease-in-out\n}\n.forms-nav a.from-nav__link_inactive{color:var(--blue);font-size:1.4rem;opacity:.5\n}\n.auth-form_inactive,.reg-form_inactive{display:none\n}\n.auth-form,.reg-form{padding-top:20px\n}\n.auth-form input,.reg-form input{display:block;width:50%;margin:0 auto;margin-bottom:10px;background:none;background-color:#fff;border:none;border-bottom:1px solid var(--blue);text-align:center;transition:width .2s ease-in-out\n}\n.auth-form input:focus,.reg-form input:focus{width:60%\n}\n.auth-form input[type=submit],.reg-form input[type=submit]{width:30%;margin-top:40px;padding:10px;background-color:var(--blue);color:#fff;font-weight:700\n}\n.log-form__flashmsg,.reg-form__flashmsg{width:50%;opacity:1;margin:0 auto;padding-top:40px;font-size:.8rem;text-align:center;color:var(--red)\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/css/variables.css","D:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/login.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,gBACC,eACD,iBACE,iBACA,iBACA,gBACD,cACF,mBACY,gBACH,0BACU,sBACH;CAClC;ACgMD,WACA,WAAA,aACA,YACA;CAEA;AAEA,aAEA,UAAA,gBACA,qCACA,qCACA;CACA;AAEA,MACA,+BAAA,UACA;CACA;AAEA,WACA,kBAAA,WACA;CACA;AAEA,aACA,kBAAA,eACA,8BAGA;CACA;AAGA,qCACA,kBAAA,iBACA,UACA;CACA;AAEA,uCAEA,YAAA;CACA;AAEA,qBAEA,gBAAA;CACA;AAEA,iCAEA,cAAA,UACA,cACA,mBACA,gBACA,sBACA,YACA,oCACA,kBACA,gCAGA;CACA;AAEA,6CAEA,SAAA;CACA;AAEA,2DAEA,UAAA,gBACA,aACA,6BACA,WACA,eACA;CACA;AAEA,wCAEA,UAAA,UACA,cACA,iBACA,gBACA,kBACA,gBACA;CACA","file":"login.vue","sourcesContent":[":root {\r\n    font-family: 'Marta';\r\n    font-size: 16px;\r\n    line-height: 1.4;\r\n    --blue: #092E64;\r\n    --purple: #656695;\r\n    --marine: #3493A8;\r\n    --yellow: #EFDA7B;\r\n    --green: #9DBE87;\r\n    --red: #c74545;\r\n    --column: calc(100vw / 24);\r\n    --row: calc(100vh / 12);\r\n    --column-mobile: calc(100vw / 12);\r\n    --row-mobile: calc(100vh / 24);\r\n}\r\n","<template lang=\"html\">\r\n    <div class=\"auth-page\">\r\n\r\n        <div class=\"forms\">\r\n\r\n            <div class=\"forms-nav\">\r\n\r\n                <a\r\n                    href=\"/auth\"\r\n                    :class=\"[activeTab == 'auth' ? '' : 'from-nav__link_inactive']\"\r\n                    @click.prevent=\"changeTab\"\r\n                >\r\n                Авторизация\r\n                </a>\r\n\r\n                <span>/</span>\r\n\r\n                <a\r\n                    href=\"/reg\"\r\n                    :class=\"[activeTab == 'reg' ? '' : 'from-nav__link_inactive']\"\r\n                    @click.prevent=\"changeTab\"\r\n                >\r\n                Регистрация\r\n                </a>\r\n\r\n            </div>\r\n\r\n            <form\r\n                :class=\"authForm\"\r\n                @submit.prevent=\"authorize\"\r\n            >\r\n\r\n                <input type=\"text\" name=\"user_email_login\" id=\"user_email_login\" value=\"\" placeholder=\"Email\" v-model=\"loginFormData.userEmail\" required>\r\n                <input type=\"password\" name=\"user_password_login\" id=\"user_password_login\" value=\"\" placeholder=\"Пароль\" v-model=\"loginFormData.userPassword\" required>\r\n                <input type=\"submit\" name=\"Enter\" value=\"Войти\">\r\n\r\n                <p :class=\"loginErrClass\">{{loginFormErr}}</p>\r\n\r\n            </form>\r\n\r\n            <form\r\n                :class=\"regForm\"\r\n                @submit.prevent=\"registration\"\r\n            >\r\n\r\n                <input type=\"text\" name=\"user_email\" id=\"user_email\" value=\"\" placeholder=\"Email\" v-model=\"regFormData.userEmail\" required>\r\n                <input type=\"password\" name=\"user_password\" id=\"user_password\" value=\"\" placeholder=\"Пароль\" v-model=\"regFormData.userPassword\" required>\r\n                <input type=\"password\" name=\"user_password_re\" id=\"user_password_re\" value=\"\" placeholder=\"Повторите пароль\" v-model=\"regFormData.userPassword_re\" required>\r\n                <input type=\"text\" name=\"user_name\" id=\"user_name\" value=\"\" placeholder=\"Имя\" v-model=\"regFormData.userName\">\r\n                <input type=\"text\" name=\"user_last_name\" id=\"user_last_name\" value=\"\" placeholder=\"Фамилия\" v-model=\"regFormData.userLastName\">\r\n                <input type=\"text\" name=\"user_company\" id=\"user_company\" value=\"\" placeholder=\"Компания\" v-model=\"regFormData.userComapny\">\r\n                <input type=\"submit\" name=\"Enter\" value=\"Регистрация\">\r\n\r\n                <p :class=\"regErrClass\">{{regFormErr}}</p>\r\n\r\n            </form>\r\n\r\n        </div>\r\n\r\n        <div class=\"info\">\r\n            <h1>Добро пожаловать в Tester</h1>\r\n            <p>Tester – это удобная платформа для быстрого создания опроса или тестирования. Вы можете быстро создать свой тест через веб-интерфейс и посмотреть статистику ответов. Гибкая настройка вопросов, возможность ограничить тестирование по времени. </p>\r\n            <ul>\r\n                <li>Гибкая настройка вопросов</li>\r\n                <li>Общая статистика по каждому тесту</li>\r\n                <li>Возможность ограничить тестирование по времени</li>\r\n            </ul>\r\n        </div>\r\n\r\n    </div>\r\n\r\n\r\n\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport Registration from './../js/reg.js';\r\nimport axios from './../../node_modules/axios/dist/axios.js';\r\n\r\n\r\nexport default {\r\n\r\n    data() {\r\n        return {\r\n            // Активный таб\r\n            activeTab: 'auth',\r\n\r\n            // Ошибки формы авторизации\r\n            loginFormErr: '',\r\n\r\n            // Ошибки формы регистрации\r\n            regFormErr: '',\r\n\r\n            // Данные авторизации\r\n            loginFormData: {\r\n                userEmail: '',\r\n                userPassword: ''\r\n            },\r\n\r\n            // Данные регистрации\r\n            regFormData: {\r\n                userEmail: '',\r\n                userPassword: '',\r\n                userPassword_re: '',\r\n                userName: '',\r\n                userLastName: '',\r\n                userCompany: ''\r\n            }\r\n        }\r\n\r\n    },\r\n\r\n    computed: {\r\n        // Объект класса формы авторизации\r\n        authForm() {\r\n            return {\r\n                'auth-form': true,\r\n                'auth-form_inactive': this.activeTab === 'reg'\r\n            }\r\n        },\r\n\r\n        // Объект класса формы регистрации\r\n        regForm() {\r\n            return {\r\n                'reg-form': true,\r\n                'reg-form_inactive': this.activeTab === 'auth'\r\n            }\r\n        },\r\n\r\n        loginErrClass() {\r\n            return {\r\n                'log-form__flashmsg': true,\r\n                'log-form__flashmsg_inactive': this.regFormErr.length === 0\r\n            }\r\n        },\r\n\r\n        // Объект класса поля ошибок формы регистрации\r\n        regErrClass() {\r\n            return {\r\n                'reg-form__flashmsg': true,\r\n                'reg-form__flashmsg_inactive': this.regFormErr.length === 0\r\n            }\r\n        }\r\n\r\n    },\r\n\r\n    methods: {\r\n        // Обработчик события переключения табов Авторизация/Регистрация\r\n        changeTab(e) {\r\n            this.activeTab = e.target.getAttribute('href').slice(1);\r\n            e.target.classList.contains\r\n        },\r\n\r\n        // Обработчик события авторизации пользователя\r\n        authorize(e) {\r\n\r\n            axios.post('php/auth.php',this.loginFormData)\r\n            .then( (res) => {\r\n                console.log(res);\r\n                if(!res.data.success) {\r\n                    throw new Error(res.data.errorMsg);\r\n                }\r\n                else {\r\n                    this.$router.push({path: '/tester'});\r\n                }\r\n            })\r\n            .catch( (err) => {\r\n                console.log(err);\r\n                this.loginFormErr = err.message;\r\n            });\r\n        },\r\n\r\n        // Обработчик события регистрации пользователя\r\n        registration(e) {\r\n            let res = Registration.checkData(this.regFormData);\r\n            if(!res.success) {\r\n                this.regFormErr = res.errorMsg;\r\n                //TODO: Сброс текст ошибки по таймауту\r\n            }\r\n            else {\r\n                axios.post('php/reg.php', this.regFormData)\r\n                .then( (res) => {\r\n                    console.log(res);\r\n                    if(!res.data.success) {\r\n                        throw new Error(res.data.errorMsg);\r\n                    }\r\n                    else {\r\n                        this.$router.push({path: '/tester'});\r\n                    }\r\n                })\r\n                .catch( (err) => {\r\n                    console.log(err);\r\n                    this.regFormErr = err.message;\r\n                });\r\n            }\r\n        }\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    @import './../css/variables.css';\r\n\r\n    .auth-page {\r\n        width: 100%;\r\n        height: 100vh;\r\n        display: flex;\r\n\r\n    }\r\n\r\n    .forms,\r\n    .info {\r\n        width: 50%;\r\n        padding-top: 15%;\r\n        padding-left: calc(var(--column) * 2);\r\n        padding-right: calc(var(--column) * 2);\r\n    }\r\n\r\n    .info {\r\n        background-color: var(--purple);\r\n        color: #fff;\r\n    }\r\n\r\n    .forms-nav {\r\n        text-align: center;\r\n        height: 2rem;\r\n    }\r\n\r\n    .forms-nav a {\r\n        color: var(--blue);\r\n        font-size: 2rem;\r\n        -webkit-transition: all .2s ease-in-out;\r\n        -o-transition: all .2s ease-in-out;\r\n        transition: all .2s ease-in-out;\r\n    }\r\n\r\n\r\n    .forms-nav a.from-nav__link_inactive {\r\n        color: var(--blue);\r\n        font-size: 1.4rem;\r\n        opacity: 0.5;\r\n    }\r\n\r\n    .auth-form_inactive,\r\n    .reg-form_inactive {\r\n        display: none;\r\n    }\r\n\r\n    .auth-form,\r\n    .reg-form {\r\n        padding-top: 20px;\r\n    }\r\n\r\n    .auth-form input,\r\n    .reg-form input {\r\n        display: block;\r\n        width: 50%;\r\n        margin: 0 auto;\r\n        margin-bottom: 10px;\r\n        background: none;\r\n        background-color: #fff;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        text-align: center;\r\n        -webkit-transition: width .2s ease-in-out;\r\n        -o-transition: width .2s ease-in-out;\r\n        transition: width .2s ease-in-out;\r\n    }\r\n\r\n    .auth-form input:focus,\r\n    .reg-form input:focus {\r\n        width: 60%;\r\n    }\r\n\r\n    .auth-form input[type=\"submit\"],\r\n    .reg-form input[type=\"submit\"] {\r\n        width: 30%;\r\n        margin-top: 40px;\r\n        padding: 10px;\r\n        background-color: var(--blue);\r\n        color: #fff;\r\n        font-weight: bold;\r\n    }\r\n\r\n    .log-form__flashmsg,\r\n    .reg-form__flashmsg {\r\n        width: 50%;\r\n        opacity: 1;\r\n        margin: 0 auto;\r\n        padding-top: 40px;\r\n        font-size: .8rem;\r\n        text-align: center;\r\n        color: var(--red);\r\n    }\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -18156,7 +18250,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n.tester-page{width:100%\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/tester.vue"],"names":[],"mappings":";AA6BA,aACA,UAAA;CACA","file":"tester.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"tester-page\">\r\n\r\n        <side-menu></side-menu>\r\n        <section class=\"content\">\r\n\r\n        </section>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport sideMenu from './side-menu.vue';\r\nimport newTest from './new-test.vue';\r\n\r\nexport default {\r\n\r\n    components: {\r\n       'side-menu': sideMenu\r\n   },\r\n\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n.tester-page {\r\n    width: 100%;\r\n}\r\n\r\n.content {\r\n    /* margin-left: calc(var(--column) * 6); */\r\n}\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.tester-page{width:100%\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/tester.vue"],"names":[],"mappings":";AA6BA,aACA,UAAA;CACA","file":"tester.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"tester-page\">\r\n\r\n        <side-menu></side-menu>\r\n        <section class=\"content\">\r\n\r\n        </section>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport sideMenu from './side-menu.vue';\r\nimport newTest from './new-test.vue';\r\n\r\nexport default {\r\n\r\n    components: {\r\n       'side-menu': sideMenu\r\n   },\r\n\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n.tester-page {\r\n    width: 100%;\r\n}\r\n\r\n.content {\r\n    /* margin-left: calc(var(--column) * 6); */\r\n}\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -18196,7 +18290,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4;--blue:#092e64;--purple:#656695;--marine:#3493a8;--yellow:#efda7b;--green:#9dbe87;--red:#c74545;--column:4.16667vw;--row:8.33333vh;--column-mobile:8.33333vw;--row-mobile:4.16667vh\n}\n.menu,.side-menu{width:calc(var(--column) * 4);height:100vh\n}\n.side-menu{z-index:102;position:fixed;top:0;left:0;background-color:var(--purple);color:#fff\n}\n.side-menu-nav{padding-top:40px\n}\n.side-menu-nav li{position:relative;list-style:none;margin-bottom:20px;padding-left:40px\n}\n.side-menu-nav li:before{position:absolute;left:-60px;top:2px;display:block;content:\"\";width:20px;height:1rem;background-color:#fff;transition:all .2s ease-in-out\n}\n.side-menu-nav li:hover:before{left:0\n}\n.side-menu-nav a{color:#fff\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/css/variables.css","C:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/side-menu.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,gBACC,eACD,iBACE,iBACA,iBACA,gBACD,cACF,mBACY,gBACH,0BACU,sBACH;CAClC;ACwCD,iBAJA,8BAAA,YACA;CAYA;AATA,WACA,YAAA,eACA,MACA,OACA,+BAGA,UACA;CACA;AAEA,eACA,gBAAA;CACA;AAGA,kBACA,kBAAA,gBACA,mBACA,iBACA;CACA;AAEA,yBACA,kBAAA,WACA,QACA,cACA,WACA,WACA,YACA,sBACA,8BAGA;CACA;AAEA,+BACA,MAAA;CACA;AAEA,iBACA,UAAA;CACA","file":"side-menu.vue","sourcesContent":[":root {\r\n    font-family: 'Marta';\r\n    font-size: 16px;\r\n    line-height: 1.4;\r\n    --blue: #092E64;\r\n    --purple: #656695;\r\n    --marine: #3493A8;\r\n    --yellow: #EFDA7B;\r\n    --green: #9DBE87;\r\n    --red: #c74545;\r\n    --column: calc(100vw / 24);\r\n    --row: calc(100vh / 12);\r\n    --column-mobile: calc(100vw / 12);\r\n    --row-mobile: calc(100vh / 24);\r\n}\r\n","<template lang=\"html\">\r\n\r\n    <div class=\"menu\">\r\n\r\n        <aside class=\"side-menu\">\r\n            <p><a href=\"#\">profile</a></p>\r\n\r\n            <nav class=\"side-menu-nav\">\r\n                <ul>\r\n                    <li><router-link to=\"/tester\">Мои тесты</router-link></li>\r\n                    <li><router-link to=\"/newtest\">Новый тест</router-link></li>\r\n                    <li><router-link to=\"/tester/respondents\">Респонденты</router-link></li>\r\n                    <li><router-link to=\"/tester/statistic\">Статистика</router-link></li>\r\n                    <li><a\r\n                            href=\"exit\"\r\n                            @click.prevent=\"logout\"\r\n                        >\r\n                        Выход</a></li>\r\n                </ul>\r\n            </nav>\r\n\r\n        </aside>\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport axios from './../../node_modules/axios/dist/axios.js';\r\n\r\nexport default {\r\n\r\n    methods: {\r\n\r\n        //Выход их профиля\r\n        logout() {\r\n            axios.get('php/logout.php')\r\n            .then( (res) => this.$router.push('/auth') )\r\n            .catch( (err) => console.log(err));\r\n        }\r\n\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n@import './../css/variables.css';\r\n\r\n.menu {\r\n    width: calc(var(--column) * 4);\r\n    height: 100vh;\r\n}\r\n\r\n.side-menu {\r\n    z-index: 102;\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    width: calc(var(--column) * 4);\r\n    height: 100vh;\r\n    background-color: var(--purple);\r\n    color: #fff;\r\n}\r\n\r\n.side-menu-nav {\r\n    padding-top: 40px;\r\n}\r\n\r\n\r\n.side-menu-nav li {\r\n    position: relative;\r\n    list-style: none;\r\n    margin-bottom: 20px;\r\n    padding-left: 40px;\r\n}\r\n\r\n.side-menu-nav li:before {\r\n    position: absolute;\r\n    left: -60px;\r\n    top: 2px;\r\n    display: block;\r\n    content: '';\r\n    width: 20px;\r\n    height: 1rem;\r\n    background-color: #fff;\r\n    -webkit-transition: all .2s ease-in-out;\r\n    -o-transition: all .2s ease-in-out;\r\n    transition: all .2s ease-in-out;\r\n}\r\n\r\n.side-menu-nav li:hover:before {\r\n    left: 0px;\r\n}\r\n\r\n.side-menu-nav a {\r\n    color: #fff;\r\n}\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4;--blue:#092e64;--purple:#656695;--marine:#3493a8;--yellow:#efda7b;--green:#9dbe87;--red:#c74545;--column:4.16667vw;--row:8.33333vh;--column-mobile:8.33333vw;--row-mobile:4.16667vh\n}\n.menu,.side-menu{width:calc(var(--column) * 4);height:100vh\n}\n.side-menu{z-index:102;position:fixed;top:0;left:0;background-color:var(--purple);color:#fff\n}\n.side-menu-nav{padding-top:40px\n}\n.side-menu-nav li{position:relative;list-style:none;margin-bottom:20px;padding-left:40px\n}\n.side-menu-nav li:before{position:absolute;left:-60px;top:2px;display:block;content:\"\";width:20px;height:1rem;background-color:#fff;transition:all .2s ease-in-out\n}\n.side-menu-nav li:hover:before{left:0\n}\n.side-menu-nav a{color:#fff\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/css/variables.css","D:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/side-menu.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,gBACC,eACD,iBACE,iBACA,iBACA,gBACD,cACF,mBACY,gBACH,0BACU,sBACH;CAClC;ACwCD,iBAJA,8BAAA,YACA;CAYA;AATA,WACA,YAAA,eACA,MACA,OACA,+BAGA,UACA;CACA;AAEA,eACA,gBAAA;CACA;AAGA,kBACA,kBAAA,gBACA,mBACA,iBACA;CACA;AAEA,yBACA,kBAAA,WACA,QACA,cACA,WACA,WACA,YACA,sBACA,8BAGA;CACA;AAEA,+BACA,MAAA;CACA;AAEA,iBACA,UAAA;CACA","file":"side-menu.vue","sourcesContent":[":root {\r\n    font-family: 'Marta';\r\n    font-size: 16px;\r\n    line-height: 1.4;\r\n    --blue: #092E64;\r\n    --purple: #656695;\r\n    --marine: #3493A8;\r\n    --yellow: #EFDA7B;\r\n    --green: #9DBE87;\r\n    --red: #c74545;\r\n    --column: calc(100vw / 24);\r\n    --row: calc(100vh / 12);\r\n    --column-mobile: calc(100vw / 12);\r\n    --row-mobile: calc(100vh / 24);\r\n}\r\n","<template lang=\"html\">\r\n\r\n    <div class=\"menu\">\r\n\r\n        <aside class=\"side-menu\">\r\n            <p><a href=\"#\">profile</a></p>\r\n\r\n            <nav class=\"side-menu-nav\">\r\n                <ul>\r\n                    <li><router-link to=\"/tester\">Мои тесты</router-link></li>\r\n                    <li><router-link to=\"/newtest\">Новый тест</router-link></li>\r\n                    <li><router-link to=\"/tester/respondents\">Респонденты</router-link></li>\r\n                    <li><router-link to=\"/tester/statistic\">Статистика</router-link></li>\r\n                    <li><a\r\n                            href=\"exit\"\r\n                            @click.prevent=\"logout\"\r\n                        >\r\n                        Выход</a></li>\r\n                </ul>\r\n            </nav>\r\n\r\n        </aside>\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport axios from './../../node_modules/axios/dist/axios.js';\r\n\r\nexport default {\r\n\r\n    methods: {\r\n\r\n        //Выход их профиля\r\n        logout() {\r\n            axios.get('php/logout.php')\r\n            .then( (res) => this.$router.push('/auth') )\r\n            .catch( (err) => console.log(err));\r\n        }\r\n\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n@import './../css/variables.css';\r\n\r\n.menu {\r\n    width: calc(var(--column) * 4);\r\n    height: 100vh;\r\n}\r\n\r\n.side-menu {\r\n    z-index: 102;\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    width: calc(var(--column) * 4);\r\n    height: 100vh;\r\n    background-color: var(--purple);\r\n    color: #fff;\r\n}\r\n\r\n.side-menu-nav {\r\n    padding-top: 40px;\r\n}\r\n\r\n\r\n.side-menu-nav li {\r\n    position: relative;\r\n    list-style: none;\r\n    margin-bottom: 20px;\r\n    padding-left: 40px;\r\n}\r\n\r\n.side-menu-nav li:before {\r\n    position: absolute;\r\n    left: -60px;\r\n    top: 2px;\r\n    display: block;\r\n    content: '';\r\n    width: 20px;\r\n    height: 1rem;\r\n    background-color: #fff;\r\n    -webkit-transition: all .2s ease-in-out;\r\n    -o-transition: all .2s ease-in-out;\r\n    transition: all .2s ease-in-out;\r\n}\r\n\r\n.side-menu-nav li:hover:before {\r\n    left: 0px;\r\n}\r\n\r\n.side-menu-nav a {\r\n    color: #fff;\r\n}\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -18330,7 +18424,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n.newtest-page{display:flex\n}\n.newtest-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16)\n}\n.new-test-nav{z-index:101;position:fixed;top:0;left:0;width:100%;padding:20px 0;padding-left:calc(var(--column) * 6);background-color:#fff\n}\n.new-test-nav li{list-style:none;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test-nav li:hover{opacity:1\n}\n.new-test-nav li:last-child{padding-left:40px\n}\n.new-test-form{padding-top:calc(var(--column) * 2)\n}\n.new-test-form__title{display:block;width:100%;border:none;border-bottom:1px solid var(--blue);margin-bottom:40px;font-family:marta;font-size:3rem;color:var(--blue)\n}\n.new-test-form__options{background-color:#dddde8;padding:20px\n}\n.new-test-form__options h3{padding:0;margin:0;margin-bottom:20px;color:#8496b1\n}\n.new-test-form__description{padding:10px;background-color:#dddde8;border:none;margin-bottom:20px;width:100%;max-width:100%;min-width:100%;max-height:calc(var(--row) * 2);min-height:calc(var(--row) * 2);height:calc(var(--row) * 2);border:1px solid var(--blue)\n}\n.new-test-form__options label{color:#8496b1\n}\n.new-test-form__options label.active{color:var(--purple)\n}\n.new-test-form__inputs>*{display:inline-block\n}\n.new-test-form__inputs img{max-width:30px;margin-bottom:-10px;padding-left:20px\n}\n.new-test-form__inputs img:first-child{padding-left:0\n}\n.new-test-form__inputs input[type=text]{background-color:#dddde8;border:none;border-bottom:1px solid var(--blue);width:50px;text-align:center\n}\n.new-test-form__inputs input[type=checkbox]{display:none\n}\n.new-test__add-question{border:none;margin:40px 0;padding-left:40px;font-family:marta;font-size:1.2rem;font-weight:700;cursor:pointer;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test__add-question:hover{opacity:1\n}\n.fade-enter-active,.fade-leave-active{transition:opacity .3s ease-in-out\n}\n.fade-enter,.fade-leave-to{opacity:0\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-test.vue"],"names":[],"mappings":";AAkJA,cAGA,YAAA;CACA;AAEA,uBACA,oCAAA,qCACA,8BACA;CACA;AAEA,cACA,YAAA,eACA,MACA,OACA,WACA,eACA,qCACA,qBACA;CACA;AAEA,iBACA,gBAAA,qBACA,WACA,kCAGA;CACA;AAEA,uBACA,SAAA;CACA;AAEA,4BACA,iBAAA;CACA;AAEA,eACA,mCAAA;CACA;AAEA,sBACA,cAAA,WACA,YACA,oCACA,mBACA,kBACA,eACA,iBACA;CACA;AAEA,wBACA,yBAAA,YACA;CACA;AAEA,2BACA,UAAA,SACA,mBACA,aACA;CACA;AAEA,4BACA,aAAA,yBACA,YACA,mBACA,WACA,eACA,eACA,gCACA,gCACA,4BACA,4BACA;CACA;AAEA,8BACA,aAAA;CACA;AAEA,qCACA,mBAAA;CACA;AAEA,yBACA,oBAAA;CACA;AAEA,2BACA,eAAA,oBACA,iBACA;CACA;AAEA,uCACA,cAAA;CACA;AAEA,wCACA,yBAAA,YACA,oCACA,WACA,iBACA;CACA;AAEA,4CACA,YAAA;CACA;AAEA,wBACA,YAAA,cACA,kBACA,kBACA,iBACA,gBACA,eACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,8BACA,SAAA;CACA;AAEA,sCACA,kCAAA;CACA;AAEA,2BACA,SAAA;CACA","file":"new-test.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"newtest-page\">\r\n\r\n        <side-menu></side-menu>\r\n        <section class=\"content\">\r\n\r\n            <nav class=\"new-test-nav\">\r\n                <ul>\r\n                    <li><a href=\"save\">Сохранить</a></li>\r\n                    <li><a href=\"publish\">Опубликовать</a></li>\r\n                </ul>\r\n            </nav>\r\n\r\n            <form class=\"new-test-form\">\r\n\r\n                <input type=\"text\" class=\"new-test-form__title\" placeholder=\"Название теста\">\r\n\r\n                <div class=\"new-test-form__options\">\r\n                    <h3>Описание:</h3>\r\n                    <textarea class=\"new-test-form__description\" name=\"test_description\"></textarea>\r\n\r\n                    <div class=\"new-test-form__inputs\">\r\n                        <img :src=\"timeToggle\" alt=\"\">\r\n                        <label for=\"time_limit\" :class=\"labelTime\">Лимит по времени</label>\r\n                        <input type=\"checkbox\" name=\"time_limit\" id=\"time_limit\" v-model=\"testOptions.timeLimit\">\r\n                        <transition name=\"fade\">\r\n                        <img src=\"img/stopwatch.svg\" alt=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <label class=\"active\" for=\"time\" v-if=\"testOptions.timeLimit\">Время в мин.:</label>\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <input type=\"text\" name=\"time\" id=\"time\" value=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <img :src=\"anonymToggle\" alt=\"\">\r\n                        <label for=\"anonym\" :class=\"labelAnonym\">Анонимное прохождение</label>\r\n                        <input type=\"checkbox\" name=\"anonym\" id=\"anonym\" v-model=\"testOptions.anonym\">\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <new-question\r\n                    v-for=\"question in questions\"\r\n                    :key=\"question.id\"\r\n                    :questiontype=\"question.type\"\r\n                    :questiontext=\"question.text\"\r\n                    :questionid=\"question.id\"\r\n                    @delete-question=\"deleteQuestionHandler\"\r\n                ></new-question>\r\n\r\n                <button\r\n                    type=\"button\"\r\n                    name=\"button\"\r\n                    @click=\"addQuestion\"\r\n                    class=\"new-test__add-question\"\r\n                >\r\n                добавить вопрос</button>\r\n\r\n            </form>\r\n\r\n        </section>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport sideMenu from './side-menu.vue';\r\nimport newQuestion from './new-question.vue';\r\n\r\nexport default {\r\n\r\n    components: {\r\n       'side-menu': sideMenu,\r\n       'new-question': newQuestion\r\n   },\r\n\r\n   data() {\r\n       return {\r\n           questions: [\r\n               {\r\n                   type: 1,\r\n                   text: 'Введите свое описание вопроса',\r\n                   id: 1\r\n               }\r\n           ],\r\n           testOptions: {\r\n               timeLimit: false,\r\n               time: 60,\r\n               anonym: false\r\n           },\r\n           nextQuestionId: 2\r\n       }\r\n   },\r\n\r\n   computed: {\r\n       // Объект класса переключателя ограничения по вреиени\r\n       timeToggle() {\r\n           return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       // Объект класса переключателя анонимного прохождения\r\n       anonymToggle() {\r\n           return this.testOptions.anonym === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       labelTime() {\r\n           return {\r\n               'active': this.testOptions.timeLimit\r\n           }\r\n       },\r\n\r\n       labelAnonym() {\r\n           return {\r\n               'active' : this.testOptions.anonym\r\n           }\r\n       }\r\n   },\r\n\r\n   methods: {\r\n       // Добавление нового вопроса\r\n       addQuestion() {\r\n           this.questions.push( {\r\n                type: 1,\r\n                text: 'Введите свое описание вопроса',\r\n                id: this.nextQuestionId\r\n            });\r\n            this.nextQuestionId++;\r\n       },\r\n       // Удаляем вопрос\r\n       deleteQuestionHandler(id) {\r\n           console.log('ded');\r\n           let index = this.questions.map( (v,i) => {\r\n               if(v.id === id) return i;\r\n           });\r\n           index.length > 1 ? index = index.filter( (v) => {if(typeof v == 'number') return v})[0] : index = index[0];\r\n           this.questions.splice(index, 1);\r\n       }\r\n   }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .newtest-page {\r\n        /* margin-left: calc(var(--column) * 6); */\r\n\r\n        display: flex;\r\n    }\r\n\r\n    .newtest-page .content {\r\n        margin-left: calc(var(--column) * 2);\r\n        margin-right: calc(var(--column) * 2);\r\n        width: calc(var(--column) * 16);\r\n    }\r\n\r\n    .new-test-nav {\r\n        z-index: 101;\r\n        position: fixed;\r\n        top: 0px;\r\n        left: 0px;\r\n        width: 100%;\r\n        padding: 20px 0px;\r\n        padding-left: calc(var(--column) * 6);\r\n        background-color: #fff;\r\n    }\r\n\r\n    .new-test-nav li {\r\n        list-style: none;\r\n        display: inline-block;\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test-nav li:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .new-test-nav li:last-child{\r\n        padding-left: 40px;\r\n    }\r\n\r\n    .new-test-form {\r\n        padding-top: calc(var(--column) * 2);\r\n    }\r\n\r\n    .new-test-form__title {\r\n        display: block;\r\n        width: 100%;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        margin-bottom: 40px;\r\n        font-family: 'marta';\r\n        font-size: 3rem;\r\n        color: var(--blue);\r\n    }\r\n\r\n    .new-test-form__options {\r\n        background-color: #dddde8;\r\n        padding: 20px;\r\n    }\r\n\r\n    .new-test-form__options h3 {\r\n        padding: 0;\r\n        margin: 0;\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__description {\r\n        padding: 10px;\r\n        background-color: #dddde8;\r\n        border: none;\r\n        margin-bottom: 20px;\r\n        width: 100%;\r\n        max-width: 100%;\r\n        min-width: 100%;\r\n        max-height: calc(var(--row) * 2);\r\n        min-height: calc(var(--row) * 2);\r\n        height: calc(var(--row) * 2);\r\n        border: 1px solid var(--blue);\r\n    }\r\n\r\n    .new-test-form__options label {\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__options label.active {\r\n        color: var(--purple);\r\n    }\r\n\r\n    .new-test-form__inputs > * {\r\n        display: inline-block;\r\n    }\r\n\r\n    .new-test-form__inputs img {\r\n        max-width: 30px;\r\n        margin-bottom: -10px;\r\n        padding-left: 20px;\r\n    }\r\n\r\n    .new-test-form__inputs img:first-child {\r\n        padding-left: 0px;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"text\"] {\r\n        background-color: #dddde8;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        width: 50px;\r\n        text-align: center;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    .new-test__add-question {\r\n        border: none;\r\n        margin: 40px 0px;\r\n        padding-left: 40px;\r\n        font-family: 'marta';\r\n        font-size: 1.2rem;\r\n        font-weight: bold;\r\n        cursor: pointer;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test__add-question:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .fade-enter-active, .fade-leave-active {\r\n        transition: opacity .3s ease-in-out;\r\n    }\r\n\r\n    .fade-enter, .fade-leave-to {\r\n        opacity: 0;\r\n    }\r\n\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.newtest-page{display:flex\n}\n.newtest-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16)\n}\n.new-test-nav{z-index:101;position:fixed;top:0;left:0;width:100%;padding:20px 0;padding-left:calc(var(--column) * 6);background-color:#fff\n}\n.new-test-nav li{list-style:none;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test-nav li:hover{opacity:1\n}\n.new-test-nav li:last-child{padding-left:40px\n}\n.new-test-form{padding-top:calc(var(--column) * 2)\n}\n.new-test-form__title{display:block;width:100%;border:none;border-bottom:1px solid var(--blue);margin-bottom:40px;font-family:marta;font-size:3rem;color:var(--blue)\n}\n.new-test-form__options{background-color:#dddde8;padding:20px\n}\n.new-test-form__options h3{padding:0;margin:0;margin-bottom:20px;color:#8496b1\n}\n.new-test-form__description{padding:10px;background-color:#dddde8;border:none;margin-bottom:20px;width:98%;max-width:98%;min-width:98%;max-height:calc(var(--row) * 2);min-height:calc(var(--row) * 2);height:calc(var(--row) * 2);border:1px solid var(--blue)\n}\n.new-test-form__options label{color:#8496b1\n}\n.new-test-form__options label.active{color:var(--purple)\n}\n.new-test-form__inputs>*{display:inline-block\n}\n.new-test-form__inputs img{max-width:30px;margin-bottom:-10px;padding-left:20px\n}\n.new-test-form__inputs img:first-child{padding-left:0\n}\n.new-test-form__inputs input[type=text]{background-color:#dddde8;border:none;border-bottom:1px solid var(--blue);width:50px;text-align:center\n}\n.new-test-form__inputs input[type=checkbox]{display:none\n}\n.new-test__add-question{border:none;margin:40px 0;padding-left:40px;font-family:marta;font-size:1.2rem;font-weight:700;cursor:pointer;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test__add-question:hover{opacity:1\n}\n.fade-enter-active,.fade-leave-active{transition:opacity .3s ease-in-out\n}\n.fade-enter,.fade-leave-to{opacity:0\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-test.vue"],"names":[],"mappings":";AAgKA,cAGA,YAAA;CACA;AAEA,uBACA,oCAAA,qCACA,8BACA;CACA;AAEA,cACA,YAAA,eACA,MACA,OACA,WACA,eACA,qCACA,qBACA;CACA;AAEA,iBACA,gBAAA,qBACA,WACA,kCAGA;CACA;AAEA,uBACA,SAAA;CACA;AAEA,4BACA,iBAAA;CACA;AAEA,eACA,mCAAA;CACA;AAEA,sBACA,cAAA,WACA,YACA,oCACA,mBACA,kBACA,eACA,iBACA;CACA;AAEA,wBACA,yBAAA,YACA;CACA;AAEA,2BACA,UAAA,SACA,mBACA,aACA;CACA;AAEA,4BACA,aAAA,yBACA,YACA,mBACA,UACA,cACA,cACA,gCACA,gCACA,4BACA,4BACA;CACA;AAEA,8BACA,aAAA;CACA;AAEA,qCACA,mBAAA;CACA;AAEA,yBACA,oBAAA;CACA;AAEA,2BACA,eAAA,oBACA,iBACA;CACA;AAEA,uCACA,cAAA;CACA;AAEA,wCACA,yBAAA,YACA,oCACA,WACA,iBACA;CACA;AAEA,4CACA,YAAA;CACA;AAEA,wBACA,YAAA,cACA,kBACA,kBACA,iBACA,gBACA,eACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,8BACA,SAAA;CACA;AAEA,sCACA,kCAAA;CACA;AAEA,2BACA,SAAA;CACA","file":"new-test.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"newtest-page\">\r\n\r\n        <side-menu></side-menu>\r\n        <section class=\"content\">\r\n\r\n            <nav class=\"new-test-nav\">\r\n                <ul>\r\n                    <li>\r\n                        <a\r\n                            href=\"save\"\r\n                            @click.prevent=\"saveTest\"\r\n                        >Сохранить</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"publish\">Опубликовать</a>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n\r\n            <form class=\"new-test-form\">\r\n\r\n                <input type=\"text\" class=\"new-test-form__title\" placeholder=\"Название теста\">\r\n\r\n                <div class=\"new-test-form__options\">\r\n                    <h3>Описание:</h3>\r\n                    <textarea class=\"new-test-form__description\" name=\"test_description\"></textarea>\r\n\r\n                    <div class=\"new-test-form__inputs\">\r\n                        <img :src=\"timeToggle\" alt=\"\">\r\n                        <label for=\"time_limit\" :class=\"labelTime\">Лимит по времени</label>\r\n                        <input type=\"checkbox\" name=\"time_limit\" id=\"time_limit\" v-model=\"testOptions.timeLimit\">\r\n                        <transition name=\"fade\">\r\n                        <img src=\"img/stopwatch.svg\" alt=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <label class=\"active\" for=\"time\" v-if=\"testOptions.timeLimit\">Время в мин.:</label>\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <input type=\"text\" name=\"time\" id=\"time\" value=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <img :src=\"anonymToggle\" alt=\"\">\r\n                        <label for=\"anonym\" :class=\"labelAnonym\">Анонимное прохождение</label>\r\n                        <input type=\"checkbox\" name=\"anonym\" id=\"anonym\" v-model=\"testOptions.anonym\">\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <new-question\r\n                    v-for=\"question in questions\"\r\n                    :key=\"question.id\"\r\n                    :questiontype=\"question.type\"\r\n                    :questiontext=\"question.text\"\r\n                    :questionid=\"question.id\"\r\n                    @delete-question=\"deleteQuestionHandler\"\r\n                ></new-question>\r\n\r\n                <button\r\n                    type=\"button\"\r\n                    name=\"button\"\r\n                    @click=\"addQuestion\"\r\n                    class=\"new-test__add-question\"\r\n                >\r\n                добавить вопрос</button>\r\n\r\n            </form>\r\n\r\n        </section>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport sideMenu from './side-menu.vue';\r\nimport newQuestion from './new-question.vue';\r\n\r\nexport default {\r\n\r\n    components: {\r\n       'side-menu': sideMenu,\r\n       'new-question': newQuestion\r\n   },\r\n\r\n   data() {\r\n       return {\r\n           testTitle: '',\r\n           testDescription: '',\r\n           testOptions: {\r\n               timeLimit: false,\r\n               time: 60,\r\n               anonym: false\r\n           },\r\n           questions: [\r\n               {\r\n                   type: 1,\r\n                   text: 'Введите свое описание вопроса',\r\n                   id: 1\r\n               }\r\n           ],\r\n           nextQuestionId: 2\r\n       }\r\n   },\r\n\r\n   computed: {\r\n       // Объект класса переключателя ограничения по вреиени\r\n       timeToggle() {\r\n           return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       // Объект класса переключателя анонимного прохождения\r\n       anonymToggle() {\r\n           return this.testOptions.anonym === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       labelTime() {\r\n           return {\r\n               'active': this.testOptions.timeLimit\r\n           }\r\n       },\r\n\r\n       labelAnonym() {\r\n           return {\r\n               'active' : this.testOptions.anonym\r\n           }\r\n       }\r\n   },\r\n\r\n   methods: {\r\n       // Добавление нового вопроса\r\n       addQuestion() {\r\n           this.questions.push( {\r\n                type: 1,\r\n                text: 'Введите свое описание вопроса',\r\n                id: this.nextQuestionId\r\n            });\r\n            this.nextQuestionId++;\r\n       },\r\n       // Удаляем вопрос\r\n       deleteQuestionHandler(id) {\r\n           console.log('ded');\r\n           let index = this.questions.map( (v,i) => {\r\n               if(v.id === id) return i;\r\n           });\r\n           index.length > 1 ? index = index.filter( (v) => {if(typeof v == 'number') return v})[0] : index = index[0];\r\n           this.questions.splice(index, 1);\r\n       },\r\n       // Сохраняем тест\r\n       saveTest() {\r\n\r\n       }\r\n\r\n   }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .newtest-page {\r\n        /* margin-left: calc(var(--column) * 6); */\r\n\r\n        display: flex;\r\n    }\r\n\r\n    .newtest-page .content {\r\n        margin-left: calc(var(--column) * 2);\r\n        margin-right: calc(var(--column) * 2);\r\n        width: calc(var(--column) * 16);\r\n    }\r\n\r\n    .new-test-nav {\r\n        z-index: 101;\r\n        position: fixed;\r\n        top: 0px;\r\n        left: 0px;\r\n        width: 100%;\r\n        padding: 20px 0px;\r\n        padding-left: calc(var(--column) * 6);\r\n        background-color: #fff;\r\n    }\r\n\r\n    .new-test-nav li {\r\n        list-style: none;\r\n        display: inline-block;\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test-nav li:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .new-test-nav li:last-child{\r\n        padding-left: 40px;\r\n    }\r\n\r\n    .new-test-form {\r\n        padding-top: calc(var(--column) * 2);\r\n    }\r\n\r\n    .new-test-form__title {\r\n        display: block;\r\n        width: 100%;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        margin-bottom: 40px;\r\n        font-family: 'marta';\r\n        font-size: 3rem;\r\n        color: var(--blue);\r\n    }\r\n\r\n    .new-test-form__options {\r\n        background-color: #dddde8;\r\n        padding: 20px;\r\n    }\r\n\r\n    .new-test-form__options h3 {\r\n        padding: 0;\r\n        margin: 0;\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__description {\r\n        padding: 10px;\r\n        background-color: #dddde8;\r\n        border: none;\r\n        margin-bottom: 20px;\r\n        width: 98%;\r\n        max-width: 98%;\r\n        min-width: 98%;\r\n        max-height: calc(var(--row) * 2);\r\n        min-height: calc(var(--row) * 2);\r\n        height: calc(var(--row) * 2);\r\n        border: 1px solid var(--blue);\r\n    }\r\n\r\n    .new-test-form__options label {\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__options label.active {\r\n        color: var(--purple);\r\n    }\r\n\r\n    .new-test-form__inputs > * {\r\n        display: inline-block;\r\n    }\r\n\r\n    .new-test-form__inputs img {\r\n        max-width: 30px;\r\n        margin-bottom: -10px;\r\n        padding-left: 20px;\r\n    }\r\n\r\n    .new-test-form__inputs img:first-child {\r\n        padding-left: 0px;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"text\"] {\r\n        background-color: #dddde8;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        width: 50px;\r\n        text-align: center;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    .new-test__add-question {\r\n        border: none;\r\n        margin: 40px 0px;\r\n        padding-left: 40px;\r\n        font-family: 'marta';\r\n        font-size: 1.2rem;\r\n        font-weight: bold;\r\n        cursor: pointer;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test__add-question:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .fade-enter-active, .fade-leave-active {\r\n        transition: opacity .3s ease-in-out;\r\n    }\r\n\r\n    .fade-enter, .fade-leave-to {\r\n        opacity: 0;\r\n    }\r\n\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -18429,7 +18523,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n.question{position:relative;border:1px solid var(--blue);margin-top:40px;padding:20px\n}\n.question h3{margin-bottom:20px;color:#8496b1\n}\n.question-type{position:absolute;right:-1px;top:-1px;background-color:var(--purple);color:#fff;font-family:marta;padding:10px\n}\n.question-type option{padding:10px\n}\n.question__description{width:calc(var(--column) * 10);max-width:calc(var(--column) * 10);min-width:calc(var(--column) * 10);height:calc(var(--row) * 1);min-height:calc(var(--row) * 1);max-height:calc(var(--row) * 1);margin-bottom:20px;border:none;background-color:#dddde8\n}\n.question-controls{position:absolute;bottom:20px;right:0;width:calc(var(--column) * 2)\n}\n.question-controls img{cursor:pointer;max-width:30px;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-controls img:hover{opacity:1\n}\n.question-controls img:nth-child(2){padding:0 10px\n}\n.question__add-var-button{border:none;padding-left:30px;cursor:pointer;font-family:marta;font-weight:700;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question__add-var-button:hover{opacity:1\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-question.vue"],"names":[],"mappings":";AA4LA,UACA,kBAAA,6BACA,gBACA,YACA;CACA;AAEA,aACA,mBAAA,aACA;CACA;AAEA,eACA,kBAAA,WACA,SACA,+BACA,WACA,kBACA,YACA;CACA;AAEA,sBACA,YAAA;CACA;AAEA,uBACA,+BAAA,mCACA,mCACA,4BACA,gCACA,gCACA,mBACA,YACA,wBACA;CACA;AAEA,mBACA,kBAAA,YACA,QACA,6BACA;CACA;AACA,uBACA,eAAA,eACA,qBACA,WACA,kCAGA;CACA;AAEA,6BACA,SAAA;CACA;AAEA,oCACA,cAAA;CACA;AAEA,0BACA,YAAA,kBACA,eACA,kBACA,gBACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,gCACA,SAAA;CACA","file":"new-question.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question\">\r\n\r\n        <h3>Текст вопроса:</h3>\r\n        <textarea class=\"question__description\" name=\"name\" rows=\"8\" cols=\"80\"></textarea>\r\n\r\n        <select class=\"\" name=\"\" class=\"question-type\" v-model=\"questionType\" @change=\"changeType\">\r\n            <option value=\"1\">Один из списка</option>\r\n            <option value=\"2\">Несколько из списка</option>\r\n        </select>\r\n\r\n        <div class=\"variants\">\r\n\r\n            <div v-if=\"questionType === 1\" key=\"single-question\">\r\n                <single\r\n                    v-for=\"(variant, index) in single.vars\"\r\n                    :text=\"variant.text\"\r\n                    :status=\"variant.isRight\"\r\n                    :key=\"variant.id\"\r\n                    @removeVar=\"single.vars.splice(index, 1)\"\r\n                    @updateVar=\"singleUpdateVarHandler\"\r\n                    @updateRightVar=\"singleUpdateRightVarHandler\"\r\n                ></single>\r\n                <button  class=\"question__add-var-button\" type=\"button\" name=\"button\" @click=\"singleAddVar\">добавить вариант</button>\r\n            </div>\r\n\r\n            <div v-else key=\"multiple-question\">\r\n                <multiple\r\n                    v-for=\"(variant, index) in multiple.vars\"\r\n                    :text=\"variant.text\"\r\n                    :status=\"variant.isRight\"\r\n                    :key=\"variant.id\"\r\n                    @removeVar=\"multiple.vars.splice(index, 1)\"\r\n                    @updateVar=\"multipleUpdateVarHandler\"\r\n                    @updateRightVar=\"multipleUpdateRightVarHandler\"\r\n                >\r\n                </multiple>\r\n                <button class=\"question__add-var-button\" type=\"button\" name=\"button\" @click=\"multipleAddVar\">добавить вариант</button>\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n\r\n        <div class=\"question-controls\">\r\n            <img src=\"img/success.svg\" alt=\"\">\r\n            <img src=\"img/edit.svg\" alt=\"\">\r\n            <img @click=\"deleteQuestion\" src=\"img/dustbin.svg\" alt=\"\">\r\n\r\n        </div>\r\n\r\n\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport single from './questions/single.vue';\r\nimport multiple from './questions/multiple.vue';\r\n\r\nexport default {\r\n\r\n    props: ['questiontype', 'questiontext', 'questionid'],\r\n\r\n    components: {\r\n       'single': single,\r\n       'multiple': multiple\r\n   },\r\n\r\n    data() {\r\n        return {\r\n            questionType: this.questiontype ? this.questiontype : 1,\r\n            id: this.questionid,\r\n            // Вопросы с одним вариантом\r\n            single: {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            },\r\n            // Вопросы с несколькими вариантами ответа\r\n            multiple: {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            }\r\n\r\n        }\r\n    },\r\n\r\n    methods: {\r\n\r\n        changeType() {\r\n            this.single = {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            };\r\n\r\n            this.multiple = {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            };\r\n        },\r\n\r\n        /*Вопросы с одним варианторм*/\r\n\r\n        //Добавляем вариант ответа\r\n        singleAddVar() {\r\n            this.single.vars.push({\r\n                text: 'Вариант ответа',\r\n                isRight: false,\r\n                id: this.nextVarId\r\n            });\r\n            this.single.nextVarId++;\r\n        },\r\n        //Обновляем текст варианта\r\n        singleUpdateVarHandler(index, text) {\r\n            this.single.vars[index].text = text;\r\n        },\r\n        //Выбираем правильный вариант вопроса\r\n        singleUpdateRightVarHandler(index) {\r\n            console.log(this.$children);\r\n            this.$children.forEach( (v,i) => {\r\n                if(i === index) {\r\n                    v.isRight ? v.isRight = false : v.isRight = true;\r\n                    this.single.vars[index].isRight ? this.single.vars[index].isRight = false : this.single.vars[index].isRight = true;\r\n                }\r\n                else {\r\n                    v.isRight = false;\r\n                    this.single.vars[i].isRight = false;\r\n                }\r\n            });\r\n        },\r\n\r\n        /*Вопросы с несолькими вариантами*/\r\n        //Добавляем вариант ответа\r\n        multipleAddVar() {\r\n            this.multiple.vars.push({\r\n                text: 'Вариант ответа',\r\n                isRight: false,\r\n                id: this.nextVarId\r\n            });\r\n            this.multiple.nextVarId++;\r\n        },\r\n\r\n        multipleUpdateVarHandler(index, text) {\r\n            this.multiple.vars[index].text = text;\r\n        },\r\n\r\n        //Выбираем правильный вариант вопроса\r\n        multipleUpdateRightVarHandler(index) {\r\n            console.log(this.$children);\r\n        },\r\n\r\n        //Событие удаления вопроса\r\n        deleteQuestion() {\r\n            this.$emit('delete-question', this.id);\r\n        }\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question {\r\n        position: relative;\r\n        border: 1px solid var(--blue);\r\n        margin-top: 40px;\r\n        padding: 20px;\r\n    }\r\n\r\n    .question h3 {\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .question-type {\r\n        position: absolute;\r\n        right: -1px;\r\n        top: -1px;\r\n        background-color: var(--purple);\r\n        color: #fff;\r\n        font-family: 'marta';\r\n        padding: 10px;\r\n    }\r\n\r\n    .question-type option{\r\n        padding: 10px;\r\n    }\r\n\r\n    .question__description {\r\n        width: calc(var(--column) * 10);\r\n        max-width: calc(var(--column) * 10);\r\n        min-width: calc(var(--column) * 10);\r\n        height: calc(var(--row) * 1);\r\n        min-height: calc(var(--row) * 1);\r\n        max-height: calc(var(--row) * 1);\r\n        margin-bottom: 20px;\r\n        border: none;\r\n        background-color: #dddde8;\r\n    }\r\n\r\n    .question-controls {\r\n        position: absolute;\r\n        bottom: 20px;\r\n        right: 0px;\r\n        width: calc(var(--column) * 2);\r\n    }\r\n    .question-controls img {\r\n        cursor: pointer;\r\n        max-width: 30px;\r\n        display: inline-block;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity 0.2s ease-in-out;\r\n        -o-transition: opacity 0.2s ease-in-out;\r\n        transition: opacity 0.2s ease-in-out;\r\n    }\r\n\r\n    .question-controls img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-controls img:nth-child(2) {\r\n        padding: 0 10px;\r\n    }\r\n\r\n    .question__add-var-button {\r\n        border: none;\r\n        padding-left: 30px;\r\n        cursor: pointer;\r\n        font-family: 'marta';\r\n        font-weight: bold;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question__add-var-button:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.question{position:relative;border:1px solid var(--blue);margin-top:40px;padding:20px\n}\n.question h3{margin-bottom:20px;color:#8496b1\n}\n.question-type{position:absolute;right:-1px;top:-1px;background-color:var(--purple);color:#fff;font-family:marta;padding:10px\n}\n.question-type option{padding:10px\n}\n.question__description{width:calc(var(--column) * 10);max-width:calc(var(--column) * 10);min-width:calc(var(--column) * 10);height:calc(var(--row) * 1);min-height:calc(var(--row) * 1);max-height:calc(var(--row) * 1);margin-bottom:20px;border:none;background-color:#dddde8\n}\n.question-controls{position:absolute;bottom:20px;right:0;width:calc(var(--column) * 2)\n}\n.question-controls img{cursor:pointer;max-width:30px;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-controls img:hover{opacity:1\n}\n.question-controls img:nth-child(2){padding:0 10px\n}\n.question__add-var-button{border:none;padding-left:30px;cursor:pointer;font-family:marta;font-weight:700;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question__add-var-button:hover{opacity:1\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-question.vue"],"names":[],"mappings":";AAqPA,UACA,kBAAA,6BACA,gBACA,YACA;CACA;AAEA,aACA,mBAAA,aACA;CACA;AAEA,eACA,kBAAA,WACA,SACA,+BACA,WACA,kBACA,YACA;CACA;AAEA,sBACA,YAAA;CACA;AAEA,uBACA,+BAAA,mCACA,mCACA,4BACA,gCACA,gCACA,mBACA,YACA,wBACA;CACA;AAEA,mBACA,kBAAA,YACA,QACA,6BACA;CACA;AACA,uBACA,eAAA,eACA,qBACA,WACA,kCAGA;CACA;AAEA,6BACA,SAAA;CACA;AAEA,oCACA,cAAA;CACA;AAEA,0BACA,YAAA,kBACA,eACA,kBACA,gBACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,gCACA,SAAA;CACA","file":"new-question.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question\">\r\n\r\n        <h3>Текст вопроса:</h3>\r\n        <textarea class=\"question__description\" name=\"name\" rows=\"8\" cols=\"80\"></textarea>\r\n\r\n        <select class=\"\" name=\"\" class=\"question-type\" @change=\"changeType\">\r\n            <option value=\"1\">Один из списка</option>\r\n            <option value=\"2\">Несколько из списка</option>\r\n            <option value=\"3\">Строка</option>\r\n        </select>\r\n\r\n        <div class=\"variants\">\r\n\r\n            <div v-if=\"questionType === 1\" key=\"single-question\">\r\n                <single\r\n                    v-for=\"(variant, index) in single.vars\"\r\n                    :text=\"variant.text\"\r\n                    :status=\"variant.isRight\"\r\n                    :id=\"variant.id\"\r\n                    :key=\"variant.id\"\r\n                    @removeVar=\"removeVarHandler\"\r\n                    @updateVar=\"singleUpdateVarHandler\"\r\n                    @updateRightVar=\"singleUpdateRightVarHandler\"\r\n                ></single>\r\n                <button key=\"add-single\"  class=\"question__add-var-button sngl\" type=\"button\" name=\"button\" @click=\"singleAddVar\">добавить вариант</button>\r\n            </div>\r\n\r\n            <div v-else-if=\"questionType === 2\" key=\"multiple-question\">\r\n                <multiple\r\n                    v-for=\"(variant, index) in multiple.vars\"\r\n                    :text=\"variant.text\"\r\n                    :status=\"variant.isRight\"\r\n                    :id=\"variant.id\"\r\n                    :key=\"variant.id\"\r\n                    @removeVar=\"multipleRemoveVarHandler\"\r\n                    @updateVar=\"multipleUpdateVarHandler\"\r\n                    @updateRightVar=\"multipleUpdateRightVarHandler\"\r\n                >\r\n                </multiple>\r\n                <button key=\"add-multiple\" class=\"question__add-var-button mlt\" type=\"button\" name=\"button\" @click=\"multipleAddVar\">добавить вариант</button>\r\n            </div>\r\n\r\n            <div v-else key=\"string-question\">\r\n                <string\r\n                    @updateVar=\"stringUpdateVarHandler\"\r\n                ></string>\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n\r\n        <div class=\"question-controls\">\r\n            <img src=\"img/success.svg\" alt=\"\">\r\n            <img src=\"img/edit.svg\" alt=\"\">\r\n            <img @click=\"deleteQuestion\" src=\"img/dustbin.svg\" alt=\"\">\r\n\r\n        </div>\r\n\r\n\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport single from './questions/single.vue';\r\nimport multiple from './questions/multiple.vue';\r\nimport string from './questions/string.vue';\r\n\r\nexport default {\r\n\r\n    props: ['questiontype', 'questiontext', 'questionid'],\r\n\r\n    components: {\r\n       'single': single,\r\n       'multiple': multiple,\r\n       'string': string\r\n   },\r\n\r\n    data() {\r\n        return {\r\n            questionType: this.questiontype ? this.questiontype : 1,\r\n            id: this.questionid,\r\n            // Вопросы с одним вариантом\r\n            single: {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            },\r\n            // Вопросы с несколькими вариантами ответа\r\n            multiple: {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            },\r\n            //Вопрос с вводом строки\r\n            string: {\r\n                answer: ''\r\n            }\r\n\r\n        }\r\n    },\r\n\r\n    methods: {\r\n\r\n        changeType(e) {\r\n\r\n            this.questionType = +e.target.value;\r\n\r\n            this.single = {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            };\r\n\r\n            this.multiple = {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            };\r\n        },\r\n\r\n        /*Вопросы с одним варианторм*/\r\n\r\n        //Добавляем вариант ответа\r\n        singleAddVar() {\r\n            this.single.vars.push({\r\n                text: 'Вариант ответа',\r\n                isRight: false,\r\n                id: this.single.nextVarId\r\n            });\r\n            this.single.nextVarId++;\r\n        },\r\n\r\n        // Удаление вариантами\r\n        removeVarHandler(id) {\r\n            let index;\r\n            for(let i = 0; i < this.single.vars.length; i++) {\r\n                if(this.single.vars[i].id === id) index = i;\r\n            }\r\n            this.single.vars.splice(index, 1);\r\n        },\r\n\r\n        //Обновляем текст варианта\r\n        singleUpdateVarHandler(id, text) {\r\n            let index;\r\n            for(let i = 0; i < this.single.vars.length; i++) {\r\n                if(this.single.vars[i].id === id) index = i;\r\n            }\r\n            this.single.vars[index].text = text;\r\n        },\r\n\r\n        //Выбираем правильный вариант вопроса\r\n        singleUpdateRightVarHandler(index) {\r\n            this.$children.forEach( (v,i) => {\r\n                if(i === index) {\r\n                    v.isRight ? v.isRight = false : v.isRight = true;\r\n                    this.single.vars[index].isRight ? this.single.vars[index].isRight = false : this.single.vars[index].isRight = true;\r\n                }\r\n                else {\r\n                    v.isRight = false;\r\n                    this.single.vars[i].isRight = false;\r\n                }\r\n            });\r\n        },\r\n\r\n        /*Вопросы с несолькими вариантами*/\r\n\r\n        //Добавляем вариант ответа\r\n        multipleAddVar() {\r\n            this.multiple.vars.push({\r\n                text: 'Вариант ответа',\r\n                isRight: false,\r\n                id: this.multiple.nextVarId\r\n            });\r\n            this.multiple.nextVarId++;\r\n        },\r\n\r\n        // Удаляем вариант ответа\r\n        multipleRemoveVarHandler(id) {\r\n            let index;\r\n            for(let i = 0; i < this.multiple.vars.length; i++) {\r\n                if(this.multiple.vars[i].id === id) index = i;\r\n            }\r\n            this.multiple.vars.splice(index, 1);\r\n        },\r\n\r\n        multipleUpdateVarHandler(id, text) {\r\n            let index;\r\n            for(let i = 0; i < this.multiple.vars.length; i++) {\r\n                if(this.multiple.vars[i].id === id) index = i;\r\n            }\r\n            this.multiple.vars[index].text = text;\r\n        },\r\n\r\n        //Выбираем правильный вариант вопроса\r\n        multipleUpdateRightVarHandler(index) {\r\n            this.$children.forEach( (v,i) => {\r\n                if(i === index) {\r\n                    v.isRight ? v.isRight = false : v.isRight = true;\r\n                    this.single.vars[index].isRight ? this.single.vars[index].isRight = false : this.single.vars[index].isRight = true;\r\n                }\r\n            });\r\n        },\r\n\r\n        /*Вопрос - строка*/\r\n\r\n        stringUpdateVarHandler(text) {\r\n            this.string.answer = text;\r\n        },\r\n\r\n        //Событие удаления вопроса\r\n        deleteQuestion() {\r\n            this.$emit('delete-question', this.id);\r\n        }\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question {\r\n        position: relative;\r\n        border: 1px solid var(--blue);\r\n        margin-top: 40px;\r\n        padding: 20px;\r\n    }\r\n\r\n    .question h3 {\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .question-type {\r\n        position: absolute;\r\n        right: -1px;\r\n        top: -1px;\r\n        background-color: var(--purple);\r\n        color: #fff;\r\n        font-family: 'marta';\r\n        padding: 10px;\r\n    }\r\n\r\n    .question-type option{\r\n        padding: 10px;\r\n    }\r\n\r\n    .question__description {\r\n        width: calc(var(--column) * 10);\r\n        max-width: calc(var(--column) * 10);\r\n        min-width: calc(var(--column) * 10);\r\n        height: calc(var(--row) * 1);\r\n        min-height: calc(var(--row) * 1);\r\n        max-height: calc(var(--row) * 1);\r\n        margin-bottom: 20px;\r\n        border: none;\r\n        background-color: #dddde8;\r\n    }\r\n\r\n    .question-controls {\r\n        position: absolute;\r\n        bottom: 20px;\r\n        right: 0px;\r\n        width: calc(var(--column) * 2);\r\n    }\r\n    .question-controls img {\r\n        cursor: pointer;\r\n        max-width: 30px;\r\n        display: inline-block;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity 0.2s ease-in-out;\r\n        -o-transition: opacity 0.2s ease-in-out;\r\n        transition: opacity 0.2s ease-in-out;\r\n    }\r\n\r\n    .question-controls img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-controls img:nth-child(2) {\r\n        padding: 0 10px;\r\n    }\r\n\r\n    .question__add-var-button {\r\n        border: none;\r\n        padding-left: 30px;\r\n        cursor: pointer;\r\n        font-family: 'marta';\r\n        font-weight: bold;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question__add-var-button:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -18527,7 +18621,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n.question-var{display:flex;width:calc(var(--column) * 10);max-height:40px;margin-bottom:20px;justify-content:space-between\n}\n.question-var>*{display:block;max-width:calc(var(--column) * 10);align-self:center\n}\n.question-var input[type=text]{max-width:calc(var(--column) * 6);border:none;border-bottom:1px solid var(--blue)\n}\n.question-var img{max-width:20px;cursor:pointer;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var img:hover{opacity:1\n}\n.question-var input[type=checkbox]{display:none\n}\nlabel[for=right_var]{cursor:pointer;color:var(--blue);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var label.active,label[for=right_var]:hover{opacity:1\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/questions/src/vue-comp/questions/single.vue"],"names":[],"mappings":";AAgDA,cACA,aAAA,+BACA,gBACA,mBACA,6BACA;CACA;AAEA,gBACA,cAAA,mCACA,iBACA;CACA;AAEA,+BACA,kCAAA,YACA,mCACA;CACA;AAEA,kBACA,eAAA,eACA,WACA,kCAGA;CACA;AAEA,wBACA,SAAA;CACA;AAEA,mCACA,YAAA;CACA;AAEA,qBACA,eAAA,kBACA,WACA,kCAGA;CACA;AAMA,sDACA,SAAA;CACA","file":"single.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question-var\">\r\n        <input type=\"text\" name=\"\" value=\"\" placeholder=\"Вариант ответа\" :placeholder=\"placeholderText\" v-model=\"varText\" @input=\"updateInfo\">\r\n        <img @click=\"deleteVar\" src=\"img/cross.svg\" alt=\"\">\r\n        <label @click=\"rightVar\" for=\"right_var\" :class=\"{active: isRight}\">правильный</label>\r\n        <input type=\"checkbox\" name=\"\" value=\"\" id=\"right_var\">\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n\r\n    props: ['text', 'status'],\r\n\r\n    data() {\r\n        return {\r\n            varText: '',\r\n            placeholderText: this.text,\r\n            isRight: this.status\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        //Удаление варианта\r\n        deleteVar(e) {\r\n            console.log(1);\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('removeVar', index);\r\n        },\r\n\r\n        // Обнавляем текст варианта\r\n        updateInfo() {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('updateVar', index, this.varText);\r\n        },\r\n\r\n        // Обнавляем статус правильного ответа варианта\r\n        rightVar() {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('updateRightVar', index);\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question-var {\r\n        display: flex;\r\n        width: calc(var(--column) * 10);\r\n        max-height: 40px;\r\n        margin-bottom: 20px;\r\n        justify-content: space-between;\r\n    }\r\n\r\n    .question-var > * {\r\n        display: block;\r\n        max-width: calc(var(--column) * 10);\r\n        align-self: center;\r\n    }\r\n\r\n    .question-var input[type=\"text\"] {\r\n        max-width: calc(var(--column) * 6);\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n    }\r\n\r\n    .question-var img{\r\n        max-width: 20px;\r\n        cursor: pointer;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question-var img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    label[for=\"right_var\"] {\r\n        cursor: pointer;\r\n        color: var(--blue);\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    label[for=\"right_var\"]:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var label.active {\r\n        opacity: 1;\r\n    }\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.question-var{display:flex;width:calc(var(--column) * 10);max-height:40px;margin-bottom:20px;justify-content:space-between\n}\n.question-var>*{display:block;max-width:calc(var(--column) * 10);align-self:center\n}\n.question-var input[type=text]{max-width:calc(var(--column) * 6);border:none;border-bottom:1px solid var(--blue)\n}\n.question-var img{max-width:20px;cursor:pointer;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var img:hover{opacity:1\n}\n.question-var input[type=checkbox]{display:none\n}\nlabel[for=right_var]{cursor:pointer;color:var(--blue);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var label.active,label[for=right_var]:hover{opacity:1\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/vue-comp/questions/src/vue-comp/questions/single.vue"],"names":[],"mappings":";AA8CA,cACA,aAAA,+BACA,gBACA,mBACA,6BACA;CACA;AAEA,gBACA,cAAA,mCACA,iBACA;CACA;AAEA,+BACA,kCAAA,YACA,mCACA;CACA;AAEA,kBACA,eAAA,eACA,WACA,kCAGA;CACA;AAEA,wBACA,SAAA;CACA;AAEA,mCACA,YAAA;CACA;AAEA,qBACA,eAAA,kBACA,WACA,kCAGA;CACA;AAMA,sDACA,SAAA;CACA","file":"single.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question-var\">\r\n        <input type=\"text\" name=\"\" value=\"\" placeholder=\"Вариант ответа\" :placeholder=\"placeholderText\" v-model=\"varText\" @input=\"updateInfo\">\r\n        <img @click=\"deleteVar\" src=\"img/cross.svg\" alt=\"\">\r\n        <label @click=\"rightVar\" for=\"right_var\" :class=\"{active: isRight}\">правильный</label>\r\n        <input type=\"checkbox\" name=\"\" value=\"\" id=\"right_var\">\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n\r\n    props: ['text', 'status', 'id'],\r\n\r\n    data() {\r\n        return {\r\n            varText: '',\r\n            placeholderText: this.text,\r\n            isRight: this.status,\r\n            questionId: this.id\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        //Удаление варианта\r\n        deleteVar(e) {\r\n            this.$emit('removeVar', this.id);\r\n        },\r\n\r\n        // Обнавляем текст варианта\r\n        updateInfo() {\r\n            this.$emit('updateVar', this.id, this.varText);\r\n        },\r\n\r\n        // Обнавляем статус правильного ответа варианта\r\n        rightVar() {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('updateRightVar', index);\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question-var {\r\n        display: flex;\r\n        width: calc(var(--column) * 10);\r\n        max-height: 40px;\r\n        margin-bottom: 20px;\r\n        justify-content: space-between;\r\n    }\r\n\r\n    .question-var > * {\r\n        display: block;\r\n        max-width: calc(var(--column) * 10);\r\n        align-self: center;\r\n    }\r\n\r\n    .question-var input[type=\"text\"] {\r\n        max-width: calc(var(--column) * 6);\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n    }\r\n\r\n    .question-var img{\r\n        max-width: 20px;\r\n        cursor: pointer;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question-var img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    label[for=\"right_var\"] {\r\n        cursor: pointer;\r\n        color: var(--blue);\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    label[for=\"right_var\"]:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var label.active {\r\n        opacity: 1;\r\n    }\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -18696,7 +18790,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n.question-var{display:flex;width:calc(var(--column) * 10);max-height:40px;margin-bottom:20px;justify-content:space-between\n}\n.question-var>*{display:block;max-width:calc(var(--column) * 10);align-self:center\n}\n.question-var input[type=text]{max-width:calc(var(--column) * 6);border:none;border-bottom:1px solid var(--blue)\n}\n.question-var img{max-width:20px;cursor:pointer;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var img:hover{opacity:1\n}\n.question-var input[type=checkbox]{display:none\n}\nlabel[for=right_var]{cursor:pointer;color:var(--blue);opacity:.5;transition:opacity .2s ease-in-out\n}\nlabel[for=right_var]:hover{opacity:1\n}", "", {"version":3,"sources":["C:/xampp/htdocs/tester-avalon/src/vue-comp/questions/src/vue-comp/questions/multiple.vue"],"names":[],"mappings":";AAiBA,cACA,aAAA,+BACA,gBACA,mBACA,6BACA;CACA;AAEA,gBACA,cAAA,mCACA,iBACA;CACA;AAEA,+BACA,kCAAA,YACA,mCACA;CACA;AAEA,kBACA,eAAA,eACA,WACA,kCAGA;CACA;AAEA,wBACA,SAAA;CACA;AAEA,mCACA,YAAA;CACA;AAEA,qBACA,eAAA,kBACA,WACA,kCAGA;CACA;AAEA,2BACA,SAAA;CACA","file":"multiple.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question-var\">\r\n        <input type=\"text\" name=\"\" value=\"\" placeholder=\"Вариант ответа\">\r\n        <img src=\"img/cross.svg\" alt=\"\">\r\n        <label for=\"right_var\">правильный</label>\r\n        <input type=\"checkbox\" name=\"\" value=\"\" id=\"right_var\">\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question-var {\r\n        display: flex;\r\n        width: calc(var(--column) * 10);\r\n        max-height: 40px;\r\n        margin-bottom: 20px;\r\n        justify-content: space-between;\r\n    }\r\n\r\n    .question-var > * {\r\n        display: block;\r\n        max-width: calc(var(--column) * 10);\r\n        align-self: center;\r\n    }\r\n\r\n    .question-var input[type=\"text\"] {\r\n        max-width: calc(var(--column) * 6);\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n    }\r\n\r\n    .question-var img{\r\n        max-width: 20px;\r\n        cursor: pointer;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question-var img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    label[for=\"right_var\"] {\r\n        cursor: pointer;\r\n        color: var(--blue);\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    label[for=\"right_var\"]:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.question-var{display:flex;width:calc(var(--column) * 10);max-height:40px;margin-bottom:20px;justify-content:space-between\n}\n.question-var>*{display:block;max-width:calc(var(--column) * 10);align-self:center\n}\n.question-var input[type=text]{max-width:calc(var(--column) * 6);border:none;border-bottom:1px solid var(--blue)\n}\n.question-var img{max-width:20px;cursor:pointer;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var img:hover{opacity:1\n}\n.question-var input[type=checkbox]{display:none\n}\nlabel[for=right_var]{cursor:pointer;color:var(--blue);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-var label.active,label[for=right_var]:hover{opacity:1\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/vue-comp/questions/src/vue-comp/questions/multiple.vue"],"names":[],"mappings":";AA8CA,cACA,aAAA,+BACA,gBACA,mBACA,6BACA;CACA;AAEA,gBACA,cAAA,mCACA,iBACA;CACA;AAEA,+BACA,kCAAA,YACA,mCACA;CACA;AAEA,kBACA,eAAA,eACA,WACA,kCAGA;CACA;AAEA,wBACA,SAAA;CACA;AAEA,mCACA,YAAA;CACA;AAEA,qBACA,eAAA,kBACA,WACA,kCAGA;CACA;AAMA,sDACA,SAAA;CACA","file":"multiple.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question-var\">\r\n        <input type=\"text\" name=\"\" value=\"\" placeholder=\"Вариант ответа\" :placeholder=\"placeholderText\" v-model=\"varText\" @input=\"updateInfo\">\r\n        <img @click=\"deleteVar\" src=\"img/cross.svg\" alt=\"\">\r\n        <label @click=\"rightVar\" for=\"right_var\" :class=\"{active: isRight}\">правильный</label>\r\n        <input type=\"checkbox\" name=\"\" value=\"\" id=\"right_var\">\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n\r\n    props: ['text', 'status', 'id'],\r\n\r\n    data() {\r\n        return {\r\n            varText: '',\r\n            placeholderText: this.text,\r\n            isRight: this.status,\r\n            questionId: this.id\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        //Удаление варианта\r\n        deleteVar(e) {\r\n            this.$emit('removeVar', this.id);\r\n        },\r\n\r\n        // Обнавляем текст варианта\r\n        updateInfo() {\r\n            this.$emit('updateVar', this.id, this.varText);\r\n        },\r\n\r\n        // Обнавляем статус правильного ответа варианта\r\n        rightVar() {\r\n            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);\r\n            this.$emit('updateRightVar', index);\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question-var {\r\n        display: flex;\r\n        width: calc(var(--column) * 10);\r\n        max-height: 40px;\r\n        margin-bottom: 20px;\r\n        justify-content: space-between;\r\n    }\r\n\r\n    .question-var > * {\r\n        display: block;\r\n        max-width: calc(var(--column) * 10);\r\n        align-self: center;\r\n    }\r\n\r\n    .question-var input[type=\"text\"] {\r\n        max-width: calc(var(--column) * 6);\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n    }\r\n\r\n    .question-var img{\r\n        max-width: 20px;\r\n        cursor: pointer;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question-var img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    label[for=\"right_var\"] {\r\n        cursor: pointer;\r\n        color: var(--blue);\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    label[for=\"right_var\"]:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-var label.active {\r\n        opacity: 1;\r\n    }\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -18710,33 +18804,58 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "question-var" }, [
-      _c("input", {
-        attrs: {
-          type: "text",
-          name: "",
-          value: "",
-          placeholder: "Вариант ответа"
+  return _c("div", { staticClass: "question-var" }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.varText,
+          expression: "varText"
         }
-      }),
-      _vm._v(" "),
-      _c("img", { attrs: { src: "img/cross.svg", alt: "" } }),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "right_var" } }, [_vm._v("правильный")]),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "checkbox", name: "", value: "", id: "right_var" }
-      })
-    ])
-  }
-]
+      ],
+      attrs: {
+        type: "text",
+        name: "",
+        value: "",
+        placeholder: "Вариант ответа",
+        placeholder: _vm.placeholderText
+      },
+      domProps: { value: _vm.varText },
+      on: {
+        input: [
+          function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.varText = $event.target.value
+          },
+          _vm.updateInfo
+        ]
+      }
+    }),
+    _vm._v(" "),
+    _c("img", {
+      attrs: { src: "img/cross.svg", alt: "" },
+      on: { click: _vm.deleteVar }
+    }),
+    _vm._v(" "),
+    _c(
+      "label",
+      {
+        class: { active: _vm.isRight },
+        attrs: { for: "right_var" },
+        on: { click: _vm.rightVar }
+      },
+      [_vm._v("правильный")]
+    ),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "checkbox", name: "", value: "", id: "right_var" }
+    })
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -18767,39 +18886,18 @@ var render = function() {
     _c(
       "select",
       {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.questionType,
-            expression: "questionType"
-          }
-        ],
         staticClass: "question-type",
         attrs: { name: "", class: "question-type" },
-        on: {
-          change: [
-            function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.questionType = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            },
-            _vm.changeType
-          ]
-        }
+        on: { change: _vm.changeType }
       },
       [
         _c("option", { attrs: { value: "1" } }, [_vm._v("Один из списка")]),
         _vm._v(" "),
-        _c("option", { attrs: { value: "2" } }, [_vm._v("Несколько из списка")])
+        _c("option", { attrs: { value: "2" } }, [
+          _vm._v("Несколько из списка")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3" } }, [_vm._v("Строка")])
       ]
     ),
     _vm._v(" "),
@@ -18812,11 +18910,13 @@ var render = function() {
               _vm._l(_vm.single.vars, function(variant, index) {
                 return _c("single", {
                   key: variant.id,
-                  attrs: { text: variant.text, status: variant.isRight },
+                  attrs: {
+                    text: variant.text,
+                    status: variant.isRight,
+                    id: variant.id
+                  },
                   on: {
-                    removeVar: function($event) {
-                      _vm.single.vars.splice(index, 1)
-                    },
+                    removeVar: _vm.removeVarHandler,
                     updateVar: _vm.singleUpdateVarHandler,
                     updateRightVar: _vm.singleUpdateRightVarHandler
                   }
@@ -18826,7 +18926,8 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "question__add-var-button",
+                  key: "add-single",
+                  staticClass: "question__add-var-button sngl",
                   attrs: { type: "button", name: "button" },
                   on: { click: _vm.singleAddVar }
                 },
@@ -18835,36 +18936,46 @@ var render = function() {
             ],
             2
           )
-        : _c(
-            "div",
-            { key: "multiple-question" },
-            [
-              _vm._l(_vm.multiple.vars, function(variant, index) {
-                return _c("multiple", {
-                  key: variant.id,
-                  attrs: { text: variant.text, status: variant.isRight },
-                  on: {
-                    removeVar: function($event) {
-                      _vm.multiple.vars.splice(index, 1)
+        : _vm.questionType === 2
+          ? _c(
+              "div",
+              { key: "multiple-question" },
+              [
+                _vm._l(_vm.multiple.vars, function(variant, index) {
+                  return _c("multiple", {
+                    key: variant.id,
+                    attrs: {
+                      text: variant.text,
+                      status: variant.isRight,
+                      id: variant.id
                     },
-                    updateVar: _vm.multipleUpdateVarHandler,
-                    updateRightVar: _vm.multipleUpdateRightVarHandler
-                  }
-                })
-              }),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "question__add-var-button",
-                  attrs: { type: "button", name: "button" },
-                  on: { click: _vm.multipleAddVar }
-                },
-                [_vm._v("добавить вариант")]
-              )
-            ],
-            2
-          )
+                    on: {
+                      removeVar: _vm.multipleRemoveVarHandler,
+                      updateVar: _vm.multipleUpdateVarHandler,
+                      updateRightVar: _vm.multipleUpdateRightVarHandler
+                    }
+                  })
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    key: "add-multiple",
+                    staticClass: "question__add-var-button mlt",
+                    attrs: { type: "button", name: "button" },
+                    on: { click: _vm.multipleAddVar }
+                  },
+                  [_vm._v("добавить вариант")]
+                )
+              ],
+              2
+            )
+          : _c(
+              "div",
+              { key: "string-question" },
+              [_c("string", { on: { updateVar: _vm.stringUpdateVarHandler } })],
+              1
+            )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "question-controls" }, [
@@ -18906,7 +19017,27 @@ var render = function() {
       _c("side-menu"),
       _vm._v(" "),
       _c("section", { staticClass: "content" }, [
-        _vm._m(0),
+        _c("nav", { staticClass: "new-test-nav" }, [
+          _c("ul", [
+            _c("li", [
+              _c(
+                "a",
+                {
+                  attrs: { href: "save" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.saveTest($event)
+                    }
+                  }
+                },
+                [_vm._v("Сохранить")]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "form",
@@ -19096,14 +19227,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("nav", { staticClass: "new-test-nav" }, [
-      _c("ul", [
-        _c("li", [_c("a", { attrs: { href: "save" } }, [_vm._v("Сохранить")])]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "publish" } }, [_vm._v("Опубликовать")])
-        ])
-      ])
+    return _c("li", [
+      _c("a", { attrs: { href: "publish" } }, [_vm._v("Опубликовать")])
     ])
   }
 ]
@@ -19141,6 +19266,196 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-b8444c62", esExports)
+  }
+}
+
+/***/ }),
+/* 57 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5c125fe0_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_string_vue__ = __webpack_require__(61);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(59)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5c125fe0_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_string_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src\\vue-comp\\questions\\string.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5c125fe0", Component.options)
+  } else {
+    hotAPI.reload("data-v-5c125fe0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  data: function data() {
+    return {
+      varText: ''
+    };
+  },
+  methods: {
+    updateInfo: function updateInfo() {
+      this.$emit('updateVar', this.varText);
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(60);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("fcbec2a8", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js?sourceMap!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5c125fe0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./string.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js?sourceMap!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5c125fe0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./string.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.question-var-str{display:flex;flex-wrap:wrap\n}\n.var-string{width:calc(var(--column) * 10);border:none;border-bottom:1px solid var(--blue)\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/vue-comp/questions/src/vue-comp/questions/string.vue"],"names":[],"mappings":";AA2BA,kBACA,aAAA,cACA;CACA;AAEA,YACA,+BAAA,YACA,mCACA;CACA","file":"string.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question-var-str\">\r\n        <p>Если вариант ответа предполагает несколько вариантов написания, просто перечислите их через строчку</p>\r\n        <input class=\"var-string\" type=\"text\" name=\"\" value=\"\" :placeholder=\"placeholderText\" v-model=\"varText\" @input=\"updateInfo\">\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n\r\n    data() {\r\n        return {\r\n            varText: ''\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        updateInfo() {\r\n            this.$emit('updateVar', this.varText);\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n.question-var-str {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n}\r\n\r\n.var-string {\r\n    width: calc(var(--column) * 10);\r\n    border: none;\r\n    border-bottom: 1px solid var(--blue);\r\n}\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "question-var-str" }, [
+    _c("p", [
+      _vm._v(
+        "Если вариант ответа предполагает несколько вариантов написания, просто перечислите их через строчку"
+      )
+    ]),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.varText,
+          expression: "varText"
+        }
+      ],
+      staticClass: "var-string",
+      attrs: {
+        type: "text",
+        name: "",
+        value: "",
+        placeholder: _vm.placeholderText
+      },
+      domProps: { value: _vm.varText },
+      on: {
+        input: [
+          function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.varText = $event.target.value
+          },
+          _vm.updateInfo
+        ]
+      }
+    })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5c125fe0", esExports)
   }
 }
 

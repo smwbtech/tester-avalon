@@ -7,8 +7,15 @@
 
             <nav class="new-test-nav">
                 <ul>
-                    <li><a href="save">Сохранить</a></li>
-                    <li><a href="publish">Опубликовать</a></li>
+                    <li>
+                        <a
+                            href="save"
+                            @click.prevent="saveTest"
+                        >Сохранить</a>
+                    </li>
+                    <li>
+                        <a href="publish">Опубликовать</a>
+                    </li>
                 </ul>
             </nav>
 
@@ -79,6 +86,13 @@ export default {
 
    data() {
        return {
+           testTitle: '',
+           testDescription: '',
+           testOptions: {
+               timeLimit: false,
+               time: 60,
+               anonym: false
+           },
            questions: [
                {
                    type: 1,
@@ -86,11 +100,6 @@ export default {
                    id: 1
                }
            ],
-           testOptions: {
-               timeLimit: false,
-               time: 60,
-               anonym: false
-           },
            nextQuestionId: 2
        }
    },
@@ -137,7 +146,12 @@ export default {
            });
            index.length > 1 ? index = index.filter( (v) => {if(typeof v == 'number') return v})[0] : index = index[0];
            this.questions.splice(index, 1);
+       },
+       // Сохраняем тест
+       saveTest() {
+
        }
+
    }
 
 }
@@ -217,9 +231,9 @@ export default {
         background-color: #dddde8;
         border: none;
         margin-bottom: 20px;
-        width: 100%;
-        max-width: 100%;
-        min-width: 100%;
+        width: 98%;
+        max-width: 98%;
+        min-width: 98%;
         max-height: calc(var(--row) * 2);
         min-height: calc(var(--row) * 2);
         height: calc(var(--row) * 2);

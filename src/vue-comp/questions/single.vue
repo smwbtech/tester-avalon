@@ -12,28 +12,26 @@
 <script>
 export default {
 
-    props: ['text', 'status'],
+    props: ['text', 'status', 'id'],
 
     data() {
         return {
             varText: '',
             placeholderText: this.text,
-            isRight: this.status
+            isRight: this.status,
+            questionId: this.id
         }
     },
 
     methods: {
         //Удаление варианта
         deleteVar(e) {
-            console.log(1);
-            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
-            this.$emit('removeVar', index);
+            this.$emit('removeVar', this.id);
         },
 
         // Обнавляем текст варианта
         updateInfo() {
-            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
-            this.$emit('updateVar', index, this.varText);
+            this.$emit('updateVar', this.id, this.varText);
         },
 
         // Обнавляем статус правильного ответа варианта

@@ -5,9 +5,10 @@
         <h3>Текст вопроса:</h3>
         <textarea class="question__description" name="name" rows="8" cols="80"></textarea>
 
-        <select class="" name="" class="question-type" v-model="questionType" @change="changeType">
+        <select class="" name="" class="question-type" @change="changeType">
             <option value="1">Один из списка</option>
             <option value="2">Несколько из списка</option>
+            <option value="3">Строка</option>
         </select>
 
         <div class="variants">
@@ -17,26 +18,34 @@
                     v-for="(variant, index) in single.vars"
                     :text="variant.text"
                     :status="variant.isRight"
+                    :id="variant.id"
                     :key="variant.id"
-                    @removeVar="single.vars.splice(index, 1)"
+                    @removeVar="removeVarHandler"
                     @updateVar="singleUpdateVarHandler"
                     @updateRightVar="singleUpdateRightVarHandler"
                 ></single>
-                <button  class="question__add-var-button" type="button" name="button" @click="singleAddVar">добавить вариант</button>
+                <button key="add-single"  class="question__add-var-button sngl" type="button" name="button" @click="singleAddVar">добавить вариант</button>
             </div>
 
-            <div v-else key="multiple-question">
+            <div v-else-if="questionType === 2" key="multiple-question">
                 <multiple
                     v-for="(variant, index) in multiple.vars"
                     :text="variant.text"
                     :status="variant.isRight"
+                    :id="variant.id"
                     :key="variant.id"
-                    @removeVar="multiple.vars.splice(index, 1)"
+                    @removeVar="multipleRemoveVarHandler"
                     @updateVar="multipleUpdateVarHandler"
                     @updateRightVar="multipleUpdateRightVarHandler"
                 >
                 </multiple>
-                <button class="question__add-var-button" type="button" name="button" @click="multipleAddVar">добавить вариант</button>
+                <button key="add-multiple" class="question__add-var-button mlt" type="button" name="button" @click="multipleAddVar">добавить вариант</button>
+            </div>
+
+            <div v-else key="string-question">
+                <string
+                    @updateVar="stringUpdateVarHandler"
+                ></string>
             </div>
 
         </div>
@@ -60,6 +69,7 @@
 
 import single from './questions/single.vue';
 import multiple from './questions/multiple.vue';
+import string from './questions/string.vue';
 
 export default {
 
@@ -67,7 +77,8 @@ export default {
 
     components: {
        'single': single,
-       'multiple': multiple
+       'multiple': multiple,
+       'string': string
    },
 
     data() {
@@ -95,6 +106,10 @@ export default {
                     }
                 ],
                 nextVarId: 2
+            },
+            //Вопрос с вводом строки
+            string: {
+                answer: ''
             }
 
         }
@@ -102,7 +117,10 @@ export default {
 
     methods: {
 
-        changeType() {
+        changeType(e) {
+
+            this.questionType = +e.target.value;
+
             this.single = {
                 vars: [
                     {
@@ -133,17 +151,31 @@ export default {
             this.single.vars.push({
                 text: 'Вариант ответа',
                 isRight: false,
-                id: this.nextVarId
+                id: this.single.nextVarId
             });
             this.single.nextVarId++;
         },
+
+        // Удаление вариантами
+        removeVarHandler(id) {
+            let index;
+            for(let i = 0; i < this.single.vars.length; i++) {
+                if(this.single.vars[i].id === id) index = i;
+            }
+            this.single.vars.splice(index, 1);
+        },
+
         //Обновляем текст варианта
-        singleUpdateVarHandler(index, text) {
+        singleUpdateVarHandler(id, text) {
+            let index;
+            for(let i = 0; i < this.single.vars.length; i++) {
+                if(this.single.vars[i].id === id) index = i;
+            }
             this.single.vars[index].text = text;
         },
+
         //Выбираем правильный вариант вопроса
         singleUpdateRightVarHandler(index) {
-            console.log(this.$children);
             this.$children.forEach( (v,i) => {
                 if(i === index) {
                     v.isRight ? v.isRight = false : v.isRight = true;
@@ -157,23 +189,48 @@ export default {
         },
 
         /*Вопросы с несолькими вариантами*/
+
         //Добавляем вариант ответа
         multipleAddVar() {
             this.multiple.vars.push({
                 text: 'Вариант ответа',
                 isRight: false,
-                id: this.nextVarId
+                id: this.multiple.nextVarId
             });
             this.multiple.nextVarId++;
         },
 
-        multipleUpdateVarHandler(index, text) {
+        // Удаляем вариант ответа
+        multipleRemoveVarHandler(id) {
+            let index;
+            for(let i = 0; i < this.multiple.vars.length; i++) {
+                if(this.multiple.vars[i].id === id) index = i;
+            }
+            this.multiple.vars.splice(index, 1);
+        },
+
+        multipleUpdateVarHandler(id, text) {
+            let index;
+            for(let i = 0; i < this.multiple.vars.length; i++) {
+                if(this.multiple.vars[i].id === id) index = i;
+            }
             this.multiple.vars[index].text = text;
         },
 
         //Выбираем правильный вариант вопроса
         multipleUpdateRightVarHandler(index) {
-            console.log(this.$children);
+            this.$children.forEach( (v,i) => {
+                if(i === index) {
+                    v.isRight ? v.isRight = false : v.isRight = true;
+                    this.single.vars[index].isRight ? this.single.vars[index].isRight = false : this.single.vars[index].isRight = true;
+                }
+            });
+        },
+
+        /*Вопрос - строка*/
+
+        stringUpdateVarHandler(text) {
+            this.string.answer = text;
         },
 
         //Событие удаления вопроса

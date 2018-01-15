@@ -1,9 +1,9 @@
 <template lang="html">
 
     <div class="question-var">
-        <input type="text" name="" value="" placeholder="Вариант ответа">
-        <img src="img/cross.svg" alt="">
-        <label for="right_var">правильный</label>
+        <input type="text" name="" value="" placeholder="Вариант ответа" :placeholder="placeholderText" v-model="varText" @input="updateInfo">
+        <img @click="deleteVar" src="img/cross.svg" alt="">
+        <label @click="rightVar" for="right_var" :class="{active: isRight}">правильный</label>
         <input type="checkbox" name="" value="" id="right_var">
     </div>
 
@@ -11,6 +11,35 @@
 
 <script>
 export default {
+
+    props: ['text', 'status', 'id'],
+
+    data() {
+        return {
+            varText: '',
+            placeholderText: this.text,
+            isRight: this.status,
+            questionId: this.id
+        }
+    },
+
+    methods: {
+        //Удаление варианта
+        deleteVar(e) {
+            this.$emit('removeVar', this.id);
+        },
+
+        // Обнавляем текст варианта
+        updateInfo() {
+            this.$emit('updateVar', this.id, this.varText);
+        },
+
+        // Обнавляем статус правильного ответа варианта
+        rightVar() {
+            let index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
+            this.$emit('updateRightVar', index);
+        }
+    }
 }
 </script>
 
@@ -65,5 +94,10 @@ export default {
     label[for="right_var"]:hover {
         opacity: 1;
     }
+
+    .question-var label.active {
+        opacity: 1;
+    }
+
 
 </style>
