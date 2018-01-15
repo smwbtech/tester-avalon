@@ -3,7 +3,7 @@
     <div class="question">
 
         <h3>Текст вопроса:</h3>
-        <textarea class="question__description" name="name" rows="8" cols="80"></textarea>
+        <textarea class="question__description" v-model="description" @input="updateDescription"></textarea>
 
         <select class="" name="" class="question-type" @change="changeType">
             <option value="1">Один из списка</option>
@@ -85,6 +85,7 @@ export default {
         return {
             questionType: this.questiontype ? this.questiontype : 1,
             id: this.questionid,
+            description: '',
             // Вопросы с одним вариантом
             single: {
                 vars: [
@@ -116,6 +117,11 @@ export default {
     },
 
     methods: {
+
+        updateDescription() {
+            this.updateQuestionVars();
+        },
+
 
         changeType(e) {
 
@@ -163,6 +169,7 @@ export default {
                 if(this.single.vars[i].id === id) index = i;
             }
             this.single.vars.splice(index, 1);
+            this.updateQuestionVars();
         },
 
         //Обновляем текст варианта
@@ -172,6 +179,7 @@ export default {
                 if(this.single.vars[i].id === id) index = i;
             }
             this.single.vars[index].text = text;
+            this.updateQuestionVars();
         },
 
         //Выбираем правильный вариант вопроса
@@ -186,6 +194,7 @@ export default {
                     this.single.vars[i].isRight = false;
                 }
             });
+            this.updateQuestionVars();
         },
 
         /*Вопросы с несолькими вариантами*/
@@ -207,6 +216,7 @@ export default {
                 if(this.multiple.vars[i].id === id) index = i;
             }
             this.multiple.vars.splice(index, 1);
+            this.updateQuestionVars();
         },
 
         multipleUpdateVarHandler(id, text) {
@@ -215,6 +225,7 @@ export default {
                 if(this.multiple.vars[i].id === id) index = i;
             }
             this.multiple.vars[index].text = text;
+            this.updateQuestionVars();
         },
 
         //Выбираем правильный вариант вопроса
@@ -222,15 +233,34 @@ export default {
             this.$children.forEach( (v,i) => {
                 if(i === index) {
                     v.isRight ? v.isRight = false : v.isRight = true;
-                    this.single.vars[index].isRight ? this.single.vars[index].isRight = false : this.single.vars[index].isRight = true;
+                    this.multiple.vars[index].isRight ? this.multiple.vars[index].isRight = false : this.multiple.vars[index].isRight = true;
                 }
             });
+            this.updateQuestionVars();
         },
 
         /*Вопрос - строка*/
 
         stringUpdateVarHandler(text) {
             this.string.answer = text;
+            this.updateQuestionVars();
+        },
+
+        //Обновляем варианты в объекте вопроса в тесте
+        updateQuestionVars() {
+            switch (this.questionType) {
+                case 1:
+                    this.$emit('udpate-question', this.id, this.questionType, this.description, this.single.vars);
+                    break;
+                case 2:
+                    this.$emit('udpate-question', this.id, this.questionType, this.description, this.multiple.vars);
+                    break;
+                case 3:
+                    this.$emit('udpate-question', this.id, this.questionType, this.description, this.string.answer);
+                    break;
+                default:
+
+            }
         },
 
         //Событие удаления вопроса

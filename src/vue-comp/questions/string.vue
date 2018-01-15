@@ -2,7 +2,7 @@
 
     <div class="question-var-str">
         <p>Если вариант ответа предполагает несколько вариантов написания, просто перечислите их через строчку</p>
-        <input class="var-string" type="text" name="" value="" :placeholder="placeholderText" v-model="varText" @input="updateInfo">
+        <input class="var-string" type="text" name="" value="" placeholder="Введите свое описание" v-model="varText" @input="updateInfo">
     </div>
 
 </template>

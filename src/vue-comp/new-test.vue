@@ -21,11 +21,11 @@
 
             <form class="new-test-form">
 
-                <input type="text" class="new-test-form__title" placeholder="Название теста">
+                <input type="text" class="new-test-form__title" placeholder="Название теста" v-model="testTitle">
 
                 <div class="new-test-form__options">
                     <h3>Описание:</h3>
-                    <textarea class="new-test-form__description" name="test_description"></textarea>
+                    <textarea v-model="testDescription" class="new-test-form__description" name="test_description"></textarea>
 
                     <div class="new-test-form__inputs">
                         <img :src="timeToggle" alt="">
@@ -38,7 +38,7 @@
                         <label class="active" for="time" v-if="testOptions.timeLimit">Время в мин.:</label>
                         </transition>
                         <transition name="fade">
-                        <input type="text" name="time" id="time" value="" v-if="testOptions.timeLimit">
+                        <input type="text" name="time" id="time" value="" v-if="testOptions.timeLimit" v-model="testOptions.time">
                         </transition>
                         <img :src="anonymToggle" alt="">
                         <label for="anonym" :class="labelAnonym">Анонимное прохождение</label>
@@ -54,6 +54,7 @@
                     :questiontext="question.text"
                     :questionid="question.id"
                     @delete-question="deleteQuestionHandler"
+                    @udpate-question="updateQuestionInfo"
                 ></new-question>
 
                 <button
@@ -129,6 +130,7 @@ export default {
    },
 
    methods: {
+
        // Добавление нового вопроса
        addQuestion() {
            this.questions.push( {
@@ -138,6 +140,7 @@ export default {
             });
             this.nextQuestionId++;
        },
+
        // Удаляем вопрос
        deleteQuestionHandler(id) {
            console.log('ded');
@@ -147,9 +150,26 @@ export default {
            index.length > 1 ? index = index.filter( (v) => {if(typeof v == 'number') return v})[0] : index = index[0];
            this.questions.splice(index, 1);
        },
+
+       // Обновляем информацию вопроса
+       updateQuestionInfo(id, type, description, vars) {
+           for(let i = 0; i < this.questions.length; i++) {
+               if(this.questions[i].id === id) {
+                   this.questions[i].type = type;
+                   this.questions[i].text = description;
+                   this.questions[i].vars = vars;
+               }
+           }
+       },
        // Сохраняем тест
        saveTest() {
-
+           let test = {
+               title: this.testTitle,
+               description: this.testDescription,
+               options: this.testOptions,
+               questions: this.questions
+           };
+           console.log(JSON.stringify(test));
        }
 
    }

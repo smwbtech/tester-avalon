@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 18);
+/******/ 	return __webpack_require__(__webpack_require__.s = 19);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -165,7 +165,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(32)
+var listToStyles = __webpack_require__(33)
 
 /*
 type StyleObject = {
@@ -2139,7 +2139,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(21);
+var	fixUrls = __webpack_require__(22);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -2683,7 +2683,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _reg = _interopRequireDefault(__webpack_require__(33));
+var _reg = _interopRequireDefault(__webpack_require__(34));
 
 var _axios = _interopRequireDefault(__webpack_require__(3));
 
@@ -2920,11 +2920,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_55efab35_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_side_menu_vue__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_55efab35_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_side_menu_vue__ = __webpack_require__(41);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(38)
+  __webpack_require__(39)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -3036,11 +3036,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f85ad0a2_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_test_vue__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f85ad0a2_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_test_vue__ = __webpack_require__(60);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(41)
+  __webpack_require__(42)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -3124,10 +3124,11 @@ exports.default = void 0;
 
 var _sideMenu = _interopRequireDefault(__webpack_require__(9));
 
-var _newQuestion = _interopRequireDefault(__webpack_require__(43));
+var _newQuestion = _interopRequireDefault(__webpack_require__(44));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -3265,8 +3266,26 @@ var _default = {
       })[0] : index = index[0];
       this.questions.splice(index, 1);
     },
+    // Обновляем информацию вопроса
+    updateQuestionInfo: function updateQuestionInfo(id, type, description, vars) {
+      for (var i = 0; i < this.questions.length; i++) {
+        if (this.questions[i].id === id) {
+          this.questions[i].type = type;
+          this.questions[i].text = description;
+          this.questions[i].vars = vars;
+        }
+      }
+    },
     // Сохраняем тест
-    saveTest: function saveTest() {}
+    saveTest: function saveTest() {
+      var test = {
+        title: this.testTitle,
+        description: this.testDescription,
+        options: this.testOptions,
+        questions: this.questions
+      };
+      console.log(JSON.stringify(test));
+    }
   }
 };
 exports.default = _default;
@@ -3283,11 +3302,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _single = _interopRequireDefault(__webpack_require__(46));
+var _single = _interopRequireDefault(__webpack_require__(47));
 
-var _multiple = _interopRequireDefault(__webpack_require__(50));
+var _multiple = _interopRequireDefault(__webpack_require__(51));
 
-var _string = _interopRequireDefault(__webpack_require__(57));
+var _string = _interopRequireDefault(__webpack_require__(55));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3369,6 +3388,7 @@ var _default = {
     return {
       questionType: this.questiontype ? this.questiontype : 1,
       id: this.questionid,
+      description: '',
       // Вопросы с одним вариантом
       single: {
         vars: [{
@@ -3394,6 +3414,9 @@ var _default = {
     };
   },
   methods: {
+    updateDescription: function updateDescription() {
+      this.updateQuestionVars();
+    },
     changeType: function changeType(e) {
       this.questionType = +e.target.value;
       this.single = {
@@ -3433,6 +3456,7 @@ var _default = {
       }
 
       this.single.vars.splice(index, 1);
+      this.updateQuestionVars();
     },
     //Обновляем текст варианта
     singleUpdateVarHandler: function singleUpdateVarHandler(id, text) {
@@ -3443,6 +3467,7 @@ var _default = {
       }
 
       this.single.vars[index].text = text;
+      this.updateQuestionVars();
     },
     //Выбираем правильный вариант вопроса
     singleUpdateRightVarHandler: function singleUpdateRightVarHandler(index) {
@@ -3457,6 +3482,7 @@ var _default = {
           _this.single.vars[i].isRight = false;
         }
       });
+      this.updateQuestionVars();
     },
 
     /*Вопросы с несолькими вариантами*/
@@ -3478,6 +3504,7 @@ var _default = {
       }
 
       this.multiple.vars.splice(index, 1);
+      this.updateQuestionVars();
     },
     multipleUpdateVarHandler: function multipleUpdateVarHandler(id, text) {
       var index;
@@ -3487,6 +3514,7 @@ var _default = {
       }
 
       this.multiple.vars[index].text = text;
+      this.updateQuestionVars();
     },
     //Выбираем правильный вариант вопроса
     multipleUpdateRightVarHandler: function multipleUpdateRightVarHandler(index) {
@@ -3495,14 +3523,34 @@ var _default = {
       this.$children.forEach(function (v, i) {
         if (i === index) {
           v.isRight ? v.isRight = false : v.isRight = true;
-          _this2.single.vars[index].isRight ? _this2.single.vars[index].isRight = false : _this2.single.vars[index].isRight = true;
+          _this2.multiple.vars[index].isRight ? _this2.multiple.vars[index].isRight = false : _this2.multiple.vars[index].isRight = true;
         }
       });
+      this.updateQuestionVars();
     },
 
     /*Вопрос - строка*/
     stringUpdateVarHandler: function stringUpdateVarHandler(text) {
       this.string.answer = text;
+      this.updateQuestionVars();
+    },
+    //Обновляем варианты в объекте вопроса в тесте
+    updateQuestionVars: function updateQuestionVars() {
+      switch (this.questionType) {
+        case 1:
+          this.$emit('udpate-question', this.id, this.questionType, this.description, this.single.vars);
+          break;
+
+        case 2:
+          this.$emit('udpate-question', this.id, this.questionType, this.description, this.multiple.vars);
+          break;
+
+        case 3:
+          this.$emit('udpate-question', this.id, this.questionType, this.description, this.string.answer);
+          break;
+
+        default:
+      }
     },
     //Событие удаления вопроса
     deleteQuestion: function deleteQuestion() {
@@ -3619,19 +3667,53 @@ exports.default = _default;
 "use strict";
 
 
-var _variables = _interopRequireDefault(__webpack_require__(19));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  data: function data() {
+    return {
+      varText: ''
+    };
+  },
+  methods: {
+    updateInfo: function updateInfo() {
+      this.$emit('updateVar', this.varText);
+    }
+  }
+};
+exports.default = _default;
 
-var _style = _interopRequireDefault(__webpack_require__(22));
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
 
-var _vue = _interopRequireDefault(__webpack_require__(24));
+"use strict";
 
-var _vueRouter = _interopRequireDefault(__webpack_require__(27));
 
-var _auth = _interopRequireDefault(__webpack_require__(28));
+var _variables = _interopRequireDefault(__webpack_require__(20));
 
-var _login = _interopRequireDefault(__webpack_require__(29));
+var _style = _interopRequireDefault(__webpack_require__(23));
 
-var _tester = _interopRequireDefault(__webpack_require__(35));
+var _vue = _interopRequireDefault(__webpack_require__(25));
+
+var _vueRouter = _interopRequireDefault(__webpack_require__(28));
+
+var _auth = _interopRequireDefault(__webpack_require__(29));
+
+var _login = _interopRequireDefault(__webpack_require__(30));
+
+var _tester = _interopRequireDefault(__webpack_require__(36));
 
 var _newTest = _interopRequireDefault(__webpack_require__(11));
 
@@ -3709,13 +3791,13 @@ var app = new _vue.default({
 }).$mount('#app');
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(20);
+var content = __webpack_require__(21);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -3740,7 +3822,7 @@ if(false) {
 }
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -3754,7 +3836,7 @@ exports.push([module.i, ":root{font-family:Marta;font-size:16px;line-height:1.4;
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 
@@ -3849,13 +3931,13 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(23);
+var content = __webpack_require__(24);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -3880,7 +3962,7 @@ if(false) {
 }
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -3894,7 +3976,7 @@ exports.push([module.i, "button:focus,input:focus,select:focus,textarea:focus{ou
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
@@ -14696,10 +14778,10 @@ return Vue$3;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(25).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(26).setImmediate))
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -14752,13 +14834,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(26);
+__webpack_require__(27);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -14951,7 +15033,7 @@ exports.clearImmediate = clearImmediate;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(6)))
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -17588,7 +17670,7 @@ return VueRouter;
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17616,7 +17698,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17624,11 +17706,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_71257c89_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_login_vue__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_71257c89_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_login_vue__ = __webpack_require__(35);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(30)
+  __webpack_require__(31)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -17674,13 +17756,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(31);
+var content = __webpack_require__(32);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17700,7 +17782,7 @@ if(false) {
 }
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -17714,7 +17796,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 /**
@@ -17747,7 +17829,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17808,7 +17890,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18158,7 +18240,7 @@ if (false) {
 }
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18166,11 +18248,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b8444c62_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_tester_vue__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b8444c62_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_tester_vue__ = __webpack_require__(61);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(36)
+  __webpack_require__(37)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -18216,13 +18298,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(37);
+var content = __webpack_require__(38);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18242,7 +18324,7 @@ if(false) {
 }
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -18256,13 +18338,13 @@ exports.push([module.i, "\n.tester-page{width:100%\n}", "", {"version":3,"source
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(39);
+var content = __webpack_require__(40);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18282,7 +18364,7 @@ if(false) {
 }
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -18296,7 +18378,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18389,13 +18471,13 @@ if (false) {
 }
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(42);
+var content = __webpack_require__(43);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18415,7 +18497,7 @@ if(false) {
 }
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var escape = __webpack_require__(12);
@@ -18424,13 +18506,13 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n.newtest-page{display:flex\n}\n.newtest-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16)\n}\n.new-test-nav{z-index:101;position:fixed;top:0;left:0;width:100%;padding:20px 0;padding-left:calc(var(--column) * 6);background-color:#fff\n}\n.new-test-nav li{list-style:none;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test-nav li:hover{opacity:1\n}\n.new-test-nav li:last-child{padding-left:40px\n}\n.new-test-form{padding-top:calc(var(--column) * 2)\n}\n.new-test-form__title{display:block;width:100%;border:none;border-bottom:1px solid var(--blue);margin-bottom:40px;font-family:marta;font-size:3rem;color:var(--blue)\n}\n.new-test-form__options{background-color:#dddde8;padding:20px\n}\n.new-test-form__options h3{padding:0;margin:0;margin-bottom:20px;color:#8496b1\n}\n.new-test-form__description{padding:10px;background-color:#dddde8;border:none;margin-bottom:20px;width:98%;max-width:98%;min-width:98%;max-height:calc(var(--row) * 2);min-height:calc(var(--row) * 2);height:calc(var(--row) * 2);border:1px solid var(--blue)\n}\n.new-test-form__options label{color:#8496b1\n}\n.new-test-form__options label.active{color:var(--purple)\n}\n.new-test-form__inputs>*{display:inline-block\n}\n.new-test-form__inputs img{max-width:30px;margin-bottom:-10px;padding-left:20px\n}\n.new-test-form__inputs img:first-child{padding-left:0\n}\n.new-test-form__inputs input[type=text]{background-color:#dddde8;border:none;border-bottom:1px solid var(--blue);width:50px;text-align:center\n}\n.new-test-form__inputs input[type=checkbox]{display:none\n}\n.new-test__add-question{border:none;margin:40px 0;padding-left:40px;font-family:marta;font-size:1.2rem;font-weight:700;cursor:pointer;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test__add-question:hover{opacity:1\n}\n.fade-enter-active,.fade-leave-active{transition:opacity .3s ease-in-out\n}\n.fade-enter,.fade-leave-to{opacity:0\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-test.vue"],"names":[],"mappings":";AAgKA,cAGA,YAAA;CACA;AAEA,uBACA,oCAAA,qCACA,8BACA;CACA;AAEA,cACA,YAAA,eACA,MACA,OACA,WACA,eACA,qCACA,qBACA;CACA;AAEA,iBACA,gBAAA,qBACA,WACA,kCAGA;CACA;AAEA,uBACA,SAAA;CACA;AAEA,4BACA,iBAAA;CACA;AAEA,eACA,mCAAA;CACA;AAEA,sBACA,cAAA,WACA,YACA,oCACA,mBACA,kBACA,eACA,iBACA;CACA;AAEA,wBACA,yBAAA,YACA;CACA;AAEA,2BACA,UAAA,SACA,mBACA,aACA;CACA;AAEA,4BACA,aAAA,yBACA,YACA,mBACA,UACA,cACA,cACA,gCACA,gCACA,4BACA,4BACA;CACA;AAEA,8BACA,aAAA;CACA;AAEA,qCACA,mBAAA;CACA;AAEA,yBACA,oBAAA;CACA;AAEA,2BACA,eAAA,oBACA,iBACA;CACA;AAEA,uCACA,cAAA;CACA;AAEA,wCACA,yBAAA,YACA,oCACA,WACA,iBACA;CACA;AAEA,4CACA,YAAA;CACA;AAEA,wBACA,YAAA,cACA,kBACA,kBACA,iBACA,gBACA,eACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,8BACA,SAAA;CACA;AAEA,sCACA,kCAAA;CACA;AAEA,2BACA,SAAA;CACA","file":"new-test.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"newtest-page\">\r\n\r\n        <side-menu></side-menu>\r\n        <section class=\"content\">\r\n\r\n            <nav class=\"new-test-nav\">\r\n                <ul>\r\n                    <li>\r\n                        <a\r\n                            href=\"save\"\r\n                            @click.prevent=\"saveTest\"\r\n                        >Сохранить</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"publish\">Опубликовать</a>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n\r\n            <form class=\"new-test-form\">\r\n\r\n                <input type=\"text\" class=\"new-test-form__title\" placeholder=\"Название теста\">\r\n\r\n                <div class=\"new-test-form__options\">\r\n                    <h3>Описание:</h3>\r\n                    <textarea class=\"new-test-form__description\" name=\"test_description\"></textarea>\r\n\r\n                    <div class=\"new-test-form__inputs\">\r\n                        <img :src=\"timeToggle\" alt=\"\">\r\n                        <label for=\"time_limit\" :class=\"labelTime\">Лимит по времени</label>\r\n                        <input type=\"checkbox\" name=\"time_limit\" id=\"time_limit\" v-model=\"testOptions.timeLimit\">\r\n                        <transition name=\"fade\">\r\n                        <img src=\"img/stopwatch.svg\" alt=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <label class=\"active\" for=\"time\" v-if=\"testOptions.timeLimit\">Время в мин.:</label>\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <input type=\"text\" name=\"time\" id=\"time\" value=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <img :src=\"anonymToggle\" alt=\"\">\r\n                        <label for=\"anonym\" :class=\"labelAnonym\">Анонимное прохождение</label>\r\n                        <input type=\"checkbox\" name=\"anonym\" id=\"anonym\" v-model=\"testOptions.anonym\">\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <new-question\r\n                    v-for=\"question in questions\"\r\n                    :key=\"question.id\"\r\n                    :questiontype=\"question.type\"\r\n                    :questiontext=\"question.text\"\r\n                    :questionid=\"question.id\"\r\n                    @delete-question=\"deleteQuestionHandler\"\r\n                ></new-question>\r\n\r\n                <button\r\n                    type=\"button\"\r\n                    name=\"button\"\r\n                    @click=\"addQuestion\"\r\n                    class=\"new-test__add-question\"\r\n                >\r\n                добавить вопрос</button>\r\n\r\n            </form>\r\n\r\n        </section>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport sideMenu from './side-menu.vue';\r\nimport newQuestion from './new-question.vue';\r\n\r\nexport default {\r\n\r\n    components: {\r\n       'side-menu': sideMenu,\r\n       'new-question': newQuestion\r\n   },\r\n\r\n   data() {\r\n       return {\r\n           testTitle: '',\r\n           testDescription: '',\r\n           testOptions: {\r\n               timeLimit: false,\r\n               time: 60,\r\n               anonym: false\r\n           },\r\n           questions: [\r\n               {\r\n                   type: 1,\r\n                   text: 'Введите свое описание вопроса',\r\n                   id: 1\r\n               }\r\n           ],\r\n           nextQuestionId: 2\r\n       }\r\n   },\r\n\r\n   computed: {\r\n       // Объект класса переключателя ограничения по вреиени\r\n       timeToggle() {\r\n           return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       // Объект класса переключателя анонимного прохождения\r\n       anonymToggle() {\r\n           return this.testOptions.anonym === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       labelTime() {\r\n           return {\r\n               'active': this.testOptions.timeLimit\r\n           }\r\n       },\r\n\r\n       labelAnonym() {\r\n           return {\r\n               'active' : this.testOptions.anonym\r\n           }\r\n       }\r\n   },\r\n\r\n   methods: {\r\n       // Добавление нового вопроса\r\n       addQuestion() {\r\n           this.questions.push( {\r\n                type: 1,\r\n                text: 'Введите свое описание вопроса',\r\n                id: this.nextQuestionId\r\n            });\r\n            this.nextQuestionId++;\r\n       },\r\n       // Удаляем вопрос\r\n       deleteQuestionHandler(id) {\r\n           console.log('ded');\r\n           let index = this.questions.map( (v,i) => {\r\n               if(v.id === id) return i;\r\n           });\r\n           index.length > 1 ? index = index.filter( (v) => {if(typeof v == 'number') return v})[0] : index = index[0];\r\n           this.questions.splice(index, 1);\r\n       },\r\n       // Сохраняем тест\r\n       saveTest() {\r\n\r\n       }\r\n\r\n   }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .newtest-page {\r\n        /* margin-left: calc(var(--column) * 6); */\r\n\r\n        display: flex;\r\n    }\r\n\r\n    .newtest-page .content {\r\n        margin-left: calc(var(--column) * 2);\r\n        margin-right: calc(var(--column) * 2);\r\n        width: calc(var(--column) * 16);\r\n    }\r\n\r\n    .new-test-nav {\r\n        z-index: 101;\r\n        position: fixed;\r\n        top: 0px;\r\n        left: 0px;\r\n        width: 100%;\r\n        padding: 20px 0px;\r\n        padding-left: calc(var(--column) * 6);\r\n        background-color: #fff;\r\n    }\r\n\r\n    .new-test-nav li {\r\n        list-style: none;\r\n        display: inline-block;\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test-nav li:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .new-test-nav li:last-child{\r\n        padding-left: 40px;\r\n    }\r\n\r\n    .new-test-form {\r\n        padding-top: calc(var(--column) * 2);\r\n    }\r\n\r\n    .new-test-form__title {\r\n        display: block;\r\n        width: 100%;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        margin-bottom: 40px;\r\n        font-family: 'marta';\r\n        font-size: 3rem;\r\n        color: var(--blue);\r\n    }\r\n\r\n    .new-test-form__options {\r\n        background-color: #dddde8;\r\n        padding: 20px;\r\n    }\r\n\r\n    .new-test-form__options h3 {\r\n        padding: 0;\r\n        margin: 0;\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__description {\r\n        padding: 10px;\r\n        background-color: #dddde8;\r\n        border: none;\r\n        margin-bottom: 20px;\r\n        width: 98%;\r\n        max-width: 98%;\r\n        min-width: 98%;\r\n        max-height: calc(var(--row) * 2);\r\n        min-height: calc(var(--row) * 2);\r\n        height: calc(var(--row) * 2);\r\n        border: 1px solid var(--blue);\r\n    }\r\n\r\n    .new-test-form__options label {\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__options label.active {\r\n        color: var(--purple);\r\n    }\r\n\r\n    .new-test-form__inputs > * {\r\n        display: inline-block;\r\n    }\r\n\r\n    .new-test-form__inputs img {\r\n        max-width: 30px;\r\n        margin-bottom: -10px;\r\n        padding-left: 20px;\r\n    }\r\n\r\n    .new-test-form__inputs img:first-child {\r\n        padding-left: 0px;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"text\"] {\r\n        background-color: #dddde8;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        width: 50px;\r\n        text-align: center;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    .new-test__add-question {\r\n        border: none;\r\n        margin: 40px 0px;\r\n        padding-left: 40px;\r\n        font-family: 'marta';\r\n        font-size: 1.2rem;\r\n        font-weight: bold;\r\n        cursor: pointer;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test__add-question:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .fade-enter-active, .fade-leave-active {\r\n        transition: opacity .3s ease-in-out;\r\n    }\r\n\r\n    .fade-enter, .fade-leave-to {\r\n        opacity: 0;\r\n    }\r\n\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.newtest-page{display:flex\n}\n.newtest-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16)\n}\n.new-test-nav{z-index:101;position:fixed;top:0;left:0;width:100%;padding:20px 0;padding-left:calc(var(--column) * 6);background-color:#fff\n}\n.new-test-nav li{list-style:none;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test-nav li:hover{opacity:1\n}\n.new-test-nav li:last-child{padding-left:40px\n}\n.new-test-form{padding-top:calc(var(--column) * 2)\n}\n.new-test-form__title{display:block;width:100%;border:none;border-bottom:1px solid var(--blue);margin-bottom:40px;font-family:marta;font-size:3rem;color:var(--blue)\n}\n.new-test-form__options{background-color:#dddde8;padding:20px\n}\n.new-test-form__options h3{padding:0;margin:0;margin-bottom:20px;color:#8496b1\n}\n.new-test-form__description{padding:10px;background-color:#dddde8;border:none;margin-bottom:20px;width:98%;max-width:98%;min-width:98%;max-height:calc(var(--row) * 2);min-height:calc(var(--row) * 2);height:calc(var(--row) * 2);border:1px solid var(--blue)\n}\n.new-test-form__options label{color:#8496b1\n}\n.new-test-form__options label.active{color:var(--purple)\n}\n.new-test-form__inputs>*{display:inline-block\n}\n.new-test-form__inputs img{max-width:30px;margin-bottom:-10px;padding-left:20px\n}\n.new-test-form__inputs img:first-child{padding-left:0\n}\n.new-test-form__inputs input[type=text]{background-color:#dddde8;border:none;border-bottom:1px solid var(--blue);width:50px;text-align:center\n}\n.new-test-form__inputs input[type=checkbox]{display:none\n}\n.new-test__add-question{border:none;margin:40px 0;padding-left:40px;font-family:marta;font-size:1.2rem;font-weight:700;cursor:pointer;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test__add-question:hover{opacity:1\n}\n.fade-enter-active,.fade-leave-active{transition:opacity .3s ease-in-out\n}\n.fade-enter,.fade-leave-to{opacity:0\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-test.vue"],"names":[],"mappings":";AAoLA,cAGA,YAAA;CACA;AAEA,uBACA,oCAAA,qCACA,8BACA;CACA;AAEA,cACA,YAAA,eACA,MACA,OACA,WACA,eACA,qCACA,qBACA;CACA;AAEA,iBACA,gBAAA,qBACA,WACA,kCAGA;CACA;AAEA,uBACA,SAAA;CACA;AAEA,4BACA,iBAAA;CACA;AAEA,eACA,mCAAA;CACA;AAEA,sBACA,cAAA,WACA,YACA,oCACA,mBACA,kBACA,eACA,iBACA;CACA;AAEA,wBACA,yBAAA,YACA;CACA;AAEA,2BACA,UAAA,SACA,mBACA,aACA;CACA;AAEA,4BACA,aAAA,yBACA,YACA,mBACA,UACA,cACA,cACA,gCACA,gCACA,4BACA,4BACA;CACA;AAEA,8BACA,aAAA;CACA;AAEA,qCACA,mBAAA;CACA;AAEA,yBACA,oBAAA;CACA;AAEA,2BACA,eAAA,oBACA,iBACA;CACA;AAEA,uCACA,cAAA;CACA;AAEA,wCACA,yBAAA,YACA,oCACA,WACA,iBACA;CACA;AAEA,4CACA,YAAA;CACA;AAEA,wBACA,YAAA,cACA,kBACA,kBACA,iBACA,gBACA,eACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,8BACA,SAAA;CACA;AAEA,sCACA,kCAAA;CACA;AAEA,2BACA,SAAA;CACA","file":"new-test.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"newtest-page\">\r\n\r\n        <side-menu></side-menu>\r\n        <section class=\"content\">\r\n\r\n            <nav class=\"new-test-nav\">\r\n                <ul>\r\n                    <li>\r\n                        <a\r\n                            href=\"save\"\r\n                            @click.prevent=\"saveTest\"\r\n                        >Сохранить</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"publish\">Опубликовать</a>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n\r\n            <form class=\"new-test-form\">\r\n\r\n                <input type=\"text\" class=\"new-test-form__title\" placeholder=\"Название теста\" v-model=\"testTitle\">\r\n\r\n                <div class=\"new-test-form__options\">\r\n                    <h3>Описание:</h3>\r\n                    <textarea v-model=\"testDescription\" class=\"new-test-form__description\" name=\"test_description\"></textarea>\r\n\r\n                    <div class=\"new-test-form__inputs\">\r\n                        <img :src=\"timeToggle\" alt=\"\">\r\n                        <label for=\"time_limit\" :class=\"labelTime\">Лимит по времени</label>\r\n                        <input type=\"checkbox\" name=\"time_limit\" id=\"time_limit\" v-model=\"testOptions.timeLimit\">\r\n                        <transition name=\"fade\">\r\n                        <img src=\"img/stopwatch.svg\" alt=\"\" v-if=\"testOptions.timeLimit\">\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <label class=\"active\" for=\"time\" v-if=\"testOptions.timeLimit\">Время в мин.:</label>\r\n                        </transition>\r\n                        <transition name=\"fade\">\r\n                        <input type=\"text\" name=\"time\" id=\"time\" value=\"\" v-if=\"testOptions.timeLimit\" v-model=\"testOptions.time\">\r\n                        </transition>\r\n                        <img :src=\"anonymToggle\" alt=\"\">\r\n                        <label for=\"anonym\" :class=\"labelAnonym\">Анонимное прохождение</label>\r\n                        <input type=\"checkbox\" name=\"anonym\" id=\"anonym\" v-model=\"testOptions.anonym\">\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <new-question\r\n                    v-for=\"question in questions\"\r\n                    :key=\"question.id\"\r\n                    :questiontype=\"question.type\"\r\n                    :questiontext=\"question.text\"\r\n                    :questionid=\"question.id\"\r\n                    @delete-question=\"deleteQuestionHandler\"\r\n                    @udpate-question=\"updateQuestionInfo\"\r\n                ></new-question>\r\n\r\n                <button\r\n                    type=\"button\"\r\n                    name=\"button\"\r\n                    @click=\"addQuestion\"\r\n                    class=\"new-test__add-question\"\r\n                >\r\n                добавить вопрос</button>\r\n\r\n            </form>\r\n\r\n        </section>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport sideMenu from './side-menu.vue';\r\nimport newQuestion from './new-question.vue';\r\n\r\nexport default {\r\n\r\n    components: {\r\n       'side-menu': sideMenu,\r\n       'new-question': newQuestion\r\n   },\r\n\r\n   data() {\r\n       return {\r\n           testTitle: '',\r\n           testDescription: '',\r\n           testOptions: {\r\n               timeLimit: false,\r\n               time: 60,\r\n               anonym: false\r\n           },\r\n           questions: [\r\n               {\r\n                   type: 1,\r\n                   text: 'Введите свое описание вопроса',\r\n                   id: 1\r\n               }\r\n           ],\r\n           nextQuestionId: 2\r\n       }\r\n   },\r\n\r\n   computed: {\r\n       // Объект класса переключателя ограничения по вреиени\r\n       timeToggle() {\r\n           return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       // Объект класса переключателя анонимного прохождения\r\n       anonymToggle() {\r\n           return this.testOptions.anonym === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\r\n       },\r\n\r\n       labelTime() {\r\n           return {\r\n               'active': this.testOptions.timeLimit\r\n           }\r\n       },\r\n\r\n       labelAnonym() {\r\n           return {\r\n               'active' : this.testOptions.anonym\r\n           }\r\n       }\r\n   },\r\n\r\n   methods: {\r\n\r\n       // Добавление нового вопроса\r\n       addQuestion() {\r\n           this.questions.push( {\r\n                type: 1,\r\n                text: 'Введите свое описание вопроса',\r\n                id: this.nextQuestionId\r\n            });\r\n            this.nextQuestionId++;\r\n       },\r\n\r\n       // Удаляем вопрос\r\n       deleteQuestionHandler(id) {\r\n           console.log('ded');\r\n           let index = this.questions.map( (v,i) => {\r\n               if(v.id === id) return i;\r\n           });\r\n           index.length > 1 ? index = index.filter( (v) => {if(typeof v == 'number') return v})[0] : index = index[0];\r\n           this.questions.splice(index, 1);\r\n       },\r\n\r\n       // Обновляем информацию вопроса\r\n       updateQuestionInfo(id, type, description, vars) {\r\n           for(let i = 0; i < this.questions.length; i++) {\r\n               if(this.questions[i].id === id) {\r\n                   this.questions[i].type = type;\r\n                   this.questions[i].text = description;\r\n                   this.questions[i].vars = vars;\r\n               }\r\n           }\r\n       },\r\n       // Сохраняем тест\r\n       saveTest() {\r\n           let test = {\r\n               title: this.testTitle,\r\n               description: this.testDescription,\r\n               options: this.testOptions,\r\n               questions: this.questions\r\n           };\r\n           console.log(JSON.stringify(test));\r\n       }\r\n\r\n   }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .newtest-page {\r\n        /* margin-left: calc(var(--column) * 6); */\r\n\r\n        display: flex;\r\n    }\r\n\r\n    .newtest-page .content {\r\n        margin-left: calc(var(--column) * 2);\r\n        margin-right: calc(var(--column) * 2);\r\n        width: calc(var(--column) * 16);\r\n    }\r\n\r\n    .new-test-nav {\r\n        z-index: 101;\r\n        position: fixed;\r\n        top: 0px;\r\n        left: 0px;\r\n        width: 100%;\r\n        padding: 20px 0px;\r\n        padding-left: calc(var(--column) * 6);\r\n        background-color: #fff;\r\n    }\r\n\r\n    .new-test-nav li {\r\n        list-style: none;\r\n        display: inline-block;\r\n        opacity: .5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test-nav li:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .new-test-nav li:last-child{\r\n        padding-left: 40px;\r\n    }\r\n\r\n    .new-test-form {\r\n        padding-top: calc(var(--column) * 2);\r\n    }\r\n\r\n    .new-test-form__title {\r\n        display: block;\r\n        width: 100%;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        margin-bottom: 40px;\r\n        font-family: 'marta';\r\n        font-size: 3rem;\r\n        color: var(--blue);\r\n    }\r\n\r\n    .new-test-form__options {\r\n        background-color: #dddde8;\r\n        padding: 20px;\r\n    }\r\n\r\n    .new-test-form__options h3 {\r\n        padding: 0;\r\n        margin: 0;\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__description {\r\n        padding: 10px;\r\n        background-color: #dddde8;\r\n        border: none;\r\n        margin-bottom: 20px;\r\n        width: 98%;\r\n        max-width: 98%;\r\n        min-width: 98%;\r\n        max-height: calc(var(--row) * 2);\r\n        min-height: calc(var(--row) * 2);\r\n        height: calc(var(--row) * 2);\r\n        border: 1px solid var(--blue);\r\n    }\r\n\r\n    .new-test-form__options label {\r\n        color: #8496b1;\r\n    }\r\n\r\n    .new-test-form__options label.active {\r\n        color: var(--purple);\r\n    }\r\n\r\n    .new-test-form__inputs > * {\r\n        display: inline-block;\r\n    }\r\n\r\n    .new-test-form__inputs img {\r\n        max-width: 30px;\r\n        margin-bottom: -10px;\r\n        padding-left: 20px;\r\n    }\r\n\r\n    .new-test-form__inputs img:first-child {\r\n        padding-left: 0px;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"text\"] {\r\n        background-color: #dddde8;\r\n        border: none;\r\n        border-bottom: 1px solid var(--blue);\r\n        width: 50px;\r\n        text-align: center;\r\n    }\r\n\r\n    .new-test-form__inputs input[type=\"checkbox\"] {\r\n        display: none;\r\n    }\r\n\r\n    .new-test__add-question {\r\n        border: none;\r\n        margin: 40px 0px;\r\n        padding-left: 40px;\r\n        font-family: 'marta';\r\n        font-size: 1.2rem;\r\n        font-weight: bold;\r\n        cursor: pointer;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .new-test__add-question:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .fade-enter-active, .fade-leave-active {\r\n        transition: opacity .3s ease-in-out;\r\n    }\r\n\r\n    .fade-enter, .fade-leave-to {\r\n        opacity: 0;\r\n    }\r\n\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18438,11 +18520,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cd0f0afa_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_question_vue__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cd0f0afa_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_question_vue__ = __webpack_require__(59);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(44)
+  __webpack_require__(45)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -18488,13 +18570,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(45);
+var content = __webpack_require__(46);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18514,7 +18596,7 @@ if(false) {
 }
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var escape = __webpack_require__(12);
@@ -18523,13 +18605,13 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n.question{position:relative;border:1px solid var(--blue);margin-top:40px;padding:20px\n}\n.question h3{margin-bottom:20px;color:#8496b1\n}\n.question-type{position:absolute;right:-1px;top:-1px;background-color:var(--purple);color:#fff;font-family:marta;padding:10px\n}\n.question-type option{padding:10px\n}\n.question__description{width:calc(var(--column) * 10);max-width:calc(var(--column) * 10);min-width:calc(var(--column) * 10);height:calc(var(--row) * 1);min-height:calc(var(--row) * 1);max-height:calc(var(--row) * 1);margin-bottom:20px;border:none;background-color:#dddde8\n}\n.question-controls{position:absolute;bottom:20px;right:0;width:calc(var(--column) * 2)\n}\n.question-controls img{cursor:pointer;max-width:30px;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-controls img:hover{opacity:1\n}\n.question-controls img:nth-child(2){padding:0 10px\n}\n.question__add-var-button{border:none;padding-left:30px;cursor:pointer;font-family:marta;font-weight:700;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question__add-var-button:hover{opacity:1\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-question.vue"],"names":[],"mappings":";AAqPA,UACA,kBAAA,6BACA,gBACA,YACA;CACA;AAEA,aACA,mBAAA,aACA;CACA;AAEA,eACA,kBAAA,WACA,SACA,+BACA,WACA,kBACA,YACA;CACA;AAEA,sBACA,YAAA;CACA;AAEA,uBACA,+BAAA,mCACA,mCACA,4BACA,gCACA,gCACA,mBACA,YACA,wBACA;CACA;AAEA,mBACA,kBAAA,YACA,QACA,6BACA;CACA;AACA,uBACA,eAAA,eACA,qBACA,WACA,kCAGA;CACA;AAEA,6BACA,SAAA;CACA;AAEA,oCACA,cAAA;CACA;AAEA,0BACA,YAAA,kBACA,eACA,kBACA,gBACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,gCACA,SAAA;CACA","file":"new-question.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question\">\r\n\r\n        <h3>Текст вопроса:</h3>\r\n        <textarea class=\"question__description\" name=\"name\" rows=\"8\" cols=\"80\"></textarea>\r\n\r\n        <select class=\"\" name=\"\" class=\"question-type\" @change=\"changeType\">\r\n            <option value=\"1\">Один из списка</option>\r\n            <option value=\"2\">Несколько из списка</option>\r\n            <option value=\"3\">Строка</option>\r\n        </select>\r\n\r\n        <div class=\"variants\">\r\n\r\n            <div v-if=\"questionType === 1\" key=\"single-question\">\r\n                <single\r\n                    v-for=\"(variant, index) in single.vars\"\r\n                    :text=\"variant.text\"\r\n                    :status=\"variant.isRight\"\r\n                    :id=\"variant.id\"\r\n                    :key=\"variant.id\"\r\n                    @removeVar=\"removeVarHandler\"\r\n                    @updateVar=\"singleUpdateVarHandler\"\r\n                    @updateRightVar=\"singleUpdateRightVarHandler\"\r\n                ></single>\r\n                <button key=\"add-single\"  class=\"question__add-var-button sngl\" type=\"button\" name=\"button\" @click=\"singleAddVar\">добавить вариант</button>\r\n            </div>\r\n\r\n            <div v-else-if=\"questionType === 2\" key=\"multiple-question\">\r\n                <multiple\r\n                    v-for=\"(variant, index) in multiple.vars\"\r\n                    :text=\"variant.text\"\r\n                    :status=\"variant.isRight\"\r\n                    :id=\"variant.id\"\r\n                    :key=\"variant.id\"\r\n                    @removeVar=\"multipleRemoveVarHandler\"\r\n                    @updateVar=\"multipleUpdateVarHandler\"\r\n                    @updateRightVar=\"multipleUpdateRightVarHandler\"\r\n                >\r\n                </multiple>\r\n                <button key=\"add-multiple\" class=\"question__add-var-button mlt\" type=\"button\" name=\"button\" @click=\"multipleAddVar\">добавить вариант</button>\r\n            </div>\r\n\r\n            <div v-else key=\"string-question\">\r\n                <string\r\n                    @updateVar=\"stringUpdateVarHandler\"\r\n                ></string>\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n\r\n        <div class=\"question-controls\">\r\n            <img src=\"img/success.svg\" alt=\"\">\r\n            <img src=\"img/edit.svg\" alt=\"\">\r\n            <img @click=\"deleteQuestion\" src=\"img/dustbin.svg\" alt=\"\">\r\n\r\n        </div>\r\n\r\n\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport single from './questions/single.vue';\r\nimport multiple from './questions/multiple.vue';\r\nimport string from './questions/string.vue';\r\n\r\nexport default {\r\n\r\n    props: ['questiontype', 'questiontext', 'questionid'],\r\n\r\n    components: {\r\n       'single': single,\r\n       'multiple': multiple,\r\n       'string': string\r\n   },\r\n\r\n    data() {\r\n        return {\r\n            questionType: this.questiontype ? this.questiontype : 1,\r\n            id: this.questionid,\r\n            // Вопросы с одним вариантом\r\n            single: {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            },\r\n            // Вопросы с несколькими вариантами ответа\r\n            multiple: {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            },\r\n            //Вопрос с вводом строки\r\n            string: {\r\n                answer: ''\r\n            }\r\n\r\n        }\r\n    },\r\n\r\n    methods: {\r\n\r\n        changeType(e) {\r\n\r\n            this.questionType = +e.target.value;\r\n\r\n            this.single = {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            };\r\n\r\n            this.multiple = {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            };\r\n        },\r\n\r\n        /*Вопросы с одним варианторм*/\r\n\r\n        //Добавляем вариант ответа\r\n        singleAddVar() {\r\n            this.single.vars.push({\r\n                text: 'Вариант ответа',\r\n                isRight: false,\r\n                id: this.single.nextVarId\r\n            });\r\n            this.single.nextVarId++;\r\n        },\r\n\r\n        // Удаление вариантами\r\n        removeVarHandler(id) {\r\n            let index;\r\n            for(let i = 0; i < this.single.vars.length; i++) {\r\n                if(this.single.vars[i].id === id) index = i;\r\n            }\r\n            this.single.vars.splice(index, 1);\r\n        },\r\n\r\n        //Обновляем текст варианта\r\n        singleUpdateVarHandler(id, text) {\r\n            let index;\r\n            for(let i = 0; i < this.single.vars.length; i++) {\r\n                if(this.single.vars[i].id === id) index = i;\r\n            }\r\n            this.single.vars[index].text = text;\r\n        },\r\n\r\n        //Выбираем правильный вариант вопроса\r\n        singleUpdateRightVarHandler(index) {\r\n            this.$children.forEach( (v,i) => {\r\n                if(i === index) {\r\n                    v.isRight ? v.isRight = false : v.isRight = true;\r\n                    this.single.vars[index].isRight ? this.single.vars[index].isRight = false : this.single.vars[index].isRight = true;\r\n                }\r\n                else {\r\n                    v.isRight = false;\r\n                    this.single.vars[i].isRight = false;\r\n                }\r\n            });\r\n        },\r\n\r\n        /*Вопросы с несолькими вариантами*/\r\n\r\n        //Добавляем вариант ответа\r\n        multipleAddVar() {\r\n            this.multiple.vars.push({\r\n                text: 'Вариант ответа',\r\n                isRight: false,\r\n                id: this.multiple.nextVarId\r\n            });\r\n            this.multiple.nextVarId++;\r\n        },\r\n\r\n        // Удаляем вариант ответа\r\n        multipleRemoveVarHandler(id) {\r\n            let index;\r\n            for(let i = 0; i < this.multiple.vars.length; i++) {\r\n                if(this.multiple.vars[i].id === id) index = i;\r\n            }\r\n            this.multiple.vars.splice(index, 1);\r\n        },\r\n\r\n        multipleUpdateVarHandler(id, text) {\r\n            let index;\r\n            for(let i = 0; i < this.multiple.vars.length; i++) {\r\n                if(this.multiple.vars[i].id === id) index = i;\r\n            }\r\n            this.multiple.vars[index].text = text;\r\n        },\r\n\r\n        //Выбираем правильный вариант вопроса\r\n        multipleUpdateRightVarHandler(index) {\r\n            this.$children.forEach( (v,i) => {\r\n                if(i === index) {\r\n                    v.isRight ? v.isRight = false : v.isRight = true;\r\n                    this.single.vars[index].isRight ? this.single.vars[index].isRight = false : this.single.vars[index].isRight = true;\r\n                }\r\n            });\r\n        },\r\n\r\n        /*Вопрос - строка*/\r\n\r\n        stringUpdateVarHandler(text) {\r\n            this.string.answer = text;\r\n        },\r\n\r\n        //Событие удаления вопроса\r\n        deleteQuestion() {\r\n            this.$emit('delete-question', this.id);\r\n        }\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question {\r\n        position: relative;\r\n        border: 1px solid var(--blue);\r\n        margin-top: 40px;\r\n        padding: 20px;\r\n    }\r\n\r\n    .question h3 {\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .question-type {\r\n        position: absolute;\r\n        right: -1px;\r\n        top: -1px;\r\n        background-color: var(--purple);\r\n        color: #fff;\r\n        font-family: 'marta';\r\n        padding: 10px;\r\n    }\r\n\r\n    .question-type option{\r\n        padding: 10px;\r\n    }\r\n\r\n    .question__description {\r\n        width: calc(var(--column) * 10);\r\n        max-width: calc(var(--column) * 10);\r\n        min-width: calc(var(--column) * 10);\r\n        height: calc(var(--row) * 1);\r\n        min-height: calc(var(--row) * 1);\r\n        max-height: calc(var(--row) * 1);\r\n        margin-bottom: 20px;\r\n        border: none;\r\n        background-color: #dddde8;\r\n    }\r\n\r\n    .question-controls {\r\n        position: absolute;\r\n        bottom: 20px;\r\n        right: 0px;\r\n        width: calc(var(--column) * 2);\r\n    }\r\n    .question-controls img {\r\n        cursor: pointer;\r\n        max-width: 30px;\r\n        display: inline-block;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity 0.2s ease-in-out;\r\n        -o-transition: opacity 0.2s ease-in-out;\r\n        transition: opacity 0.2s ease-in-out;\r\n    }\r\n\r\n    .question-controls img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-controls img:nth-child(2) {\r\n        padding: 0 10px;\r\n    }\r\n\r\n    .question__add-var-button {\r\n        border: none;\r\n        padding-left: 30px;\r\n        cursor: pointer;\r\n        font-family: 'marta';\r\n        font-weight: bold;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question__add-var-button:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.question{position:relative;border:1px solid var(--blue);margin-top:40px;padding:20px\n}\n.question h3{margin-bottom:20px;color:#8496b1\n}\n.question-type{position:absolute;right:-1px;top:-1px;background-color:var(--purple);color:#fff;font-family:marta;padding:10px\n}\n.question-type option{padding:10px\n}\n.question__description{width:calc(var(--column) * 10);max-width:calc(var(--column) * 10);min-width:calc(var(--column) * 10);height:calc(var(--row) * 1);min-height:calc(var(--row) * 1);max-height:calc(var(--row) * 1);margin-bottom:20px;border:none;background-color:#dddde8\n}\n.question-controls{position:absolute;bottom:20px;right:0;width:calc(var(--column) * 2)\n}\n.question-controls img{cursor:pointer;max-width:30px;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-controls img:hover{opacity:1\n}\n.question-controls img:nth-child(2){padding:0 10px\n}\n.question__add-var-button{border:none;padding-left:30px;cursor:pointer;font-family:marta;font-weight:700;background-image:url(" + escape(__webpack_require__(13)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out\n}\n.question__add-var-button:hover{opacity:1\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-question.vue"],"names":[],"mappings":";AAmRA,UACA,kBAAA,6BACA,gBACA,YACA;CACA;AAEA,aACA,mBAAA,aACA;CACA;AAEA,eACA,kBAAA,WACA,SACA,+BACA,WACA,kBACA,YACA;CACA;AAEA,sBACA,YAAA;CACA;AAEA,uBACA,+BAAA,mCACA,mCACA,4BACA,gCACA,gCACA,mBACA,YACA,wBACA;CACA;AAEA,mBACA,kBAAA,YACA,QACA,6BACA;CACA;AACA,uBACA,eAAA,eACA,qBACA,WACA,kCAGA;CACA;AAEA,6BACA,SAAA;CACA;AAEA,oCACA,cAAA;CACA;AAEA,0BACA,YAAA,kBACA,eACA,kBACA,gBACA,+CACA,4BACA,sBACA,sBACA,oBACA,WACA,kCAGA;CACA;AAEA,gCACA,SAAA;CACA","file":"new-question.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question\">\r\n\r\n        <h3>Текст вопроса:</h3>\r\n        <textarea class=\"question__description\" v-model=\"description\" @input=\"updateDescription\"></textarea>\r\n\r\n        <select class=\"\" name=\"\" class=\"question-type\" @change=\"changeType\">\r\n            <option value=\"1\">Один из списка</option>\r\n            <option value=\"2\">Несколько из списка</option>\r\n            <option value=\"3\">Строка</option>\r\n        </select>\r\n\r\n        <div class=\"variants\">\r\n\r\n            <div v-if=\"questionType === 1\" key=\"single-question\">\r\n                <single\r\n                    v-for=\"(variant, index) in single.vars\"\r\n                    :text=\"variant.text\"\r\n                    :status=\"variant.isRight\"\r\n                    :id=\"variant.id\"\r\n                    :key=\"variant.id\"\r\n                    @removeVar=\"removeVarHandler\"\r\n                    @updateVar=\"singleUpdateVarHandler\"\r\n                    @updateRightVar=\"singleUpdateRightVarHandler\"\r\n                ></single>\r\n                <button key=\"add-single\"  class=\"question__add-var-button sngl\" type=\"button\" name=\"button\" @click=\"singleAddVar\">добавить вариант</button>\r\n            </div>\r\n\r\n            <div v-else-if=\"questionType === 2\" key=\"multiple-question\">\r\n                <multiple\r\n                    v-for=\"(variant, index) in multiple.vars\"\r\n                    :text=\"variant.text\"\r\n                    :status=\"variant.isRight\"\r\n                    :id=\"variant.id\"\r\n                    :key=\"variant.id\"\r\n                    @removeVar=\"multipleRemoveVarHandler\"\r\n                    @updateVar=\"multipleUpdateVarHandler\"\r\n                    @updateRightVar=\"multipleUpdateRightVarHandler\"\r\n                >\r\n                </multiple>\r\n                <button key=\"add-multiple\" class=\"question__add-var-button mlt\" type=\"button\" name=\"button\" @click=\"multipleAddVar\">добавить вариант</button>\r\n            </div>\r\n\r\n            <div v-else key=\"string-question\">\r\n                <string\r\n                    @updateVar=\"stringUpdateVarHandler\"\r\n                ></string>\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n\r\n        <div class=\"question-controls\">\r\n            <img src=\"img/success.svg\" alt=\"\">\r\n            <img src=\"img/edit.svg\" alt=\"\">\r\n            <img @click=\"deleteQuestion\" src=\"img/dustbin.svg\" alt=\"\">\r\n\r\n        </div>\r\n\r\n\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport single from './questions/single.vue';\r\nimport multiple from './questions/multiple.vue';\r\nimport string from './questions/string.vue';\r\n\r\nexport default {\r\n\r\n    props: ['questiontype', 'questiontext', 'questionid'],\r\n\r\n    components: {\r\n       'single': single,\r\n       'multiple': multiple,\r\n       'string': string\r\n   },\r\n\r\n    data() {\r\n        return {\r\n            questionType: this.questiontype ? this.questiontype : 1,\r\n            id: this.questionid,\r\n            description: '',\r\n            // Вопросы с одним вариантом\r\n            single: {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            },\r\n            // Вопросы с несколькими вариантами ответа\r\n            multiple: {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            },\r\n            //Вопрос с вводом строки\r\n            string: {\r\n                answer: ''\r\n            }\r\n\r\n        }\r\n    },\r\n\r\n    methods: {\r\n\r\n        updateDescription() {\r\n            this.updateQuestionVars();\r\n        },\r\n\r\n\r\n        changeType(e) {\r\n\r\n            this.questionType = +e.target.value;\r\n\r\n            this.single = {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            };\r\n\r\n            this.multiple = {\r\n                vars: [\r\n                    {\r\n                        text: 'Вариант ответа',\r\n                        isRight: false,\r\n                        id: 1\r\n                    }\r\n                ],\r\n                nextVarId: 2\r\n            };\r\n        },\r\n\r\n        /*Вопросы с одним варианторм*/\r\n\r\n        //Добавляем вариант ответа\r\n        singleAddVar() {\r\n            this.single.vars.push({\r\n                text: 'Вариант ответа',\r\n                isRight: false,\r\n                id: this.single.nextVarId\r\n            });\r\n            this.single.nextVarId++;\r\n        },\r\n\r\n        // Удаление вариантами\r\n        removeVarHandler(id) {\r\n            let index;\r\n            for(let i = 0; i < this.single.vars.length; i++) {\r\n                if(this.single.vars[i].id === id) index = i;\r\n            }\r\n            this.single.vars.splice(index, 1);\r\n            this.updateQuestionVars();\r\n        },\r\n\r\n        //Обновляем текст варианта\r\n        singleUpdateVarHandler(id, text) {\r\n            let index;\r\n            for(let i = 0; i < this.single.vars.length; i++) {\r\n                if(this.single.vars[i].id === id) index = i;\r\n            }\r\n            this.single.vars[index].text = text;\r\n            this.updateQuestionVars();\r\n        },\r\n\r\n        //Выбираем правильный вариант вопроса\r\n        singleUpdateRightVarHandler(index) {\r\n            this.$children.forEach( (v,i) => {\r\n                if(i === index) {\r\n                    v.isRight ? v.isRight = false : v.isRight = true;\r\n                    this.single.vars[index].isRight ? this.single.vars[index].isRight = false : this.single.vars[index].isRight = true;\r\n                }\r\n                else {\r\n                    v.isRight = false;\r\n                    this.single.vars[i].isRight = false;\r\n                }\r\n            });\r\n            this.updateQuestionVars();\r\n        },\r\n\r\n        /*Вопросы с несолькими вариантами*/\r\n\r\n        //Добавляем вариант ответа\r\n        multipleAddVar() {\r\n            this.multiple.vars.push({\r\n                text: 'Вариант ответа',\r\n                isRight: false,\r\n                id: this.multiple.nextVarId\r\n            });\r\n            this.multiple.nextVarId++;\r\n        },\r\n\r\n        // Удаляем вариант ответа\r\n        multipleRemoveVarHandler(id) {\r\n            let index;\r\n            for(let i = 0; i < this.multiple.vars.length; i++) {\r\n                if(this.multiple.vars[i].id === id) index = i;\r\n            }\r\n            this.multiple.vars.splice(index, 1);\r\n            this.updateQuestionVars();\r\n        },\r\n\r\n        multipleUpdateVarHandler(id, text) {\r\n            let index;\r\n            for(let i = 0; i < this.multiple.vars.length; i++) {\r\n                if(this.multiple.vars[i].id === id) index = i;\r\n            }\r\n            this.multiple.vars[index].text = text;\r\n            this.updateQuestionVars();\r\n        },\r\n\r\n        //Выбираем правильный вариант вопроса\r\n        multipleUpdateRightVarHandler(index) {\r\n            this.$children.forEach( (v,i) => {\r\n                if(i === index) {\r\n                    v.isRight ? v.isRight = false : v.isRight = true;\r\n                    this.multiple.vars[index].isRight ? this.multiple.vars[index].isRight = false : this.multiple.vars[index].isRight = true;\r\n                }\r\n            });\r\n            this.updateQuestionVars();\r\n        },\r\n\r\n        /*Вопрос - строка*/\r\n\r\n        stringUpdateVarHandler(text) {\r\n            this.string.answer = text;\r\n            this.updateQuestionVars();\r\n        },\r\n\r\n        //Обновляем варианты в объекте вопроса в тесте\r\n        updateQuestionVars() {\r\n            switch (this.questionType) {\r\n                case 1:\r\n                    this.$emit('udpate-question', this.id, this.questionType, this.description, this.single.vars);\r\n                    break;\r\n                case 2:\r\n                    this.$emit('udpate-question', this.id, this.questionType, this.description, this.multiple.vars);\r\n                    break;\r\n                case 3:\r\n                    this.$emit('udpate-question', this.id, this.questionType, this.description, this.string.answer);\r\n                    break;\r\n                default:\r\n\r\n            }\r\n        },\r\n\r\n        //Событие удаления вопроса\r\n        deleteQuestion() {\r\n            this.$emit('delete-question', this.id);\r\n        }\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    .question {\r\n        position: relative;\r\n        border: 1px solid var(--blue);\r\n        margin-top: 40px;\r\n        padding: 20px;\r\n    }\r\n\r\n    .question h3 {\r\n        margin-bottom: 20px;\r\n        color: #8496b1;\r\n    }\r\n\r\n    .question-type {\r\n        position: absolute;\r\n        right: -1px;\r\n        top: -1px;\r\n        background-color: var(--purple);\r\n        color: #fff;\r\n        font-family: 'marta';\r\n        padding: 10px;\r\n    }\r\n\r\n    .question-type option{\r\n        padding: 10px;\r\n    }\r\n\r\n    .question__description {\r\n        width: calc(var(--column) * 10);\r\n        max-width: calc(var(--column) * 10);\r\n        min-width: calc(var(--column) * 10);\r\n        height: calc(var(--row) * 1);\r\n        min-height: calc(var(--row) * 1);\r\n        max-height: calc(var(--row) * 1);\r\n        margin-bottom: 20px;\r\n        border: none;\r\n        background-color: #dddde8;\r\n    }\r\n\r\n    .question-controls {\r\n        position: absolute;\r\n        bottom: 20px;\r\n        right: 0px;\r\n        width: calc(var(--column) * 2);\r\n    }\r\n    .question-controls img {\r\n        cursor: pointer;\r\n        max-width: 30px;\r\n        display: inline-block;\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity 0.2s ease-in-out;\r\n        -o-transition: opacity 0.2s ease-in-out;\r\n        transition: opacity 0.2s ease-in-out;\r\n    }\r\n\r\n    .question-controls img:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n    .question-controls img:nth-child(2) {\r\n        padding: 0 10px;\r\n    }\r\n\r\n    .question__add-var-button {\r\n        border: none;\r\n        padding-left: 30px;\r\n        cursor: pointer;\r\n        font-family: 'marta';\r\n        font-weight: bold;\r\n        background-image: url('./../img/add.svg');\r\n        background-repeat: no-repeat;\r\n        background-position: left;\r\n        background-color: #fff;\r\n        color: var(--purple);\r\n        opacity: 0.5;\r\n        -webkit-transition: opacity .2s ease-in-out;\r\n        -o-transition: opacity .2s ease-in-out;\r\n        transition: opacity .2s ease-in-out;\r\n    }\r\n\r\n    .question__add-var-button:hover {\r\n        opacity: 1;\r\n    }\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18537,11 +18619,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_662f00c7_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_single_vue__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_662f00c7_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_single_vue__ = __webpack_require__(50);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(47)
+  __webpack_require__(48)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -18587,13 +18669,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(48);
+var content = __webpack_require__(49);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18613,7 +18695,7 @@ if(false) {
 }
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -18627,7 +18709,7 @@ exports.push([module.i, "\n.question-var{display:flex;width:calc(var(--column) *
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18698,7 +18780,7 @@ if (false) {
 }
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18706,11 +18788,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_78e520cf_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_multiple_vue__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_78e520cf_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_multiple_vue__ = __webpack_require__(54);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(51)
+  __webpack_require__(52)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -18756,13 +18838,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(52);
+var content = __webpack_require__(53);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18782,7 +18864,7 @@ if(false) {
 }
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -18796,7 +18878,7 @@ exports.push([module.i, "\n.question-var{display:flex;width:calc(var(--column) *
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18867,7 +18949,163 @@ if (false) {
 }
 
 /***/ }),
-/* 54 */
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5c125fe0_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_string_vue__ = __webpack_require__(58);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(56)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5c125fe0_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_string_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src\\vue-comp\\questions\\string.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5c125fe0", Component.options)
+  } else {
+    hotAPI.reload("data-v-5c125fe0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(57);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("fcbec2a8", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js?sourceMap!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5c125fe0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./string.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js?sourceMap!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5c125fe0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./string.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.question-var-str{display:flex;flex-wrap:wrap\n}\n.var-string{width:calc(var(--column) * 10);border:none;border-bottom:1px solid var(--blue)\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/vue-comp/questions/src/vue-comp/questions/string.vue"],"names":[],"mappings":";AA2BA,kBACA,aAAA,cACA;CACA;AAEA,YACA,+BAAA,YACA,mCACA;CACA","file":"string.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question-var-str\">\r\n        <p>Если вариант ответа предполагает несколько вариантов написания, просто перечислите их через строчку</p>\r\n        <input class=\"var-string\" type=\"text\" name=\"\" value=\"\" placeholder=\"Введите свое описание\" v-model=\"varText\" @input=\"updateInfo\">\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n\r\n    data() {\r\n        return {\r\n            varText: ''\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        updateInfo() {\r\n            this.$emit('updateVar', this.varText);\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n.question-var-str {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n}\r\n\r\n.var-string {\r\n    width: calc(var(--column) * 10);\r\n    border: none;\r\n    border-bottom: 1px solid var(--blue);\r\n}\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "question-var-str" }, [
+    _c("p", [
+      _vm._v(
+        "Если вариант ответа предполагает несколько вариантов написания, просто перечислите их через строчку"
+      )
+    ]),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.varText,
+          expression: "varText"
+        }
+      ],
+      staticClass: "var-string",
+      attrs: {
+        type: "text",
+        name: "",
+        value: "",
+        placeholder: "Введите свое описание"
+      },
+      domProps: { value: _vm.varText },
+      on: {
+        input: [
+          function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.varText = $event.target.value
+          },
+          _vm.updateInfo
+        ]
+      }
+    })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5c125fe0", esExports)
+  }
+}
+
+/***/ }),
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18879,8 +19117,27 @@ var render = function() {
     _c("h3", [_vm._v("Текст вопроса:")]),
     _vm._v(" "),
     _c("textarea", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.description,
+          expression: "description"
+        }
+      ],
       staticClass: "question__description",
-      attrs: { name: "name", rows: "8", cols: "80" }
+      domProps: { value: _vm.description },
+      on: {
+        input: [
+          function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.description = $event.target.value
+          },
+          _vm.updateDescription
+        ]
+      }
     }),
     _vm._v(" "),
     _c(
@@ -19002,7 +19259,7 @@ if (false) {
 }
 
 /***/ }),
-/* 55 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19044,16 +19301,50 @@ var render = function() {
           { staticClass: "new-test-form" },
           [
             _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.testTitle,
+                  expression: "testTitle"
+                }
+              ],
               staticClass: "new-test-form__title",
-              attrs: { type: "text", placeholder: "Название теста" }
+              attrs: { type: "text", placeholder: "Название теста" },
+              domProps: { value: _vm.testTitle },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.testTitle = $event.target.value
+                }
+              }
             }),
             _vm._v(" "),
             _c("div", { staticClass: "new-test-form__options" }, [
               _c("h3", [_vm._v("Описание:")]),
               _vm._v(" "),
               _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.testDescription,
+                    expression: "testDescription"
+                  }
+                ],
                 staticClass: "new-test-form__description",
-                attrs: { name: "test_description" }
+                attrs: { name: "test_description" },
+                domProps: { value: _vm.testDescription },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.testDescription = $event.target.value
+                  }
+                }
               }),
               _vm._v(" "),
               _c(
@@ -19132,11 +19423,32 @@ var render = function() {
                   _c("transition", { attrs: { name: "fade" } }, [
                     _vm.testOptions.timeLimit
                       ? _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.testOptions.time,
+                              expression: "testOptions.time"
+                            }
+                          ],
                           attrs: {
                             type: "text",
                             name: "time",
                             id: "time",
                             value: ""
+                          },
+                          domProps: { value: _vm.testOptions.time },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.testOptions,
+                                "time",
+                                $event.target.value
+                              )
+                            }
                           }
                         })
                       : _vm._e()
@@ -19201,7 +19513,10 @@ var render = function() {
                   questiontext: question.text,
                   questionid: question.id
                 },
-                on: { "delete-question": _vm.deleteQuestionHandler }
+                on: {
+                  "delete-question": _vm.deleteQuestionHandler,
+                  "udpate-question": _vm.updateQuestionInfo
+                }
               })
             }),
             _vm._v(" "),
@@ -19243,7 +19558,7 @@ if (false) {
 }
 
 /***/ }),
-/* 56 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19266,196 +19581,6 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-b8444c62", esExports)
-  }
-}
-
-/***/ }),
-/* 57 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5c125fe0_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_string_vue__ = __webpack_require__(61);
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(59)
-}
-var normalizeComponent = __webpack_require__(2)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5c125fe0_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_string_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "src\\vue-comp\\questions\\string.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5c125fe0", Component.options)
-  } else {
-    hotAPI.reload("data-v-5c125fe0", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  data: function data() {
-    return {
-      varText: ''
-    };
-  },
-  methods: {
-    updateInfo: function updateInfo() {
-      this.$emit('updateVar', this.varText);
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(60);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(1)("fcbec2a8", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js?sourceMap!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5c125fe0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./string.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js?sourceMap!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5c125fe0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./string.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.question-var-str{display:flex;flex-wrap:wrap\n}\n.var-string{width:calc(var(--column) * 10);border:none;border-bottom:1px solid var(--blue)\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/vue-comp/questions/src/vue-comp/questions/string.vue"],"names":[],"mappings":";AA2BA,kBACA,aAAA,cACA;CACA;AAEA,YACA,+BAAA,YACA,mCACA;CACA","file":"string.vue","sourcesContent":["<template lang=\"html\">\r\n\r\n    <div class=\"question-var-str\">\r\n        <p>Если вариант ответа предполагает несколько вариантов написания, просто перечислите их через строчку</p>\r\n        <input class=\"var-string\" type=\"text\" name=\"\" value=\"\" :placeholder=\"placeholderText\" v-model=\"varText\" @input=\"updateInfo\">\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n\r\n    data() {\r\n        return {\r\n            varText: ''\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        updateInfo() {\r\n            this.$emit('updateVar', this.varText);\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n.question-var-str {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n}\r\n\r\n.var-string {\r\n    width: calc(var(--column) * 10);\r\n    border: none;\r\n    border-bottom: 1px solid var(--blue);\r\n}\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 61 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "question-var-str" }, [
-    _c("p", [
-      _vm._v(
-        "Если вариант ответа предполагает несколько вариантов написания, просто перечислите их через строчку"
-      )
-    ]),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.varText,
-          expression: "varText"
-        }
-      ],
-      staticClass: "var-string",
-      attrs: {
-        type: "text",
-        name: "",
-        value: "",
-        placeholder: _vm.placeholderText
-      },
-      domProps: { value: _vm.varText },
-      on: {
-        input: [
-          function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.varText = $event.target.value
-          },
-          _vm.updateInfo
-        ]
-      }
-    })
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5c125fe0", esExports)
   }
 }
 
