@@ -38,7 +38,7 @@
                         <label class="active" for="time" v-if="testOptions.timeLimit">Время в мин.:</label>
                         </transition>
                         <transition name="fade">
-                        <input type="text" name="time" id="time" value="" v-if="testOptions.timeLimit" v-model="testOptions.time">
+                        <input type="text" name="time" id="time" value="" v-if="testOptions.timeLimit" v-model="testOptions.time" @input="validTimeLimit">
                         </transition>
                         <img :src="anonymToggle" alt="">
                         <label for="anonym" :class="labelAnonym">Анонимное прохождение</label>
@@ -64,6 +64,13 @@
                     class="new-test__add-question"
                 >
                 добавить вопрос</button>
+
+                 <transition name="fade">
+                    <p
+                        v-if="flashMsg.text.length > 0"
+                        :class="flashMsgClass"
+                    >{{flashMsg.text}}</p>
+                </transition>
 
             </form>
 
@@ -101,7 +108,11 @@ export default {
                    id: 1
                }
            ],
-           nextQuestionId: 2
+           nextQuestionId: 2,
+           flashMsg: {
+               text: '',
+               status: 1
+           },
        }
    },
 
@@ -126,10 +137,38 @@ export default {
            return {
                'active' : this.testOptions.anonym
            }
+       },
+
+       //Всплывающие сообщения
+       flashMsgClass() {
+           return {
+               'test-flasgMesg' : true,
+               'test-flasgMesg_error' : this.flashMsg.status == 1,
+               'test-flasgMesg_warn' : this.flashMsg.status == 2,
+               'test-flasgMesg_succes' : this.flashMsg.status == 3
+           }
        }
    },
 
    methods: {
+
+       //Вывод сообщения
+       showFlashMsg(status, text) {
+           this.flashMsg.status = status;
+           this.flashMsg.text = text;
+           setTimeout( () => this.flashMsg.text = '', 10000);
+       },
+
+       // Валидация лимита времени
+       validTimeLimit(e) {
+           let time = e.target.value;
+           let pattern = /\d{2,3}/;
+           if(!pattern.test(time)) {
+               this.testOptions.time = 60;
+               let msg = "Лимит времени задается только в числовом эквиваленте и не должен превышать разумных пределов"
+               this.showFlashMsg(1, msg);
+           }
+       },
 
        // Добавление нового вопроса
        addQuestion() {
@@ -161,6 +200,7 @@ export default {
                }
            }
        },
+
        // Сохраняем тест
        saveTest() {
            let test = {
@@ -221,6 +261,7 @@ export default {
 
     .new-test-form {
         padding-top: calc(var(--column) * 2);
+        position: relative;
     }
 
     .new-test-form__title {
@@ -315,6 +356,27 @@ export default {
 
     .new-test__add-question:hover {
         opacity: 1;
+    }
+
+    .test-flasgMesg {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        padding: 20px;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .test-flasgMesg_error {
+        background-color: var(--red);
+    }
+
+    .test-flasgMesg_warn {
+        background-color: var(--yellow);
+    }
+
+    .test-flasgMesg_succes {
+        background-color: var(--green);
     }
 
     .fade-enter-active, .fade-leave-active {
