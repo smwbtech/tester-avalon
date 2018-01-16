@@ -29,6 +29,7 @@
 
             <div v-else-if="questionType === 2" key="multiple-question">
                 <multiple
+
                     v-for="(variant, index) in multiple.vars"
                     :text="variant.text"
                     :status="variant.isRight"
@@ -276,9 +277,20 @@ export default {
 
     .question {
         position: relative;
-        border: 1px solid var(--blue);
         margin-top: 40px;
         padding: 20px;
+        border: 1px solid var(--blue);
+        -webkit-box-shadow: 3px 3px 8px var(--purple);
+        box-shadow: 3px 3px 8px var(--purple);
+        -webkit-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+    }
+
+    .question_error {
+        border: 1px solid var(--red);
+        -webkit-box-shadow: 3px 3px 8px var(--red);
+        box-shadow: 3px 3px 8px var(--red);
     }
 
     .question h3 {
@@ -290,6 +302,7 @@ export default {
         position: absolute;
         right: -1px;
         top: -1px;
+        border: none;
         background-color: var(--purple);
         color: #fff;
         font-family: 'marta';
@@ -309,7 +322,7 @@ export default {
         max-height: calc(var(--row) * 1);
         margin-bottom: 20px;
         border: none;
-        background-color: #dddde8;
+        border: 1px solid var(--blue);
     }
 
     .question-controls {

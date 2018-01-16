@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Янв 14 2018 г., 23:11
--- Версия сервера: 10.1.21-MariaDB
--- Версия PHP: 7.1.1
+-- Время создания: Янв 16 2018 г., 16:15
+-- Версия сервера: 10.1.26-MariaDB
+-- Версия PHP: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -38,7 +40,14 @@ CREATE TABLE `connect` (
 --
 
 INSERT INTO `connect` (`session`, `token`, `user_id`, `expire`) VALUES
-('rr1f2jfnrv3bfmslievspjgskb', 'l5gvln68j7hpnamacc81nhrzr77fpmdo', 9, '0000-00-00 00:00:00');
+('p0qnpn1vusllmfjj4b6pg8m8vc', '5gmvanw2ecb0qbxzbwb384k2jmgv5m0v', 0, '0000-00-00 00:00:00'),
+('p0qnpn1vusllmfjj4b6pg8m8vc', '2yca3in7ycttfxm81pejoea2rqg171z1', 0, '0000-00-00 00:00:00'),
+('p0qnpn1vusllmfjj4b6pg8m8vc', '1fj8241b15jxno2382ywusv0kpereo5y', 0, '0000-00-00 00:00:00'),
+('p0qnpn1vusllmfjj4b6pg8m8vc', 'afj0xiksxfu6ajq8ewgucxzwqbqghee5', 0, '0000-00-00 00:00:00'),
+('p0qnpn1vusllmfjj4b6pg8m8vc', 'i6seb3kd9s7qa8g027mwdbzu3eworc9r', 0, '0000-00-00 00:00:00'),
+('p0qnpn1vusllmfjj4b6pg8m8vc', 'yyaml5ewjxn7b1dli6wudtlv8beul4zk', 0, '0000-00-00 00:00:00'),
+('p0qnpn1vusllmfjj4b6pg8m8vc', '0cyfsvfow4i4r2o38vbwpffi78juemc7', 9, '0000-00-00 00:00:00'),
+('o61us57tmqetvv28d68p62v3q5', 'dzluj7rt3yo242kltmo0lkh6p1t7sl0b', 9, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -235,41 +244,49 @@ ALTER TABLE `user`
 --
 ALTER TABLE `question`
   MODIFY `question_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `question_answer`
 --
 ALTER TABLE `question_answer`
   MODIFY `question_answer_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `question_comparison`
 --
 ALTER TABLE `question_comparison`
   MODIFY `question_comparison_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `question_type`
 --
 ALTER TABLE `question_type`
   MODIFY `question_type_id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT для таблицы `question_variant`
 --
 ALTER TABLE `question_variant`
   MODIFY `question_variant_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `statistic`
 --
 ALTER TABLE `statistic`
   MODIFY `statistic_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `test`
 --
 ALTER TABLE `test`
   MODIFY `test_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
   MODIFY `user_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
@@ -310,6 +327,7 @@ ALTER TABLE `statistic`
 --
 ALTER TABLE `test`
   ADD CONSTRAINT `test_ibfk_1` FOREIGN KEY (`test_author_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

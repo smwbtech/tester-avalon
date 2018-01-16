@@ -10,7 +10,7 @@
                     <li>
                         <a
                             href="save"
-                            @click.prevent="saveTest"
+                            @click.prevent="saveTest(0)"
                         >Сохранить</a>
                     </li>
                     <li>
@@ -38,7 +38,7 @@
                         <label class="active" for="time" v-if="testOptions.timeLimit">Время в мин.:</label>
                         </transition>
                         <transition name="fade">
-                        <input type="text" name="time" id="time" value="" v-if="testOptions.timeLimit" v-model="testOptions.time" @input="validTimeLimit">
+                        <input type="text" name="time" id="time" value="60" v-if="testOptions.timeLimit" @input="validTimeLimit">
                         </transition>
                         <img :src="anonymToggle" alt="">
                         <label for="anonym" :class="labelAnonym">Анонимное прохождение</label>
@@ -84,6 +84,9 @@
 
 import sideMenu from './side-menu.vue';
 import newQuestion from './new-question.vue';
+import testCheck from './../js/test.js';
+import axios from './../../node_modules/axios/dist/axios.js';
+
 
 export default {
 
@@ -104,8 +107,9 @@ export default {
            questions: [
                {
                    type: 1,
-                   text: 'Введите свое описание вопроса',
-                   id: 1
+                   text: '',
+                   id: 1,
+                   vars: []
                }
            ],
            nextQuestionId: 2,
@@ -161,12 +165,25 @@ export default {
 
        // Валидация лимита времени
        validTimeLimit(e) {
-           let time = e.target.value;
-           let pattern = /\d{2,3}/;
-           if(!pattern.test(time)) {
-               this.testOptions.time = 60;
-               let msg = "Лимит времени задается только в числовом эквиваленте и не должен превышать разумных пределов"
+           let data = e.inputType === 'deleteContentBackward' ? e.target.value : e.data;
+           if(!/\d/i.test(data)) {
+               let msg = "Лимит времени задается только в числовом эквиваленте и не должен превышать разумных пределов";
                this.showFlashMsg(1, msg);
+               e.target.value = this.testOptions.time;
+           }
+           else {
+               if(+e.target.value > 240) {
+                   let msg = "Вы установили очень большой лимит времени, подумайте, может стоит отключить эту опцию.";
+                   this.showFlashMsg(2, msg);
+                   this.testOptions.time = +e.target.value;
+               }
+               else if(+e.target.value < 10) {
+                   let msg = "Вы установили очень низкий лимит времени!";
+                   this.showFlashMsg(1, msg);
+               }
+               else {
+                   this.testOptions.time = +e.target.value;
+               }
            }
        },
 
@@ -174,8 +191,9 @@ export default {
        addQuestion() {
            this.questions.push( {
                 type: 1,
-                text: 'Введите свое описание вопроса',
-                id: this.nextQuestionId
+                text: '',
+                id: this.nextQuestionId,
+                vars: []
             });
             this.nextQuestionId++;
        },
@@ -202,14 +220,46 @@ export default {
        },
 
        // Сохраняем тест
-       saveTest() {
+       saveTest(status) {
            let test = {
                title: this.testTitle,
                description: this.testDescription,
                options: this.testOptions,
-               questions: this.questions
+               questions: this.questions,
+               status: status
            };
-           console.log(JSON.stringify(test));
+
+           let res = testCheck.check(test);
+           if(res.status) {
+               axios.post('php/savetest.php', test)
+               .then( (res) => {
+                   if(!res.data.success) {
+                       this.showFlashMsg(1, res.data.errorMsg);
+                   }
+                   else {
+                       this.$router.push('/tester');
+                   }
+               })
+               .catch( (err) => console.log(err));
+               // console.log(JSON.stringify(test));
+           }
+           else {
+               this.showFlashMsg(res.code, res.msg);
+               document.querySelector('.new-test-form__title').scrollIntoView({ behavior: 'smooth' });
+               if(res.questionId) {
+                   for(let i = 0; i < this.$children.length; i++) {
+                       if(this.$children[i].id === res.questionId) {
+                           let elem = this.$children[i].$el;
+                           elem.scrollIntoView({ behavior: 'smooth' });
+                           elem.classList.add('question_error');
+                           setTimeout( () => {
+                               elem.classList.remove('question_error');
+                           }, 8000)
+                       }
+                   }
+               }
+           }
+
        }
 
    }
@@ -276,7 +326,10 @@ export default {
     }
 
     .new-test-form__options {
-        background-color: #dddde8;
+        background-color: #fff;
+        border: 1px solid var(--blue);
+        -webkit-box-shadow: 3px 3px 8px var(--purple);
+        box-shadow: 3px 3px 8px var(--purple);
         padding: 20px;
     }
 
@@ -289,7 +342,6 @@ export default {
 
     .new-test-form__description {
         padding: 10px;
-        background-color: #dddde8;
         border: none;
         margin-bottom: 20px;
         width: 98%;
@@ -360,10 +412,13 @@ export default {
 
     .test-flasgMesg {
         position: fixed;
-        bottom: 40px;
+        max-width: 30%;
+        top: 40px;
         right: 40px;
         padding: 20px;
-        font-size: 1.2rem;
+        color: #fff;
+        font-size: 1.1rem;
+        text-align: center;
         font-weight: bold;
     }
 

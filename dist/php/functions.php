@@ -63,4 +63,28 @@ else {
 }
 
 }
+
+
+// Получаем ID авторизованного пользователя
+function getUserId($token, $session) {
+    $db  = mysqli_connect(HOST, USER, PASS, BASE);
+
+    if (mysqli_connect_errno()) {
+        return false;
+    }
+
+    else {
+        mysqli_set_charset($db, 'UTF8');
+        $query = mysqli_query($db, '
+            SELECT user_id FROM connect
+            WHERE session = "' . $session . '"
+            AND token = "' . $token .'";
+        ');
+
+        $user_id = mysqli_fetch_assoc($query);
+
+        return (int)$user_id['user_id'];
+    }
+}
+
 ?>
