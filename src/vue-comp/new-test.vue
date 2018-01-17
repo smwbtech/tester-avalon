@@ -237,7 +237,10 @@ export default {
                        this.showFlashMsg(1, res.data.errorMsg);
                    }
                    else {
-                       this.$router.push('/tester');
+                       let msg = 'Тест успешно сохранен в базе данных';
+                       this.showFlashMsg(3, msg);
+                       setTimeout( () => this.$router.push('/tester'), 5000);
+
                    }
                })
                .catch( (err) => console.log(err));
