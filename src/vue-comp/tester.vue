@@ -15,7 +15,9 @@
                 :time="currentTest.test_time"
                 :status="currentTest.test_status"
                 :testquestions="currentTest.questions"
+                :testid="currentTest.test_id"
                 @close-window="closePopUp"
+                @edit-test="editTestHandler"
             >
 
             </pop-up>
@@ -75,8 +77,6 @@
                     ></test-item>
 
                 <div class="add-new-test">
-
-
 
                 </div>
 
@@ -168,6 +168,10 @@ export default {
        //Закрываем всплывающее окно
        closePopUp() {
            this.popUp = false;
+       },
+       //Редактирование теста
+       editTestHandler(id) {
+            console.log(this.currentTest);
        }
    }
 
@@ -195,7 +199,7 @@ export default {
 
 .tests-list {
     width: 100%;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     display: flex;
 }
 
@@ -204,16 +208,21 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
 }
 
 .add-new-test {
     width: calc(var(--column) * 4);
     max-height: calc(var(--row) * 4);
+    min-height: calc(var(--row) * 4);
     -webkit-box-shadow: 3px 3px 8px var(--purple);
     box-shadow: 3px 3px 8px var(--purple);
     cursor: pointer;
     opacity: .2;
     background-image: url('./../img/add.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     -webkit-transition: opacity .3s ease-in-out;
     -o-transition: opacity .3s ease-in-out;
     transition: opacity .3s ease-in-out;

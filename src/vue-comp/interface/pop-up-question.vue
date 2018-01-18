@@ -5,9 +5,13 @@
         <ul
             v-if="type == 1 || type == 2"
         >
-            <li v-for="item in variants" :key="item.var_bd_id">{{item.var_text}}</li>
+            <li
+                v-for="item in variants"
+                :key="item.var_bd_id"
+                :class="[right.indexOf(item.question_client_id) >= 0 ? 'right' : 'false']"
+            >{{item.var_text}}</li>
         </ul>
-        <p v-else>{{right}}</p>
+        <p class="string_right" v-else>{{right}}</p>
     </div>
 
 </template>
@@ -27,7 +31,9 @@ export default {
     },
 
     created() {
-        console.log(this.right);
+        if(this.type == 1 || this.type == 2) {
+            this.right = this.answer.length > 0 ? this.answer.split(',') : [this.anwer];
+        }
     }
 
 }
@@ -38,9 +44,11 @@ export default {
     .pop-up-question {
         display: flex;
         flex-wrap: wrap;
-        border-top: 1px solid var(--purple);
         border-bottom: 1px solid var(--purple);
-        margin: 20px 0px;
+    }
+
+    .pop-up-question:last-of-type {
+        border-bottom: none;
     }
 
 
@@ -48,6 +56,8 @@ export default {
         width: 100%;
         text-align: left;
         margin-bottom: 20px;
+        color: var(--blue);
+        padding-top: 20px;
     }
 
     .pop-up-question ul {
@@ -62,6 +72,18 @@ export default {
     .pop-up-question li {
         display: block;
         text-align: left;
+        color: var(--purple);
+        opacity: .5;
+    }
+
+    .pop-up-question li.right {
+        opacity: 1;
+        text-decoration: underline;
+    }
+
+    .string_right {
+        color: var(--purple);
+        /* text-decoration: underline; */
     }
 
 

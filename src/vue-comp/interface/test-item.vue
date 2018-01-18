@@ -139,7 +139,7 @@ export default {
 .tests-list-item {
     position: relative;
     width: calc(var(--column) * 4);
-    max-height: calc(var(--row) * 4);
+    min-height: calc(var(--row) * 4);
     border: 1px solid var(--blue);
     -webkit-box-shadow: 3px 3px 8px var(--purple);
     box-shadow: 3px 3px 8px var(--purple);
@@ -209,6 +209,7 @@ export default {
 
 .tests-list-item-info {
     padding: 20px;
+    margin-bottom: 30px;
 }
 
 .tests-list-item-info h3{
