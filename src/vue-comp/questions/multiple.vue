@@ -16,7 +16,7 @@ export default {
 
     data() {
         return {
-            varText: '',
+            varText: this.text ? this.text : '',
             placeholderText: this.text,
             isRight: this.status,
             questionId: this.id

@@ -10,9 +10,11 @@
 <script>
 export default {
 
+    props: ['text'],
+
     data() {
         return {
-            varText: ''
+            varText: this.text ? this.text : ''
         }
     },
 

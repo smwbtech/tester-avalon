@@ -171,7 +171,8 @@ export default {
        },
        //Редактирование теста
        editTestHandler(id) {
-            console.log(this.currentTest);
+            localStorage.setItem('test', JSON.stringify(this.currentTest));
+            this.$router.push('/newtest');
        }
    }
 

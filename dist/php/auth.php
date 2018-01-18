@@ -16,6 +16,7 @@
 
         $db  = mysqli_connect(HOST, USER, PASS, BASE);
             // В случае ошибки соединеия с БД отправляем JSON с текстом ошибки
+            // TODO: mysqli_real_escape_string
             if (mysqli_connect_errno()) {
                     $res["success"] = false;
                     $res["errorMsg"] = "Ошибка соединения с базой данных, попробуйте зарегистрироваться позже";

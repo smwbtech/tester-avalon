@@ -53,6 +53,8 @@
                     :questiontype="question.type"
                     :questiontext="question.text"
                     :questionid="question.id"
+                    :questiondbid="question.db_id"
+                    :questionvars="question.vars"
                     @delete-question="deleteQuestionHandler"
                     @udpate-question="updateQuestionInfo"
                 ></new-question>
@@ -117,6 +119,7 @@ export default {
                text: '',
                status: 1
            },
+           testId: undefined
        }
    },
 
@@ -155,6 +158,44 @@ export default {
    },
 
    methods: {
+
+       // Устанавливаем данные теста из ДБ
+       fetchTestDb(test) {
+           this.testTitle = test.test_name;
+           this.testDescription = test.test_description;
+           this.testId = +test.test_id;
+           this.testOptions.timeLimit = +test.test_time ? true : false;
+           this.testOptions.time = +test.test_time;
+           this.testOptions.anonym = +test.test_anonym;
+           this.questions = [];
+           for(let i = 0; i < test.questions.length; i++) {
+               this.questions[i] = {
+                   type: +test.questions[i].question_type_id,
+                   text: test.questions[i].question_description,
+                   id: +test.questions[i].question_client_id,
+                   db_id: +test.questions[i].question_id,
+                   vars: []
+               };
+               let type = +test.questions[i].question_type_id;
+               if(type === 1 || type == 2) {
+                   for(let j = 0; j < test.questions[i].vars.length; j++) {
+                       let answer = test.questions[i].question_answer.length === 1 ? [test.questions[i].question_answer] : test.questions[i].question_answer.split(',');
+                       this.questions[i].vars.push({
+                           text: test.questions[i].vars[j].var_text,
+                           id: +test.questions[i].vars[j].question_client_id,
+                           db_id: +test.questions[i].vars[j].question_client_id,
+                           isRight: answer.indexOf(test.questions[i].vars[j].question_client_id) >= 0 ? true : false
+                       });
+                   }
+               }
+               else {
+                   this.questions[i].vars =  test.questions[i].question_answer;
+               }
+
+
+
+           }
+       },
 
        //Вывод сообщения
        showFlashMsg(status, text) {
@@ -200,7 +241,6 @@ export default {
 
        // Удаляем вопрос
        deleteQuestionHandler(id) {
-           console.log('ded');
            let index = this.questions.map( (v,i) => {
                if(v.id === id) return i;
            });
@@ -230,21 +270,29 @@ export default {
            };
 
            let res = testCheck.check(test);
-           if(res.status) {
-               axios.post('php/savetest.php', test)
-               .then( (res) => {
-                   if(!res.data.success) {
-                       this.showFlashMsg(1, res.data.errorMsg);
-                   }
-                   else {
-                       let msg = 'Тест успешно сохранен в базе данных';
-                       this.showFlashMsg(3, msg);
-                       setTimeout( () => this.$router.push('/tester'), 5000);
 
-                   }
-               })
-               .catch( (err) => console.log(err));
-               // console.log(JSON.stringify(test));
+
+           if(res.status) {
+               //Если это новый тест у него нет свойтсва testId и мы просто сохраняем его
+               if(!this.testId) {
+                   axios.post('php/savetest.php', test)
+                   .then( (res) => {
+                       if(!res.data.success) {
+                           this.showFlashMsg(1, res.data.errorMsg);
+                       }
+                       else {
+                           let msg = 'Тест успешно сохранен в базе данных';
+                           this.showFlashMsg(3, msg);
+                           setTimeout( () => this.$router.push('/tester'), 5000);
+
+                       }
+                   })
+                   .catch( (err) => console.log(err));
+               }
+               //В противном случае, нам надо
+               else {
+
+               }
            }
            else {
                this.showFlashMsg(res.code, res.msg);
@@ -265,6 +313,20 @@ export default {
 
        }
 
+   },
+
+   // При создании компонента, проверяем localStorage и если в нем есть объект тест выводим его данные
+   created() {
+       if(localStorage.getItem('test')) {
+           let test = JSON.parse(localStorage.getItem('test'));
+           this.fetchTestDb(test);
+       }
+   },
+
+   // Перед уходом очищаем localStorage;
+   beforeRouteLeave(to, from, next) {
+       localStorage.getItem('test') ? localStorage.removeItem('test') : false;
+       next();
    }
 
 }
@@ -284,7 +346,7 @@ export default {
         width: calc(var(--column) * 16);
     }
 
-    
+
 
     .new-test-form {
         padding-top: calc(var(--column) * 2);

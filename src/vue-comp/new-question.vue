@@ -45,6 +45,7 @@
 
             <div v-else key="string-question">
                 <string
+                    :text="string.answer"
                     @updateVar="stringUpdateVarHandler"
                 ></string>
             </div>
@@ -74,7 +75,13 @@ import string from './questions/string.vue';
 
 export default {
 
-    props: ['questiontype', 'questiontext', 'questionid'],
+    props: [
+        'questiontype',
+        'questiontext',
+        'questionid',
+        'questiondbid',
+        'questionvars'
+    ],
 
     components: {
        'single': single,
@@ -86,7 +93,8 @@ export default {
         return {
             questionType: this.questiontype ? this.questiontype : 1,
             id: this.questionid,
-            description: '',
+            db_id: this.questiondbid,
+            description: this.questiontext ? this.questiontext : '',
             // Вопросы с одним вариантом
             single: {
                 vars: [
@@ -267,6 +275,20 @@ export default {
         //Событие удаления вопроса
         deleteQuestion() {
             this.$emit('delete-question', this.id);
+        }
+    },
+
+    created() {
+        switch(this.questiontype) {
+            case 1:
+                this.single.vars = this.questionvars;
+                break;
+            case 2:
+                this.multiple.vars = this.questionvars;
+                break;
+            case 3:
+                this.string.answer = this.questionvars;
+                break;
         }
     }
 
