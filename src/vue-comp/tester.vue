@@ -71,7 +71,7 @@
                     @show-test="showTestHandler"
                     ></test-item>
 
-                <div class="add-new-test">
+                <div class="add-new-test" @click="newTest">
 
                 </div>
 
@@ -138,6 +138,11 @@ export default {
                console.log(err);
            });
        },
+
+       newTest() {
+            this.$router.push('/newtest');
+       },
+
        //Показываем опубликованные тесты
        showPublished() {
            this.currentSection = true;

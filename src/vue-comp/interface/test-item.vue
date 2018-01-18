@@ -88,6 +88,9 @@
 </template>
 
 <script>
+
+import axios from './../../../node_modules/axios/dist/axios.js';
+
 export default {
 
     props: ['description', 'testtitle', 'status', 'imglink', 'testid'],
@@ -121,7 +124,16 @@ export default {
 
         // Событие - удаление теста
         deleteHandler() {
-
+            if(window.confirm('Вы точто хотите удалить тест?')) {
+                let query = this.testId;
+                axios.get(`php/deletetest.php?test_id=${query}`)
+                .then( (res) => {
+                    if(res.data.status) {
+                        // TODO: Вывести сообщение об успешном удалении теста
+                    }
+                })
+                .catch( (err) => console.log(err));
+            }
         },
 
         showTest(e) {

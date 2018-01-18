@@ -36,26 +36,13 @@
             else {
 
                 mysqli_set_charset($db, 'UTF8');
-                //Проверяем, существует ли уже такой тест (подобным считаем тест с таким же названием, описанием и авторством тогоже пользователя)
-                // $check = mysqli_query($db, '
-                //     SELECT * FROM test
-                //     WHERE test_name LIKE "' . mysqli_real_escape_string($db, $title) . '"
-                //     AND test_description LIKE "' . $description . '"
-                //     AND test_author_id = "' . $user_id . '";
-                // ');
-                //
-                // if(mysqli_num_rows($check)) {
-                //     $res["success"] = false;
-                //     $res["errorMsg"] = "Вы пытаетесь повторно создать тест, который уже существует";
-                //     echo json_encode($res);
-                //     exit();
-                // }
                 //Если тест уже существует, удалим его и перезапишем все заново
                 if($testId) {
 
                     mysqli_query($db, '
                         DELETE FROM test
-                        WHERE test_id = "'.$testId.'";
+                        WHERE test_id = "'.$testId.'"
+                        AND test_author_id = "'.$user_id.'";
                     ');
 
                 }
