@@ -14,7 +14,9 @@
                         >Сохранить</a>
                     </li>
                     <li>
-                        <a href="publish">Опубликовать</a>
+                        <a href="publish"
+                        @click.prevent="saveTest(1)"
+                    >Опубликовать</a>
                     </li>
                 </ul>
             </nav>
@@ -168,6 +170,7 @@ export default {
            this.testOptions.time = +test.test_time;
            this.testOptions.anonym = +test.test_anonym;
            this.questions = [];
+           this.nextQuestionId = +test.questions[test.questions.length-1].question_client_id + 1;
            for(let i = 0; i < test.questions.length; i++) {
                this.questions[i] = {
                    type: +test.questions[i].question_type_id,
@@ -234,7 +237,11 @@ export default {
                 type: 1,
                 text: '',
                 id: this.nextQuestionId,
-                vars: []
+                vars: [{
+                    text: '',
+                    isRight: false,
+                    id: 1
+                }]
             });
             this.nextQuestionId++;
        },
@@ -266,33 +273,27 @@ export default {
                description: this.testDescription,
                options: this.testOptions,
                questions: this.questions,
-               status: status
+               status: status,
+               testId: this.testId
            };
 
            let res = testCheck.check(test);
 
 
            if(res.status) {
-               //Если это новый тест у него нет свойтсва testId и мы просто сохраняем его
-               if(!this.testId) {
-                   axios.post('php/savetest.php', test)
-                   .then( (res) => {
-                       if(!res.data.success) {
-                           this.showFlashMsg(1, res.data.errorMsg);
-                       }
-                       else {
-                           let msg = 'Тест успешно сохранен в базе данных';
-                           this.showFlashMsg(3, msg);
-                           setTimeout( () => this.$router.push('/tester'), 5000);
+               axios.post('php/savetest.php', test)
+               .then( (res) => {
+                   if(!res.data.success) {
+                       this.showFlashMsg(1, res.data.errorMsg);
+                   }
+                   else {
+                       let msg = status == 0 ? 'Тест успешно сохранен в базе данных' : 'Тест опубликован';
+                       this.showFlashMsg(3, msg);
+                       setTimeout( () => this.$router.push('/tester'), 5000);
 
-                       }
-                   })
-                   .catch( (err) => console.log(err));
-               }
-               //В противном случае, нам надо
-               else {
-
-               }
+                   }
+               })
+               .catch( (err) => console.log(err));
            }
            else {
                this.showFlashMsg(res.code, res.msg);

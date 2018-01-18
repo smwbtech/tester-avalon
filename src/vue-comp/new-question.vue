@@ -282,9 +282,11 @@ export default {
         switch(this.questiontype) {
             case 1:
                 this.single.vars = this.questionvars;
+                this.single.nextVarId = this.questionvars[this.questionvars.length-1].id;
                 break;
             case 2:
                 this.multiple.vars = this.questionvars;
+                this.multiple.nextVarId = this.questionvars[this.questionvars.length-1].id;
                 break;
             case 3:
                 this.string.answer = this.questionvars;

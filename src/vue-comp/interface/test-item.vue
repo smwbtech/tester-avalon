@@ -215,6 +215,7 @@ export default {
 .tests-list-item-info h3{
     position: relative;
     color: var(--blue);
+    min-height: 4rem;
     -webkit-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;

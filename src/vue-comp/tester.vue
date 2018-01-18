@@ -48,24 +48,19 @@
 
             <div class="tests-list" v-else>
 
-                <div v-if="currentSection">
                     <test-item
+                    v-if="currentSection"
                     v-for="test in tests.published"
                     :description = "test.test_description"
                     :testtitle="test.test_name"
-                    :id="test_id"
+                    :testid="test.test_id"
                     :key="test_id"
                     :imglink="test.test_img"
                     :status="test.test_status"
                     @show-test="showTestHandler"
                     ></test-item>
 
-                <div class="add-new-test"></div>
-
-                </div>
-
-                <div v-else>
-                    <test-item
+                    <test-item v-else
                     v-for="test in tests.drafts"
                     :description = "test.test_description"
                     :testtitle="test.test_name"
@@ -77,9 +72,6 @@
                     ></test-item>
 
                 <div class="add-new-test">
-
-                </div>
-
 
                 </div>
 
@@ -131,7 +123,6 @@ export default {
            this.loading = true;
            axios.get('php/gettests.php')
            .then( (res) => {
-               // console.log(res);
                this.loading = false;
                this.tests = {};
                this.tests.published = [];
@@ -139,6 +130,7 @@ export default {
                res.data.tests.forEach( (v) => {
                    v.test_status == 1 ? this.tests.published.push(v) : this.tests.drafts.push(v);
                });
+               console.log(this.tests);
 
            })
            .catch( (err) => {
@@ -202,14 +194,16 @@ export default {
     width: 100%;
     /* min-height: 100vh; */
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
-.tests-list > div {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+.tests-list > div:nth-child(3n+1) {
+    margin-right: calc(var(--column) * 2);
+}
+
+.tests-list > div:nth-child(3n+3) {
+    margin-left: calc(var(--column) * 2);
 }
 
 .add-new-test {
@@ -236,7 +230,7 @@ export default {
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+.fade-enter, .fade-leave-to {
   opacity: 0;
 }
 
