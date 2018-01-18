@@ -284,33 +284,7 @@ export default {
         width: calc(var(--column) * 16);
     }
 
-    .new-test-nav {
-        z-index: 101;
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        padding: 20px 0px;
-        padding-left: calc(var(--column) * 6);
-        background-color: #fff;
-    }
-
-    .new-test-nav li {
-        list-style: none;
-        display: inline-block;
-        opacity: .5;
-        -webkit-transition: opacity .2s ease-in-out;
-        -o-transition: opacity .2s ease-in-out;
-        transition: opacity .2s ease-in-out;
-    }
-
-    .new-test-nav li:hover {
-        opacity: 1;
-    }
-
-    .new-test-nav li:last-child{
-        padding-left: 40px;
-    }
+    
 
     .new-test-form {
         padding-top: calc(var(--column) * 2);

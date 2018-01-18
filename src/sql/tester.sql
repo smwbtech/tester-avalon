@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Янв 16 2018 г., 16:15
+-- Время создания: Янв 18 2018 г., 10:05
 -- Версия сервера: 10.1.26-MariaDB
 -- Версия PHP: 7.1.9
 
@@ -47,7 +47,10 @@ INSERT INTO `connect` (`session`, `token`, `user_id`, `expire`) VALUES
 ('p0qnpn1vusllmfjj4b6pg8m8vc', 'i6seb3kd9s7qa8g027mwdbzu3eworc9r', 0, '0000-00-00 00:00:00'),
 ('p0qnpn1vusllmfjj4b6pg8m8vc', 'yyaml5ewjxn7b1dli6wudtlv8beul4zk', 0, '0000-00-00 00:00:00'),
 ('p0qnpn1vusllmfjj4b6pg8m8vc', '0cyfsvfow4i4r2o38vbwpffi78juemc7', 9, '0000-00-00 00:00:00'),
-('o61us57tmqetvv28d68p62v3q5', 'dzluj7rt3yo242kltmo0lkh6p1t7sl0b', 9, '0000-00-00 00:00:00');
+('o61us57tmqetvv28d68p62v3q5', 'dzluj7rt3yo242kltmo0lkh6p1t7sl0b', 9, '0000-00-00 00:00:00'),
+('vcs3ehoef5nfijsc2roddvmde2', 'ewti8nem2d8ond145lhr9022hdnw89fz', 9, '0000-00-00 00:00:00'),
+('db322oa5hd9t195436t36sq85s', 'nfy0bzns8su6ygbb922s84khb9ru61x1', 9, '0000-00-00 00:00:00'),
+('unkrf4e8uui7qutp0g9k6q7ldf', 'han158yf42czfywq1197ahacy1jipgde', 9, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -60,8 +63,23 @@ CREATE TABLE `question` (
   `question_test_id` mediumint(8) UNSIGNED DEFAULT NULL,
   `question_description` text,
   `question_type_id` tinyint(3) UNSIGNED DEFAULT NULL,
-  `question_picture` varchar(255) DEFAULT NULL
+  `question_picture` varchar(255) DEFAULT NULL,
+  `question_client_id` tinyint(3) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `question`
+--
+
+INSERT INTO `question` (`question_id`, `question_test_id`, `question_description`, `question_type_id`, `question_picture`, `question_client_id`) VALUES
+(19, 4, 'В каком году основан Санкт-Петербург?', 1, '', 1),
+(20, 4, 'Кто основал Санкт-Петербург?', 1, '', 2),
+(21, 4, 'Какие из этих зданий находятся в Санкт-Петербурге?', 2, '', 3),
+(22, 4, 'Главный проспект Санкт-Петербурга?', 3, '', 4),
+(23, 5, 'Что такое переменная?', 1, '', 1),
+(24, 5, 'Что из ниже перечисленного относится к структурам данных?', 2, '', 2),
+(25, 5, 'Как называется функция которая относится к объекту и описывает его поведение?', 1, '', 3),
+(26, 5, 'Напишите, чему в JS будет равняться следующие выражение:\n0 * -1', 3, '', 4);
 
 -- --------------------------------------------------------
 
@@ -74,6 +92,20 @@ CREATE TABLE `question_answer` (
   `question_answe_question_id` bigint(20) UNSIGNED DEFAULT NULL,
   `question_answer_answer` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `question_answer`
+--
+
+INSERT INTO `question_answer` (`question_answer_id`, `question_answe_question_id`, `question_answer_answer`) VALUES
+(19, 19, '1'),
+(20, 20, '2'),
+(21, 21, '2,4'),
+(22, 22, 'Невский проспект, невский'),
+(23, 23, '1'),
+(24, 24, '2,3'),
+(25, 25, '2'),
+(26, 26, '-0');
 
 -- --------------------------------------------------------
 
@@ -118,8 +150,38 @@ INSERT INTO `question_type` (`question_type_id`, `question_type_name`) VALUES
 CREATE TABLE `question_variant` (
   `question_variant_id` bigint(20) UNSIGNED NOT NULL,
   `question_variant_question_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `question_variant_text` text
+  `question_variant_text` text,
+  `question_variant_client_id` tinyint(3) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `question_variant`
+--
+
+INSERT INTO `question_variant` (`question_variant_id`, `question_variant_question_id`, `question_variant_text`, `question_variant_client_id`) VALUES
+(61, 19, '1703', 1),
+(62, 19, '1704', 2),
+(63, 19, '1702', 3),
+(64, 19, '1705', 4),
+(65, 20, 'Екатерина 1', 1),
+(66, 20, 'Петр 1', 2),
+(67, 20, 'Павел', 3),
+(68, 20, 'Иван 4', 4),
+(69, 21, 'Кремль', 1),
+(70, 21, 'Летний сад', 2),
+(71, 21, 'Парк Горького', 3),
+(72, 21, 'Зимний дворец', 4),
+(73, 23, 'Ячейка в памяти, где хранится значение', 1),
+(74, 23, 'Нечто изменчивое', 2),
+(75, 23, 'Я не знаю', 3),
+(76, 24, 'Фундамент', 1),
+(77, 24, 'Строка', 2),
+(78, 24, 'Массив', 3),
+(79, 24, 'Квартал', 4),
+(80, 25, 'Функция объекта', 1),
+(81, 25, 'Метод', 2),
+(82, 25, 'Повод', 3),
+(83, 25, 'Довод', 4);
 
 -- --------------------------------------------------------
 
@@ -148,10 +210,17 @@ CREATE TABLE `test` (
   `test_description` varchar(255) DEFAULT NULL,
   `test_author_id` mediumint(8) UNSIGNED DEFAULT NULL,
   `test_time` smallint(5) UNSIGNED DEFAULT '0',
-  `test_anonym` bit(1) DEFAULT b'0',
-  `test_staus` bit(1) DEFAULT b'0',
-  `test_respondent_id` mediumint(8) UNSIGNED DEFAULT NULL
+  `test_anonym` tinyint(1) DEFAULT '0',
+  `test_status` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `test`
+--
+
+INSERT INTO `test` (`test_id`, `test_name`, `test_description`, `test_author_id`, `test_time`, `test_anonym`, `test_status`) VALUES
+(4, 'Как ты знаешь Петербург?', 'Это тест на знание Санкт-Петербурга', 9, 0, 1, 0),
+(5, 'Тест на основы JavaScript', 'Простой тест на основы JavaScript', 9, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -243,13 +312,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `question`
 --
 ALTER TABLE `question`
-  MODIFY `question_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `question_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT для таблицы `question_answer`
 --
 ALTER TABLE `question_answer`
-  MODIFY `question_answer_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `question_answer_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT для таблицы `question_comparison`
@@ -267,7 +336,7 @@ ALTER TABLE `question_type`
 -- AUTO_INCREMENT для таблицы `question_variant`
 --
 ALTER TABLE `question_variant`
-  MODIFY `question_variant_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `question_variant_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT для таблицы `statistic`
@@ -279,7 +348,7 @@ ALTER TABLE `statistic`
 -- AUTO_INCREMENT для таблицы `test`
 --
 ALTER TABLE `test`
-  MODIFY `test_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `test_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
