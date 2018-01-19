@@ -58,6 +58,7 @@
                     :imglink="test.test_img"
                     :status="test.test_status"
                     @show-test="showTestHandler"
+                    @delete-info="deleteTest"
                     ></test-item>
 
                     <test-item v-else
@@ -69,13 +70,21 @@
                     :imglink="test.test_img"
                     :status="test.test_status"
                     @show-test="showTestHandler"
+                    @delete-info="deleteTest"
                     ></test-item>
 
                 <div class="add-new-test" @click="newTest">
 
                 </div>
 
-
+                <transition name="fade">
+                   <flash-message
+                       v-if="flashMsg.text.length > 0"
+                       :code="flashMsg.status"
+                       :text="flashMsg.text"
+                   >
+                   </flash-message>
+                </transition>
 
             </div>
 
@@ -109,7 +118,11 @@ export default {
            tests: null,
            currentSection: true,
            popUp: false,
-           currentTest: null
+           currentTest: null,
+           flashMsg: {
+               text: '',
+               status: 1
+           }
        }
    },
 
@@ -139,6 +152,14 @@ export default {
            });
        },
 
+       //Вывод сообщения
+       showFlashMsg(status, text) {
+           this.flashMsg.status = status;
+           this.flashMsg.text = text;
+           setTimeout( () => this.flashMsg.text = '', 10000);
+       },
+
+       // Добовление теста
        newTest() {
             this.$router.push('/newtest');
        },
@@ -162,14 +183,22 @@ export default {
            })
            .catch( (err) => console.log(err));
        },
+
        //Закрываем всплывающее окно
        closePopUp() {
            this.popUp = false;
        },
+
        //Редактирование теста
        editTestHandler(id) {
             localStorage.setItem('test', JSON.stringify(this.currentTest));
             this.$router.push('/newtest');
+       },
+
+       // Удаление теста
+       deleteTest(code, msg) {
+           this.showFlashMsg(code, msg);
+           this.fetchData();
        }
    }
 

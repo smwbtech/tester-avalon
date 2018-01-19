@@ -99,7 +99,7 @@ export default {
             single: {
                 vars: [
                     {
-                        text: 'Вариант ответа',
+                        text: '',
                         isRight: false,
                         id: 1
                     }
@@ -110,7 +110,7 @@ export default {
             multiple: {
                 vars: [
                     {
-                        text: 'Вариант ответа',
+                        text: '',
                         isRight: false,
                         id: 1
                     }
@@ -139,7 +139,7 @@ export default {
             this.single = {
                 vars: [
                     {
-                        text: 'Вариант ответа',
+                        text: '',
                         isRight: false,
                         id: 1
                     }
@@ -150,7 +150,7 @@ export default {
             this.multiple = {
                 vars: [
                     {
-                        text: 'Вариант ответа',
+                        text: '',
                         isRight: false,
                         id: 1
                     }
@@ -163,12 +163,13 @@ export default {
 
         //Добавляем вариант ответа
         singleAddVar() {
+            this.single.nextVarId++;
             this.single.vars.push({
-                text: 'Вариант ответа',
+                text: '',
                 isRight: false,
                 id: this.single.nextVarId
             });
-            this.single.nextVarId++;
+
         },
 
         // Удаление вариантами

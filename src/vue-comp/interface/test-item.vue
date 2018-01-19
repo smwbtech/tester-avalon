@@ -129,7 +129,12 @@ export default {
                 axios.get(`php/deletetest.php?test_id=${query}`)
                 .then( (res) => {
                     if(res.data.status) {
-                        // TODO: Вывести сообщение об успешном удалении теста
+                        let msg = 'Тест успешно удален из базы данных';
+                        this.$emit('delete-info', 3, msg);
+                    }
+                    else {
+                        let msg = 'Ошибка базы данных, попробуйте позже';
+                        this.$emit('delete-info', 1, msg);
                     }
                 })
                 .catch( (err) => console.log(err));

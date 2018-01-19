@@ -69,12 +69,14 @@
                 >
                 добавить вопрос</button>
 
-                 <transition name="fade">
-                    <p
-                        v-if="flashMsg.text.length > 0"
-                        :class="flashMsgClass"
-                    >{{flashMsg.text}}</p>
-                </transition>
+                <transition name="fade">
+                   <flash-message
+                       v-if="flashMsg.text.length > 0"
+                       :code="flashMsg.status"
+                       :text="flashMsg.text"
+                   >
+                   </flash-message>
+              </transition>
 
             </form>
 
@@ -88,6 +90,7 @@
 
 import sideMenu from './side-menu.vue';
 import newQuestion from './new-question.vue';
+import flashMessage from './interface/flashmessage.vue'
 import testCheck from './../js/test.js';
 import axios from './../../node_modules/axios/dist/axios.js';
 
@@ -96,7 +99,8 @@ export default {
 
     components: {
        'side-menu': sideMenu,
-       'new-question': newQuestion
+       'new-question': newQuestion,
+       'flash-message': flashMessage
    },
 
    data() {

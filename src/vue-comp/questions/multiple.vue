@@ -1,7 +1,7 @@
 <template lang="html">
 
     <div class="question-var">
-        <input type="text" name="" value="" placeholder="Вариант ответа" :placeholder="placeholderText" v-model="varText" @input="updateInfo">
+        <input type="text" name="" value="" placeholder="Вариант ответа" v-model="varText" @input="updateInfo">
         <img @click="deleteVar" src="img/cross.svg" alt="">
         <label @click="rightVar" for="right_var" :class="{active: isRight}">правильный</label>
         <input type="checkbox" name="" value="" id="right_var">

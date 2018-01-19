@@ -7,6 +7,8 @@ export default {
 
     check(testObj) {
 
+        console.log(testObj);
+
         let res = {
             status: true,
             msg: '',
@@ -173,6 +175,7 @@ function checkMultiVarsRights(vars) {
 
 function checkMultiVarsText(vars) {
     for(let i = 0; i < vars.length; i++) {
+        vars[i].text.length;
         if(vars[i].text.length === 0 || vars[i].text.length > 500) {
             return false;
         }
