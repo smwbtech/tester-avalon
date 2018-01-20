@@ -41,7 +41,7 @@
                 $question_id = $question['question_id'];
 
                 $vars = mysqli_query($db, '
-                SELECT question_variant_id AS var_bd_id, question_variant_text AS var_text, question_variant_client_id AS question_client_id
+                SELECT question_variant_id AS var_bd_id, question_variant_text AS var_text, question_variant_client_id AS question_client_id, question_variant_question_id AS question_db_id
                 FROM question_variant
                 WHERE question_variant_question_id = '. $question_id .';
                 ');

@@ -6,7 +6,7 @@
 
             <h2>{{title}}</h2>
             <p>{{description}}</p>
-            <button type="button" name="button">Готово</button>
+            <button @click="sendTest" type="button" name="button">Готово</button>
 
 
         </aside>
@@ -23,6 +23,12 @@ export default {
         return {
             title: this.testname,
             description: this.testdescription
+        }
+    },
+
+    methods: {
+        sendTest() {
+            this.$emit('send-test');
         }
     }
 

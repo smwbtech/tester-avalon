@@ -6,7 +6,7 @@
         v-if="qstType == 1"
     >
         <div v-for="variant in qstVars" :key="variant.var_bd_id">
-            <input :value="variant.question_client_id" v-model="answer" @change="updateAnswer" type="radio" name="single_var" :id="variant.question_client_id">
+            <input :value="variant.question_client_id" :data-questionid="variant.question_db_id"  @change="updateAnswer" type="radio" :name="'single_var_'+variant.question_db_id" :id="variant.question_client_id">
             <label :for="variant.question_client_id">{{variant.var_text}}</label>
         </div>
     </div>
@@ -16,13 +16,13 @@
     >
         <div v-for="variant in qstVars"
         :key="variant.var_bd_id">
-            <input :value="variant.question_client_id" v-model="answer" @change="updateAnswer" type="checkbox" name="single_var" :id="variant.question_client_id">
+            <input :value="variant.question_client_id" :data-questionid="variant.question_db_id" @change="updateAnswer" type="checkbox" :name="'multiple_var_'+variant.question_db_id" :id="variant.question_client_id">
             <label :for="variant.question_client_id">{{variant.var_text}}</label>
         </div>
     </div>
 
     <div v-else class="variant-item">
-        <input v-model="answerStr" @change="updateAnswer" class="variant-item__string" type="text" placeholder="Напишите ваш ответ">
+        <input :data-questionid="qstId" @change="updateAnswer" class="variant-item__string" type="text" placeholder="Напишите ваш ответ">
     </div>
 
 
@@ -45,19 +45,40 @@ export default {
             navId: this.currentqst,
             qstVars: this.questions[this.currentqst].vars,
             questionsArr: this.questions,
-            answer: [],
-            answerStr: ''
+            answers: [],
+            qstId: undefined
         }
     },
 
     methods: {
+
+        getMultipleAnswers(id) {
+            let answer = '';
+            let vars = document.querySelectorAll(`input[name="multiple_var_${id}"]`);
+            for(let i = 0; i < vars.length; i++) {
+                if(vars[i].checked) {
+                    answer.length == 0 ? answer += vars[i].value : answer += (',' + vars[i].value);
+                }
+            }
+            return answer;
+        },
+
+        // Обновляем информацию о вопросе
         updateAnswer(e) {
-            let answer = {};
-            answer.answer = this.qstType == 1 || this.qstType == 2 ? this.answer: this.answerStr;
-            answer.questionDbId = this.questions[this.currentqst].question_id;
-            answer.questionType = this.qstType;
-            console.log(this.answer);
-            this.$emit('update-answer', answer);
+
+            let check = true;
+            let answer = {
+                answer: this.qstType !== 2 ? e.target.value : this.getMultipleAnswers(+e.target.getAttribute('data-questionid')),
+                questionDbId: +e.target.getAttribute('data-questionid')
+            };
+            this.answers.forEach( (v,i,a) => {
+                if(v.questionDbId == answer.questionDbId) {
+                    a[i] = answer;
+                    check = false;
+                }
+            });
+            check ? this.answers.push(answer) : false;
+            this.$emit('update-answer', this.answers);
         }
     },
 
@@ -66,6 +87,7 @@ export default {
     watch: {
         currentqst: function (data) {
             this.qstVars = this.questionsArr[data].vars;
+            this.qstId = this.questionsArr[data].question_id;
         },
         type: function (data) {
                 this.qstType = data;

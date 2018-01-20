@@ -13,6 +13,7 @@
             <test-menu
                 :testname="test.test_name"
                 :testdescription="test.test_description"
+                @send-test="sendTestHander"
             >
 
             </test-menu>
@@ -163,15 +164,15 @@ export default {
         },
 
         //Обновляем информацию ответов
-        updateAnswerHandler(answer) {
-            let check = true;
-            this.answers.forEach( (v,i,a) => {
-                if(v.questionDbId === answer.questionDbId) {
-                    a[i] = answer;
-                    check = false;
-                }
-            });
-            if(check) this.answers.push(answer);
+        updateAnswerHandler(answers) {
+            this.answers = answers;
+        },
+
+        // Отправляем тест
+        sendTestHander() {
+            if(window.confirm('Вы готовы отправить ответы на проверку?')) {
+                console.log(this.answers);
+            }
         }
     },
 
