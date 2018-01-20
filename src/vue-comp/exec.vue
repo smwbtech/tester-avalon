@@ -28,6 +28,20 @@
 
                         <h2>{{test.questions[userProgress.currentQstId].question_description}}</h2>
                         <p>{{questionDescr}}</p>
+                        <variants
+                            :type="currentQstType"
+                            :questions="questions"
+                            :currentqst="userProgress.currentQstId"
+                        ></variants>
+
+                        <ul class="test-nav">
+                            <li
+                                v-for="n in test.questions.length"
+                                :id="'qst_'+n"
+                                @click="changeQst"
+                            >{{n}}</li>
+                        </ul>
+
 
 
                     </div>
@@ -44,6 +58,7 @@
 
 import testMenu from './interface/test-menu.vue';
 import loadingElem from './interface/loading.vue';
+import variantsElem from './interface/variants.vue';
 import axios from './../../node_modules/axios/dist/axios.js';
 import Auth from './../js/auth.js';
 
@@ -51,7 +66,8 @@ export default {
 
     components: {
         'test-menu': testMenu,
-        'loading': loadingElem
+        'loading': loadingElem,
+        'variants': variantsElem
     },
 
     // Когда компонент создан, получаем тест, проверяем, аторизацию пользвателя
@@ -67,13 +83,15 @@ export default {
             authorized: false,
             loaded: false,
             userProgress: {
-                currentQstId: 1
-            }
-
+                currentQstId: 0
+            },
+            currentQstType: 1
         }
     },
 
     computed: {
+
+        //Описание вопроса в зависимости от типа
         questionDescr() {
             switch (+this.questions[this.userProgress.currentQstId].question_type_id) {
                 case 1:
@@ -92,6 +110,7 @@ export default {
     },
 
     methods: {
+        //Получаем данные с сервер, сверяем авторизацию пользователя и возможность анонимного прохождения
         fetchData() {
             let query = "?" + atob(window.location.search.slice(1));
             Auth.checkUser()
@@ -121,6 +140,14 @@ export default {
 
             })
             .catch( (err) => console.log(err));
+        },
+
+        //Навигация по вопросам
+        changeQst(e) {
+            this.userProgress.currentQstId = +e.target.id.slice(4) - 1;
+            this.currentQstType = +this.test.questions[this.userProgress.currentQstId].question_type_id;
+            console.log(this.currentQstType + ' - type');
+            // console.log(this.variants);
         }
     },
 
@@ -156,6 +183,10 @@ export default {
 
     .exec-page > div {
         display: flex;
+    }
+
+    .content > div {
+        width: 100%;
     }
 
 
