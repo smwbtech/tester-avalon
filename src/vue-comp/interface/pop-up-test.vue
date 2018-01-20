@@ -10,6 +10,7 @@
 
 
                     </div>
+                    <p v-if="testStatus == 1" class="link">{{testId}}</p>
                     <h2>{{testTitle}}</h2>
                     <p>{{testDescription}}</p>
                     <img :src="testImage" alt="">
@@ -58,7 +59,7 @@ export default {
             testDescription: this.description,
             testImage: this.imglink ? this.imglink : 'img/default_test.svg',
             testStatus: +this.status ? true : false,
-            testId: +this.testid,
+            testId: window.location.origin + '/exec?' +  btoa('test_id=' + (+this.testid)), //кодируем запрос в формат base64
             testOptions: {
                 timeLimit: +this.time !== 0 ? true : false,
                 time: +this.time,

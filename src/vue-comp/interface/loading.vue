@@ -18,57 +18,66 @@ export default {
 
     .loading-indicator {
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
+        justify-content: center;
         align-items: center;
-        width: 300px;
-        height: 300px;
+        width: 100px;
+        height: 100px;
         height: auto;
+        opacity: 1;
     }
 
     span[class^="loading-indicator"] {
-        width: 125px;
-        height: 125px;
+        width: 45px;
+        height: 45px;
         transform: scale(1);
         background-color: var(--purple);
-        -webkit-animation: load 2s ease-in-out infinite;
+
+    }
+
+    .loading-indicator__1 {
+        -webkit-animation: load 1.5s ease-in-out infinite;
+        animation: load 1.5s ease-in-out infinite;
+        /* animation-delay: .5s; */
+    }
+
+    .loading-indicator__2 {
+        -webkit-animation: load 1.5s ease-in-out infinite;
         animation: load 2s ease-in-out infinite;
+        animation-delay: .1s;
     }
 
-    .loading-indicator-1 {
-        animation-delay: .5s;
+    .loading-indicator__3 {
+        -webkit-animation: load 1.5s ease-in-out infinite;
+        animation: load 1.5s ease-in-out infinite;
+        animation-delay: .2s;
     }
 
-    .loading-indicator-2 {
-        animation-delay: 1s;
-    }
-
-    .loading-indicator-3 {
-        animation-delay: 1.5s;
-    }
-
-    .loading-indicator-4 {
-        animation-delay: 2s;
+    .loading-indicator__4 {
+        -webkit-animation: load 1.5s ease-in-out infinite;
+        animation: load 1.5s ease-in-out infinite;
+        animation-delay: .3s;
     }
 
     @-webkit-keyframes load {
-        0% { transform: scale(1); }
-        50% { transform: scale(.1); }
-        100% { transform: scale(1); }
+        0% { transform: scale(1); opacity: 1;}
+        50% { transform: scale(.1); opacity: .2;}
+        100% { transform: scale(1); opacity: 1;}
     }
     @-o-keyframes load {
-        0% { transform: scale(1); }
-        50% { transform: scale(.1); }
-        100% { transform: scale(1); }
+        0% { transform: scale(1); opacity: 1;}
+        50% { transform: scale(.1); opacity: .2;}
+        100% { transform: scale(1); opacity: 1;}
     }
     @-moz-keyframes load {
-        0% { transform: scale(1); }
-        50% { transform: scale(.1); }
-        100% { transform: scale(1); }
+        0% { transform: scale(1); opacity: 1;}
+        50% { transform: scale(.1); opacity: .2;}
+        100% { transform: scale(1); opacity: 1;}
     }
     @keyframes load {
-        0% { transform: scale(1); }
-        50% { transform: scale(.1); }
-        100% { transform: scale(1); }
+        0% { transform: scale(1); opacity: 1;}
+        50% { transform: scale(.1); opacity: .2;}
+        100% { transform: scale(1); opacity: 1;}
     }
 
 

@@ -158,12 +158,12 @@ export default {
 
             axios.post('php/auth.php',this.loginFormData)
             .then( (res) => {
-                console.log(res);
                 if(!res.data.success) {
                     throw new Error(res.data.errorMsg);
                 }
                 else {
-                    this.$router.push({path: '/tester'});
+                    let query = localStorage.getItem('query');
+                    !query ? this.$router.push({path: '/tester'}) : window.location.href = window.location.origin + '/exec?' + query;
                 }
             })
             .catch( (err) => {
@@ -187,7 +187,8 @@ export default {
                         throw new Error(res.data.errorMsg);
                     }
                     else {
-                        this.$router.push({path: '/tester'});
+                        let query = localStorage.getItem('query');
+                        !query ? this.$router.push({path: '/tester'}) : window.location.href = window.location.origin + '/exec?' + query;
                     }
                 })
                 .catch( (err) => {
@@ -196,6 +197,11 @@ export default {
                 });
             }
         }
+    },
+
+    beforeRouteLeave(to, from, next) {
+        localStorage.getItem('query') ? localStorage.removeItem('query') : false;
+        next();
     }
 
 }

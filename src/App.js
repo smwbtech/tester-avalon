@@ -14,6 +14,7 @@ window.__forceSmoothScrollPolyfill__ = true;
 import login from './vue-comp/login.vue';
 import tester from './vue-comp/tester.vue';
 import newTest from './vue-comp/new-test.vue';
+import execTest from './vue-comp/exec.vue';
 
 
 
@@ -51,6 +52,11 @@ const router = new Router({
             meta: {
                 requiredAuth: true
             }
+        },
+
+        {
+            path: '/exec',
+            component: execTest
         },
 
     ],
