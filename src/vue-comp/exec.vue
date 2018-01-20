@@ -26,21 +26,26 @@
 
                     <div v-else>
 
-                        <h2>{{test.questions[userProgress.currentQstId].question_description}}</h2>
-                        <p>{{questionDescr}}</p>
+                        <h2 class="test-title">{{test.questions[userProgress.currentQstId].question_description}}</h2>
+                        <p class="test-descr">{{questionDescr}}</p>
                         <variants
                             :type="currentQstType"
                             :questions="questions"
                             :currentqst="userProgress.currentQstId"
+                            @update-answer="updateAnswerHandler"
+
                         ></variants>
 
-                        <ul class="test-nav">
-                            <li
+                        <div class="test-nav">
+                            <ul>
+                                <li
                                 v-for="n in test.questions.length"
                                 :id="'qst_'+n"
+                                :class="{active: n==1}"
                                 @click="changeQst"
-                            >{{n}}</li>
-                        </ul>
+                                >{{n}}</li>
+                            </ul>
+                        </div>
 
 
 
@@ -85,7 +90,8 @@ export default {
             userProgress: {
                 currentQstId: 0
             },
-            currentQstType: 1
+            currentQstType: 1,
+            answers: []
         }
     },
 
@@ -144,10 +150,28 @@ export default {
 
         //Навигация по вопросам
         changeQst(e) {
+            let elemId = e.target.id;
+            let children = e.path[1].children;
+            e.target.classList.contains('active') ? false : e.target.classList.add('active');
+            for(let i = 0; i < children.length; i++) {
+                if(children[i].id !== elemId) {
+                    children[i].classList.contains('active') ? children[i].classList.remove('active') : false;
+                }
+            }
             this.userProgress.currentQstId = +e.target.id.slice(4) - 1;
             this.currentQstType = +this.test.questions[this.userProgress.currentQstId].question_type_id;
-            console.log(this.currentQstType + ' - type');
-            // console.log(this.variants);
+        },
+
+        //Обновляем информацию ответов
+        updateAnswerHandler(answer) {
+            let check = true;
+            this.answers.forEach( (v,i,a) => {
+                if(v.questionDbId === answer.questionDbId) {
+                    a[i] = answer;
+                    check = false;
+                }
+            });
+            if(check) this.answers.push(answer);
         }
     },
 
@@ -187,11 +211,113 @@ export default {
 
     .content > div {
         width: 100%;
+        padding-top: calc(var(--row) * 2);
+        color: var(--blue);
+    }
+
+    .test-title, .test-descr {
+        text-align: center;
+    }
+
+    .test-title {
+        position: relative;
+    }
+
+    .test-title:after {
+        position: absolute;
+        left: 30%;
+        bottom: -10px;
+        display: block;
+        content: '';
+        width: 40%;
+        height: 3px;
+        background-color: var(--purple);
     }
 
 
     .warning {
         align-self: center;
+    }
+
+    .test-nav {
+        position: fixed;
+        display: flex;
+        padding-bottom: 40px;
+        justify-content: center;
+        width: calc(var(--column) * 20);
+        z-index: 102;
+        bottom: 0;
+        right: 0;
+        background-color: #fff;
+    }
+
+    .test-nav ul {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: calc(var(--column) * 16);
+        min-height: 0 20px;
+        list-style: none;
+        margin: 0 auto;
+    }
+
+    .test-nav li {
+        position: relative;
+        display: block;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        margin: 0px 20px;
+        text-align: center;
+        padding: 5px;
+        border: 1px solid var(--purple);
+        background-color: var(--purple);
+        color: #fff;
+        border-radius: 20px;
+        -webkit-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+    }
+
+    .test-nav li:before,
+    .test-nav li:after {
+        width: 40px;
+        position: absolute;
+        content: '';
+        display: block;
+        height: 3px;
+        background-color: var(--purple);
+    }
+
+    .test-nav li:before {
+        top: 14px;
+        left: -41px;
+    }
+
+    .test-nav li:after {
+        top: 14px;
+        right: -41px;
+    }
+
+    .test-nav li:first-child {
+        margin-left: 0;
+    }
+
+    .test-nav li:first-child:before {
+        display: none;
+    }
+
+    .test-nav li:last-child {
+        margin-right: 0;
+    }
+
+    .test-nav li:last-child:after {
+        display: none;
+    }
+
+    .test-nav li.active {
+        background-color: #fff;
+        color: var(--purple);
     }
 
 </style>

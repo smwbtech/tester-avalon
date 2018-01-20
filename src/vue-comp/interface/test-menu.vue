@@ -2,7 +2,7 @@
 
     <div class="menu">
 
-        <aside class="side-menu">
+        <aside class="side-menu-test">
 
             <h2>{{title}}</h2>
             <p>{{description}}</p>
@@ -36,7 +36,7 @@ export default {
         height: 100vh;
     }
 
-    .side-menu {
+    .side-menu-test {
         z-index: 102;
         position: fixed;
         top: 0;
@@ -44,6 +44,41 @@ export default {
         width: calc(var(--column) * 4);
         height: 100vh;
         background-color: var(--purple);
+        color: #fff;
+    }
+
+    .side-menu-test h2 {
+        padding: 20px 10px;
+        text-align: center;
+        position: relative;
+    }
+
+    .side-menu-test h2:after {
+        position: absolute;
+        left: 25%;
+        width: 50%;
+        height: 3px;
+        bottom: -10px;
+        display: block;
+        content: '';
+        background-color: #fff;
+
+    }
+
+    .side-menu-test p{
+        padding: 20px 10px;
+        text-align: center;
+    }
+
+    .side-menu-test button {
+        font-family: 'marta', sans-serif;
+        position: absolute;
+        width: 40%;
+        left: 30%;
+        bottom: 40px;
+        background-color: var(--purple);
+        border: 3px solid #fff;
+        padding: 10px;
         color: #fff;
     }
 
