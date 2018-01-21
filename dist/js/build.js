@@ -2449,6 +2449,19 @@ var _default = {
     sendTestHander: function sendTestHander() {
       if (window.confirm('Вы готовы отправить ответы на проверку?')) {
         console.log(this.answers);
+        var date = new Date();
+        var test = {
+          test_db_id: this.test.test_id,
+          anonym: this.test.test_anonym,
+          token: btoa(date.getTime()),
+          answers: this.answers
+        };
+
+        _axios.default.post('php/saveexectest.php', test).then(function (res) {
+          console.log(res);
+        }).catch(function (err) {
+          console.log(err);
+        });
       }
     }
   },
@@ -20294,51 +20307,11 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 
 /***/ }),
 
-/***/ 938:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(939);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(1)("99448fea", content, true);
-
-/***/ }),
-
-/***/ 939:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".exec-page{width:100%;display:flex}.exec-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16);display:flex}.exec-page>div{display:flex}.content>div{width:100%;padding-top:calc(var(--row) * 2);color:var(--blue)}.test-descr,.test-title{text-align:center}.test-title{position:relative}.test-title:after{position:absolute;left:30%;bottom:-10px;display:block;content:\"\";width:40%;height:3px;background-color:var(--purple)}.warning{align-self:center}.test-nav{position:fixed;padding-bottom:40px;width:calc(var(--column) * 20);z-index:102;bottom:0;right:0;background-color:#fff}.test-nav,.test-nav ul{display:flex;justify-content:center}.test-nav ul{position:relative;width:calc(var(--column) * 16);min-height:0 20px;list-style:none;margin:0 auto}.test-nav li{position:relative;display:block;cursor:pointer;width:20px;height:20px;margin:0 20px;text-align:center;padding:5px;border:1px solid var(--purple);background-color:var(--purple);color:#fff;border-radius:20px;transition:all .3s ease-in-out}.test-nav li:after,.test-nav li:before{width:40px;position:absolute;content:\"\";display:block;height:3px;background-color:var(--purple)}.test-nav li:before{top:14px;left:-41px}.test-nav li:after{top:14px;right:-41px}.test-nav li:first-child{margin-left:0}.test-nav li:first-child:before{display:none}.test-nav li:last-child{margin-right:0}.test-nav li:last-child:after{display:none}.test-nav li.active{background-color:#fff;color:var(--purple)}", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ 94:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tester-page"},[_c('side-menu'),_vm._v(" "),_c('section',{staticClass:"content"},[_c('transition',{attrs:{"name":"fade"}},[(_vm.popUp)?_c('pop-up',{attrs:{"testtite":_vm.currentTest.test_name,"description":_vm.currentTest.test_description,"imglink":_vm.currentTest.test_image,"anonym":_vm.currentTest.test_anonym,"time":_vm.currentTest.test_time,"status":_vm.currentTest.test_status,"testquestions":_vm.currentTest.questions,"testid":_vm.currentTest.test_id},on:{"close-window":_vm.closePopUp,"edit-test":_vm.editTestHandler}}):_vm._e()],1),_vm._v(" "),_c('nav',{staticClass:"new-test-nav"},[_c('ul',[_c('li',[_c('a',{attrs:{"href":"save"},on:{"click":function($event){$event.preventDefault();_vm.showPublished($event)}}},[_vm._v("Опубликованные")])]),_vm._v(" "),_c('li',[_c('a',{attrs:{"href":"publish"},on:{"click":function($event){$event.preventDefault();_vm.showDrafts($event)}}},[_vm._v("Черновики")])])])]),_vm._v(" "),(_vm.loading)?_c('div',{staticClass:"loading"},[_c('loading-indicator')],1):_c('div',{staticClass:"tests-list"},[_vm._l((_vm.tests.published),function(test){return (_vm.currentSection)?_c('test-item',{key:_vm.test_id,attrs:{"description":test.test_description,"testtitle":test.test_name,"testid":test.test_id,"imglink":test.test_img,"status":test.test_status},on:{"show-test":_vm.showTestHandler,"delete-info":_vm.deleteTest}}):_vm._l((_vm.tests.drafts),function(test){return _c('test-item',{key:_vm.test_id,attrs:{"description":test.test_description,"testtitle":test.test_name,"testid":test.test_id,"imglink":test.test_img,"status":test.test_status},on:{"show-test":_vm.showTestHandler,"delete-info":_vm.deleteTest}})})}),_vm._v(" "),_c('div',{staticClass:"add-new-test",on:{"click":_vm.newTest}}),_vm._v(" "),_c('transition',{attrs:{"name":"fade"}},[(_vm.flashMsg.text.length > 0)?_c('flash-message',{attrs:{"code":_vm.flashMsg.status,"text":_vm.flashMsg.text}}):_vm._e()],1)],2)],1)],1)}
-var staticRenderFns = []
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-
-/***/ }),
-
-/***/ 940:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"exec-page"},[(!_vm.loaded)?_c('div',[_c('loading')],1):_c('div',[_c('test-menu',{attrs:{"testname":_vm.test.test_name,"testdescription":_vm.test.test_description},on:{"send-test":_vm.sendTestHander}}),_vm._v(" "),_c('section',{staticClass:"content"},[(!_vm.authorized)?_c('div',{staticClass:"warning"},[_c('loading'),_vm._v(" "),_c('p',[_vm._v(" Данный тест доступен только зарегистрированным пользователям. Сейчас вы будете перенаправленны на страницу авторизации и регистрации. После входа в систему вы автоматически вернетесь к прохождению теста")])],1):_c('div',[_c('h2',{staticClass:"test-title"},[_vm._v(_vm._s(_vm.test.questions[_vm.userProgress.currentQstId].question_description))]),_vm._v(" "),_c('p',{staticClass:"test-descr"},[_vm._v(_vm._s(_vm.questionDescr))]),_vm._v(" "),_c('variants',{attrs:{"type":_vm.currentQstType,"questions":_vm.questions,"currentqst":_vm.userProgress.currentQstId},on:{"update-answer":_vm.updateAnswerHandler}}),_vm._v(" "),_c('div',{staticClass:"test-nav"},[_c('ul',_vm._l((_vm.test.questions.length),function(n){return _c('li',{class:{active: n==1},attrs:{"id":'qst_'+n},on:{"click":_vm.changeQst}},[_vm._v(_vm._s(n))])}))])],1)])],1)])}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -20353,9 +20326,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_22364dd1_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_exec_vue__ = __webpack_require__(940);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0946a3ed_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_exec_vue__ = __webpack_require__(955);
 function injectStyle (ssrContext) {
-  __webpack_require__(938)
+  __webpack_require__(953)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -20373,7 +20346,7 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_22364dd1_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_exec_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0946a3ed_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_exec_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
@@ -20382,6 +20355,46 @@ var Component = normalizeComponent(
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
+
+/***/ }),
+
+/***/ 953:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(954);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("1fcade72", content, true);
+
+/***/ }),
+
+/***/ 954:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".exec-page{width:100%;display:flex}.exec-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16);display:flex}.exec-page>div{display:flex}.content>div{width:100%;padding-top:calc(var(--row) * 2);color:var(--blue)}.test-descr,.test-title{text-align:center}.test-title{position:relative}.test-title:after{position:absolute;left:30%;bottom:-10px;display:block;content:\"\";width:40%;height:3px;background-color:var(--purple)}.warning{align-self:center}.test-nav{position:fixed;padding-bottom:40px;width:calc(var(--column) * 20);z-index:102;bottom:0;right:0;background-color:#fff}.test-nav,.test-nav ul{display:flex;justify-content:center}.test-nav ul{position:relative;width:calc(var(--column) * 16);min-height:0 20px;list-style:none;margin:0 auto}.test-nav li{position:relative;display:block;cursor:pointer;width:20px;height:20px;margin:0 20px;text-align:center;padding:5px;border:1px solid var(--purple);background-color:var(--purple);color:#fff;border-radius:20px;transition:all .3s ease-in-out}.test-nav li:after,.test-nav li:before{width:40px;position:absolute;content:\"\";display:block;height:3px;background-color:var(--purple)}.test-nav li:before{top:14px;left:-41px}.test-nav li:after{top:14px;right:-41px}.test-nav li:first-child{margin-left:0}.test-nav li:first-child:before{display:none}.test-nav li:last-child{margin-right:0}.test-nav li:last-child:after{display:none}.test-nav li.active{background-color:#fff;color:var(--purple)}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 955:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"exec-page"},[(!_vm.loaded)?_c('div',[_c('loading')],1):_c('div',[_c('test-menu',{attrs:{"testname":_vm.test.test_name,"testdescription":_vm.test.test_description},on:{"send-test":_vm.sendTestHander}}),_vm._v(" "),_c('section',{staticClass:"content"},[(!_vm.authorized)?_c('div',{staticClass:"warning"},[_c('loading'),_vm._v(" "),_c('p',[_vm._v(" Данный тест доступен только зарегистрированным пользователям. Сейчас вы будете перенаправленны на страницу авторизации и регистрации. После входа в систему вы автоматически вернетесь к прохождению теста")])],1):_c('div',[_c('h2',{staticClass:"test-title"},[_vm._v(_vm._s(_vm.test.questions[_vm.userProgress.currentQstId].question_description))]),_vm._v(" "),_c('p',{staticClass:"test-descr"},[_vm._v(_vm._s(_vm.questionDescr))]),_vm._v(" "),_c('variants',{attrs:{"type":_vm.currentQstType,"questions":_vm.questions,"currentqst":_vm.userProgress.currentQstId},on:{"update-answer":_vm.updateAnswerHandler}}),_vm._v(" "),_c('div',{staticClass:"test-nav"},[_c('ul',_vm._l((_vm.test.questions.length),function(n){return _c('li',{class:{active: n==1},attrs:{"id":'qst_'+n},on:{"click":_vm.changeQst}},[_vm._v(_vm._s(n))])}))])],1)])],1)])}
+var staticRenderFns = []
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
 
 /***/ }),
 

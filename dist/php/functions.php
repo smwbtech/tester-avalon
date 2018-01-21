@@ -87,4 +87,71 @@ function getUserId($token, $session) {
     }
 }
 
+// Проверяем результаты теста и получани статистику
+function checkTest($test_answer_id) {
+
+    $db  = mysqli_connect(HOST, USER, PASS, BASE);
+
+    if (mysqli_connect_errno()) {
+        return false;
+    }
+    else {
+
+        $res = array(
+            'test_answers_id' => $test_answer_id,
+            'time_start' => 0,
+            'time_end' => 0,
+            'user_id' => 0,
+            'answers' => []
+        );
+
+        mysqli_set_charset($db, 'UTF8');
+        $query = mysqli_query($db, '
+        SELECT user_answers.user_answers_answer AS user_answer,
+        question_answer.question_answer_answer AS question_answer,
+        question.question_type_id AS question_type,
+        question.question_id AS question_id,
+        question.question_id AS question_id
+        FROM user_answers
+        JOIN question_answer
+        ON user_answers.user_answers_question_id = question_answer.question_answe_question_id
+        JOIN question ON question.question_id = user_answers.user_answers_question_id
+        WHERE user_answers.user_answers_test_answers_id = "'.$test_answer_id.'";
+        ');
+
+        $answers = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+        // $ans = array('res' => fal, );
+
+        foreach ($answers as $key => $answer) {
+            $result = array("question_id" => $answer['question_id']);
+            switch (+$answer['question_type']) {
+                case 1:
+                    $result['result'] = $answer['user_answer'] == $answer['question_answer'];
+                    break;
+                case 2:
+                    $arr = explode(",",$answer['user_answer']);
+                    $arr2 = explode(",", $answer['question_answer']);
+                    sort($arr);
+                    sort($arr2);
+                    $result['result'] = implode($arr) == implode($arr2);
+                    break;
+                case 3:
+                    $user_answer = $answer['user_answer'];
+                    $right_answer = $answer['question_answer'];
+                    $pattern = "/$user_answer/i";
+                    $result['result'] = (bool)preg_match($pattern, $right_answer);
+                    break;
+            }
+
+            array_push($res['answers'], )
+
+        }
+
+
+
+    }
+
+}
+
 ?>

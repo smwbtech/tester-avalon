@@ -172,6 +172,20 @@ export default {
         sendTestHander() {
             if(window.confirm('Вы готовы отправить ответы на проверку?')) {
                 console.log(this.answers);
+                let date = new Date();
+                let test = {
+                    test_db_id: this.test.test_id,
+                    anonym:  this.test.test_anonym,
+                    token: btoa(date.getTime()),
+                    answers: this.answers
+                };
+                axios.post('php/saveexectest.php', test)
+                .then( (res) => {
+                    console.log(res);
+                })
+                .catch( (err) => {
+                    console.log(err);
+                });
             }
         }
     },
