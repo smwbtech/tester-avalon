@@ -46,10 +46,11 @@
 
             </div>
 
-            <div class="tests-list" v-else>
+            <div class="tests-list-main" v-else>
 
+
+                <div v-if="currentSection" class="tests-list" :key="sectionOne">
                     <test-item
-                    v-if="currentSection"
                     v-for="test in tests.published"
                     :description = "test.test_description"
                     :testtitle="test.test_name"
@@ -60,8 +61,13 @@
                     @show-test="showTestHandler"
                     @delete-info="deleteTest"
                     ></test-item>
+                    <button type="button" name="button" class="add-new-test" @click="newTest"></button>
 
-                    <test-item v-else
+                </div>
+
+                <div v-else class="tests-list" :key="sectionTwo">
+
+                    <test-item
                     v-for="test in tests.drafts"
                     :description = "test.test_description"
                     :testtitle="test.test_name"
@@ -72,8 +78,11 @@
                     @show-test="showTestHandler"
                     @delete-info="deleteTest"
                     ></test-item>
+                    <button type="button" name="button" class="add-new-test" @click="newTest"></button>
 
-                <div class="add-new-test" @click="newTest">
+                </div>
+
+                <!-- <div class="add-new-test" @click="newTest"> -->
 
                 </div>
 
@@ -122,12 +131,15 @@ export default {
            flashMsg: {
                text: '',
                status: 1
-           }
+           },
+           sectionOne: 1,
+           sectionTwo: 2
        }
    },
 
    created() {
        this.fetchData();
+
    },
 
    methods: {
@@ -143,6 +155,7 @@ export default {
                res.data.tests.forEach( (v) => {
                    v.test_status == 1 ? this.tests.published.push(v) : this.tests.drafts.push(v);
                });
+               console.log(12312312);
                console.log(this.tests);
 
            })
@@ -224,20 +237,28 @@ export default {
     /* margin-left: calc(var(--column) * 6); */
 }
 
-.tests-list {
+.tests-list-main {
     width: 100%;
-    /* min-height: 100vh; */
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.tests-list {
+    /* width: 100%; */
+    /* min-height: 100vh; */
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .tests-list > div:nth-child(3n+1) {
-    margin-right: calc(var(--column) * 2);
+    margin-right: calc(var(--column) * 1);
 }
 
 .tests-list > div:nth-child(3n+3) {
-    margin-left: calc(var(--column) * 2);
+    margin-left: calc(var(--column) * 1);
 }
 
 .add-new-test {
@@ -247,6 +268,8 @@ export default {
     -webkit-box-shadow: 3px 3px 8px var(--purple);
     box-shadow: 3px 3px 8px var(--purple);
     cursor: pointer;
+    background-color: #fff;
+    border: none;
     opacity: .2;
     background-image: url('./../img/add.svg');
     background-repeat: no-repeat;
@@ -259,6 +282,13 @@ export default {
 
 .add-new-test:hover {
     opacity: 1;
+}
+
+.fix {
+    opacity: 0;
+    position: fixed;
+    top: -100;
+    display: none;
 }
 
 .fade-enter-active, .fade-leave-active {

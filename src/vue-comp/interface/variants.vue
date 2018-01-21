@@ -106,11 +106,9 @@ export default {
                                 elements[i].value == answer ? elements[i].checked = true : elements[i].checked = false;
                             }
                         }
-                    } ,500)
+                    } ,100)
                     break;
                     case 2:
-                        console.log(this.answers);
-
                         setTimeout( () => {
                             let elements;
                             let answer;
@@ -125,23 +123,20 @@ export default {
                                      answer.indexOf(elements[i].value) >= 0 ? elements[i].checked = true : elements[i].checked = false;
                                 }
                             }
-                        } ,500)
+                        } ,100)
                         break;
 
                         case 3:
-                            console.log(this.qstType + '-qst');
-
                             setTimeout( () => {
                                 let elements;
                                 let answer;
                                 this.answers.forEach( (v, i, a) => {
-                                    console.log(document.querySelectorAll(`input[type="text"][data-questionid="${v.questionDbId}"]`).length);
                                     if(document.querySelectorAll(`input[type="text"][data-questionid="${v.questionDbId}"]`).length > 0) {
                                         elements = document.querySelectorAll(`input[type="text"][data-questionid="${v.questionDbId}"]`);
                                         elements[0].value = v.answer;
                                     }
                                 });
-                            } ,500)
+                            } ,100)
                             break;
                 default:
 

@@ -270,8 +270,13 @@ export default {
            }
        },
 
+       publishTest() {
+           this.saveTest(1);
+       },
+
        // Сохраняем тест
        saveTest(status) {
+           var status = status ? status : 0;
            let test = {
                title: this.testTitle,
                description: this.testDescription,
@@ -287,19 +292,20 @@ export default {
            if(res.status) {
                axios.post('php/savetest.php', test)
                .then( (res) => {
+                   console.log(res);
                    if(!res.data.success) {
                        this.showFlashMsg(1, res.data.errorMsg);
                    }
                    else {
                        let msg = status == 0 ? 'Тест успешно сохранен в базе данных' : 'Тест опубликован';
                        this.showFlashMsg(3, msg);
-                       setTimeout( () => this.$router.push('/tester'), 5000);
-
+                       setTimeout( () => this.$router.push('/tester'), 2000);
                    }
                })
                .catch( (err) => console.log(err));
            }
            else {
+               console.log('мы здесь');
                this.showFlashMsg(res.code, res.msg);
                document.querySelector('.new-test-form__title').scrollIntoView({ behavior: 'smooth' });
                if(res.questionId) {

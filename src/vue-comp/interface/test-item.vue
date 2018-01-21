@@ -157,6 +157,7 @@ export default {
     position: relative;
     width: calc(var(--column) * 4);
     min-height: calc(var(--row) * 4);
+    margin-bottom: calc(var(--row) * 1);
     border: 1px solid var(--blue);
     -webkit-box-shadow: 3px 3px 8px var(--purple);
     box-shadow: 3px 3px 8px var(--purple);

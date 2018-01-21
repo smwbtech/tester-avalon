@@ -66,7 +66,7 @@
 
                             $id      = mysqli_insert_id($db);
                             $expire  = time() + 1000 * 60 * 60 * 24;
-                            $session = $_COOKIE['PHPSESSID'];
+                            $session = isset($_COOKIE['PHPSESSID']) ? $_COOKIE['PHPSESSID'] : session_id();
                             $token   = generator();
 
                             mysqli_query($db, '

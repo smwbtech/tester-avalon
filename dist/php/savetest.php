@@ -47,6 +47,7 @@
 
                 }
 
+
                 $test_insert = mysqli_query($db, '
                     INSERT INTO test SET
                     test_name = "' . mysqli_real_escape_string($db,$title) . '",
@@ -58,6 +59,8 @@
                ');
 
                $test_id = mysqli_insert_id($db);
+
+
                // Сохраняем вопросы
                foreach ($questions as $key => $question) {
                    $qst_description = $question['text'];

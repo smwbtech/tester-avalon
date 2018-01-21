@@ -13,12 +13,19 @@
             <test-menu
                 :testname="test.test_name"
                 :testdescription="test.test_description"
-                @send-test="sendTestHander"
+                @send-test="sendTestHander(false)"
             >
 
             </test-menu>
 
             <section class="content">
+
+                <nav class="new-test-nav">
+                    <ul>
+                        <li>Вы ответили на <span>{{answers.length}}</span><span>/</span><span>{{questions.length}}</span></li>
+                        <li v-if="timeLimit"><img src="img/stopwatch.svg" alt="">{{timeLeft}}</li>
+                    </ul>
+                </nav>
 
                     <div v-if="!authorized" class="warning">
                         <loading></loading>
@@ -94,7 +101,10 @@ export default {
             },
             currentQstType: 1,
             answers: [],
-            timeStart: 0
+            timeStart: 0,
+            time: 0,
+            timeLimit: false,
+            timeLeft: 0
         }
     },
 
@@ -121,7 +131,7 @@ export default {
     methods: {
         //Получаем данные с сервер, сверяем авторизацию пользователя и возможность анонимного прохождения
         fetchData() {
-            let query = "?" + atob(window.location.search.slice(1));
+            let query = "?" + atob(decodeURIComponent(window.location.search.slice(1)));
             Auth.checkUser()
             .then( (res) => {
                 let auth = res;
@@ -132,6 +142,7 @@ export default {
                 .then( (res) => {
                     console.log(res);
                     let date = new Date();
+                    // Устанавливани все параметры теста
                     this.test = res.data.test;
                     this.questions = res.data.test.questions;
                     this.timeStart = test && +test.test_db_id == testId? test.time_start : date.getTime();
@@ -139,14 +150,12 @@ export default {
                     this.currentQstType = test && +test.test_db_id == testId? test.currentQstType : +res.data.test.questions[0].question_type_id;
                     this.currentQstId = test && +test.test_db_id == testId? test.currentQstId : 1;
                     this.loaded = true;
-                    // console.log('Ответы')
-                    // console.log(this.answers);
-                    // console.log('Текущий вопрос')
-                    // console.log(this.currentQstId);
+
                     setTimeout( () => {
                         var elem = document.getElementById(`qst_${this.currentQstId + 1}`);
                         elem.click();
                     }, 100);
+
                     if(!res.data.anonym && !auth) {
                         console.log('Просим авторизоваться');
                         this.authorized = false;
@@ -158,6 +167,23 @@ export default {
                     else {
                         console.log('Показываем тест');
                         this.authorized = true;
+                        // Если тест на время, то будет отсчитывать время
+                        if(+res.data.test.test_time > 0) {
+                            setInterval( () => {
+                                this.timeLimit = true;
+                                this.time = +res.data.test.test_time;
+
+                                let date = new Date();
+                                let timeStart = new Date(this.timeStart);
+                                let timeNow = new Date(date.getTime());
+                                let timeDifference = timeNow.getHours()*60 + timeNow.getMinutes() - timeStart.getHours()*60 - timeStart.getMinutes();
+
+                                if(timeDifference > this.time) {
+                                    window.alert('Время теста истекло, ваши данные отправлены на сервер');
+                                }
+
+                            }, 1000 * 60);
+                        }
                     }
                 })
                 .catch( (err) => console.log(err));
@@ -179,11 +205,17 @@ export default {
             }
             this.userProgress.currentQstId = +e.target.id.slice(4) - 1;
             this.currentQstType = +this.test.questions[this.userProgress.currentQstId].question_type_id;
+            this.saveLocalStorage();
+            console.log(this.answers);
         },
 
         //Обновляем информацию ответов и сохраняем объект теста в localStorage
         updateAnswerHandler(answers) {
             this.answers = answers;
+            this.saveLocalStorage();
+        },
+
+        saveLocalStorage() {
             let date = new Date();
             let test = {
                 test_db_id: this.test.test_id,
@@ -200,16 +232,25 @@ export default {
         },
 
         // Отправляем тест
-        sendTestHander() {
-            if(window.confirm('Вы готовы отправить ответы на проверку?')) {
-                console.log(this.answers);
-                let date = new Date();
-                let test = {
-                    test_db_id: this.test.test_id,
-                    anonym:  this.test.test_anonym,
-                    token: btoa(date.getTime()),
-                    answers: this.answers
-                };
+        sendTestHander(autoEnd) {
+            localStorage.removeItem('current_test');
+            let date = new Date();
+            let test = {
+                test_db_id: this.test.test_id,
+                anonym:  this.test.test_anonym,
+                token: this.token ? this.token : btoa(date.getTime()),
+                answers: this.answers
+            };
+            if(!autoEnd && window.confirm('Вы готовы отправить ответы на проверку?')) {
+                axios.post('php/saveexectest.php', test)
+                .then( (res) => {
+                    console.log(res);
+                })
+                .catch( (err) => {
+                    console.log(err);
+                });
+            }
+            else {
                 axios.post('php/saveexectest.php', test)
                 .then( (res) => {
                     console.log(res);
@@ -223,9 +264,8 @@ export default {
 
     // Перед тем, как пользователь попадет на страницу, проверим, установлено ли id вопроса
     beforeRouteEnter (to, from, next) {
-
-        let check = atob(window.location.search.slice(1)).slice(0,7);
-        if(check == 'test_id') {
+        let check = decodeURIComponent(window.location.search.slice(1));
+        if(/test_id/.test(atob(check))) {
             next();
         }
         else {

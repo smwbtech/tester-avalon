@@ -59,7 +59,7 @@ export default {
             testDescription: this.description,
             testImage: this.imglink ? this.imglink : 'img/default_test.svg',
             testStatus: +this.status ? true : false,
-            testId: window.location.origin + '/exec?' +  btoa('test_id=' + (+this.testid)), //кодируем запрос в формат base64
+            testId: window.location.origin + '/exec?' + encodeURIComponent(btoa('test_id=' + (+this.testid))), //кодируем запрос в формат base64
             testOptions: {
                 timeLimit: +this.time !== 0 ? true : false,
                 time: +this.time,

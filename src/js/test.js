@@ -7,7 +7,7 @@ export default {
 
     check(testObj) {
 
-        console.log(testObj);
+        // console.log(testObj);
 
         let res = {
             status: true,
