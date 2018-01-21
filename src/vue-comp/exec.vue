@@ -32,6 +32,7 @@
                         <variants
                             :type="currentQstType"
                             :questions="questions"
+                            :answersarr="answers"
                             :currentqst="userProgress.currentQstId"
                             @update-answer="updateAnswerHandler"
 
@@ -92,7 +93,8 @@ export default {
                 currentQstId: 0
             },
             currentQstType: 1,
-            answers: []
+            answers: [],
+            timeStart: 0
         }
     },
 
@@ -123,13 +125,28 @@ export default {
             Auth.checkUser()
             .then( (res) => {
                 let auth = res;
+                let testId = +query.slice(9);
+                let test = JSON.parse(localStorage.getItem('current_test'));
+                //Если тест уже есть в localStorage берем данные от туда, в противном случае, загружаем их с сервера
                 axios.get(`php/getexectest.php${query}`)
                 .then( (res) => {
                     console.log(res);
+                    let date = new Date();
                     this.test = res.data.test;
                     this.questions = res.data.test.questions;
+                    this.timeStart = test && +test.test_db_id == testId? test.time_start : date.getTime();
+                    this.answers = test && +test.test_db_id == testId? test.answers : [];
+                    this.currentQstType = test && +test.test_db_id == testId? test.currentQstType : +res.data.test.questions[0].question_type_id;
+                    this.currentQstId = test && +test.test_db_id == testId? test.currentQstId : 1;
                     this.loaded = true;
-                    console.log(this.questions);
+                    // console.log('Ответы')
+                    // console.log(this.answers);
+                    // console.log('Текущий вопрос')
+                    // console.log(this.currentQstId);
+                    setTimeout( () => {
+                        var elem = document.getElementById(`qst_${this.currentQstId + 1}`);
+                        elem.click();
+                    }, 100);
                     if(!res.data.anonym && !auth) {
                         console.log('Просим авторизоваться');
                         this.authorized = false;
@@ -151,6 +168,7 @@ export default {
 
         //Навигация по вопросам
         changeQst(e) {
+            console.log(1);
             let elemId = e.target.id;
             let children = e.path[1].children;
             e.target.classList.contains('active') ? false : e.target.classList.add('active');
@@ -163,9 +181,22 @@ export default {
             this.currentQstType = +this.test.questions[this.userProgress.currentQstId].question_type_id;
         },
 
-        //Обновляем информацию ответов
+        //Обновляем информацию ответов и сохраняем объект теста в localStorage
         updateAnswerHandler(answers) {
             this.answers = answers;
+            let date = new Date();
+            let test = {
+                test_db_id: this.test.test_id,
+                test: this.test,
+                anonym:  this.test.test_anonym,
+                token: this.test.token ? this.test.token : btoa(date.getTime()),
+                answers: this.answers,
+                time_start: this.timeStart,
+                currentQstType: this.currentQstType,
+                currentQstId: this.userProgress.currentQstId
+            };
+
+            localStorage.setItem('current_test', JSON.stringify(test));
         },
 
         // Отправляем тест

@@ -37,7 +37,7 @@
 <script>
 export default {
 
-    props: ['type', 'questions', 'currentqst'],
+    props: ['type', 'questions', 'currentqst', 'answersarr'],
 
     data() {
         return {
@@ -45,9 +45,17 @@ export default {
             navId: this.currentqst,
             qstVars: this.questions[this.currentqst].vars,
             questionsArr: this.questions,
-            answers: [],
+            answers: this.answersarr,
             qstId: undefined
         }
+    },
+
+    mounted() {
+        this.answers.forEach( (v,i,a) => {
+            let dbIndex = v.questionDbId;
+            let elements = document.querySelectorAll(`input[type="checkbox"][data-questionid="${dbIndex}"]`) || document.querySelectorAll(`input[type="radio"][data-questionid="${dbIndex}"]`);
+            console.log(elements);
+        });
     },
 
     methods: {
@@ -65,7 +73,6 @@ export default {
 
         // Обновляем информацию о вопросе
         updateAnswer(e) {
-
             let check = true;
             let answer = {
                 answer: this.qstType !== 2 ? e.target.value : this.getMultipleAnswers(+e.target.getAttribute('data-questionid')),
@@ -79,18 +86,80 @@ export default {
             });
             check ? this.answers.push(answer) : false;
             this.$emit('update-answer', this.answers);
+        },
+
+        //Устанавливани значение чекд в зависимости от типа вопроса
+        updateInputs() {
+            switch (this.qstType) {
+                case 1:
+                    setTimeout( () => {
+                        let elements;
+                        let answer;
+                        this.answers.forEach( (v, i, a) => {
+                            if(document.querySelectorAll([`input[type="radio"][data-questionid="${v.questionDbId}"]`]).length > 0) {
+                                elements = document.querySelectorAll([`input[type="radio"][data-questionid="${v.questionDbId}"]`]);
+                                answer = v.answer;
+                            }
+                        });
+                        if(elements.length > 0) {
+                            for(let i = 0; i < elements.length; i++) {
+                                elements[i].value == answer ? elements[i].checked = true : elements[i].checked = false;
+                            }
+                        }
+                    } ,500)
+                    break;
+                    case 2:
+                        console.log(this.answers);
+
+                        setTimeout( () => {
+                            let elements;
+                            let answer;
+                            this.answers.forEach( (v, i, a) => {
+                                if(document.querySelectorAll([`input[type="checkbox"][data-questionid="${v.questionDbId}"]`]).length > 0) {
+                                    elements = document.querySelectorAll([`input[type="checkbox"][data-questionid="${v.questionDbId}"]`]);
+                                    answer = v.answer;
+                                }
+                            });
+                            if(elements.length > 0) {
+                                for(let i = 0; i < elements.length; i++) {
+                                     answer.indexOf(elements[i].value) >= 0 ? elements[i].checked = true : elements[i].checked = false;
+                                }
+                            }
+                        } ,500)
+                        break;
+
+                        case 3:
+                            console.log(this.qstType + '-qst');
+
+                            setTimeout( () => {
+                                let elements;
+                                let answer;
+                                this.answers.forEach( (v, i, a) => {
+                                    console.log(document.querySelectorAll(`input[type="text"][data-questionid="${v.questionDbId}"]`).length);
+                                    if(document.querySelectorAll(`input[type="text"][data-questionid="${v.questionDbId}"]`).length > 0) {
+                                        elements = document.querySelectorAll(`input[type="text"][data-questionid="${v.questionDbId}"]`);
+                                        elements[0].value = v.answer;
+                                    }
+                                });
+                            } ,500)
+                            break;
+                default:
+
+            }
         }
     },
 
 
     // эта функция запускается при любом изменении навинации
     watch: {
+        type: function (data) {
+                this.qstType = data;
+                this.updateInputs();
+        },
         currentqst: function (data) {
             this.qstVars = this.questionsArr[data].vars;
             this.qstId = this.questionsArr[data].question_id;
-        },
-        type: function (data) {
-                this.qstType = data;
+            this.updateInputs();
         }
     }
 
