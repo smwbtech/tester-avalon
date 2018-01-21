@@ -21,9 +21,9 @@
             <section class="content">
 
                 <nav class="new-test-nav">
-                    <ul>
-                        <li>Вы ответили на <span>{{answers.length}}</span><span>/</span><span>{{questions.length}}</span></li>
-                        <li v-if="timeLimit"><img src="img/stopwatch.svg" alt="">{{timeLeft}}</li>
+                    <ul class="test-info">
+                        <li class="question">Вы ответили на <span>{{answers.length}}</span><span>/</span><span>{{questions.length}}</span></li>
+                        <li class="time-limit" v-if="timeLimit"><img src="img/stopwatch.svg" alt="">{{timeLeft}}:00</li>
                     </ul>
                 </nav>
 
@@ -55,10 +55,12 @@
                                 >{{n}}</li>
                             </ul>
                         </div>
-
-
-
                     </div>
+
+                    <pop-up v-if="popUp"
+                        :results="testResults"
+                        :timestart="timeStart"
+                    ></pop-up>
 
             </section>
 
@@ -73,6 +75,7 @@
 import testMenu from './interface/test-menu.vue';
 import loadingElem from './interface/loading.vue';
 import variantsElem from './interface/variants.vue';
+import popUpExec from './interface/pop-up-exec.vue';
 import axios from './../../node_modules/axios/dist/axios.js';
 import Auth from './../js/auth.js';
 
@@ -81,7 +84,8 @@ export default {
     components: {
         'test-menu': testMenu,
         'loading': loadingElem,
-        'variants': variantsElem
+        'variants': variantsElem,
+        'pop-up': popUpExec
     },
 
     // Когда компонент создан, получаем тест, проверяем, аторизацию пользвателя
@@ -104,7 +108,9 @@ export default {
             timeStart: 0,
             time: 0,
             timeLimit: false,
-            timeLeft: 0
+            timeLeft: 0,
+            popUp: false,
+            testResults: {}
         }
     },
 
@@ -135,28 +141,31 @@ export default {
             Auth.checkUser()
             .then( (res) => {
                 let auth = res;
-                let testId = +query.slice(9);
-                let test = JSON.parse(localStorage.getItem('current_test'));
                 //Если тест уже есть в localStorage берем данные от туда, в противном случае, загружаем их с сервера
                 axios.get(`php/getexectest.php${query}`)
                 .then( (res) => {
                     console.log(res);
                     let date = new Date();
+                    let testId = +query.slice(9);
+                    let testData = JSON.parse(localStorage.getItem('current_test'));
+
                     // Устанавливани все параметры теста
                     this.test = res.data.test;
                     this.questions = res.data.test.questions;
-                    this.timeStart = test && +test.test_db_id == testId? test.time_start : date.getTime();
-                    this.answers = test && +test.test_db_id == testId? test.answers : [];
-                    this.currentQstType = test && +test.test_db_id == testId? test.currentQstType : +res.data.test.questions[0].question_type_id;
-                    this.currentQstId = test && +test.test_db_id == testId? test.currentQstId : 1;
+
+                    this.timeStart = testData && +testData.test_db_id == testId? testData.time_start : date.getTime();
+                    this.answers = testData && +testData.test_db_id == testId? testData.answers : [];
+                    this.currentQstType = testData && +testData.test_db_id == testId? testData.currentQstType : +res.data.test.questions[0].question_type_id;
+                    this.currentQstId = testData && +testData.test_db_id == testId? testData.currentQstId : 0;
                     this.loaded = true;
 
                     setTimeout( () => {
-                        var elem = document.getElementById(`qst_${this.currentQstId + 1}`);
+                        let id = this.currentQstId + 1;
+                        let elem = document.getElementById(`qst_${id}`);
                         elem.click();
-                    }, 100);
+                    }, 0);
 
-                    if(!res.data.anonym && !auth) {
+                    if(+res.data.test.test_anonym == 0 && !auth) {
                         console.log('Просим авторизоваться');
                         this.authorized = false;
                         window.localStorage.setItem('query', window.location.search.slice(1));
@@ -167,22 +176,31 @@ export default {
                     else {
                         console.log('Показываем тест');
                         this.authorized = true;
+
                         // Если тест на время, то будет отсчитывать время
                         if(+res.data.test.test_time > 0) {
+                            console.log('Это тест на время');
+                            var test = 'dsadasda';
+                            this.timeLimit = true;
+                            this.time = res.data.test.test_time;
+                            let date = new Date(this.timeStart);
+
+                            let timeStart = date.getMinutes();
+                            console.log(timeStart);
                             setInterval( () => {
-                                this.timeLimit = true;
-                                this.time = +res.data.test.test_time;
-
-                                let date = new Date();
-                                let timeStart = new Date(this.timeStart);
-                                let timeNow = new Date(date.getTime());
-                                let timeDifference = timeNow.getHours()*60 + timeNow.getMinutes() - timeStart.getHours()*60 - timeStart.getMinutes();
-
-                                if(timeDifference > this.time) {
+                                let newDate = new Date();
+                                let timeNow = newDate.getMinutes();
+                                let timeDifference = timeNow - timeStart;
+                                let minutes = new Date(timeDifference * 1000);
+                                console.log(timeDifference);
+                                this.timeLeft = this.time - timeDifference;
+                                if(timeDifference < this.time) {
                                     window.alert('Время теста истекло, ваши данные отправлены на сервер');
+
+
                                 }
 
-                            }, 1000 * 60);
+                            }, 1000);
                         }
                     }
                 })
@@ -194,9 +212,8 @@ export default {
 
         //Навигация по вопросам
         changeQst(e) {
-            console.log(1);
             let elemId = e.target.id;
-            let children = e.path[1].children;
+            let children = e.target.parentElement.children;
             e.target.classList.contains('active') ? false : e.target.classList.add('active');
             for(let i = 0; i < children.length; i++) {
                 if(children[i].id !== elemId) {
@@ -245,6 +262,8 @@ export default {
                 axios.post('php/saveexectest.php', test)
                 .then( (res) => {
                     console.log(res);
+                    this.testResults = res.data;
+                    this.popUp = true;
                 })
                 .catch( (err) => {
                     console.log(err);
@@ -254,6 +273,7 @@ export default {
                 axios.post('php/saveexectest.php', test)
                 .then( (res) => {
                     console.log(res);
+                    this.popUp = true;
                 })
                 .catch( (err) => {
                     console.log(err);
@@ -405,5 +425,42 @@ export default {
         background-color: #fff;
         color: var(--purple);
     }
+
+    .test-info {
+        max-width: 65%;
+        padding-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+    }
+
+    .test-info li {
+        display: block;
+        position: relative;
+        margin-left: 50px;
+        font-size: 1.2rem;
+
+    }
+
+    .test-info li img {
+        position: absolute;
+        top: -10px;
+        left: -15px;
+    }
+
+    .time-limit img {
+        width: 40px;
+    }
+    .test-info .question {
+        opacity: 1;
+        color: var(--blue);
+    }
+
+    .test-info .question span:last-child {
+        opacity: .5;
+        color: var(--purple);
+    }
+
 
 </style>

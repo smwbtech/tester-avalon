@@ -4,13 +4,13 @@
         <div>
                 <div class="pop-up-window" @click.stop>
                     <div class="pop-up-controls">
-                        <button class="pop-up-controls__publish" v-if="!testStatus" type="button" name="button" title="опубликовать"></button>
+                        <button class="pop-up-controls__publish" v-if="!testStatus" type="button" name="button" title="опубликовать" @click="publish"></button>
                         <button class="pop-up-controls__edit" v-if="!testStatus" type="button" name="button" title="редактировать" @click="edit"></button>
-                        <button class="pop-up-controls__delete" type="button" name="button" title="удалить"></button>
+                        <button class="pop-up-controls__delete" type="button" name="button" title="удалить" @click="deleteTest"></button>
 
 
                     </div>
-                    <p v-if="testStatus == 1" class="link">{{testId}}</p>
+                    <p v-if="testStatus == 1" class="link">{{testLink}}</p>
                     <h2>{{testTitle}}</h2>
                     <p>{{testDescription}}</p>
                     <img :src="testImage" alt="">
@@ -35,6 +35,7 @@
 <script>
 
 import questionItem from './pop-up-question.vue';
+import axios from './../../../node_modules/axios/dist/axios.js';
 
 export default {
 
@@ -59,7 +60,8 @@ export default {
             testDescription: this.description,
             testImage: this.imglink ? this.imglink : 'img/default_test.svg',
             testStatus: +this.status ? true : false,
-            testId: window.location.origin + '/exec?' + encodeURIComponent(btoa('test_id=' + (+this.testid))), //кодируем запрос в формат base64
+            testId: this.testid,
+            testLink: window.location.origin + '/exec?' + encodeURIComponent(btoa('test_id=' + (+this.testid))), //кодируем запрос в формат base64
             testOptions: {
                 timeLimit: +this.time !== 0 ? true : false,
                 time: +this.time,
@@ -76,7 +78,48 @@ export default {
         },
         edit() {
             this.$emit('edit-test', this.testId);
+        },
+        //Удаляем тест
+        deleteTest() {
+
+            if(window.confirm('Вы точто хотите удалить тест?')) {
+                let query = this.testId;
+                axios.get(`php/deletetest.php?test_id=${query}`)
+                .then( (res) => {
+                    if(res.data.status) {
+                        let msg = 'Тест успешно удален из базы данных';
+                        this.$emit('delete-test', 3, msg);
+                        this.closeWindow();
+                    }
+                    else {
+                        let msg = 'Ошибка базы данных, попробуйте позже';
+                        this.$emit('delete-test', 3, msg);
+                        this.closeWindow();
+                    }
+                })
+                .catch( (err) => console.log(err));
+            }
+        },
+
+        //Публикуем тест
+        publish() {
+            let query = this.testId;
+            axios.get(`php/changeteststatus.php?test_id=${query}`)
+            .then( (res) => {
+                if(res.data.status) {
+                    let msg = 'Тест успешно опубликован';
+                    this.$emit('update-test', 3, msg);
+                    this.closeWindow();
+                }
+                else {
+                    let msg = 'Ошибка базы данных, попробуйте позже';
+                    this.$emit('update-test', 3, msg);
+                    this.closeWindow();
+                }
+            })
+            .catch( (err) => console.log(err));
         }
+
     },
 
     created () {

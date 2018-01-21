@@ -18,6 +18,7 @@
                 :testid="currentTest.test_id"
                 @close-window="closePopUp"
                 @edit-test="editTestHandler"
+                @delete-test="deleteTestHandler"
             >
 
             </pop-up>
@@ -163,6 +164,11 @@ export default {
                this.loading = false;
                console.log(err);
            });
+       },
+
+       deleteTestHandler(code, msg) {
+           this.flashMsg(code, msg);
+           this.fetchData();
        },
 
        //Вывод сообщения

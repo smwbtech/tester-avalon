@@ -44,7 +44,7 @@
                         </transition>
                         <img :src="anonymToggle" alt="">
                         <label for="anonym" :class="labelAnonym">Анонимное прохождение</label>
-                        <input type="checkbox" name="anonym" id="anonym" v-model="testOptions.anonym">
+                        <input type="checkbox" name="anonym" id="anonym" v-model="testOptions.anonym" @change="check">
                     </div>
 
                 </div>
@@ -130,6 +130,7 @@ export default {
    },
 
    computed: {
+       
        // Объект класса переключателя ограничения по вреиени
        timeToggle() {
            return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';

@@ -50,13 +50,13 @@ export default {
         }
     },
 
-    mounted() {
-        this.answers.forEach( (v,i,a) => {
-            let dbIndex = v.questionDbId;
-            let elements = document.querySelectorAll(`input[type="checkbox"][data-questionid="${dbIndex}"]`) || document.querySelectorAll(`input[type="radio"][data-questionid="${dbIndex}"]`);
-            console.log(elements);
-        });
-    },
+    // mounted() {
+    //     this.answers.forEach( (v,i,a) => {
+    //         let dbIndex = v.questionDbId;
+    //         let elements = document.querySelectorAll(`input[type="checkbox"][data-questionid="${dbIndex}"]`) || document.querySelectorAll(`input[type="radio"][data-questionid="${dbIndex}"]`);
+    //         console.log(elements);
+    //     });
+    // },
 
     methods: {
 
@@ -93,15 +93,15 @@ export default {
             switch (this.qstType) {
                 case 1:
                     setTimeout( () => {
-                        let elements;
-                        let answer;
+                        var elements;
+                        var answer;
                         this.answers.forEach( (v, i, a) => {
                             if(document.querySelectorAll([`input[type="radio"][data-questionid="${v.questionDbId}"]`]).length > 0) {
                                 elements = document.querySelectorAll([`input[type="radio"][data-questionid="${v.questionDbId}"]`]);
                                 answer = v.answer;
                             }
                         });
-                        if(elements.length > 0) {
+                        if(elements && elements.length > 0) {
                             for(let i = 0; i < elements.length; i++) {
                                 elements[i].value == answer ? elements[i].checked = true : elements[i].checked = false;
                             }
@@ -110,15 +110,15 @@ export default {
                     break;
                     case 2:
                         setTimeout( () => {
-                            let elements;
-                            let answer;
+                            var elements;
+                            var answer;
                             this.answers.forEach( (v, i, a) => {
                                 if(document.querySelectorAll([`input[type="checkbox"][data-questionid="${v.questionDbId}"]`]).length > 0) {
                                     elements = document.querySelectorAll([`input[type="checkbox"][data-questionid="${v.questionDbId}"]`]);
                                     answer = v.answer;
                                 }
                             });
-                            if(elements.length > 0) {
+                            if(elements && elements.length > 0) {
                                 for(let i = 0; i < elements.length; i++) {
                                      answer.indexOf(elements[i].value) >= 0 ? elements[i].checked = true : elements[i].checked = false;
                                 }
@@ -128,8 +128,8 @@ export default {
 
                         case 3:
                             setTimeout( () => {
-                                let elements;
-                                let answer;
+                                var elements;
+                                var answer;
                                 this.answers.forEach( (v, i, a) => {
                                     if(document.querySelectorAll(`input[type="text"][data-questionid="${v.questionDbId}"]`).length > 0) {
                                         elements = document.querySelectorAll(`input[type="text"][data-questionid="${v.questionDbId}"]`);
