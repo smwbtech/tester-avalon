@@ -121,10 +121,13 @@ function checkTest($test_answer_id) {
 
         $answers = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-        // $ans = array('res' => fal, );
+
 
         foreach ($answers as $key => $answer) {
-            $result = array("question_id" => $answer['question_id']);
+            $result = array(
+                "question_id" => $answer['question_id'],
+                "result" => false
+            );
             switch (+$answer['question_type']) {
                 case 1:
                     $result['result'] = $answer['user_answer'] == $answer['question_answer'];
@@ -143,12 +146,25 @@ function checkTest($test_answer_id) {
                     $result['result'] = (bool)preg_match($pattern, $right_answer);
                     break;
             }
-
-            array_push($res['answers'], )
-
+            array_push($res['answers'], $result);
         }
 
+    $stats = mysqli_query($db, '
 
+        SELECT test_answer_time_start AS time_start,
+        test_answer_time_end AS time_end,
+        test_answer_user_id AS user_id
+        FROM test_answers
+        WHERE test_answer_id = "'.$test_answer_id.'";
+
+    ');
+
+    $stats = mysqli_fetch_assoc($stats);
+    $res['time_start'] = $stats['time_start'];
+    $res['time_end'] = $stats['time_end'];
+    $res['user_id'] = $res['user_id'];
+
+    return $res;
 
     }
 

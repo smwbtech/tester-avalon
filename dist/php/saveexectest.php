@@ -18,7 +18,7 @@
         $answers = $_POST['answers'];
         $token = htmlspecialchars($_POST['token']);
 
-        $res = array("success" => true, "errorMsg" => "", "errorText" => "");
+        $res = array("success" => true, "errorMsg" => "", "errorText" => "", "result" => []);
         $db  = mysqli_connect(HOST, USER, PASS, BASE);
 
         if (mysqli_connect_errno()) {
@@ -54,6 +54,7 @@
                     ');
                 }
 
+                $res['result'] = checkTest($test_answer_id);
                 echo json_encode($res);
                 exit();
 

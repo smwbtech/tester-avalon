@@ -159,7 +159,8 @@ export default {
             axios.post('php/auth.php',this.loginFormData)
             .then( (res) => {
                 if(!res.data.success) {
-                    throw new Error(res.data.errorMsg);
+                    console.log(res);
+                    // throw new Error(res.data.errorMsg);
                 }
                 else {
                     let query = localStorage.getItem('query');
