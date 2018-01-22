@@ -65,7 +65,8 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-
+    -webkit-box-shadow: inset -4px 0px 3px rgba(0,0,0,0.2);
+    box-shadow: inset -4px 0px 3px rgba(0,0,0,0.2);
     width: calc(var(--column) * 4);
     height: 100vh;
     background-color: var(--purple);
