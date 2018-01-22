@@ -24,8 +24,6 @@
 </svg>Ссылка</a>
             <a v-if="testStatus == 1" @ckick.stop.prevent="showResp" class="tests-list-item-info__resp" href=""><svg version="1.1" id="respondent" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
-<style type="text/css">
-</style>
 <g>
 	<g>
 		<path class="st0" d="M7.9,11.9H4.9c-2.1,0-3.7,1.6-3.8,3.7c-0.1,0.6-0.3,1.7,0.1,2.1c1,1,3.4,1.4,5.2,1.4c1.8,0,4.1-0.4,5.2-1.4

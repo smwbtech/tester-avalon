@@ -20,13 +20,35 @@ if(checkUser()) {
     else {
 
         mysqli_set_charset($db, 'UTF8');
-        //Проверяем, существует ли уже такой тест (подобным считаем тест с таким же названием, описанием и авторством тогоже пользователя)
+        //Выбираем все тесты пользователя
         $tests = mysqli_query($db, '
-            SELECT * FROM
-            WHERE test_author_id = "' . $user_id . '";
+            SELECT test_id, test_name
+            FROM test
+            WHERE test_author_id = "'.$user_id.'";
         ');
 
+
         $res['tests'] = mysqli_fetch_all($tests, MYSQLI_ASSOC);
+
+        //Обходим их в цикле и для каждого теста добавляем варианты ответа
+
+        foreach ($res['tests'] as $key => $test) {
+            $test_id = $test['test_id'];
+
+            $tries = mysqli_query($db, '
+                SELECT *
+                FROM test_answers
+                WHERE test_answer_test_id = "'.$test_id.'";
+            ');
+
+            $res['tests'][$key]['tries'] = mysqli_fetch_all($tries, MYSQLI_ASSOC);
+
+            foreach ($res['tests'][$key]['tries'] as $k => $answer) {
+                $res['tests'][$key]['tries'][$k]['result'] = checkTest($answer['test_answer_id']);
+            }
+        }
+
+
         echo json_encode($res);
 
     }

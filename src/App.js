@@ -15,6 +15,7 @@ import login from './vue-comp/login.vue';
 import tester from './vue-comp/tester.vue';
 import newTest from './vue-comp/new-test.vue';
 import execTest from './vue-comp/exec.vue';
+import stats from './vue-comp/stats.vue';
 
 
 
@@ -49,6 +50,14 @@ const router = new Router({
         {
             path: '/newtest',
             component: newTest,
+            meta: {
+                requiredAuth: true
+            }
+        },
+
+        {
+            path: '/stats',
+            component: stats,
             meta: {
                 requiredAuth: true
             }
@@ -96,7 +105,8 @@ let app = new Vue({
     components: {
         'login': login,
         'tester': tester,
-        'new-test': newTest
+        'new-test': newTest,
+        'statistic': stats
     },
 
     methods: {

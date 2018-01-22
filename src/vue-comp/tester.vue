@@ -5,6 +5,8 @@
         <side-menu></side-menu>
         <section class="content">
 
+
+
               <transition name="fade">
             <pop-up
                 v-if="popUp"
@@ -24,6 +26,8 @@
             </pop-up>
         </transition>
 
+
+
             <nav class="new-test-nav">
                 <ul>
                     <li>
@@ -41,11 +45,14 @@
                 </ul>
             </nav>
 
+
+
             <div class="loading" v-if="loading">
 
                 <loading-indicator></loading-indicator>
 
             </div>
+
 
             <div class="tests-list-main" v-else>
 
@@ -97,11 +104,11 @@
                    </flash-message>
                 </transition>
 
+            </section>
+
+
             </div>
 
-        </section>
-
-    </div>
 
 </template>
 
@@ -157,7 +164,6 @@ export default {
                res.data.tests.forEach( (v) => {
                    v.test_status == 1 ? this.tests.published.push(v) : this.tests.drafts.push(v);
                });
-               console.log(12312312);
                console.log(this.tests);
 
            })
