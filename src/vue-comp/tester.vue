@@ -59,6 +59,7 @@
                     :key="test_id"
                     :imglink="test.test_img"
                     :status="test.test_status"
+                    :respondents="test.respondents"
                     @show-test="showTestHandler"
                     @delete-info="deleteTest"
                     ></test-item>

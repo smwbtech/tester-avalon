@@ -24,8 +24,13 @@
             mysqli_set_charset($db, 'UTF8');
             //Проверяем, существует ли уже такой тест (подобным считаем тест с таким же названием, описанием и авторством тогоже пользователя)
             $tests = mysqli_query($db, '
-                SELECT * FROM test
-                WHERE test_author_id = "' . $user_id . '";
+            SELECT test.*,
+            COUNT(test_answers.test_answer_id) AS respondents
+            FROM test
+            LEFT JOIN test_answers
+            ON test_answers.test_answer_test_id = test.test_id
+            WHERE test.test_author_id = "'.$user_id.'"
+            GROUP BY test.test_id;
             ');
 
             $res['tests'] = mysqli_fetch_all($tests, MYSQLI_ASSOC);

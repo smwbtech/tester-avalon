@@ -93,7 +93,7 @@ import axios from './../../../node_modules/axios/dist/axios.js';
 
 export default {
 
-    props: ['description', 'testtitle', 'status', 'imglink', 'testid'],
+    props: ['description', 'testtitle', 'status', 'imglink', 'testid', 'respondents'],
 
     data() {
         return {
@@ -102,7 +102,7 @@ export default {
             testStatus: this.status,
             testId: this.testid,
             testImage: this.imglink ? this.imglink : 'img/default_test.svg',
-            testRespondents: 0
+            testRespondents: this.respondents
         }
     },
 

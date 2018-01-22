@@ -60,12 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 29);
+/******/ 	return __webpack_require__(__webpack_require__.s = 30);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports) {
 
 /*
@@ -147,8 +146,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-
-/***/ 1:
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -167,7 +165,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(43)
+var listToStyles = __webpack_require__(44)
 
 /*
 type StyleObject = {
@@ -369,1634 +367,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-
-/***/ 10:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _reg = _interopRequireDefault(__webpack_require__(44));
-
-var _axios = _interopRequireDefault(__webpack_require__(3));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  data: function data() {
-    return {
-      // Активный таб
-      activeTab: 'auth',
-      // Ошибки формы авторизации
-      loginFormErr: '',
-      // Ошибки формы регистрации
-      regFormErr: '',
-      // Данные авторизации
-      loginFormData: {
-        userEmail: '',
-        userPassword: ''
-      },
-      // Данные регистрации
-      regFormData: {
-        userEmail: '',
-        userPassword: '',
-        userPassword_re: '',
-        userName: '',
-        userLastName: '',
-        userCompany: ''
-      }
-    };
-  },
-  computed: {
-    // Объект класса формы авторизации
-    authForm: function authForm() {
-      return {
-        'auth-form': true,
-        'auth-form_inactive': this.activeTab === 'reg'
-      };
-    },
-    // Объект класса формы регистрации
-    regForm: function regForm() {
-      return {
-        'reg-form': true,
-        'reg-form_inactive': this.activeTab === 'auth'
-      };
-    },
-    loginErrClass: function loginErrClass() {
-      return {
-        'log-form__flashmsg': true,
-        'log-form__flashmsg_inactive': this.regFormErr.length === 0
-      };
-    },
-    // Объект класса поля ошибок формы регистрации
-    regErrClass: function regErrClass() {
-      return {
-        'reg-form__flashmsg': true,
-        'reg-form__flashmsg_inactive': this.regFormErr.length === 0
-      };
-    }
-  },
-  methods: {
-    // Обработчик события переключения табов Авторизация/Регистрация
-    changeTab: function changeTab(e) {
-      this.activeTab = e.target.getAttribute('href').slice(1);
-      e.target.classList.contains;
-    },
-    // Обработчик события авторизации пользователя
-    authorize: function authorize(e) {
-      var _this = this;
-
-      _axios.default.post('php/auth.php', this.loginFormData).then(function (res) {
-        if (!res.data.success) {
-          console.log(res); // throw new Error(res.data.errorMsg);
-        } else {
-          var query = localStorage.getItem('query');
-          !query ? _this.$router.push({
-            path: '/tester'
-          }) : window.location.href = window.location.origin + '/exec?' + query;
-        }
-      }).catch(function (err) {
-        console.log(err);
-        _this.loginFormErr = err.message;
-      });
-    },
-    // Обработчик события регистрации пользователя
-    registration: function registration(e) {
-      var _this2 = this;
-
-      var res = _reg.default.checkData(this.regFormData);
-
-      if (!res.success) {
-        this.regFormErr = res.errorMsg; //TODO: Сброс текст ошибки по таймауту
-      } else {
-        _axios.default.post('php/reg.php', this.regFormData).then(function (res) {
-          console.log(res);
-
-          if (!res.data.success) {
-            throw new Error(res.data.errorMsg);
-          } else {
-            var query = localStorage.getItem('query');
-            !query ? _this2.$router.push({
-              path: '/tester'
-            }) : window.location.href = window.location.origin + '/exec?' + query;
-          }
-        }).catch(function (err) {
-          console.log(err);
-          _this2.regFormErr = err.message;
-        });
-      }
-    }
-  },
-  beforeRouteLeave: function beforeRouteLeave(to, from, next) {
-    localStorage.getItem('query') ? localStorage.removeItem('query') : false;
-    next();
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 100:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".menu,.side-menu-test{width:calc(var(--column) * 4);height:100vh}.side-menu-test{z-index:102;position:fixed;top:0;left:0;background-color:var(--purple);color:#fff}.side-menu-test h2{padding:20px 10px;text-align:center;position:relative}.side-menu-test h2:after{position:absolute;left:25%;width:50%;height:3px;bottom:-10px;display:block;content:\"\";background-color:#fff}.side-menu-test p{padding:20px 10px;text-align:center}.side-menu-test button{font-family:marta,sans-serif;position:absolute;width:40%;left:30%;bottom:40px;background-color:var(--purple);border:3px solid #fff;padding:10px;color:#fff}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 101:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"menu"},[_c('aside',{staticClass:"side-menu-test"},[_c('h2',[_vm._v(_vm._s(_vm.title))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(_vm.description))]),_vm._v(" "),_c('button',{attrs:{"type":"button","name":"button"},on:{"click":_vm.sendTest}},[_vm._v("Готово")])])])}
-var staticRenderFns = []
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-
-/***/ }),
-
-/***/ 102:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5f255f14_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_variants_vue__ = __webpack_require__(751);
-function injectStyle (ssrContext) {
-  __webpack_require__(749)
-}
-var normalizeComponent = __webpack_require__(2)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5f255f14_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_variants_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-
-/***/ 1091:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  props: ['results', 'timestart'],
-  data: function data() {
-    return {
-      res: this.results,
-      time: this.timestart
-    };
-  },
-  computed: {
-    right: function right() {
-      var right = 0;
-      this.res.result.answers.forEach(function (v, i, a) {
-        if (v.result) right++;
-      });
-      return right;
-    },
-    wrong: function wrong() {
-      var wrong = 0;
-      this.res.result.answers.forEach(function (v, i, a) {
-        if (!v.result) wrong++;
-      });
-      return wrong;
-    },
-    timeLeft: function timeLeft() {
-      var end = new Date(+this.res.time_end);
-      var start = new Date(this.time);
-      return end.getMinutes() - start.getMinutes();
-    }
-  },
-  methods: {
-    endTest: function endTest() {
-      localStorage.clear();
-      this.$router.replace('/tester');
-    }
-  },
-  mounted: function mounted() {
-    console.log('mounted');
-    console.log(this.res);
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 1094:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__ = __webpack_require__(1091);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58ce7670_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_pop_up_exec_vue__ = __webpack_require__(1311);
-function injectStyle (ssrContext) {
-  __webpack_require__(1309)
-}
-var normalizeComponent = __webpack_require__(2)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58ce7670_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_pop_up_exec_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-
-/***/ 11:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _sideMenu = _interopRequireDefault(__webpack_require__(12));
-
-var _newTest = _interopRequireDefault(__webpack_require__(14));
-
-var _loading = _interopRequireDefault(__webpack_require__(21));
-
-var _testItem = _interopRequireDefault(__webpack_require__(79));
-
-var _popUpTest = _interopRequireDefault(__webpack_require__(83));
-
-var _axios = _interopRequireDefault(__webpack_require__(3));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  components: {
-    'side-menu': _sideMenu.default,
-    'loading-indicator': _loading.default,
-    'test-item': _testItem.default,
-    'pop-up': _popUpTest.default
-  },
-  data: function data() {
-    return {
-      loading: false,
-      tests: null,
-      currentSection: true,
-      popUp: false,
-      currentTest: null,
-      flashMsg: {
-        text: '',
-        status: 1
-      },
-      sectionOne: 1,
-      sectionTwo: 2
-    };
-  },
-  created: function created() {
-    this.fetchData();
-  },
-  methods: {
-    // Получаем данные о тестах с сервера
-    fetchData: function fetchData() {
-      var _this = this;
-
-      this.loading = true;
-
-      _axios.default.get('php/gettests.php').then(function (res) {
-        _this.loading = false;
-        _this.tests = {};
-        _this.tests.published = [];
-        _this.tests.drafts = [];
-        res.data.tests.forEach(function (v) {
-          v.test_status == 1 ? _this.tests.published.push(v) : _this.tests.drafts.push(v);
-        });
-        console.log(12312312);
-        console.log(_this.tests);
-      }).catch(function (err) {
-        _this.loading = false;
-        console.log(err);
-      });
-    },
-    deleteTestHandler: function deleteTestHandler(code, msg) {
-      this.flashMsg(code, msg);
-      this.fetchData();
-    },
-    //Вывод сообщения
-    showFlashMsg: function showFlashMsg(status, text) {
-      var _this2 = this;
-
-      this.flashMsg.status = status;
-      this.flashMsg.text = text;
-      setTimeout(function () {
-        return _this2.flashMsg.text = '';
-      }, 10000);
-    },
-    // Добовление теста
-    newTest: function newTest() {
-      this.$router.push('/newtest');
-    },
-    //Показываем опубликованные тесты
-    showPublished: function showPublished() {
-      this.currentSection = true;
-    },
-    // Показываем черновики
-    showDrafts: function showDrafts() {
-      this.currentSection = false;
-    },
-    //Выводим всплывающее окно с полной информацией о тесте
-    showTestHandler: function showTestHandler(id) {
-      var _this3 = this;
-
-      var query = "?test_id=".concat(id);
-
-      _axios.default.get("php/gettest.php".concat(query)).then(function (res) {
-        _this3.currentTest = res.data.test;
-        _this3.popUp = true;
-      }).catch(function (err) {
-        return console.log(err);
-      });
-    },
-    //Закрываем всплывающее окно
-    closePopUp: function closePopUp() {
-      this.popUp = false;
-    },
-    //Редактирование теста
-    editTestHandler: function editTestHandler(id) {
-      localStorage.setItem('test', JSON.stringify(this.currentTest));
-      this.$router.push('/newtest');
-    },
-    // Удаление теста
-    deleteTest: function deleteTest(code, msg) {
-      this.showFlashMsg(code, msg);
-      this.fetchData();
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 1117:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(1118);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(1)("441a89ec", content, true);
-
-/***/ }),
-
-/***/ 1118:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".exec-page{width:100%;display:flex}.exec-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16);display:flex}.exec-page>div{display:flex}.content>div{width:100%;padding-top:calc(var(--row) * 2);color:var(--blue)}.test-descr,.test-title{text-align:center}.test-title{position:relative}.test-title:after{position:absolute;left:30%;bottom:-10px;display:block;content:\"\";width:40%;height:3px;background-color:var(--purple)}.warning{align-self:center}.test-nav{position:fixed;padding-bottom:40px;width:calc(var(--column) * 20);z-index:102;bottom:0;right:0;background-color:#fff}.test-nav,.test-nav ul{display:flex;justify-content:center}.test-nav ul{position:relative;width:calc(var(--column) * 16);min-height:0 20px;list-style:none;margin:0 auto}.test-nav li{position:relative;display:block;cursor:pointer;width:20px;height:20px;margin:0 20px;text-align:center;padding:5px;border:1px solid var(--purple);background-color:var(--purple);color:#fff;border-radius:20px;transition:all .3s ease-in-out}.test-nav li:after,.test-nav li:before{width:40px;position:absolute;content:\"\";display:block;height:3px;background-color:var(--purple)}.test-nav li:before{top:14px;left:-41px}.test-nav li:after{top:14px;right:-41px}.test-nav li:first-child{margin-left:0}.test-nav li:first-child:before{display:none}.test-nav li:last-child{margin-right:0}.test-nav li:last-child:after{display:none}.test-nav li.active{background-color:#fff;color:var(--purple)}.test-info{max-width:65%;padding-top:20px;display:flex;justify-content:flex-end;align-items:center}.test-info li{display:block;position:relative;margin-left:50px;font-size:1.2rem}.test-info li img{position:absolute;top:-10px;left:-15px}.time-limit img{width:40px}.test-info .question{opacity:1;color:var(--blue)}.test-info .question span:last-child{opacity:.5;color:var(--purple)}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 1119:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"exec-page"},[(!_vm.loaded)?_c('div',[_c('loading')],1):_c('div',[_c('test-menu',{attrs:{"testname":_vm.test.test_name,"testdescription":_vm.test.test_description},on:{"send-test":function($event){_vm.sendTestHander(false)}}}),_vm._v(" "),_c('section',{staticClass:"content"},[_c('nav',{staticClass:"new-test-nav"},[_c('ul',{staticClass:"test-info"},[_c('li',{staticClass:"question"},[_vm._v("Вы ответили на "),_c('span',[_vm._v(_vm._s(_vm.answers.length))]),_c('span',[_vm._v("/")]),_c('span',[_vm._v(_vm._s(_vm.questions.length))])]),_vm._v(" "),(_vm.timeLimit)?_c('li',{staticClass:"time-limit"},[_c('img',{attrs:{"src":"img/stopwatch.svg","alt":""}}),_vm._v(_vm._s(_vm.timeLeft)+":00")]):_vm._e()])]),_vm._v(" "),(!_vm.authorized)?_c('div',{staticClass:"warning"},[_c('loading'),_vm._v(" "),_c('p',[_vm._v(" Данный тест доступен только зарегистрированным пользователям. Сейчас вы будете перенаправленны на страницу авторизации и регистрации. После входа в систему вы автоматически вернетесь к прохождению теста")])],1):_c('div',[_c('h2',{staticClass:"test-title"},[_vm._v(_vm._s(_vm.test.questions[_vm.userProgress.currentQstId].question_description))]),_vm._v(" "),_c('p',{staticClass:"test-descr"},[_vm._v(_vm._s(_vm.questionDescr))]),_vm._v(" "),_c('variants',{attrs:{"type":_vm.currentQstType,"questions":_vm.questions,"answersarr":_vm.answers,"currentqst":_vm.userProgress.currentQstId},on:{"update-answer":_vm.updateAnswerHandler}}),_vm._v(" "),_c('div',{staticClass:"test-nav"},[_c('ul',_vm._l((_vm.test.questions.length),function(n){return _c('li',{class:{active: n==1},attrs:{"id":'qst_'+n},on:{"click":_vm.changeQst}},[_vm._v(_vm._s(n))])}))])],1),_vm._v(" "),(_vm.popUp)?_c('pop-up',{attrs:{"results":_vm.testResults,"timestart":_vm.timeStart}}):_vm._e()],1)],1)])}
-var staticRenderFns = []
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-
-/***/ }),
-
-/***/ 12:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1ca9ef26_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_side_menu_vue__ = __webpack_require__(51);
-function injectStyle (ssrContext) {
-  __webpack_require__(49)
-}
-var normalizeComponent = __webpack_require__(2)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1ca9ef26_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_side_menu_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-
-/***/ 13:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _axios = _interopRequireDefault(__webpack_require__(3));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  methods: {
-    //Выход их профиля
-    logout: function logout() {
-      var _this = this;
-
-      _axios.default.get('php/logout.php').then(function (res) {
-        return _this.$router.push('/auth');
-      }).catch(function (err) {
-        return console.log(err);
-      });
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 1309:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(1310);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(1)("60d172f3", content, true);
-
-/***/ }),
-
-/***/ 1310:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".pop-up-exec{left:calc(var(--column) * 6);top:0;width:calc(var(--column) * 15);min-height:50vh;z-index:200}.pop-up-exec,.pop-up-exec-container{position:fixed;background-color:#fff}.pop-up-exec-container{width:50%;min-height:50%;top:25%;left:25%;box-shadow:3px 3px 8px var(--purple);z-index:202}.background{width:52%;min-height:52%;position:fixed;top:24%;left:24%;overflow:hidden}.background div{height:100vh;width:100vw;left:-50%;top:-50%;position:absolute;background-image:linear-gradient(#656695,#956565);animation:a 5s ease-in-out infinite}.pop-up-info{padding:40px;text-align:center;color:var(--blue);margin:20px 0}.pop-up-info p{font-size:1.2rem;font-weight:700;margin-bottom:20px}.pop-up-info button{text-align:center;padding:5px;background-color:#fff;border:3px solid var(--purple);cursor:pointer;font-family:marta,sans-serif;font-weight:700}@keyframes a{0%{left:-60%;top:-60%}25%{left:0;top:0}50%{left:0;top:-50%}to{left:-50%;top:-50%}}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 1311:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pop-up-exec"},[_c('div',{staticClass:"pop-up-exec-container"},[_c('div',{staticClass:"pop-up-info"},[_c('h2',[_vm._v("Результаты вашейго теста")]),_vm._v(" "),_c('p',[_vm._v("Количество правильных ответов: "+_vm._s(_vm.right))]),_vm._v(" "),_c('p',[_vm._v("Количество неправильных ответов: "+_vm._s(_vm.wrong))]),_vm._v(" "),_c('p',[_vm._v("Время затраченое на прохождение: "+_vm._s(_vm.timeLeft))]),_vm._v(" "),_c('button',{attrs:{"type":"button","name":"button"},on:{"click":_vm.endTest}},[_vm._v("Завершить тестирование")])])]),_vm._v(" "),_vm._m(0)])}
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"background"},[_c('div')])}]
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-
-/***/ }),
-
-/***/ 14:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_afcec6e0_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_test_vue__ = __webpack_require__(685);
-function injectStyle (ssrContext) {
-  __webpack_require__(683)
-}
-var normalizeComponent = __webpack_require__(2)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_afcec6e0_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_test_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-
-/***/ 15:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _sideMenu = _interopRequireDefault(__webpack_require__(12));
-
-var _newQuestion = _interopRequireDefault(__webpack_require__(54));
-
-var _flashmessage = _interopRequireDefault(__webpack_require__(70));
-
-var _test = _interopRequireDefault(__webpack_require__(74));
-
-var _axios = _interopRequireDefault(__webpack_require__(3));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  components: {
-    'side-menu': _sideMenu.default,
-    'new-question': _newQuestion.default,
-    'flash-message': _flashmessage.default
-  },
-  data: function data() {
-    return {
-      testTitle: '',
-      testDescription: '',
-      testOptions: {
-        timeLimit: false,
-        time: 60,
-        anonym: false
-      },
-      questions: [{
-        type: 1,
-        text: '',
-        id: 1,
-        vars: []
-      }],
-      nextQuestionId: 2,
-      flashMsg: {
-        text: '',
-        status: 1
-      },
-      testId: undefined
-    };
-  },
-  computed: {
-    // Объект класса переключателя ограничения по вреиени
-    timeToggle: function timeToggle() {
-      return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';
-    },
-    // Объект класса переключателя анонимного прохождения
-    anonymToggle: function anonymToggle() {
-      return this.testOptions.anonym === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';
-    },
-    labelTime: function labelTime() {
-      return {
-        'active': this.testOptions.timeLimit
-      };
-    },
-    labelAnonym: function labelAnonym() {
-      return {
-        'active': this.testOptions.anonym
-      };
-    },
-    //Всплывающие сообщения
-    flashMsgClass: function flashMsgClass() {
-      return {
-        'test-flasgMesg': true,
-        'test-flasgMesg_error': this.flashMsg.status == 1,
-        'test-flasgMesg_warn': this.flashMsg.status == 2,
-        'test-flasgMesg_succes': this.flashMsg.status == 3
-      };
-    }
-  },
-  methods: {
-    // Устанавливаем данные теста из ДБ
-    fetchTestDb: function fetchTestDb(test) {
-      this.testTitle = test.test_name;
-      this.testDescription = test.test_description;
-      this.testId = +test.test_id;
-      this.testOptions.timeLimit = +test.test_time ? true : false;
-      this.testOptions.time = +test.test_time;
-      this.testOptions.anonym = +test.test_anonym;
-      this.questions = [];
-      this.nextQuestionId = +test.questions[test.questions.length - 1].question_client_id + 1;
-
-      for (var i = 0; i < test.questions.length; i++) {
-        this.questions[i] = {
-          type: +test.questions[i].question_type_id,
-          text: test.questions[i].question_description,
-          id: +test.questions[i].question_client_id,
-          db_id: +test.questions[i].question_id,
-          vars: []
-        };
-        var type = +test.questions[i].question_type_id;
-
-        if (type === 1 || type == 2) {
-          for (var j = 0; j < test.questions[i].vars.length; j++) {
-            var answer = test.questions[i].question_answer.length === 1 ? [test.questions[i].question_answer] : test.questions[i].question_answer.split(',');
-            this.questions[i].vars.push({
-              text: test.questions[i].vars[j].var_text,
-              id: +test.questions[i].vars[j].question_client_id,
-              db_id: +test.questions[i].vars[j].question_client_id,
-              isRight: answer.indexOf(test.questions[i].vars[j].question_client_id) >= 0 ? true : false
-            });
-          }
-        } else {
-          this.questions[i].vars = test.questions[i].question_answer;
-        }
-      }
-    },
-    //Вывод сообщения
-    showFlashMsg: function showFlashMsg(status, text) {
-      var _this = this;
-
-      this.flashMsg.status = status;
-      this.flashMsg.text = text;
-      setTimeout(function () {
-        return _this.flashMsg.text = '';
-      }, 10000);
-    },
-    // Валидация лимита времени
-    validTimeLimit: function validTimeLimit(e) {
-      var data = e.inputType === 'deleteContentBackward' ? e.target.value : e.data;
-
-      if (!/\d/i.test(data)) {
-        var msg = "Лимит времени задается только в числовом эквиваленте и не должен превышать разумных пределов";
-        this.showFlashMsg(1, msg);
-        e.target.value = this.testOptions.time;
-      } else {
-        if (+e.target.value > 240) {
-          var _msg = "Вы установили очень большой лимит времени, подумайте, может стоит отключить эту опцию.";
-          this.showFlashMsg(2, _msg);
-          this.testOptions.time = +e.target.value;
-        } else if (+e.target.value < 10) {
-          var _msg2 = "Вы установили очень низкий лимит времени!";
-          this.showFlashMsg(1, _msg2);
-        } else {
-          this.testOptions.time = +e.target.value;
-        }
-      }
-    },
-    // Добавление нового вопроса
-    addQuestion: function addQuestion() {
-      this.questions.push({
-        type: 1,
-        text: '',
-        id: this.nextQuestionId,
-        vars: [{
-          text: '',
-          isRight: false,
-          id: 1
-        }]
-      });
-      this.nextQuestionId++;
-    },
-    // Удаляем вопрос
-    deleteQuestionHandler: function deleteQuestionHandler(id) {
-      var index = this.questions.map(function (v, i) {
-        if (v.id === id) return i;
-      });
-      index.length > 1 ? index = index.filter(function (v) {
-        if (typeof v == 'number') return v;
-      })[0] : index = index[0];
-      this.questions.splice(index, 1);
-    },
-    // Обновляем информацию вопроса
-    updateQuestionInfo: function updateQuestionInfo(id, type, description, vars) {
-      for (var i = 0; i < this.questions.length; i++) {
-        if (this.questions[i].id === id) {
-          this.questions[i].type = type;
-          this.questions[i].text = description;
-          this.questions[i].vars = vars;
-        }
-      }
-    },
-    publishTest: function publishTest() {
-      this.saveTest(1);
-    },
-    // Сохраняем тест
-    saveTest: function saveTest(status) {
-      var _this2 = this;
-
-      var status = status ? status : 0;
-      var test = {
-        title: this.testTitle,
-        description: this.testDescription,
-        options: this.testOptions,
-        questions: this.questions,
-        status: status,
-        testId: this.testId
-      };
-
-      var res = _test.default.check(test);
-
-      if (res.status) {
-        _axios.default.post('php/savetest.php', test).then(function (res) {
-          console.log(res);
-
-          if (!res.data.success) {
-            _this2.showFlashMsg(1, res.data.errorMsg);
-          } else {
-            var msg = status == 0 ? 'Тест успешно сохранен в базе данных' : 'Тест опубликован';
-
-            _this2.showFlashMsg(3, msg);
-
-            setTimeout(function () {
-              return _this2.$router.push('/tester');
-            }, 2000);
-          }
-        }).catch(function (err) {
-          return console.log(err);
-        });
-      } else {
-        console.log('мы здесь');
-        this.showFlashMsg(res.code, res.msg);
-        document.querySelector('.new-test-form__title').scrollIntoView({
-          behavior: 'smooth'
-        });
-
-        if (res.questionId) {
-          for (var i = 0; i < this.$children.length; i++) {
-            if (this.$children[i].id === res.questionId) {
-              (function () {
-                var elem = _this2.$children[i].$el;
-                elem.scrollIntoView({
-                  behavior: 'smooth'
-                });
-                elem.classList.add('question_error');
-                setTimeout(function () {
-                  elem.classList.remove('question_error');
-                }, 8000);
-              })();
-            }
-          }
-        }
-      }
-    }
-  },
-  // При создании компонента, проверяем localStorage и если в нем есть объект тест выводим его данные
-  created: function created() {
-    if (localStorage.getItem('test')) {
-      var test = JSON.parse(localStorage.getItem('test'));
-      this.fetchTestDb(test);
-    }
-  },
-  // Перед уходом очищаем localStorage;
-  beforeRouteLeave: function beforeRouteLeave(to, from, next) {
-    localStorage.getItem('test') ? localStorage.removeItem('test') : false;
-    next();
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 16:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _single = _interopRequireDefault(__webpack_require__(57));
-
-var _multiple = _interopRequireDefault(__webpack_require__(61));
-
-var _string = _interopRequireDefault(__webpack_require__(65));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  props: ['questiontype', 'questiontext', 'questionid', 'questiondbid', 'questionvars'],
-  components: {
-    'single': _single.default,
-    'multiple': _multiple.default,
-    'string': _string.default
-  },
-  data: function data() {
-    return {
-      questionType: this.questiontype ? this.questiontype : 1,
-      id: this.questionid,
-      db_id: this.questiondbid,
-      description: this.questiontext ? this.questiontext : '',
-      // Вопросы с одним вариантом
-      single: {
-        vars: [{
-          text: '',
-          isRight: false,
-          id: 1
-        }],
-        nextVarId: 2
-      },
-      // Вопросы с несколькими вариантами ответа
-      multiple: {
-        vars: [{
-          text: '',
-          isRight: false,
-          id: 1
-        }],
-        nextVarId: 2
-      },
-      //Вопрос с вводом строки
-      string: {
-        answer: ''
-      }
-    };
-  },
-  methods: {
-    updateDescription: function updateDescription() {
-      this.updateQuestionVars();
-    },
-    changeType: function changeType(e) {
-      this.questionType = +e.target.value;
-      this.single = {
-        vars: [{
-          text: '',
-          isRight: false,
-          id: 1
-        }],
-        nextVarId: 2
-      };
-      this.multiple = {
-        vars: [{
-          text: '',
-          isRight: false,
-          id: 1
-        }],
-        nextVarId: 2
-      };
-    },
-
-    /*Вопросы с одним варианторм*/
-    //Добавляем вариант ответа
-    singleAddVar: function singleAddVar() {
-      this.single.nextVarId++;
-      this.single.vars.push({
-        text: '',
-        isRight: false,
-        id: this.single.nextVarId
-      });
-    },
-    // Удаление вариантами
-    removeVarHandler: function removeVarHandler(id) {
-      var index;
-
-      for (var i = 0; i < this.single.vars.length; i++) {
-        if (this.single.vars[i].id === id) index = i;
-      }
-
-      this.single.vars.splice(index, 1);
-      this.updateQuestionVars();
-    },
-    //Обновляем текст варианта
-    singleUpdateVarHandler: function singleUpdateVarHandler(id, text) {
-      var index;
-
-      for (var i = 0; i < this.single.vars.length; i++) {
-        if (this.single.vars[i].id === id) index = i;
-      }
-
-      this.single.vars[index].text = text;
-      this.updateQuestionVars();
-    },
-    //Выбираем правильный вариант вопроса
-    singleUpdateRightVarHandler: function singleUpdateRightVarHandler(index) {
-      var _this = this;
-
-      this.$children.forEach(function (v, i) {
-        if (i === index) {
-          v.isRight ? v.isRight = false : v.isRight = true;
-          _this.single.vars[index].isRight ? _this.single.vars[index].isRight = false : _this.single.vars[index].isRight = true;
-        } else {
-          v.isRight = false;
-          _this.single.vars[i].isRight = false;
-        }
-      });
-      this.updateQuestionVars();
-    },
-
-    /*Вопросы с несолькими вариантами*/
-    //Добавляем вариант ответа
-    multipleAddVar: function multipleAddVar() {
-      this.multiple.vars.push({
-        text: 'Вариант ответа',
-        isRight: false,
-        id: this.multiple.nextVarId
-      });
-      this.multiple.nextVarId++;
-    },
-    // Удаляем вариант ответа
-    multipleRemoveVarHandler: function multipleRemoveVarHandler(id) {
-      var index;
-
-      for (var i = 0; i < this.multiple.vars.length; i++) {
-        if (this.multiple.vars[i].id === id) index = i;
-      }
-
-      this.multiple.vars.splice(index, 1);
-      this.updateQuestionVars();
-    },
-    multipleUpdateVarHandler: function multipleUpdateVarHandler(id, text) {
-      var index;
-
-      for (var i = 0; i < this.multiple.vars.length; i++) {
-        if (this.multiple.vars[i].id === id) index = i;
-      }
-
-      this.multiple.vars[index].text = text;
-      this.updateQuestionVars();
-    },
-    //Выбираем правильный вариант вопроса
-    multipleUpdateRightVarHandler: function multipleUpdateRightVarHandler(index) {
-      var _this2 = this;
-
-      this.$children.forEach(function (v, i) {
-        if (i === index) {
-          v.isRight ? v.isRight = false : v.isRight = true;
-          _this2.multiple.vars[index].isRight ? _this2.multiple.vars[index].isRight = false : _this2.multiple.vars[index].isRight = true;
-        }
-      });
-      this.updateQuestionVars();
-    },
-
-    /*Вопрос - строка*/
-    stringUpdateVarHandler: function stringUpdateVarHandler(text) {
-      this.string.answer = text;
-      this.updateQuestionVars();
-    },
-    //Обновляем варианты в объекте вопроса в тесте
-    updateQuestionVars: function updateQuestionVars() {
-      switch (this.questionType) {
-        case 1:
-          this.$emit('udpate-question', this.id, this.questionType, this.description, this.single.vars);
-          break;
-
-        case 2:
-          this.$emit('udpate-question', this.id, this.questionType, this.description, this.multiple.vars);
-          break;
-
-        case 3:
-          this.$emit('udpate-question', this.id, this.questionType, this.description, this.string.answer);
-          break;
-
-        default:
-      }
-    },
-    //Событие удаления вопроса
-    deleteQuestion: function deleteQuestion() {
-      this.$emit('delete-question', this.id);
-    }
-  },
-  created: function created() {
-    switch (this.questiontype) {
-      case 1:
-        this.single.vars = this.questionvars;
-        this.single.nextVarId = this.questionvars[this.questionvars.length - 1].id;
-        break;
-
-      case 2:
-        this.multiple.vars = this.questionvars;
-        this.multiple.nextVarId = this.questionvars[this.questionvars.length - 1].id;
-        break;
-
-      case 3:
-        this.string.answer = this.questionvars;
-        break;
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 17:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  props: ['text', 'status', 'id'],
-  data: function data() {
-    return {
-      varText: this.text,
-      isRight: this.status,
-      questionId: this.id
-    };
-  },
-  methods: {
-    //Удаление варианта
-    deleteVar: function deleteVar(e) {
-      this.$emit('removeVar', this.id);
-    },
-    // Обнавляем текст варианта
-    updateInfo: function updateInfo() {
-      this.$emit('updateVar', this.id, this.varText);
-    },
-    // Обнавляем статус правильного ответа варианта
-    rightVar: function rightVar() {
-      var index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
-      this.$emit('updateRightVar', index);
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 18:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  props: ['text', 'status', 'id'],
-  data: function data() {
-    return {
-      varText: this.text ? this.text : '',
-      placeholderText: this.text,
-      isRight: this.status,
-      questionId: this.id
-    };
-  },
-  methods: {
-    //Удаление варианта
-    deleteVar: function deleteVar(e) {
-      this.$emit('removeVar', this.id);
-    },
-    // Обнавляем текст варианта
-    updateInfo: function updateInfo() {
-      this.$emit('updateVar', this.id, this.varText);
-    },
-    // Обнавляем статус правильного ответа варианта
-    rightVar: function rightVar() {
-      var index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
-      this.$emit('updateRightVar', index);
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 19:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  props: ['text'],
-  data: function data() {
-    return {
-      varText: this.text ? this.text : ''
-    };
-  },
-  methods: {
-    updateInfo: function updateInfo() {
-      this.$emit('updateVar', this.varText);
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 2:
+/* 2 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -2105,1090 +476,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-
-/***/ 20:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  props: ['code', 'text'],
-  data: function data() {
-    return {
-      message: this.text,
-      status: this.code
-    };
-  },
-  computed: {
-    //Всплывающие сообщения
-    flashMsgClass: function flashMsgClass() {
-      return {
-        'test-flasgMesg': true,
-        'test-flasgMesg_error': this.status == 1,
-        'test-flasgMesg_warn': this.status == 2,
-        'test-flasgMesg_succes': this.status == 3
-      };
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 21:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c14f2584_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_loading_vue__ = __webpack_require__(78);
-function injectStyle (ssrContext) {
-  __webpack_require__(76)
-}
-var normalizeComponent = __webpack_require__(2)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c14f2584_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_loading_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-
-/***/ 22:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 23:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _axios = _interopRequireDefault(__webpack_require__(3));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  props: ['description', 'testtitle', 'status', 'imglink', 'testid'],
-  data: function data() {
-    return {
-      testTitle: this.testtitle,
-      testDescription: this.description,
-      testStatus: this.status,
-      testId: this.testid,
-      testImage: this.imglink ? this.imglink : 'img/default_test.svg',
-      testRespondents: 0
-    };
-  },
-  methods: {
-    // Событие - показать ссылку на тест
-    showLink: function showLink() {
-      console.log(this.testId);
-    },
-    // Событие - показать респондентов, которые прошли данный тест
-    showResp: function showResp() {
-      console.log(this.testRespondents);
-    },
-    // Событие - редактирование теста
-    editHandler: function editHandler() {},
-    // Событие - удаление теста
-    deleteHandler: function deleteHandler() {
-      var _this = this;
-
-      if (window.confirm('Вы точто хотите удалить тест?')) {
-        var query = this.testId;
-
-        _axios.default.get("php/deletetest.php?test_id=".concat(query)).then(function (res) {
-          if (res.data.status) {
-            var msg = 'Тест успешно удален из базы данных';
-
-            _this.$emit('delete-info', 3, msg);
-          } else {
-            var _msg = 'Ошибка базы данных, попробуйте позже';
-
-            _this.$emit('delete-info', 1, _msg);
-          }
-        }).catch(function (err) {
-          return console.log(err);
-        });
-      }
-    },
-    showTest: function showTest(e) {
-      this.$emit('show-test', this.testId);
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 24:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _popUpQuestion = _interopRequireDefault(__webpack_require__(89));
-
-var _axios = _interopRequireDefault(__webpack_require__(3));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  props: ['testtite', 'description', 'imglink', 'anonym', 'time', 'status', 'testquestions', 'testid'],
-  components: {
-    'question-item': _popUpQuestion.default
-  },
-  data: function data() {
-    return {
-      testTitle: this.testtite,
-      testDescription: this.description,
-      testImage: this.imglink ? this.imglink : 'img/default_test.svg',
-      testStatus: +this.status ? true : false,
-      testId: this.testid,
-      testLink: window.location.origin + '/exec?' + encodeURIComponent(btoa('test_id=' + +this.testid)),
-      //кодируем запрос в формат base64
-      testOptions: {
-        timeLimit: +this.time !== 0 ? true : false,
-        time: +this.time,
-        anonym: +this.status ? true : false
-      },
-      questions: this.testquestions
-    };
-  },
-  methods: {
-    closeWindow: function closeWindow() {
-      // console.log(this.testId);
-      this.$emit('close-window');
-    },
-    edit: function edit() {
-      this.$emit('edit-test', this.testId);
-    },
-    //Удаляем тест
-    deleteTest: function deleteTest() {
-      var _this = this;
-
-      if (window.confirm('Вы точто хотите удалить тест?')) {
-        var query = this.testId;
-
-        _axios.default.get("php/deletetest.php?test_id=".concat(query)).then(function (res) {
-          if (res.data.status) {
-            var msg = 'Тест успешно удален из базы данных';
-
-            _this.$emit('delete-test', 3, msg);
-
-            _this.closeWindow();
-          } else {
-            var _msg = 'Ошибка базы данных, попробуйте позже';
-
-            _this.$emit('delete-test', 3, _msg);
-
-            _this.closeWindow();
-          }
-        }).catch(function (err) {
-          return console.log(err);
-        });
-      }
-    },
-    //Публикуем тест
-    publish: function publish() {
-      var _this2 = this;
-
-      var query = this.testId;
-
-      _axios.default.get("php/changeteststatus.php?test_id=".concat(query)).then(function (res) {
-        if (res.data.status) {
-          var msg = 'Тест успешно опубликован';
-
-          _this2.$emit('update-test', 3, msg);
-
-          _this2.closeWindow();
-        } else {
-          var _msg2 = 'Ошибка базы данных, попробуйте позже';
-
-          _this2.$emit('update-test', 3, _msg2);
-
-          _this2.closeWindow();
-        }
-      }).catch(function (err) {
-        return console.log(err);
-      });
-    }
-  },
-  created: function created() {
-    document.body.style.overflow = 'hidden';
-  },
-  destroyed: function destroyed() {
-    document.body.style.overflow = 'auto';
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 25:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  props: ['qsttitle', 'vars', 'answer', 'qsttype'],
-  data: function data() {
-    return {
-      title: this.qsttitle,
-      variants: this.vars,
-      right: this.answer,
-      type: +this.qsttype
-    };
-  },
-  created: function created() {
-    if (this.type == 1 || this.type == 2) {
-      this.right = this.answer.length > 0 ? this.answer.split(',') : [this.anwer];
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 26:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _testMenu = _interopRequireDefault(__webpack_require__(98));
-
-var _loading = _interopRequireDefault(__webpack_require__(21));
-
-var _variants = _interopRequireDefault(__webpack_require__(102));
-
-var _popUpExec = _interopRequireDefault(__webpack_require__(1094));
-
-var _axios = _interopRequireDefault(__webpack_require__(3));
-
-var _auth = _interopRequireDefault(__webpack_require__(9));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  components: {
-    'test-menu': _testMenu.default,
-    'loading': _loading.default,
-    'variants': _variants.default,
-    'pop-up': _popUpExec.default
-  },
-  // Когда компонент создан, получаем тест, проверяем, аторизацию пользвателя
-  created: function created() {
-    this.fetchData();
-  },
-  data: function data() {
-    return {
-      test: null,
-      questions: null,
-      authorized: false,
-      loaded: false,
-      userProgress: {
-        currentQstId: 0
-      },
-      currentQstType: 1,
-      answers: [],
-      timeStart: 0,
-      time: 0,
-      timeLimit: false,
-      timeLeft: 0,
-      popUp: false,
-      testResults: {}
-    };
-  },
-  computed: {
-    //Описание вопроса в зависимости от типа
-    questionDescr: function questionDescr() {
-      switch (+this.questions[this.userProgress.currentQstId].question_type_id) {
-        case 1:
-          return 'Выберите один вариант ответа';
-          break;
-
-        case 2:
-          return 'Выберите несколько вариантов';
-          break;
-
-        case 3:
-          return 'Напишите вариант ответа';
-          break;
-
-        default:
-      }
-    }
-  },
-  methods: {
-    //Получаем данные с сервер, сверяем авторизацию пользователя и возможность анонимного прохождения
-    fetchData: function fetchData() {
-      var _this = this;
-
-      var query = "?" + atob(decodeURIComponent(window.location.search.slice(1)));
-
-      _auth.default.checkUser().then(function (res) {
-        var auth = res; //Если тест уже есть в localStorage берем данные от туда, в противном случае, загружаем их с сервера
-
-        _axios.default.get("php/getexectest.php".concat(query)).then(function (res) {
-          console.log(res);
-          var date = new Date();
-          var testId = +query.slice(9);
-          var testData = JSON.parse(localStorage.getItem('current_test')); // Устанавливани все параметры теста
-
-          _this.test = res.data.test;
-          _this.questions = res.data.test.questions;
-          _this.timeStart = testData && +testData.test_db_id == testId ? testData.time_start : date.getTime();
-          _this.answers = testData && +testData.test_db_id == testId ? testData.answers : [];
-          _this.currentQstType = testData && +testData.test_db_id == testId ? testData.currentQstType : +res.data.test.questions[0].question_type_id;
-          _this.currentQstId = testData && +testData.test_db_id == testId ? testData.currentQstId : 0;
-          _this.loaded = true;
-          setTimeout(function () {
-            var id = _this.currentQstId + 1;
-            var elem = document.getElementById("qst_".concat(id));
-            elem.click();
-          }, 0);
-
-          if (+res.data.test.test_anonym == 0 && !auth) {
-            console.log('Просим авторизоваться');
-            _this.authorized = false;
-            window.localStorage.setItem('query', window.location.search.slice(1));
-            setTimeout(function () {
-              _this.$router.replace('/auth');
-            }, 8000);
-          } else {
-            console.log('Показываем тест');
-            _this.authorized = true; // Если тест на время, то будет отсчитывать время
-
-            if (+res.data.test.test_time > 0) {
-              console.log('Это тест на время');
-              var test = 'dsadasda';
-              _this.timeLimit = true;
-              _this.time = res.data.test.test_time;
-
-              var _date = new Date(_this.timeStart);
-
-              var timeStart = _date.getMinutes();
-
-              console.log(timeStart);
-              setInterval(function () {
-                var newDate = new Date();
-                var timeNow = newDate.getMinutes();
-                var timeDifference = timeNow - timeStart;
-                var minutes = new Date(timeDifference * 1000);
-                console.log(timeDifference);
-                _this.timeLeft = _this.time - timeDifference;
-
-                if (timeDifference < _this.time) {
-                  window.alert('Время теста истекло, ваши данные отправлены на сервер');
-                }
-              }, 1000);
-            }
-          }
-        }).catch(function (err) {
-          return console.log(err);
-        });
-      }).catch(function (err) {
-        return console.log(err);
-      });
-    },
-    //Навигация по вопросам
-    changeQst: function changeQst(e) {
-      var elemId = e.target.id;
-      var children = e.target.parentElement.children;
-      e.target.classList.contains('active') ? false : e.target.classList.add('active');
-
-      for (var i = 0; i < children.length; i++) {
-        if (children[i].id !== elemId) {
-          children[i].classList.contains('active') ? children[i].classList.remove('active') : false;
-        }
-      }
-
-      this.userProgress.currentQstId = +e.target.id.slice(4) - 1;
-      this.currentQstType = +this.test.questions[this.userProgress.currentQstId].question_type_id;
-      this.saveLocalStorage();
-      console.log(this.answers);
-    },
-    //Обновляем информацию ответов и сохраняем объект теста в localStorage
-    updateAnswerHandler: function updateAnswerHandler(answers) {
-      this.answers = answers;
-      this.saveLocalStorage();
-    },
-    saveLocalStorage: function saveLocalStorage() {
-      var date = new Date();
-      var test = {
-        test_db_id: this.test.test_id,
-        test: this.test,
-        anonym: this.test.test_anonym,
-        token: this.test.token ? this.test.token : btoa(date.getTime()),
-        answers: this.answers,
-        time_start: this.timeStart,
-        currentQstType: this.currentQstType,
-        currentQstId: this.userProgress.currentQstId
-      };
-      localStorage.setItem('current_test', JSON.stringify(test));
-    },
-    // Отправляем тест
-    sendTestHander: function sendTestHander(autoEnd) {
-      var _this2 = this;
-
-      localStorage.removeItem('current_test');
-      var date = new Date();
-      var test = {
-        test_db_id: this.test.test_id,
-        anonym: this.test.test_anonym,
-        token: this.token ? this.token : btoa(date.getTime()),
-        answers: this.answers
-      };
-
-      if (!autoEnd && window.confirm('Вы готовы отправить ответы на проверку?')) {
-        _axios.default.post('php/saveexectest.php', test).then(function (res) {
-          console.log(res);
-          _this2.testResults = res.data;
-          _this2.popUp = true;
-        }).catch(function (err) {
-          console.log(err);
-        });
-      } else {
-        _axios.default.post('php/saveexectest.php', test).then(function (res) {
-          console.log(res);
-          _this2.popUp = true;
-        }).catch(function (err) {
-          console.log(err);
-        });
-      }
-    }
-  },
-  // Перед тем, как пользователь попадет на страницу, проверим, установлено ли id вопроса
-  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
-    var check = decodeURIComponent(window.location.search.slice(1));
-
-    if (/test_id/.test(atob(check))) {
-      next();
-    } else {
-      window.location.pathname = '/tester';
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 27:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  props: ['testname', 'testdescription'],
-  data: function data() {
-    return {
-      title: this.testname,
-      description: this.testdescription
-    };
-  },
-  methods: {
-    sendTest: function sendTest() {
-      this.$emit('send-test');
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 28:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  props: ['type', 'questions', 'currentqst', 'answersarr'],
-  data: function data() {
-    return {
-      qstType: this.type,
-      navId: this.currentqst,
-      qstVars: this.questions[this.currentqst].vars,
-      questionsArr: this.questions,
-      answers: this.answersarr,
-      qstId: undefined
-    };
-  },
-  // mounted() {
-  //     this.answers.forEach( (v,i,a) => {
-  //         let dbIndex = v.questionDbId;
-  //         let elements = document.querySelectorAll(`input[type="checkbox"][data-questionid="${dbIndex}"]`) || document.querySelectorAll(`input[type="radio"][data-questionid="${dbIndex}"]`);
-  //         console.log(elements);
-  //     });
-  // },
-  methods: {
-    getMultipleAnswers: function getMultipleAnswers(id) {
-      var answer = '';
-      var vars = document.querySelectorAll("input[name=\"multiple_var_".concat(id, "\"]"));
-
-      for (var i = 0; i < vars.length; i++) {
-        if (vars[i].checked) {
-          answer.length == 0 ? answer += vars[i].value : answer += ',' + vars[i].value;
-        }
-      }
-
-      return answer;
-    },
-    // Обновляем информацию о вопросе
-    updateAnswer: function updateAnswer(e) {
-      var check = true;
-      var answer = {
-        answer: this.qstType !== 2 ? e.target.value : this.getMultipleAnswers(+e.target.getAttribute('data-questionid')),
-        questionDbId: +e.target.getAttribute('data-questionid')
-      };
-      this.answers.forEach(function (v, i, a) {
-        if (v.questionDbId == answer.questionDbId) {
-          a[i] = answer;
-          check = false;
-        }
-      });
-      check ? this.answers.push(answer) : false;
-      this.$emit('update-answer', this.answers);
-    },
-    //Устанавливани значение чекд в зависимости от типа вопроса
-    updateInputs: function updateInputs() {
-      var _this = this;
-
-      switch (this.qstType) {
-        case 1:
-          setTimeout(function () {
-            var elements;
-            var answer;
-
-            _this.answers.forEach(function (v, i, a) {
-              if (document.querySelectorAll(["input[type=\"radio\"][data-questionid=\"".concat(v.questionDbId, "\"]")]).length > 0) {
-                elements = document.querySelectorAll(["input[type=\"radio\"][data-questionid=\"".concat(v.questionDbId, "\"]")]);
-                answer = v.answer;
-              }
-            });
-
-            if (elements && elements.length > 0) {
-              for (var i = 0; i < elements.length; i++) {
-                elements[i].value == answer ? elements[i].checked = true : elements[i].checked = false;
-              }
-            }
-          }, 100);
-          break;
-
-        case 2:
-          setTimeout(function () {
-            var elements;
-            var answer;
-
-            _this.answers.forEach(function (v, i, a) {
-              if (document.querySelectorAll(["input[type=\"checkbox\"][data-questionid=\"".concat(v.questionDbId, "\"]")]).length > 0) {
-                elements = document.querySelectorAll(["input[type=\"checkbox\"][data-questionid=\"".concat(v.questionDbId, "\"]")]);
-                answer = v.answer;
-              }
-            });
-
-            if (elements && elements.length > 0) {
-              for (var i = 0; i < elements.length; i++) {
-                answer.indexOf(elements[i].value) >= 0 ? elements[i].checked = true : elements[i].checked = false;
-              }
-            }
-          }, 100);
-          break;
-
-        case 3:
-          setTimeout(function () {
-            var elements;
-            var answer;
-
-            _this.answers.forEach(function (v, i, a) {
-              if (document.querySelectorAll("input[type=\"text\"][data-questionid=\"".concat(v.questionDbId, "\"]")).length > 0) {
-                elements = document.querySelectorAll("input[type=\"text\"][data-questionid=\"".concat(v.questionDbId, "\"]"));
-                elements[0].value = v.answer;
-              }
-            });
-          }, 100);
-          break;
-
-        default:
-      }
-    }
-  },
-  // эта функция запускается при любом изменении навинации
-  watch: {
-    type: function type(data) {
-      this.qstType = data;
-      this.updateInputs();
-    },
-    currentqst: function currentqst(data) {
-      this.qstVars = this.questionsArr[data].vars;
-      this.qstId = this.questionsArr[data].question_id;
-      this.updateInputs();
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 29:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _variables = _interopRequireDefault(__webpack_require__(30));
-
-var _style = _interopRequireDefault(__webpack_require__(33));
-
-var _vue = _interopRequireDefault(__webpack_require__(35));
-
-var _vueRouter = _interopRequireDefault(__webpack_require__(38));
-
-var _auth = _interopRequireDefault(__webpack_require__(9));
-
-var _smoothscrollMin = _interopRequireDefault(__webpack_require__(39));
-
-var _login = _interopRequireDefault(__webpack_require__(40));
-
-var _tester = _interopRequireDefault(__webpack_require__(46));
-
-var _newTest = _interopRequireDefault(__webpack_require__(14));
-
-var _exec = _interopRequireDefault(__webpack_require__(95));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-window.__forceSmoothScrollPolyfill__ = true; // компоненты
-
-// Маршруты
-_vue.default.use(_vueRouter.default);
-
-var router = new _vueRouter.default({
-  routes: [{
-    path: '/',
-    component: _tester.default,
-    meta: {
-      requiredAuth: true
-    }
-  }, {
-    path: '/auth',
-    component: _login.default
-  }, {
-    path: '/tester',
-    component: _tester.default,
-    meta: {
-      requiredAuth: true
-    }
-  }, {
-    path: '/newtest',
-    component: _newTest.default,
-    meta: {
-      requiredAuth: true
-    }
-  }, {
-    path: '/exec',
-    component: _exec.default
-  }],
-  mode: 'history'
-});
-router.beforeEach(function (to, from, next) {
-  if (to.meta.requiredAuth) {
-    _auth.default.checkUser().then(function (res) {
-      console.log(res);
-
-      if (!res) {
-        router.push('/auth');
-      } else {
-        next();
-      }
-    });
-  } else {
-    next();
-  }
-});
-var app = new _vue.default({
-  router: router,
-  data: {
-    user: {
-      authinticate: false
-    }
-  },
-  components: {
-    'login': _login.default,
-    'tester': _tester.default,
-    'new-test': _newTest.default
-  },
-  methods: {
-    //Событие успешной авторизации или регистрации
-    loginHandler: function loginHandler() {
-      console.log('вот тут должна сработать переадресация');
-      this.authinticate = true; // DELETE
-
-      localStorage.setItem('tester_token', true); // DELETEEND
-
-      router.push({
-        path: '/tester'
-      });
-    }
-  }
-}).$mount('#app');
-
-/***/ }),
-
-/***/ 3:
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/* axios v0.17.1 | (c) 2017 by Matt Zabriskie */
@@ -4795,14 +2083,3157 @@ return /******/ (function(modules) { // webpackBootstrap
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
+/* 4 */
+/***/ (function(module, exports) {
 
-/***/ 30:
+module.exports = function escape(url) {
+    // If url is already wrapped in quotes, remove them
+    if (/^['"].*['"]$/.test(url)) {
+        url = url.slice(1, -1);
+    }
+    // Should url be wrapped?
+    // See https://drafts.csswg.org/css-values-3/#urls
+    if (/["'() \t\n]/.test(url)) {
+        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
+    }
+
+    return url
+}
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = "img/../img/add.svg";
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+
+var stylesInDom = {};
+
+var	memoize = function (fn) {
+	var memo;
+
+	return function () {
+		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+		return memo;
+	};
+};
+
+var isOldIE = memoize(function () {
+	// Test for IE <= 9 as proposed by Browserhacks
+	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+	// Tests for existence of standard globals is to allow style-loader
+	// to operate correctly into non-standard environments
+	// @see https://github.com/webpack-contrib/style-loader/issues/177
+	return window && document && document.all && !window.atob;
+});
+
+var getElement = (function (fn) {
+	var memo = {};
+
+	return function(selector) {
+		if (typeof memo[selector] === "undefined") {
+			var styleTarget = fn.call(this, selector);
+			// Special case to return head of iframe instead of iframe itself
+			if (styleTarget instanceof window.HTMLIFrameElement) {
+				try {
+					// This will throw an exception if access to iframe is blocked
+					// due to cross-origin restrictions
+					styleTarget = styleTarget.contentDocument.head;
+				} catch(e) {
+					styleTarget = null;
+				}
+			}
+			memo[selector] = styleTarget;
+		}
+		return memo[selector]
+	};
+})(function (target) {
+	return document.querySelector(target)
+});
+
+var singleton = null;
+var	singletonCounter = 0;
+var	stylesInsertedAtTop = [];
+
+var	fixUrls = __webpack_require__(33);
+
+module.exports = function(list, options) {
+	if (typeof DEBUG !== "undefined" && DEBUG) {
+		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+
+	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
+
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the <head> element
+	if (!options.insertInto) options.insertInto = "head";
+
+	// By default, add <style> tags to the bottom of the target
+	if (!options.insertAt) options.insertAt = "bottom";
+
+	var styles = listToStyles(list, options);
+
+	addStylesToDom(styles, options);
+
+	return function update (newList) {
+		var mayRemove = [];
+
+		for (var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+
+		if(newList) {
+			var newStyles = listToStyles(newList, options);
+			addStylesToDom(newStyles, options);
+		}
+
+		for (var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+
+			if(domStyle.refs === 0) {
+				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+};
+
+function addStylesToDom (styles, options) {
+	for (var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+
+		if(domStyle) {
+			domStyle.refs++;
+
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles (list, options) {
+	var styles = [];
+	var newStyles = {};
+
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = options.base ? item[0] + options.base : item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+
+		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
+		else newStyles[id].parts.push(part);
+	}
+
+	return styles;
+}
+
+function insertStyleElement (options, style) {
+	var target = getElement(options.insertInto)
+
+	if (!target) {
+		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
+	}
+
+	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
+
+	if (options.insertAt === "top") {
+		if (!lastStyleElementInsertedAtTop) {
+			target.insertBefore(style, target.firstChild);
+		} else if (lastStyleElementInsertedAtTop.nextSibling) {
+			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			target.appendChild(style);
+		}
+		stylesInsertedAtTop.push(style);
+	} else if (options.insertAt === "bottom") {
+		target.appendChild(style);
+	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
+		var nextSibling = getElement(options.insertInto + " " + options.insertAt.before);
+		target.insertBefore(style, nextSibling);
+	} else {
+		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
+	}
+}
+
+function removeStyleElement (style) {
+	if (style.parentNode === null) return false;
+	style.parentNode.removeChild(style);
+
+	var idx = stylesInsertedAtTop.indexOf(style);
+	if(idx >= 0) {
+		stylesInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement (options) {
+	var style = document.createElement("style");
+
+	options.attrs.type = "text/css";
+
+	addAttrs(style, options.attrs);
+	insertStyleElement(options, style);
+
+	return style;
+}
+
+function createLinkElement (options) {
+	var link = document.createElement("link");
+
+	options.attrs.type = "text/css";
+	options.attrs.rel = "stylesheet";
+
+	addAttrs(link, options.attrs);
+	insertStyleElement(options, link);
+
+	return link;
+}
+
+function addAttrs (el, attrs) {
+	Object.keys(attrs).forEach(function (key) {
+		el.setAttribute(key, attrs[key]);
+	});
+}
+
+function addStyle (obj, options) {
+	var style, update, remove, result;
+
+	// If a transform function was defined, run it on the css
+	if (options.transform && obj.css) {
+	    result = options.transform(obj.css);
+
+	    if (result) {
+	    	// If transform returns a value, use that instead of the original css.
+	    	// This allows running runtime transformations on the css.
+	    	obj.css = result;
+	    } else {
+	    	// If the transform function returns a falsy value, don't add this css.
+	    	// This allows conditional loading of css
+	    	return function() {
+	    		// noop
+	    	};
+	    }
+	}
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+
+		style = singleton || (singleton = createStyleElement(options));
+
+		update = applyToSingletonTag.bind(null, style, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+
+	} else if (
+		obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function"
+	) {
+		style = createLinkElement(options);
+		update = updateLink.bind(null, style, options);
+		remove = function () {
+			removeStyleElement(style);
+
+			if(style.href) URL.revokeObjectURL(style.href);
+		};
+	} else {
+		style = createStyleElement(options);
+		update = applyToTag.bind(null, style);
+		remove = function () {
+			removeStyleElement(style);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle (newObj) {
+		if (newObj) {
+			if (
+				newObj.css === obj.css &&
+				newObj.media === obj.media &&
+				newObj.sourceMap === obj.sourceMap
+			) {
+				return;
+			}
+
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag (style, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (style.styleSheet) {
+		style.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = style.childNodes;
+
+		if (childNodes[index]) style.removeChild(childNodes[index]);
+
+		if (childNodes.length) {
+			style.insertBefore(cssNode, childNodes[index]);
+		} else {
+			style.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag (style, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		style.setAttribute("media", media)
+	}
+
+	if(style.styleSheet) {
+		style.styleSheet.cssText = css;
+	} else {
+		while(style.firstChild) {
+			style.removeChild(style.firstChild);
+		}
+
+		style.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink (link, options, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	/*
+		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
+		and there is no publicPath defined then lets turn convertToAbsoluteUrls
+		on by default.  Otherwise default to the convertToAbsoluteUrls option
+		directly
+	*/
+	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
+
+	if (options.convertToAbsoluteUrls || autoFixUrls) {
+		css = fixUrls(css);
+	}
+
+	if (sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = link.href;
+
+	link.href = URL.createObjectURL(blob);
+
+	if(oldSrc) URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _axios = _interopRequireDefault(__webpack_require__(3));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = {
+  //Проверка авторизации пользователя
+  checkUser: function checkUser() {
+    return _axios.default.get('php/checkauth.php').then(function (res) {
+      return res.data === 1;
+    }).catch(function (err) {
+      console.log(err);
+    }); // return false;
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _reg = _interopRequireDefault(__webpack_require__(45));
+
+var _axios = _interopRequireDefault(__webpack_require__(3));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  data: function data() {
+    return {
+      // Активный таб
+      activeTab: 'auth',
+      // Ошибки формы авторизации
+      loginFormErr: '',
+      // Ошибки формы регистрации
+      regFormErr: '',
+      // Данные авторизации
+      loginFormData: {
+        userEmail: '',
+        userPassword: ''
+      },
+      // Данные регистрации
+      regFormData: {
+        userEmail: '',
+        userPassword: '',
+        userPassword_re: '',
+        userName: '',
+        userLastName: '',
+        userCompany: ''
+      }
+    };
+  },
+  computed: {
+    // Объект класса формы авторизации
+    authForm: function authForm() {
+      return {
+        'auth-form': true,
+        'auth-form_inactive': this.activeTab === 'reg'
+      };
+    },
+    // Объект класса формы регистрации
+    regForm: function regForm() {
+      return {
+        'reg-form': true,
+        'reg-form_inactive': this.activeTab === 'auth'
+      };
+    },
+    loginErrClass: function loginErrClass() {
+      return {
+        'log-form__flashmsg': true,
+        'log-form__flashmsg_inactive': this.regFormErr.length === 0
+      };
+    },
+    // Объект класса поля ошибок формы регистрации
+    regErrClass: function regErrClass() {
+      return {
+        'reg-form__flashmsg': true,
+        'reg-form__flashmsg_inactive': this.regFormErr.length === 0
+      };
+    }
+  },
+  methods: {
+    // Обработчик события переключения табов Авторизация/Регистрация
+    changeTab: function changeTab(e) {
+      this.activeTab = e.target.getAttribute('href').slice(1);
+      e.target.classList.contains;
+    },
+    // Обработчик события авторизации пользователя
+    authorize: function authorize(e) {
+      var _this = this;
+
+      _axios.default.post('php/auth.php', this.loginFormData).then(function (res) {
+        if (!res.data.success) {
+          console.log(res); // throw new Error(res.data.errorMsg);
+        } else {
+          var query = localStorage.getItem('query');
+          !query ? _this.$router.push({
+            path: '/tester'
+          }) : window.location.href = window.location.origin + '/exec?' + query;
+        }
+      }).catch(function (err) {
+        console.log(err);
+        _this.loginFormErr = err.message;
+      });
+    },
+    // Обработчик события регистрации пользователя
+    registration: function registration(e) {
+      var _this2 = this;
+
+      var res = _reg.default.checkData(this.regFormData);
+
+      if (!res.success) {
+        this.regFormErr = res.errorMsg; //TODO: Сброс текст ошибки по таймауту
+      } else {
+        _axios.default.post('php/reg.php', this.regFormData).then(function (res) {
+          console.log(res);
+
+          if (!res.data.success) {
+            throw new Error(res.data.errorMsg);
+          } else {
+            var query = localStorage.getItem('query');
+            !query ? _this2.$router.push({
+              path: '/tester'
+            }) : window.location.href = window.location.origin + '/exec?' + query;
+          }
+        }).catch(function (err) {
+          console.log(err);
+          _this2.regFormErr = err.message;
+        });
+      }
+    }
+  },
+  beforeRouteLeave: function beforeRouteLeave(to, from, next) {
+    localStorage.getItem('query') ? localStorage.removeItem('query') : false;
+    next();
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _sideMenu = _interopRequireDefault(__webpack_require__(12));
+
+var _newTest = _interopRequireDefault(__webpack_require__(14));
+
+var _loading = _interopRequireDefault(__webpack_require__(21));
+
+var _testItem = _interopRequireDefault(__webpack_require__(80));
+
+var _popUpTest = _interopRequireDefault(__webpack_require__(84));
+
+var _axios = _interopRequireDefault(__webpack_require__(3));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  components: {
+    'side-menu': _sideMenu.default,
+    'loading-indicator': _loading.default,
+    'test-item': _testItem.default,
+    'pop-up': _popUpTest.default
+  },
+  data: function data() {
+    return {
+      loading: false,
+      tests: null,
+      currentSection: true,
+      popUp: false,
+      currentTest: null,
+      flashMsg: {
+        text: '',
+        status: 1
+      },
+      sectionOne: 1,
+      sectionTwo: 2
+    };
+  },
+  created: function created() {
+    this.fetchData();
+  },
+  methods: {
+    // Получаем данные о тестах с сервера
+    fetchData: function fetchData() {
+      var _this = this;
+
+      this.loading = true;
+
+      _axios.default.get('php/gettests.php').then(function (res) {
+        _this.loading = false;
+        _this.tests = {};
+        _this.tests.published = [];
+        _this.tests.drafts = [];
+        res.data.tests.forEach(function (v) {
+          v.test_status == 1 ? _this.tests.published.push(v) : _this.tests.drafts.push(v);
+        });
+        console.log(12312312);
+        console.log(_this.tests);
+      }).catch(function (err) {
+        _this.loading = false;
+        console.log(err);
+      });
+    },
+    deleteTestHandler: function deleteTestHandler(code, msg) {
+      this.flashMsg(code, msg);
+      this.fetchData();
+    },
+    //Вывод сообщения
+    showFlashMsg: function showFlashMsg(status, text) {
+      var _this2 = this;
+
+      this.flashMsg.status = status;
+      this.flashMsg.text = text;
+      setTimeout(function () {
+        return _this2.flashMsg.text = '';
+      }, 10000);
+    },
+    // Добовление теста
+    newTest: function newTest() {
+      this.$router.push('/newtest');
+    },
+    //Показываем опубликованные тесты
+    showPublished: function showPublished() {
+      this.currentSection = true;
+    },
+    // Показываем черновики
+    showDrafts: function showDrafts() {
+      this.currentSection = false;
+    },
+    //Выводим всплывающее окно с полной информацией о тесте
+    showTestHandler: function showTestHandler(id) {
+      var _this3 = this;
+
+      var query = "?test_id=".concat(id);
+
+      _axios.default.get("php/gettest.php".concat(query)).then(function (res) {
+        _this3.currentTest = res.data.test;
+        _this3.popUp = true;
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    //Закрываем всплывающее окно
+    closePopUp: function closePopUp() {
+      this.popUp = false;
+    },
+    //Редактирование теста
+    editTestHandler: function editTestHandler(id) {
+      localStorage.setItem('test', JSON.stringify(this.currentTest));
+      this.$router.push('/newtest');
+    },
+    // Удаление теста
+    deleteTest: function deleteTest(code, msg) {
+      this.showFlashMsg(code, msg);
+      this.fetchData();
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1ca9ef26_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_side_menu_vue__ = __webpack_require__(52);
+function injectStyle (ssrContext) {
+  __webpack_require__(50)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1ca9ef26_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_side_menu_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _axios = _interopRequireDefault(__webpack_require__(3));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  methods: {
+    //Выход их профиля
+    logout: function logout() {
+      var _this = this;
+
+      _axios.default.get('php/logout.php').then(function (res) {
+        return _this.$router.push('/auth');
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_afcec6e0_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_test_vue__ = __webpack_require__(76);
+function injectStyle (ssrContext) {
+  __webpack_require__(53)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_test_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_afcec6e0_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_test_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _sideMenu = _interopRequireDefault(__webpack_require__(12));
+
+var _newQuestion = _interopRequireDefault(__webpack_require__(55));
+
+var _flashmessage = _interopRequireDefault(__webpack_require__(71));
+
+var _test = _interopRequireDefault(__webpack_require__(75));
+
+var _axios = _interopRequireDefault(__webpack_require__(3));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  components: {
+    'side-menu': _sideMenu.default,
+    'new-question': _newQuestion.default,
+    'flash-message': _flashmessage.default
+  },
+  data: function data() {
+    return {
+      testTitle: '',
+      testDescription: '',
+      testOptions: {
+        timeLimit: false,
+        time: 60,
+        anonym: false
+      },
+      questions: [{
+        type: 1,
+        text: '',
+        id: 1,
+        vars: []
+      }],
+      nextQuestionId: 2,
+      flashMsg: {
+        text: '',
+        status: 1
+      },
+      testId: undefined
+    };
+  },
+  computed: {
+    // Объект класса переключателя ограничения по вреиени
+    timeToggle: function timeToggle() {
+      return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';
+    },
+    // Объект класса переключателя анонимного прохождения
+    anonymToggle: function anonymToggle() {
+      return this.testOptions.anonym === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';
+    },
+    labelTime: function labelTime() {
+      return {
+        'active': this.testOptions.timeLimit
+      };
+    },
+    labelAnonym: function labelAnonym() {
+      return {
+        'active': this.testOptions.anonym
+      };
+    },
+    //Всплывающие сообщения
+    flashMsgClass: function flashMsgClass() {
+      return {
+        'test-flasgMesg': true,
+        'test-flasgMesg_error': this.flashMsg.status == 1,
+        'test-flasgMesg_warn': this.flashMsg.status == 2,
+        'test-flasgMesg_succes': this.flashMsg.status == 3
+      };
+    }
+  },
+  methods: {
+    // Устанавливаем данные теста из ДБ
+    fetchTestDb: function fetchTestDb(test) {
+      this.testTitle = test.test_name;
+      this.testDescription = test.test_description;
+      this.testId = +test.test_id;
+      this.testOptions.timeLimit = +test.test_time ? true : false;
+      this.testOptions.time = +test.test_time;
+      this.testOptions.anonym = +test.test_anonym;
+      this.questions = [];
+      this.nextQuestionId = +test.questions[test.questions.length - 1].question_client_id + 1;
+
+      for (var i = 0; i < test.questions.length; i++) {
+        this.questions[i] = {
+          type: +test.questions[i].question_type_id,
+          text: test.questions[i].question_description,
+          id: +test.questions[i].question_client_id,
+          db_id: +test.questions[i].question_id,
+          vars: []
+        };
+        var type = +test.questions[i].question_type_id;
+
+        if (type === 1 || type == 2) {
+          for (var j = 0; j < test.questions[i].vars.length; j++) {
+            var answer = test.questions[i].question_answer.length === 1 ? [test.questions[i].question_answer] : test.questions[i].question_answer.split(',');
+            this.questions[i].vars.push({
+              text: test.questions[i].vars[j].var_text,
+              id: +test.questions[i].vars[j].question_client_id,
+              db_id: +test.questions[i].vars[j].question_client_id,
+              isRight: answer.indexOf(test.questions[i].vars[j].question_client_id) >= 0 ? true : false
+            });
+          }
+        } else {
+          this.questions[i].vars = test.questions[i].question_answer;
+        }
+      }
+    },
+    //Вывод сообщения
+    showFlashMsg: function showFlashMsg(status, text) {
+      var _this = this;
+
+      this.flashMsg.status = status;
+      this.flashMsg.text = text;
+      setTimeout(function () {
+        return _this.flashMsg.text = '';
+      }, 10000);
+    },
+    // Валидация лимита времени
+    validTimeLimit: function validTimeLimit(e) {
+      var data = e.inputType === 'deleteContentBackward' ? e.target.value : e.data;
+
+      if (!/\d/i.test(data)) {
+        var msg = "Лимит времени задается только в числовом эквиваленте и не должен превышать разумных пределов";
+        this.showFlashMsg(1, msg);
+        e.target.value = this.testOptions.time;
+      } else {
+        if (+e.target.value > 240) {
+          var _msg = "Вы установили очень большой лимит времени, подумайте, может стоит отключить эту опцию.";
+          this.showFlashMsg(2, _msg);
+          this.testOptions.time = +e.target.value;
+        } else if (+e.target.value < 10) {
+          var _msg2 = "Вы установили очень низкий лимит времени!";
+          this.showFlashMsg(1, _msg2);
+        } else {
+          this.testOptions.time = +e.target.value;
+        }
+      }
+    },
+    // Добавление нового вопроса
+    addQuestion: function addQuestion() {
+      this.questions.push({
+        type: 1,
+        text: '',
+        id: this.nextQuestionId,
+        vars: [{
+          text: '',
+          isRight: false,
+          id: 1
+        }]
+      });
+      this.nextQuestionId++;
+    },
+    // Удаляем вопрос
+    deleteQuestionHandler: function deleteQuestionHandler(id) {
+      var index = this.questions.map(function (v, i) {
+        if (v.id === id) return i;
+      });
+      index.length > 1 ? index = index.filter(function (v) {
+        if (typeof v == 'number') return v;
+      })[0] : index = index[0];
+      this.questions.splice(index, 1);
+    },
+    // Обновляем информацию вопроса
+    updateQuestionInfo: function updateQuestionInfo(id, type, description, vars) {
+      for (var i = 0; i < this.questions.length; i++) {
+        if (this.questions[i].id === id) {
+          this.questions[i].type = type;
+          this.questions[i].text = description;
+          this.questions[i].vars = vars;
+        }
+      }
+    },
+    publishTest: function publishTest() {
+      this.saveTest(1);
+    },
+    // Сохраняем тест
+    saveTest: function saveTest(status) {
+      var _this2 = this;
+
+      var status = status ? status : 0;
+      var test = {
+        title: this.testTitle,
+        description: this.testDescription,
+        options: this.testOptions,
+        questions: this.questions,
+        status: status,
+        testId: this.testId
+      };
+
+      var res = _test.default.check(test);
+
+      if (res.status) {
+        _axios.default.post('php/savetest.php', test).then(function (res) {
+          console.log(res);
+
+          if (!res.data.success) {
+            _this2.showFlashMsg(1, res.data.errorMsg);
+          } else {
+            var msg = status == 0 ? 'Тест успешно сохранен в базе данных' : 'Тест опубликован';
+
+            _this2.showFlashMsg(3, msg);
+
+            setTimeout(function () {
+              return _this2.$router.push('/tester');
+            }, 2000);
+          }
+        }).catch(function (err) {
+          return console.log(err);
+        });
+      } else {
+        console.log('мы здесь');
+        this.showFlashMsg(res.code, res.msg);
+        document.querySelector('.new-test-form__title').scrollIntoView({
+          behavior: 'smooth'
+        });
+
+        if (res.questionId) {
+          for (var i = 0; i < this.$children.length; i++) {
+            if (this.$children[i].id === res.questionId) {
+              (function () {
+                var elem = _this2.$children[i].$el;
+                elem.scrollIntoView({
+                  behavior: 'smooth'
+                });
+                elem.classList.add('question_error');
+                setTimeout(function () {
+                  elem.classList.remove('question_error');
+                }, 8000);
+              })();
+            }
+          }
+        }
+      }
+    }
+  },
+  // При создании компонента, проверяем localStorage и если в нем есть объект тест выводим его данные
+  created: function created() {
+    if (localStorage.getItem('test')) {
+      var test = JSON.parse(localStorage.getItem('test'));
+      this.fetchTestDb(test);
+    }
+  },
+  // Перед уходом очищаем localStorage;
+  beforeRouteLeave: function beforeRouteLeave(to, from, next) {
+    localStorage.getItem('test') ? localStorage.removeItem('test') : false;
+    next();
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _single = _interopRequireDefault(__webpack_require__(58));
+
+var _multiple = _interopRequireDefault(__webpack_require__(62));
+
+var _string = _interopRequireDefault(__webpack_require__(66));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  props: ['questiontype', 'questiontext', 'questionid', 'questiondbid', 'questionvars'],
+  components: {
+    'single': _single.default,
+    'multiple': _multiple.default,
+    'string': _string.default
+  },
+  data: function data() {
+    return {
+      questionType: this.questiontype ? this.questiontype : 1,
+      id: this.questionid,
+      db_id: this.questiondbid,
+      description: this.questiontext ? this.questiontext : '',
+      // Вопросы с одним вариантом
+      single: {
+        vars: [{
+          text: '',
+          isRight: false,
+          id: 1
+        }],
+        nextVarId: 2
+      },
+      // Вопросы с несколькими вариантами ответа
+      multiple: {
+        vars: [{
+          text: '',
+          isRight: false,
+          id: 1
+        }],
+        nextVarId: 2
+      },
+      //Вопрос с вводом строки
+      string: {
+        answer: ''
+      }
+    };
+  },
+  methods: {
+    updateDescription: function updateDescription() {
+      this.updateQuestionVars();
+    },
+    changeType: function changeType(e) {
+      this.questionType = +e.target.value;
+      this.single = {
+        vars: [{
+          text: '',
+          isRight: false,
+          id: 1
+        }],
+        nextVarId: 2
+      };
+      this.multiple = {
+        vars: [{
+          text: '',
+          isRight: false,
+          id: 1
+        }],
+        nextVarId: 2
+      };
+    },
+
+    /*Вопросы с одним варианторм*/
+    //Добавляем вариант ответа
+    singleAddVar: function singleAddVar() {
+      this.single.nextVarId++;
+      this.single.vars.push({
+        text: '',
+        isRight: false,
+        id: this.single.nextVarId
+      });
+    },
+    // Удаление вариантами
+    removeVarHandler: function removeVarHandler(id) {
+      var index;
+
+      for (var i = 0; i < this.single.vars.length; i++) {
+        if (this.single.vars[i].id === id) index = i;
+      }
+
+      this.single.vars.splice(index, 1);
+      this.updateQuestionVars();
+    },
+    //Обновляем текст варианта
+    singleUpdateVarHandler: function singleUpdateVarHandler(id, text) {
+      var index;
+
+      for (var i = 0; i < this.single.vars.length; i++) {
+        if (this.single.vars[i].id === id) index = i;
+      }
+
+      this.single.vars[index].text = text;
+      this.updateQuestionVars();
+    },
+    //Выбираем правильный вариант вопроса
+    singleUpdateRightVarHandler: function singleUpdateRightVarHandler(index) {
+      var _this = this;
+
+      this.$children.forEach(function (v, i) {
+        if (i === index) {
+          v.isRight ? v.isRight = false : v.isRight = true;
+          _this.single.vars[index].isRight ? _this.single.vars[index].isRight = false : _this.single.vars[index].isRight = true;
+        } else {
+          v.isRight = false;
+          _this.single.vars[i].isRight = false;
+        }
+      });
+      this.updateQuestionVars();
+    },
+
+    /*Вопросы с несолькими вариантами*/
+    //Добавляем вариант ответа
+    multipleAddVar: function multipleAddVar() {
+      this.multiple.vars.push({
+        text: 'Вариант ответа',
+        isRight: false,
+        id: this.multiple.nextVarId
+      });
+      this.multiple.nextVarId++;
+    },
+    // Удаляем вариант ответа
+    multipleRemoveVarHandler: function multipleRemoveVarHandler(id) {
+      var index;
+
+      for (var i = 0; i < this.multiple.vars.length; i++) {
+        if (this.multiple.vars[i].id === id) index = i;
+      }
+
+      this.multiple.vars.splice(index, 1);
+      this.updateQuestionVars();
+    },
+    multipleUpdateVarHandler: function multipleUpdateVarHandler(id, text) {
+      var index;
+
+      for (var i = 0; i < this.multiple.vars.length; i++) {
+        if (this.multiple.vars[i].id === id) index = i;
+      }
+
+      this.multiple.vars[index].text = text;
+      this.updateQuestionVars();
+    },
+    //Выбираем правильный вариант вопроса
+    multipleUpdateRightVarHandler: function multipleUpdateRightVarHandler(index) {
+      var _this2 = this;
+
+      this.$children.forEach(function (v, i) {
+        if (i === index) {
+          v.isRight ? v.isRight = false : v.isRight = true;
+          _this2.multiple.vars[index].isRight ? _this2.multiple.vars[index].isRight = false : _this2.multiple.vars[index].isRight = true;
+        }
+      });
+      this.updateQuestionVars();
+    },
+
+    /*Вопрос - строка*/
+    stringUpdateVarHandler: function stringUpdateVarHandler(text) {
+      this.string.answer = text;
+      this.updateQuestionVars();
+    },
+    //Обновляем варианты в объекте вопроса в тесте
+    updateQuestionVars: function updateQuestionVars() {
+      switch (this.questionType) {
+        case 1:
+          this.$emit('udpate-question', this.id, this.questionType, this.description, this.single.vars);
+          break;
+
+        case 2:
+          this.$emit('udpate-question', this.id, this.questionType, this.description, this.multiple.vars);
+          break;
+
+        case 3:
+          this.$emit('udpate-question', this.id, this.questionType, this.description, this.string.answer);
+          break;
+
+        default:
+      }
+    },
+    //Событие удаления вопроса
+    deleteQuestion: function deleteQuestion() {
+      this.$emit('delete-question', this.id);
+    }
+  },
+  created: function created() {
+    switch (this.questiontype) {
+      case 1:
+        this.single.vars = this.questionvars;
+        this.single.nextVarId = this.questionvars[this.questionvars.length - 1].id;
+        break;
+
+      case 2:
+        this.multiple.vars = this.questionvars;
+        this.multiple.nextVarId = this.questionvars[this.questionvars.length - 1].id;
+        break;
+
+      case 3:
+        this.string.answer = this.questionvars;
+        break;
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  props: ['text', 'status', 'id'],
+  data: function data() {
+    return {
+      varText: this.text,
+      isRight: this.status,
+      questionId: this.id
+    };
+  },
+  methods: {
+    //Удаление варианта
+    deleteVar: function deleteVar(e) {
+      this.$emit('removeVar', this.id);
+    },
+    // Обнавляем текст варианта
+    updateInfo: function updateInfo() {
+      this.$emit('updateVar', this.id, this.varText);
+    },
+    // Обнавляем статус правильного ответа варианта
+    rightVar: function rightVar() {
+      var index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
+      this.$emit('updateRightVar', index);
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  props: ['text', 'status', 'id'],
+  data: function data() {
+    return {
+      varText: this.text ? this.text : '',
+      placeholderText: this.text,
+      isRight: this.status,
+      questionId: this.id
+    };
+  },
+  methods: {
+    //Удаление варианта
+    deleteVar: function deleteVar(e) {
+      this.$emit('removeVar', this.id);
+    },
+    // Обнавляем текст варианта
+    updateInfo: function updateInfo() {
+      this.$emit('updateVar', this.id, this.varText);
+    },
+    // Обнавляем статус правильного ответа варианта
+    rightVar: function rightVar() {
+      var index = Array.prototype.indexOf.call(this.$el.parentNode.childNodes, this.$el);
+      this.$emit('updateRightVar', index);
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  props: ['text'],
+  data: function data() {
+    return {
+      varText: this.text ? this.text : ''
+    };
+  },
+  methods: {
+    updateInfo: function updateInfo() {
+      this.$emit('updateVar', this.varText);
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  props: ['code', 'text'],
+  data: function data() {
+    return {
+      message: this.text,
+      status: this.code
+    };
+  },
+  computed: {
+    //Всплывающие сообщения
+    flashMsgClass: function flashMsgClass() {
+      return {
+        'test-flasgMesg': true,
+        'test-flasgMesg_error': this.status == 1,
+        'test-flasgMesg_warn': this.status == 2,
+        'test-flasgMesg_succes': this.status == 3
+      };
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c14f2584_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_loading_vue__ = __webpack_require__(79);
+function injectStyle (ssrContext) {
+  __webpack_require__(77)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c14f2584_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_loading_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {};
+exports.default = _default;
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _axios = _interopRequireDefault(__webpack_require__(3));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  props: ['description', 'testtitle', 'status', 'imglink', 'testid', 'respondents'],
+  data: function data() {
+    return {
+      testTitle: this.testtitle,
+      testDescription: this.description,
+      testStatus: this.status,
+      testId: this.testid,
+      testImage: this.imglink ? this.imglink : 'img/default_test.svg',
+      testRespondents: this.respondents
+    };
+  },
+  methods: {
+    // Событие - показать ссылку на тест
+    showLink: function showLink() {
+      console.log(this.testId);
+    },
+    // Событие - показать респондентов, которые прошли данный тест
+    showResp: function showResp() {
+      console.log(this.testRespondents);
+    },
+    // Событие - редактирование теста
+    editHandler: function editHandler() {},
+    // Событие - удаление теста
+    deleteHandler: function deleteHandler() {
+      var _this = this;
+
+      if (window.confirm('Вы точто хотите удалить тест?')) {
+        var query = this.testId;
+
+        _axios.default.get("php/deletetest.php?test_id=".concat(query)).then(function (res) {
+          if (res.data.status) {
+            var msg = 'Тест успешно удален из базы данных';
+
+            _this.$emit('delete-info', 3, msg);
+          } else {
+            var _msg = 'Ошибка базы данных, попробуйте позже';
+
+            _this.$emit('delete-info', 1, _msg);
+          }
+        }).catch(function (err) {
+          return console.log(err);
+        });
+      }
+    },
+    showTest: function showTest(e) {
+      this.$emit('show-test', this.testId);
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _popUpQuestion = _interopRequireDefault(__webpack_require__(90));
+
+var _axios = _interopRequireDefault(__webpack_require__(3));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  props: ['testtite', 'description', 'imglink', 'anonym', 'time', 'status', 'testquestions', 'testid'],
+  components: {
+    'question-item': _popUpQuestion.default
+  },
+  data: function data() {
+    return {
+      testTitle: this.testtite,
+      testDescription: this.description,
+      testImage: this.imglink ? this.imglink : 'img/default_test.svg',
+      testStatus: +this.status ? true : false,
+      testId: this.testid,
+      testLink: window.location.origin + '/exec?' + encodeURIComponent(btoa('test_id=' + +this.testid)),
+      //кодируем запрос в формат base64
+      testOptions: {
+        timeLimit: +this.time !== 0 ? true : false,
+        time: +this.time,
+        anonym: +this.status ? true : false
+      },
+      questions: this.testquestions
+    };
+  },
+  methods: {
+    closeWindow: function closeWindow() {
+      // console.log(this.testId);
+      this.$emit('close-window');
+    },
+    edit: function edit() {
+      this.$emit('edit-test', this.testId);
+    },
+    //Удаляем тест
+    deleteTest: function deleteTest() {
+      var _this = this;
+
+      if (window.confirm('Вы точто хотите удалить тест?')) {
+        var query = this.testId;
+
+        _axios.default.get("php/deletetest.php?test_id=".concat(query)).then(function (res) {
+          if (res.data.status) {
+            var msg = 'Тест успешно удален из базы данных';
+
+            _this.$emit('delete-test', 3, msg);
+
+            _this.closeWindow();
+          } else {
+            var _msg = 'Ошибка базы данных, попробуйте позже';
+
+            _this.$emit('delete-test', 3, _msg);
+
+            _this.closeWindow();
+          }
+        }).catch(function (err) {
+          return console.log(err);
+        });
+      }
+    },
+    //Публикуем тест
+    publish: function publish() {
+      var _this2 = this;
+
+      var query = this.testId;
+
+      _axios.default.get("php/changeteststatus.php?test_id=".concat(query)).then(function (res) {
+        if (res.data.status) {
+          var msg = 'Тест успешно опубликован';
+
+          _this2.$emit('update-test', 3, msg);
+
+          _this2.closeWindow();
+        } else {
+          var _msg2 = 'Ошибка базы данных, попробуйте позже';
+
+          _this2.$emit('update-test', 3, _msg2);
+
+          _this2.closeWindow();
+        }
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    }
+  },
+  created: function created() {
+    document.body.style.overflow = 'hidden';
+  },
+  destroyed: function destroyed() {
+    document.body.style.overflow = 'auto';
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  props: ['qsttitle', 'vars', 'answer', 'qsttype'],
+  data: function data() {
+    return {
+      title: this.qsttitle,
+      variants: this.vars,
+      right: this.answer,
+      type: +this.qsttype
+    };
+  },
+  created: function created() {
+    if (this.type == 1 || this.type == 2) {
+      this.right = this.answer.length > 0 ? this.answer.split(',') : [this.anwer];
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _testMenu = _interopRequireDefault(__webpack_require__(99));
+
+var _loading = _interopRequireDefault(__webpack_require__(21));
+
+var _variants = _interopRequireDefault(__webpack_require__(103));
+
+var _popUpExec = _interopRequireDefault(__webpack_require__(107));
+
+var _axios = _interopRequireDefault(__webpack_require__(3));
+
+var _auth = _interopRequireDefault(__webpack_require__(9));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  components: {
+    'test-menu': _testMenu.default,
+    'loading': _loading.default,
+    'variants': _variants.default,
+    'pop-up': _popUpExec.default
+  },
+  // Когда компонент создан, получаем тест, проверяем, аторизацию пользвателя
+  created: function created() {
+    this.fetchData();
+  },
+  data: function data() {
+    return {
+      test: null,
+      questions: null,
+      authorized: false,
+      loaded: false,
+      userProgress: {
+        currentQstId: 0
+      },
+      currentQstType: 1,
+      answers: [],
+      timeStart: 0,
+      time: 0,
+      timeLimit: false,
+      timeLeft: 0,
+      popUp: false,
+      testResults: {}
+    };
+  },
+  computed: {
+    //Описание вопроса в зависимости от типа
+    questionDescr: function questionDescr() {
+      switch (+this.questions[this.userProgress.currentQstId].question_type_id) {
+        case 1:
+          return 'Выберите один вариант ответа';
+          break;
+
+        case 2:
+          return 'Выберите несколько вариантов';
+          break;
+
+        case 3:
+          return 'Напишите вариант ответа';
+          break;
+
+        default:
+      }
+    }
+  },
+  methods: {
+    //Получаем данные с сервер, сверяем авторизацию пользователя и возможность анонимного прохождения
+    fetchData: function fetchData() {
+      var _this = this;
+
+      var query = "?" + atob(decodeURIComponent(window.location.search.slice(1)));
+
+      _auth.default.checkUser().then(function (res) {
+        var auth = res; //Если тест уже есть в localStorage берем данные от туда, в противном случае, загружаем их с сервера
+
+        _axios.default.get("php/getexectest.php".concat(query)).then(function (res) {
+          console.log(res);
+          var date = new Date();
+          var testId = +query.slice(9);
+          var testData = JSON.parse(localStorage.getItem('current_test')); // Устанавливани все параметры теста
+
+          _this.test = res.data.test;
+          _this.questions = res.data.test.questions;
+          _this.timeStart = testData && +testData.test_db_id == testId ? testData.time_start : date.getTime();
+          _this.answers = testData && +testData.test_db_id == testId ? testData.answers : [];
+          _this.currentQstType = testData && +testData.test_db_id == testId ? testData.currentQstType : +res.data.test.questions[0].question_type_id;
+          _this.currentQstId = testData && +testData.test_db_id == testId ? testData.currentQstId : 0;
+          _this.loaded = true;
+          setTimeout(function () {
+            var id = _this.currentQstId + 1;
+            var elem = document.getElementById("qst_".concat(id));
+            elem.click();
+          }, 0);
+
+          if (+res.data.test.test_anonym == 0 && !auth) {
+            console.log('Просим авторизоваться');
+            _this.authorized = false;
+            window.localStorage.setItem('query', window.location.search.slice(1));
+            setTimeout(function () {
+              _this.$router.replace('/auth');
+            }, 8000);
+          } else {
+            console.log('Показываем тест');
+            _this.authorized = true; // Если тест на время, то будет отсчитывать время
+
+            if (+res.data.test.test_time > 0) {
+              console.log('Это тест на время');
+              var test = 'dsadasda';
+              _this.timeLimit = true;
+              _this.time = res.data.test.test_time;
+
+              var _date = new Date(_this.timeStart);
+
+              var timeStart = _date.getMinutes();
+
+              console.log(timeStart);
+              setInterval(function () {
+                var newDate = new Date();
+                var timeNow = newDate.getMinutes();
+                var timeDifference = timeNow - timeStart;
+                var minutes = new Date(timeDifference * 1000);
+                console.log(timeDifference);
+                _this.timeLeft = _this.time - timeDifference;
+
+                if (timeDifference < _this.time) {
+                  window.alert('Время теста истекло, ваши данные отправлены на сервер');
+                }
+              }, 1000);
+            }
+          }
+        }).catch(function (err) {
+          return console.log(err);
+        });
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    //Навигация по вопросам
+    changeQst: function changeQst(e) {
+      var elemId = e.target.id;
+      var children = e.target.parentElement.children;
+      e.target.classList.contains('active') ? false : e.target.classList.add('active');
+
+      for (var i = 0; i < children.length; i++) {
+        if (children[i].id !== elemId) {
+          children[i].classList.contains('active') ? children[i].classList.remove('active') : false;
+        }
+      }
+
+      this.userProgress.currentQstId = +e.target.id.slice(4) - 1;
+      this.currentQstType = +this.test.questions[this.userProgress.currentQstId].question_type_id;
+      this.saveLocalStorage();
+      console.log(this.answers);
+    },
+    //Обновляем информацию ответов и сохраняем объект теста в localStorage
+    updateAnswerHandler: function updateAnswerHandler(answers) {
+      this.answers = answers;
+      this.saveLocalStorage();
+    },
+    saveLocalStorage: function saveLocalStorage() {
+      var date = new Date();
+      var test = {
+        test_db_id: this.test.test_id,
+        test: this.test,
+        anonym: this.test.test_anonym,
+        token: this.test.token ? this.test.token : btoa(date.getTime()),
+        answers: this.answers,
+        time_start: this.timeStart,
+        currentQstType: this.currentQstType,
+        currentQstId: this.userProgress.currentQstId
+      };
+      localStorage.setItem('current_test', JSON.stringify(test));
+    },
+    // Отправляем тест
+    sendTestHander: function sendTestHander(autoEnd) {
+      var _this2 = this;
+
+      localStorage.removeItem('current_test');
+      var date = new Date();
+      var test = {
+        test_db_id: this.test.test_id,
+        anonym: this.test.test_anonym,
+        token: this.token ? this.token : btoa(date.getTime()),
+        answers: this.answers
+      };
+
+      if (!autoEnd && window.confirm('Вы готовы отправить ответы на проверку?')) {
+        _axios.default.post('php/saveexectest.php', test).then(function (res) {
+          console.log(res);
+          _this2.testResults = res.data;
+          _this2.popUp = true;
+        }).catch(function (err) {
+          console.log(err);
+        });
+      } else {
+        _axios.default.post('php/saveexectest.php', test).then(function (res) {
+          console.log(res);
+          _this2.popUp = true;
+        }).catch(function (err) {
+          console.log(err);
+        });
+      }
+    }
+  },
+  // Перед тем, как пользователь попадет на страницу, проверим, установлено ли id вопроса
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    var check = decodeURIComponent(window.location.search.slice(1));
+
+    if (/test_id/.test(atob(check))) {
+      next();
+    } else {
+      window.location.pathname = '/tester';
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  props: ['testname', 'testdescription'],
+  data: function data() {
+    return {
+      title: this.testname,
+      description: this.testdescription
+    };
+  },
+  methods: {
+    sendTest: function sendTest() {
+      this.$emit('send-test');
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  props: ['type', 'questions', 'currentqst', 'answersarr'],
+  data: function data() {
+    return {
+      qstType: this.type,
+      navId: this.currentqst,
+      qstVars: this.questions[this.currentqst].vars,
+      questionsArr: this.questions,
+      answers: this.answersarr,
+      qstId: undefined
+    };
+  },
+  // mounted() {
+  //     this.answers.forEach( (v,i,a) => {
+  //         let dbIndex = v.questionDbId;
+  //         let elements = document.querySelectorAll(`input[type="checkbox"][data-questionid="${dbIndex}"]`) || document.querySelectorAll(`input[type="radio"][data-questionid="${dbIndex}"]`);
+  //         console.log(elements);
+  //     });
+  // },
+  methods: {
+    getMultipleAnswers: function getMultipleAnswers(id) {
+      var answer = '';
+      var vars = document.querySelectorAll("input[name=\"multiple_var_".concat(id, "\"]"));
+
+      for (var i = 0; i < vars.length; i++) {
+        if (vars[i].checked) {
+          answer.length == 0 ? answer += vars[i].value : answer += ',' + vars[i].value;
+        }
+      }
+
+      return answer;
+    },
+    // Обновляем информацию о вопросе
+    updateAnswer: function updateAnswer(e) {
+      var check = true;
+      var answer = {
+        answer: this.qstType !== 2 ? e.target.value : this.getMultipleAnswers(+e.target.getAttribute('data-questionid')),
+        questionDbId: +e.target.getAttribute('data-questionid')
+      };
+      this.answers.forEach(function (v, i, a) {
+        if (v.questionDbId == answer.questionDbId) {
+          a[i] = answer;
+          check = false;
+        }
+      });
+      check ? this.answers.push(answer) : false;
+      this.$emit('update-answer', this.answers);
+    },
+    //Устанавливани значение чекд в зависимости от типа вопроса
+    updateInputs: function updateInputs() {
+      var _this = this;
+
+      switch (this.qstType) {
+        case 1:
+          setTimeout(function () {
+            var elements;
+            var answer;
+
+            _this.answers.forEach(function (v, i, a) {
+              if (document.querySelectorAll(["input[type=\"radio\"][data-questionid=\"".concat(v.questionDbId, "\"]")]).length > 0) {
+                elements = document.querySelectorAll(["input[type=\"radio\"][data-questionid=\"".concat(v.questionDbId, "\"]")]);
+                answer = v.answer;
+              }
+            });
+
+            if (elements && elements.length > 0) {
+              for (var i = 0; i < elements.length; i++) {
+                elements[i].value == answer ? elements[i].checked = true : elements[i].checked = false;
+              }
+            }
+          }, 100);
+          break;
+
+        case 2:
+          setTimeout(function () {
+            var elements;
+            var answer;
+
+            _this.answers.forEach(function (v, i, a) {
+              if (document.querySelectorAll(["input[type=\"checkbox\"][data-questionid=\"".concat(v.questionDbId, "\"]")]).length > 0) {
+                elements = document.querySelectorAll(["input[type=\"checkbox\"][data-questionid=\"".concat(v.questionDbId, "\"]")]);
+                answer = v.answer;
+              }
+            });
+
+            if (elements && elements.length > 0) {
+              for (var i = 0; i < elements.length; i++) {
+                answer.indexOf(elements[i].value) >= 0 ? elements[i].checked = true : elements[i].checked = false;
+              }
+            }
+          }, 100);
+          break;
+
+        case 3:
+          setTimeout(function () {
+            var elements;
+            var answer;
+
+            _this.answers.forEach(function (v, i, a) {
+              if (document.querySelectorAll("input[type=\"text\"][data-questionid=\"".concat(v.questionDbId, "\"]")).length > 0) {
+                elements = document.querySelectorAll("input[type=\"text\"][data-questionid=\"".concat(v.questionDbId, "\"]"));
+                elements[0].value = v.answer;
+              }
+            });
+          }, 100);
+          break;
+
+        default:
+      }
+    }
+  },
+  // эта функция запускается при любом изменении навинации
+  watch: {
+    type: function type(data) {
+      this.qstType = data;
+      this.updateInputs();
+    },
+    currentqst: function currentqst(data) {
+      this.qstVars = this.questionsArr[data].vars;
+      this.qstId = this.questionsArr[data].question_id;
+      this.updateInputs();
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  props: ['results', 'timestart'],
+  data: function data() {
+    return {
+      res: this.results,
+      time: this.timestart
+    };
+  },
+  computed: {
+    right: function right() {
+      var right = 0;
+      this.res.result.answers.forEach(function (v, i, a) {
+        if (v.result) right++;
+      });
+      return right;
+    },
+    wrong: function wrong() {
+      var wrong = 0;
+      this.res.result.answers.forEach(function (v, i, a) {
+        if (!v.result) wrong++;
+      });
+      return wrong;
+    },
+    timeLeft: function timeLeft() {
+      var end = new Date(+this.res.time_end);
+      var start = new Date(this.time);
+      return end.getMinutes() - start.getMinutes();
+    }
+  },
+  methods: {
+    endTest: function endTest() {
+      localStorage.clear();
+      this.$router.replace('/tester');
+    }
+  },
+  mounted: function mounted() {
+    console.log('mounted');
+    console.log(this.res);
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _variables = _interopRequireDefault(__webpack_require__(31));
+
+var _style = _interopRequireDefault(__webpack_require__(34));
+
+var _vue = _interopRequireDefault(__webpack_require__(36));
+
+var _vueRouter = _interopRequireDefault(__webpack_require__(39));
+
+var _auth = _interopRequireDefault(__webpack_require__(9));
+
+var _smoothscrollMin = _interopRequireDefault(__webpack_require__(40));
+
+var _login = _interopRequireDefault(__webpack_require__(41));
+
+var _tester = _interopRequireDefault(__webpack_require__(47));
+
+var _newTest = _interopRequireDefault(__webpack_require__(14));
+
+var _exec = _interopRequireDefault(__webpack_require__(96));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+window.__forceSmoothScrollPolyfill__ = true; // компоненты
+
+// Маршруты
+_vue.default.use(_vueRouter.default);
+
+var router = new _vueRouter.default({
+  routes: [{
+    path: '/',
+    component: _tester.default,
+    meta: {
+      requiredAuth: true
+    }
+  }, {
+    path: '/auth',
+    component: _login.default
+  }, {
+    path: '/tester',
+    component: _tester.default,
+    meta: {
+      requiredAuth: true
+    }
+  }, {
+    path: '/newtest',
+    component: _newTest.default,
+    meta: {
+      requiredAuth: true
+    }
+  }, {
+    path: '/exec',
+    component: _exec.default
+  }],
+  mode: 'history'
+});
+router.beforeEach(function (to, from, next) {
+  if (to.meta.requiredAuth) {
+    _auth.default.checkUser().then(function (res) {
+      console.log(res);
+
+      if (!res) {
+        router.push('/auth');
+      } else {
+        next();
+      }
+    });
+  } else {
+    next();
+  }
+});
+var app = new _vue.default({
+  router: router,
+  data: {
+    user: {
+      authinticate: false
+    }
+  },
+  components: {
+    'login': _login.default,
+    'tester': _tester.default,
+    'new-test': _newTest.default
+  },
+  methods: {
+    //Событие успешной авторизации или регистрации
+    loginHandler: function loginHandler() {
+      console.log('вот тут должна сработать переадресация');
+      this.authinticate = true; // DELETE
+
+      localStorage.setItem('tester_token', true); // DELETEEND
+
+      router.push({
+        path: '/tester'
+      });
+    }
+  }
+}).$mount('#app');
+
+/***/ }),
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(31);
+var content = __webpack_require__(32);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -4827,8 +5258,7 @@ if(false) {
 }
 
 /***/ }),
-
-/***/ 31:
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -4842,8 +5272,7 @@ exports.push([module.i, ":root{font-family:Marta;font-size:16px;line-height:1.4;
 
 
 /***/ }),
-
-/***/ 32:
+/* 33 */
 /***/ (function(module, exports) {
 
 
@@ -4938,14 +5367,13 @@ module.exports = function (css) {
 
 
 /***/ }),
-
-/***/ 33:
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(34);
+var content = __webpack_require__(35);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -4970,8 +5398,7 @@ if(false) {
 }
 
 /***/ }),
-
-/***/ 34:
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -4985,8 +5412,7 @@ exports.push([module.i, "button:focus,input:focus,select:focus,textarea:focus{ou
 
 
 /***/ }),
-
-/***/ 35:
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
@@ -15788,11 +16214,10 @@ return Vue$3;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(36).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(37).setImmediate))
 
 /***/ }),
-
-/***/ 36:
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -15845,14 +16270,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(37);
+__webpack_require__(38);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-
-/***/ 37:
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -16045,8 +16469,7 @@ exports.clearImmediate = clearImmediate;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(8)))
 
 /***/ }),
-
-/***/ 38:
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -18683,8 +19106,7 @@ return VueRouter;
 
 
 /***/ }),
-
-/***/ 39:
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -18819,28 +19241,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 }();
 
 /***/ }),
-
-/***/ 4:
-/***/ (function(module, exports) {
-
-module.exports = function escape(url) {
-    // If url is already wrapped in quotes, remove them
-    if (/^['"].*['"]$/.test(url)) {
-        url = url.slice(1, -1);
-    }
-    // Should url be wrapped?
-    // See https://drafts.csswg.org/css-values-3/#urls
-    if (/["'() \t\n]/.test(url)) {
-        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
-    }
-
-    return url
-}
-
-
-/***/ }),
-
-/***/ 40:
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18848,9 +19249,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_058273de_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_login_vue__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_058273de_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_login_vue__ = __webpack_require__(46);
 function injectStyle (ssrContext) {
-  __webpack_require__(41)
+  __webpack_require__(42)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -18879,22 +19280,20 @@ var Component = normalizeComponent(
 
 
 /***/ }),
-
-/***/ 41:
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(42);
+var content = __webpack_require__(43);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var update = __webpack_require__(1)("702cd293", content, true);
 
 /***/ }),
-
-/***/ 42:
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -18908,8 +19307,7 @@ exports.push([module.i, ":root{font-family:Marta;font-size:16px;line-height:1.4;
 
 
 /***/ }),
-
-/***/ 43:
+/* 44 */
 /***/ (function(module, exports) {
 
 /**
@@ -18942,8 +19340,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-
-/***/ 44:
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19004,8 +19401,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-
-/***/ 45:
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19015,8 +19411,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 
 /***/ }),
-
-/***/ 46:
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19024,9 +19419,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f7d21462_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_tester_vue__ = __webpack_require__(667);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_79ed5d27_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_tester_vue__ = __webpack_require__(95);
 function injectStyle (ssrContext) {
-  __webpack_require__(665)
+  __webpack_require__(48)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -19044,7 +19439,7 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f7d21462_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_tester_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_79ed5d27_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_tester_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
@@ -19055,29 +19450,48 @@ var Component = normalizeComponent(
 
 
 /***/ }),
-
-/***/ 49:
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(50);
+var content = __webpack_require__(49);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("e98639dc", content, true);
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__(4);
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16)}.tester-page{width:100%;padding-top:calc(var(--row) * 2);display:flex}.tests-list-main{width:100%;align-items:center}.tests-list,.tests-list-main{display:flex;justify-content:flex-start;flex-wrap:wrap}.tests-list>div:nth-child(3n+1){margin-right:calc(var(--column) * 1)}.tests-list>div:nth-child(3n+3){margin-left:calc(var(--column) * 1)}.add-new-test{width:calc(var(--column) * 4);max-height:calc(var(--row) * 4);min-height:calc(var(--row) * 4);box-shadow:3px 3px 8px var(--purple);cursor:pointer;background-color:#fff;border:none;opacity:.2;background-image:url(" + escape(__webpack_require__(5)) + ");background-repeat:no-repeat;background-position:50%;background-size:cover;transition:opacity .3s ease-in-out}.add-new-test:hover{opacity:1}.fix{opacity:0;position:fixed;top:-100;display:none}.fade-enter-active,.fade-leave-active{transition:opacity .5s}.fade-enter,.fade-leave-to{opacity:0}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(51);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var update = __webpack_require__(1)("95328818", content, true);
 
 /***/ }),
-
-/***/ 5:
-/***/ (function(module, exports) {
-
-module.exports = "img/../img/add.svg";
-
-/***/ }),
-
-/***/ 50:
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -19091,8 +19505,7 @@ exports.push([module.i, ":root{font-family:Marta;font-size:16px;line-height:1.4;
 
 
 /***/ }),
-
-/***/ 51:
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19102,8 +19515,35 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 
 /***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 54:
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(54);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("59601542", content, true);
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__(4);
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".newtest-page{display:flex}.newtest-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16)}.new-test-form{padding-top:calc(var(--column) * 2);position:relative}.new-test-form__title{display:block;width:100%;border:none;border-bottom:1px solid var(--blue);margin-bottom:40px;font-family:marta;font-size:3rem;color:var(--blue)}.new-test-form__options{background-color:#fff;border:1px solid var(--blue);box-shadow:3px 3px 8px var(--purple);padding:20px}.new-test-form__options h3{padding:0;margin:0;margin-bottom:20px;color:#8496b1}.new-test-form__description{padding:10px;border:none;margin-bottom:20px;width:98%;max-width:98%;min-width:98%;max-height:calc(var(--row) * 2);min-height:calc(var(--row) * 2);height:calc(var(--row) * 2);border:1px solid var(--blue)}.new-test-form__options label{color:#8496b1}.new-test-form__options label.active{color:var(--purple)}.new-test-form__inputs>*{display:inline-block}.new-test-form__inputs img{max-width:30px;margin-bottom:-10px;padding-left:20px}.new-test-form__inputs img:first-child{padding-left:0}.new-test-form__inputs input[type=text]{background-color:#dddde8;border:none;border-bottom:1px solid var(--blue);width:50px;text-align:center}.new-test-form__inputs input[type=checkbox]{display:none}.new-test__add-question{border:none;margin:40px 0;padding-left:40px;font-family:marta;font-size:1.2rem;font-weight:700;cursor:pointer;background-image:url(" + escape(__webpack_require__(5)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out}.new-test__add-question:hover{opacity:1}.test-flasgMesg{position:fixed;max-width:30%;top:40px;right:40px;padding:20px;color:#fff;font-size:1.1rem;text-align:center;font-weight:700}.test-flasgMesg_error{background-color:var(--red)}.test-flasgMesg_warn{background-color:var(--yellow)}.test-flasgMesg_succes{background-color:var(--green)}.fade-enter-active,.fade-leave-active{transition:opacity .3s ease-in-out}.fade-enter,.fade-leave-to{opacity:0}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19111,9 +19551,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_241cb3b8_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_question_vue__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_241cb3b8_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_question_vue__ = __webpack_require__(70);
 function injectStyle (ssrContext) {
-  __webpack_require__(55)
+  __webpack_require__(56)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -19142,62 +19582,20 @@ var Component = normalizeComponent(
 
 
 /***/ }),
-
-/***/ 55:
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(56);
+var content = __webpack_require__(57);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var update = __webpack_require__(1)("741d34c4", content, true);
 
 /***/ }),
-
-/***/ 554:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(555);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(1)("47b3b27a", content, true);
-
-/***/ }),
-
-/***/ 555:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".tests-list-item{position:relative;width:calc(var(--column) * 4);min-height:calc(var(--row) * 4);margin-bottom:calc(var(--row) * 1);border:1px solid var(--blue);box-shadow:3px 3px 8px var(--purple);cursor:pointer;background-color:#fff;transition:all .3s ease-in-out}.tests-list-item:hover{background-color:var(--purple)}.tests-list-item:hover .tests-list-item__img{opacity:0}.tests-list-item:hover .tests-list-item__desc{top:20px;opacity:1}.tests-list-item:hover .tests-list-item-info h3{color:#fff}.tests-list-item:hover .tests-list-item-info h3:before{background-color:#fff}.tests-list-item:hover .tests-list-item-info__link,.tests-list-item:hover .tests-list-item-info__resp{color:#fff}.tests-list-item:hover .tests-list-item-info__link svg,.tests-list-item:hover .tests-list-item-info__resp svg{fill:#fff}.tests-list-item-descr{position:relative;overflow:hidden}.tests-list-item__img{display:block;width:100%;max-height:200px;transition:opacity .1s ease-in-out}.tests-list-item__desc{position:absolute;top:-100%;padding:0 20px;opacity:0;color:#fff;font-size:.9rem;transition:all .3s ease-in-out}.tests-list-item-info{padding:20px;margin-bottom:30px}.tests-list-item-info h3{position:relative;color:var(--blue);min-height:4rem;transition:all .3s ease-in-out}.tests-list-item-info h3:before{display:block;position:absolute;content:\"\";top:-5px;left:0;width:50px;height:5px;background-color:var(--purple);transition:all .3s ease-in-out}.tests-list-item-info__link,.tests-list-item-info__resp{position:absolute;bottom:20px;padding-left:30px;display:block;color:var(--blue);font-size:.8rem;transition:all .3s ease-in}.tests-list-item-info__link{left:20px}.tests-list-item-info__resp{right:20px}.tests-list-item-info__link svg,.tests-list-item-info__resp svg{width:20px;position:absolute;top:0;left:0;fill:var(--purple);padding-right:5px;transition:all .3s ease-in-out}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 556:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tests-list-item",attrs:{"id":_vm.testId + '_tst'},on:{"click":_vm.showTest}},[_c('div',{staticClass:"tests-list-item-descr"},[_c('img',{staticClass:"tests-list-item__img",attrs:{"src":_vm.testImage,"alt":""}}),_vm._v(" "),_c('p',{staticClass:"tests-list-item__desc"},[_vm._v(_vm._s(_vm.testDescription))])]),_vm._v(" "),_c('div',{staticClass:"tests-list-item-info"},[_c('h3',[_vm._v(_vm._s(_vm.testTitle))]),_vm._v(" "),(_vm.testStatus == 1)?_c('a',{staticClass:"tests-list-item-info__link",attrs:{"href":"link"},on:{"click":function($event){$event.stopPropagation();$event.preventDefault();_vm.showLink($event)}}},[_c('svg',{staticStyle:{"enable-background":"new 0 0 20 20"},attrs:{"version":"1.1","id":"link","xmlns":"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink","x":"0px","y":"0px","viewBox":"0 0 20 20","xml:space":"preserve"}},[_c('g',[_c('path',{staticClass:"st0",attrs:{"d":"M17.3,2.4c-1.6-1.6-4.3-1.6-5.9,0l-3,3C8.2,5.6,8.2,6,8.4,6.2c0.3,0.3,0.7,0.3,0.9,0l3-3\n\t\tc0.5-0.5,1.3-0.8,2.1-0.8c0.8,0,1.5,0.3,2.1,0.8s0.8,1.3,0.8,2.1c0,0.8-0.3,1.5-0.8,2.1l-3.9,3.9c-1.1,1.1-3,1.1-4.1,0\n\t\tc-0.3-0.3-0.7-0.3-0.9,0s-0.3,0.7,0,0.9c0.8,0.8,1.9,1.2,3,1.2s2.1-0.4,3-1.2l3.9-3.9c0.8-0.8,1.2-1.8,1.2-3\n\t\tC18.6,4.2,18.1,3.1,17.3,2.4z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M9.6,14.2l-2.5,2.5c-0.5,0.5-1.3,0.8-2.1,0.8c-0.8,0-1.5-0.3-2.1-0.8c-1.1-1.1-1.1-3,0-4.1L6.6,9\n\t\tc0.5-0.5,1.3-0.8,2.1-0.8c0.8,0,1.5,0.3,2.1,0.8c0.3,0.3,0.7,0.3,0.9,0c0.3-0.3,0.3-0.7,0-0.9c-1.6-1.6-4.3-1.6-5.9,0L2,11.7\n\t\tc-0.8,0.8-1.2,1.8-1.2,3c0,1.1,0.4,2.2,1.2,3c0.8,0.8,1.8,1.2,3,1.2c1.1,0,2.2-0.4,3-1.2l2.5-2.5c0.3-0.3,0.3-0.7,0-0.9\n\t\tC10.2,14,9.8,14,9.6,14.2z"}})])]),_vm._v("Ссылка")]):_vm._e(),_vm._v(" "),(_vm.testStatus == 1)?_c('a',{staticClass:"tests-list-item-info__resp",attrs:{"href":""},on:{"ckick":function($event){$event.stopPropagation();$event.preventDefault();_vm.showResp($event)}}},[_c('svg',{staticStyle:{"enable-background":"new 0 0 20 20"},attrs:{"version":"1.1","id":"respondent","xmlns":"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink","x":"0px","y":"0px","viewBox":"0 0 20 20","xml:space":"preserve"}},[_c('g',[_c('g',[_c('path',{staticClass:"st0",attrs:{"d":"M7.9,11.9H4.9c-2.1,0-3.7,1.6-3.8,3.7c-0.1,0.6-0.3,1.7,0.1,2.1c1,1,3.4,1.4,5.2,1.4c1.8,0,4.1-0.4,5.2-1.4\n\t\t\tc0.4-0.4,0.2-1.5,0.1-2.1C11.6,13.5,10,11.9,7.9,11.9z M11.1,17.1c-0.7,0.7-2.5,1.2-4.6,1.2c-2.1,0-3.9-0.5-4.6-1.2\n\t\t\tc-0.1-0.2-0.4-4.3,3.1-4.5c0.8,0,3.1,0,3.1,0C11.4,12.6,11.1,16.9,11.1,17.1L11.1,17.1z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M6.4,11.2c1.7,0,3.1-1.4,3-3c0-1.7-1.3-3-3-3c-1.6,0-3,1.4-3,3C3.3,9.8,4.7,11.2,6.4,11.2z M6.4,5.9\n\t\t\tc1.3,0,2.3,1,2.3,2.3s-1,2.3-2.3,2.3s-2.3-1-2.3-2.3S5.1,5.9,6.4,5.9z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M9.9,1v5.6h1.2v2.7l2.7-2.7H19V1H9.9z M18.3,5.8h-4.8l-1.7,1.7V5.8h-1.2V1.8h7.6V5.8z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M14.4,2.8c0-0.1,0.1-0.1,0.2-0.1c0.1,0,0.2,0,0.2,0c0,0.1,0.1,0.2,0.1,0.2c0,0.1,0,0.2-0.1,0.2l-0.3,0.3\n\t\t\tc-0.1,0.1-0.2,0.2-0.2,0.3c0,0.1,0,0.2,0,0.3v0.3h0.7V4.2c0-0.1,0-0.2,0-0.2c0,0,0.1-0.1,0.2-0.2c0.1-0.1,0.2-0.2,0.2-0.2\n\t\t\tc0,0,0-0.1,0.1-0.1c0,0,0.1-0.1,0.1-0.1c0,0,0,0,0.1-0.1c0,0,0-0.2,0-0.3c0-0.3-0.1-0.5-0.3-0.7c-0.2-0.2-0.4-0.2-0.7-0.2\n\t\t\tc-0.3,0-0.5,0.1-0.7,0.3c-0.2,0.2-0.3,0.4-0.3,0.7h0.8C14.3,3,14.3,2.9,14.4,2.8L14.4,2.8z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M14.6,4.6c-0.1,0-0.2,0-0.3,0.1c-0.1,0.1-0.1,0.2-0.1,0.3c0,0.1,0,0.2,0.1,0.3c0.1,0.1,0.2,0.1,0.3,0.1\n\t\t\tc0.1,0,0.2,0,0.3-0.1C14.9,5.3,15,5.2,15,5.1c0-0.1,0-0.2-0.1-0.3S14.7,4.6,14.6,4.6z"}})])])]),_vm._v(_vm._s(_vm.testRespondents))]):_vm._e(),_vm._v(" "),(_vm.testStatus == 0)?_c('a',{staticClass:"tests-list-item-info__link",attrs:{"href":""},on:{"click":function($event){$event.stopPropagation();$event.preventDefault();_vm.editHandler($event)}}},[_c('svg',{staticStyle:{"enable-background":"new 0 0 20 20"},attrs:{"version":"1.1","id":"Layer_2","xmlns":"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink","x":"0px","y":"0px","viewBox":"0 0 20 20","xml:space":"preserve"}},[_c('path',{staticClass:"st0",attrs:{"d":"M18.6,1.4c-1.2-1.2-3.2-1.2-4.4,0L1.8,13.8c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0.1,0,0.1s0,0,0,0l0,0l-1.2,5.1\n\tc0,0,0,0,0,0.1l0,0c0,0,0,0.1,0,0.1c0,0,0,0,0,0s0,0.1,0.1,0.1c0,0,0.1,0.1,0.1,0.1c0,0,0.1,0,0.1,0c0,0,0.1,0,0.1,0L6,18.3h0h0\n\tc0,0,0,0,0.1,0c0,0,0,0,0,0l0,0L18.6,5.8C19.8,4.6,19.8,2.6,18.6,1.4z M18.1,1.9C19,2.7,19,4.1,18.4,5L15,1.6\n\tC15.9,1,17.3,1.1,18.1,1.9z M16.4,7L13,3.6l0.5-0.5l3.4,3.4L16.4,7z M2.2,17.8c-0.1-0.1-0.3-0.1-0.5,0l-0.3,0.2l0.9-3.7l1.5-0.2\n\tL3.7,16v0v0v0c0,0,0,0,0,0.1c0,0,0,0,0,0.1l0,0c0,0,0,0,0.1,0l0,0c0,0,0,0,0.1,0h0h0l0,0l0,0l0,0l0,0h0l1.8-0.2l-0.2,1.5l-3.7,0.9\n\tl0.3-0.3C2.4,18.2,2.4,18,2.2,17.8z M6.5,15.9l7.7-7.7c0.1-0.1,0.1-0.3,0-0.5c-0.1-0.1-0.3-0.1-0.5,0L6,15.4l-1.7,0.2L4.6,14\n\tl7.7-7.7c0.1-0.1,0.1-0.3,0-0.5c-0.1-0.1-0.3-0.1-0.5,0l-7.7,7.7L3,13.6l9.5-9.5l3.4,3.4L6.4,17L6.5,15.9z M17.4,6L14,2.6l0.5-0.5\n\tl3.4,3.4L17.4,6z"}})]),_vm._v("редактировать")]):_vm._e(),_vm._v(" "),(_vm.testStatus == 0)?_c('a',{staticClass:"tests-list-item-info__resp",attrs:{"href":""},on:{"click":function($event){$event.stopPropagation();$event.preventDefault();_vm.deleteHandler($event)}}},[_c('svg',{staticStyle:{"enable-background":"new 0 0 20 20"},attrs:{"version":"1.1","id":"delete","xmlns":"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink","x":"0px","y":"0px","viewBox":"0 0 20 20","xml:space":"preserve"}},[_c('g',[_c('g',[_c('g',[_c('path',{staticClass:"st0",attrs:{"d":"M15.5,6.4c0-0.2,0.1-0.3,0.3-0.3c0.2,0,0.3,0.1,0.3,0.3v10.8c0,0.5-0.2,0.9-0.5,1.2\n\t\t\t\tc-0.3,0.3-0.8,0.5-1.2,0.5H5.5c-0.5,0-0.9-0.2-1.2-0.5c-0.3-0.3-0.5-0.8-0.5-1.2V6.4c0-0.2,0.1-0.3,0.3-0.3s0.3,0.1,0.3,0.3v10.8\n\t\t\t\tc0,0.3,0.1,0.6,0.3,0.8c0.2,0.2,0.5,0.3,0.8,0.3h8.8c0.3,0,0.6-0.1,0.8-0.3s0.3-0.5,0.3-0.8L15.5,6.4L15.5,6.4z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M7.8,16.5c0,0.2-0.1,0.3-0.3,0.3c-0.2,0-0.3-0.1-0.3-0.3v-10c0-0.2,0.1-0.3,0.3-0.3c0.2,0,0.3,0.1,0.3,0.3\n\t\t\t\tV16.5z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M10.2,16.5c0,0.2-0.1,0.3-0.3,0.3c-0.2,0-0.3-0.1-0.3-0.3v-10c0-0.2,0.1-0.3,0.3-0.3c0.2,0,0.3,0.1,0.3,0.3\n\t\t\t\tV16.5z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M12.6,16.5c0,0.2-0.1,0.3-0.3,0.3S12,16.7,12,16.5v-10c0-0.2,0.1-0.3,0.3-0.3s0.3,0.1,0.3,0.3V16.5\n\t\t\t\tL12.6,16.5z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M7.6,2.6c0,0.2-0.1,0.3-0.3,0.3c-0.2,0-0.3-0.1-0.3-0.3c0-0.5,0.2-0.9,0.5-1.2c0.3-0.3,0.8-0.5,1.2-0.5H11\n\t\t\t\tc0.5,0,0.9,0.2,1.2,0.5c0.3,0.3,0.5,0.8,0.5,1.2c0,0.2-0.1,0.3-0.3,0.3s-0.3-0.1-0.3-0.3c0-0.3-0.1-0.6-0.3-0.8\n\t\t\t\tc-0.2-0.2-0.5-0.3-0.8-0.3H8.8C8.5,1.5,8.2,1.6,8,1.8C7.8,2,7.6,2.3,7.6,2.6z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M3.3,3.5h13.2c0.3,0,0.5,0.1,0.7,0.3l0,0c0.2,0.2,0.3,0.4,0.3,0.7v0.7c0,0.2-0.1,0.3-0.3,0.3h0H2.6\n\t\t\t\tc-0.2,0-0.3-0.1-0.3-0.3v0V4.5c0-0.3,0.1-0.5,0.3-0.7l0,0C2.8,3.6,3,3.5,3.3,3.5L3.3,3.5z M16.5,4H3.3C3.2,4,3.1,4.1,3,4.2l0,0\n\t\t\t\tC2.9,4.2,2.9,4.3,2.9,4.5v0.4h14V4.5c0-0.1,0-0.2-0.1-0.3l0,0C16.7,4.1,16.6,4,16.5,4z"}})])])])]),_vm._v("удалить")]):_vm._e()])])}
-var staticRenderFns = []
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-
-/***/ }),
-
-/***/ 56:
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var escape = __webpack_require__(4);
@@ -19212,8 +19610,7 @@ exports.push([module.i, ".question{position:relative;margin-top:40px;padding:20p
 
 
 /***/ }),
-
-/***/ 57:
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19221,9 +19618,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_323fd128_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_single_vue__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_323fd128_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_single_vue__ = __webpack_require__(61);
 function injectStyle (ssrContext) {
-  __webpack_require__(58)
+  __webpack_require__(59)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -19252,22 +19649,20 @@ var Component = normalizeComponent(
 
 
 /***/ }),
-
-/***/ 58:
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(59);
+var content = __webpack_require__(60);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var update = __webpack_require__(1)("9648692c", content, true);
 
 /***/ }),
-
-/***/ 59:
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -19281,381 +19676,7 @@ exports.push([module.i, ".question-var{display:flex;width:calc(var(--column) * 1
 
 
 /***/ }),
-
-/***/ 6:
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-
-var stylesInDom = {};
-
-var	memoize = function (fn) {
-	var memo;
-
-	return function () {
-		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-		return memo;
-	};
-};
-
-var isOldIE = memoize(function () {
-	// Test for IE <= 9 as proposed by Browserhacks
-	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-	// Tests for existence of standard globals is to allow style-loader
-	// to operate correctly into non-standard environments
-	// @see https://github.com/webpack-contrib/style-loader/issues/177
-	return window && document && document.all && !window.atob;
-});
-
-var getElement = (function (fn) {
-	var memo = {};
-
-	return function(selector) {
-		if (typeof memo[selector] === "undefined") {
-			var styleTarget = fn.call(this, selector);
-			// Special case to return head of iframe instead of iframe itself
-			if (styleTarget instanceof window.HTMLIFrameElement) {
-				try {
-					// This will throw an exception if access to iframe is blocked
-					// due to cross-origin restrictions
-					styleTarget = styleTarget.contentDocument.head;
-				} catch(e) {
-					styleTarget = null;
-				}
-			}
-			memo[selector] = styleTarget;
-		}
-		return memo[selector]
-	};
-})(function (target) {
-	return document.querySelector(target)
-});
-
-var singleton = null;
-var	singletonCounter = 0;
-var	stylesInsertedAtTop = [];
-
-var	fixUrls = __webpack_require__(32);
-
-module.exports = function(list, options) {
-	if (typeof DEBUG !== "undefined" && DEBUG) {
-		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-
-	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
-
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the <head> element
-	if (!options.insertInto) options.insertInto = "head";
-
-	// By default, add <style> tags to the bottom of the target
-	if (!options.insertAt) options.insertAt = "bottom";
-
-	var styles = listToStyles(list, options);
-
-	addStylesToDom(styles, options);
-
-	return function update (newList) {
-		var mayRemove = [];
-
-		for (var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-
-		if(newList) {
-			var newStyles = listToStyles(newList, options);
-			addStylesToDom(newStyles, options);
-		}
-
-		for (var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-
-			if(domStyle.refs === 0) {
-				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
-
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-};
-
-function addStylesToDom (styles, options) {
-	for (var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-
-		if(domStyle) {
-			domStyle.refs++;
-
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles (list, options) {
-	var styles = [];
-	var newStyles = {};
-
-	for (var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = options.base ? item[0] + options.base : item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-
-		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
-		else newStyles[id].parts.push(part);
-	}
-
-	return styles;
-}
-
-function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto)
-
-	if (!target) {
-		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-	}
-
-	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
-
-	if (options.insertAt === "top") {
-		if (!lastStyleElementInsertedAtTop) {
-			target.insertBefore(style, target.firstChild);
-		} else if (lastStyleElementInsertedAtTop.nextSibling) {
-			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			target.appendChild(style);
-		}
-		stylesInsertedAtTop.push(style);
-	} else if (options.insertAt === "bottom") {
-		target.appendChild(style);
-	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
-		var nextSibling = getElement(options.insertInto + " " + options.insertAt.before);
-		target.insertBefore(style, nextSibling);
-	} else {
-		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
-	}
-}
-
-function removeStyleElement (style) {
-	if (style.parentNode === null) return false;
-	style.parentNode.removeChild(style);
-
-	var idx = stylesInsertedAtTop.indexOf(style);
-	if(idx >= 0) {
-		stylesInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement (options) {
-	var style = document.createElement("style");
-
-	options.attrs.type = "text/css";
-
-	addAttrs(style, options.attrs);
-	insertStyleElement(options, style);
-
-	return style;
-}
-
-function createLinkElement (options) {
-	var link = document.createElement("link");
-
-	options.attrs.type = "text/css";
-	options.attrs.rel = "stylesheet";
-
-	addAttrs(link, options.attrs);
-	insertStyleElement(options, link);
-
-	return link;
-}
-
-function addAttrs (el, attrs) {
-	Object.keys(attrs).forEach(function (key) {
-		el.setAttribute(key, attrs[key]);
-	});
-}
-
-function addStyle (obj, options) {
-	var style, update, remove, result;
-
-	// If a transform function was defined, run it on the css
-	if (options.transform && obj.css) {
-	    result = options.transform(obj.css);
-
-	    if (result) {
-	    	// If transform returns a value, use that instead of the original css.
-	    	// This allows running runtime transformations on the css.
-	    	obj.css = result;
-	    } else {
-	    	// If the transform function returns a falsy value, don't add this css.
-	    	// This allows conditional loading of css
-	    	return function() {
-	    		// noop
-	    	};
-	    }
-	}
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-
-		style = singleton || (singleton = createStyleElement(options));
-
-		update = applyToSingletonTag.bind(null, style, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-
-	} else if (
-		obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function"
-	) {
-		style = createLinkElement(options);
-		update = updateLink.bind(null, style, options);
-		remove = function () {
-			removeStyleElement(style);
-
-			if(style.href) URL.revokeObjectURL(style.href);
-		};
-	} else {
-		style = createStyleElement(options);
-		update = applyToTag.bind(null, style);
-		remove = function () {
-			removeStyleElement(style);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle (newObj) {
-		if (newObj) {
-			if (
-				newObj.css === obj.css &&
-				newObj.media === obj.media &&
-				newObj.sourceMap === obj.sourceMap
-			) {
-				return;
-			}
-
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag (style, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (style.styleSheet) {
-		style.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = style.childNodes;
-
-		if (childNodes[index]) style.removeChild(childNodes[index]);
-
-		if (childNodes.length) {
-			style.insertBefore(cssNode, childNodes[index]);
-		} else {
-			style.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag (style, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		style.setAttribute("media", media)
-	}
-
-	if(style.styleSheet) {
-		style.styleSheet.cssText = css;
-	} else {
-		while(style.firstChild) {
-			style.removeChild(style.firstChild);
-		}
-
-		style.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink (link, options, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	/*
-		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
-		and there is no publicPath defined then lets turn convertToAbsoluteUrls
-		on by default.  Otherwise default to the convertToAbsoluteUrls option
-		directly
-	*/
-	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
-
-	if (options.convertToAbsoluteUrls || autoFixUrls) {
-		css = fixUrls(css);
-	}
-
-	if (sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = link.href;
-
-	link.href = URL.createObjectURL(blob);
-
-	if(oldSrc) URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ }),
-
-/***/ 60:
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19665,8 +19686,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 
 /***/ }),
-
-/***/ 61:
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19674,9 +19694,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_06ff6f54_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_multiple_vue__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_06ff6f54_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_multiple_vue__ = __webpack_require__(65);
 function injectStyle (ssrContext) {
-  __webpack_require__(62)
+  __webpack_require__(63)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -19705,22 +19725,20 @@ var Component = normalizeComponent(
 
 
 /***/ }),
-
-/***/ 62:
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(63);
+var content = __webpack_require__(64);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var update = __webpack_require__(1)("69930e52", content, true);
 
 /***/ }),
-
-/***/ 63:
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -19734,8 +19752,7 @@ exports.push([module.i, ".question-var{display:flex;width:calc(var(--column) * 1
 
 
 /***/ }),
-
-/***/ 64:
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19745,8 +19762,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 
 /***/ }),
-
-/***/ 65:
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19754,9 +19770,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4f86c12c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_string_vue__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4f86c12c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_string_vue__ = __webpack_require__(69);
 function injectStyle (ssrContext) {
-  __webpack_require__(66)
+  __webpack_require__(67)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -19785,63 +19801,20 @@ var Component = normalizeComponent(
 
 
 /***/ }),
-
-/***/ 66:
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(67);
+var content = __webpack_require__(68);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var update = __webpack_require__(1)("7c5a89b7", content, true);
 
 /***/ }),
-
-/***/ 665:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(666);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(1)("93d92a8a", content, true);
-
-/***/ }),
-
-/***/ 666:
-/***/ (function(module, exports, __webpack_require__) {
-
-var escape = __webpack_require__(4);
-exports = module.exports = __webpack_require__(0)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16)}.tester-page{width:100%;padding-top:calc(var(--row) * 2);display:flex}.tests-list-main{width:100%;align-items:center}.tests-list,.tests-list-main{display:flex;justify-content:flex-start;flex-wrap:wrap}.tests-list>div:nth-child(3n+1){margin-right:calc(var(--column) * 1)}.tests-list>div:nth-child(3n+3){margin-left:calc(var(--column) * 1)}.add-new-test{width:calc(var(--column) * 4);max-height:calc(var(--row) * 4);min-height:calc(var(--row) * 4);box-shadow:3px 3px 8px var(--purple);cursor:pointer;background-color:#fff;border:none;opacity:.2;background-image:url(" + escape(__webpack_require__(5)) + ");background-repeat:no-repeat;background-position:50%;background-size:cover;transition:opacity .3s ease-in-out}.add-new-test:hover{opacity:1}.fix{opacity:0;position:fixed;top:-100;display:none}.fade-enter-active,.fade-leave-active{transition:opacity .5s}.fade-enter,.fade-leave-to{opacity:0}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 667:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tester-page"},[_c('side-menu'),_vm._v(" "),_c('section',{staticClass:"content"},[_c('transition',{attrs:{"name":"fade"}},[(_vm.popUp)?_c('pop-up',{attrs:{"testtite":_vm.currentTest.test_name,"description":_vm.currentTest.test_description,"imglink":_vm.currentTest.test_image,"anonym":_vm.currentTest.test_anonym,"time":_vm.currentTest.test_time,"status":_vm.currentTest.test_status,"testquestions":_vm.currentTest.questions,"testid":_vm.currentTest.test_id},on:{"close-window":_vm.closePopUp,"edit-test":_vm.editTestHandler,"delete-test":_vm.deleteTestHandler}}):_vm._e()],1),_vm._v(" "),_c('nav',{staticClass:"new-test-nav"},[_c('ul',[_c('li',[_c('a',{attrs:{"href":"save"},on:{"click":function($event){$event.preventDefault();_vm.showPublished($event)}}},[_vm._v("Опубликованные")])]),_vm._v(" "),_c('li',[_c('a',{attrs:{"href":"publish"},on:{"click":function($event){$event.preventDefault();_vm.showDrafts($event)}}},[_vm._v("Черновики")])])])]),_vm._v(" "),(_vm.loading)?_c('div',{staticClass:"loading"},[_c('loading-indicator')],1):_c('div',{staticClass:"tests-list-main"},[(_vm.currentSection)?_c('div',{key:_vm.sectionOne,staticClass:"tests-list"},[_vm._l((_vm.tests.published),function(test){return _c('test-item',{key:_vm.test_id,attrs:{"description":test.test_description,"testtitle":test.test_name,"testid":test.test_id,"imglink":test.test_img,"status":test.test_status},on:{"show-test":_vm.showTestHandler,"delete-info":_vm.deleteTest}})}),_vm._v(" "),_c('button',{staticClass:"add-new-test",attrs:{"type":"button","name":"button"},on:{"click":_vm.newTest}})],2):_c('div',{key:_vm.sectionTwo,staticClass:"tests-list"},[_vm._l((_vm.tests.drafts),function(test){return _c('test-item',{key:_vm.test_id,attrs:{"description":test.test_description,"testtitle":test.test_name,"testid":test.test_id,"imglink":test.test_img,"status":test.test_status},on:{"show-test":_vm.showTestHandler,"delete-info":_vm.deleteTest}})}),_vm._v(" "),_c('button',{staticClass:"add-new-test",attrs:{"type":"button","name":"button"},on:{"click":_vm.newTest}})],2)]),_vm._v(" "),_c('transition',{attrs:{"name":"fade"}},[(_vm.flashMsg.text.length > 0)?_c('flash-message',{attrs:{"code":_vm.flashMsg.status,"text":_vm.flashMsg.text}}):_vm._e()],1)],1)],1)}
-var staticRenderFns = []
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-
-/***/ }),
-
-/***/ 67:
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -19855,49 +19828,7 @@ exports.push([module.i, ".question-var-str{display:flex;flex-wrap:wrap}.var-stri
 
 
 /***/ }),
-
-/***/ 671:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(672);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(1)("dc96d806", content, true);
-
-/***/ }),
-
-/***/ 672:
-/***/ (function(module, exports, __webpack_require__) {
-
-var escape = __webpack_require__(4);
-exports = module.exports = __webpack_require__(0)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".pop-up{z-index:105;position:fixed;top:0;left:0;width:100vw;height:100%;background-color:rgba(0,0,0,.8)}.pop-up,.pop-up>div{overflow-y:scroll}.pop-up-controls{position:fixed;display:flex;flex-wrap:wrap;max-width:50px;top:0;left:calc(25% - 100px);background-color:#fff}.pop-up-controls button{display:block;cursor:pointer;width:50px;height:50px;border:none;margin:10px 5px;background-color:#fff;background-repeat:no-repeat;background-position:50%;opacity:.5;transition:opacity .3s ease-in-out}.pop-up-controls button:hover{opacity:1}.pop-up-controls__publish{background-image:url(" + escape(__webpack_require__(86)) + ")}.pop-up-controls__edit{background-image:url(" + escape(__webpack_require__(87)) + ")}.pop-up-controls__delete{background-image:url(" + escape(__webpack_require__(88)) + ")}.pop-up-window{width:50%;background-color:#fff;margin:0 auto;padding:40px}.pop-up-window>h2,.pop-up-window>p{color:var(--blue)}.pop-up-window img{display:block;margin:0 auto;max-height:300px}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 673:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pop-up",on:{"click":_vm.closeWindow}},[_c('div',[_c('div',{staticClass:"pop-up-window",on:{"click":function($event){$event.stopPropagation();}}},[_c('div',{staticClass:"pop-up-controls"},[(!_vm.testStatus)?_c('button',{staticClass:"pop-up-controls__publish",attrs:{"type":"button","name":"button","title":"опубликовать"},on:{"click":_vm.publish}}):_vm._e(),_vm._v(" "),(!_vm.testStatus)?_c('button',{staticClass:"pop-up-controls__edit",attrs:{"type":"button","name":"button","title":"редактировать"},on:{"click":_vm.edit}}):_vm._e(),_vm._v(" "),_c('button',{staticClass:"pop-up-controls__delete",attrs:{"type":"button","name":"button","title":"удалить"},on:{"click":_vm.deleteTest}})]),_vm._v(" "),(_vm.testStatus == 1)?_c('p',{staticClass:"link"},[_vm._v(_vm._s(_vm.testLink))]):_vm._e(),_vm._v(" "),_c('h2',[_vm._v(_vm._s(_vm.testTitle))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(_vm.testDescription))]),_vm._v(" "),_c('img',{attrs:{"src":_vm.testImage,"alt":""}}),_vm._v(" "),_vm._l((_vm.questions),function(question){return _c('question-item',{key:question.question_id,attrs:{"qsttitle":question.question_description,"vars":question.vars,"answer":question.question_answer,"qsttype":question.question_type_id}})})],2)])])}
-var staticRenderFns = []
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-
-/***/ }),
-
-/***/ 68:
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19907,49 +19838,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 
 /***/ }),
-
-/***/ 683:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(684);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(1)("59601542", content, true);
-
-/***/ }),
-
-/***/ 684:
-/***/ (function(module, exports, __webpack_require__) {
-
-var escape = __webpack_require__(4);
-exports = module.exports = __webpack_require__(0)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".newtest-page{display:flex}.newtest-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16)}.new-test-form{padding-top:calc(var(--column) * 2);position:relative}.new-test-form__title{display:block;width:100%;border:none;border-bottom:1px solid var(--blue);margin-bottom:40px;font-family:marta;font-size:3rem;color:var(--blue)}.new-test-form__options{background-color:#fff;border:1px solid var(--blue);box-shadow:3px 3px 8px var(--purple);padding:20px}.new-test-form__options h3{padding:0;margin:0;margin-bottom:20px;color:#8496b1}.new-test-form__description{padding:10px;border:none;margin-bottom:20px;width:98%;max-width:98%;min-width:98%;max-height:calc(var(--row) * 2);min-height:calc(var(--row) * 2);height:calc(var(--row) * 2);border:1px solid var(--blue)}.new-test-form__options label{color:#8496b1}.new-test-form__options label.active{color:var(--purple)}.new-test-form__inputs>*{display:inline-block}.new-test-form__inputs img{max-width:30px;margin-bottom:-10px;padding-left:20px}.new-test-form__inputs img:first-child{padding-left:0}.new-test-form__inputs input[type=text]{background-color:#dddde8;border:none;border-bottom:1px solid var(--blue);width:50px;text-align:center}.new-test-form__inputs input[type=checkbox]{display:none}.new-test__add-question{border:none;margin:40px 0;padding-left:40px;font-family:marta;font-size:1.2rem;font-weight:700;cursor:pointer;background-image:url(" + escape(__webpack_require__(5)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:var(--purple);opacity:.5;transition:opacity .2s ease-in-out}.new-test__add-question:hover{opacity:1}.test-flasgMesg{position:fixed;max-width:30%;top:40px;right:40px;padding:20px;color:#fff;font-size:1.1rem;text-align:center;font-weight:700}.test-flasgMesg_error{background-color:var(--red)}.test-flasgMesg_warn{background-color:var(--yellow)}.test-flasgMesg_succes{background-color:var(--green)}.fade-enter-active,.fade-leave-active{transition:opacity .3s ease-in-out}.fade-enter,.fade-leave-to{opacity:0}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 685:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"newtest-page"},[_c('side-menu'),_vm._v(" "),_c('section',{staticClass:"content"},[_c('nav',{staticClass:"new-test-nav"},[_c('ul',[_c('li',[_c('a',{attrs:{"href":"save"},on:{"click":function($event){$event.preventDefault();_vm.saveTest(0)}}},[_vm._v("Сохранить")])]),_vm._v(" "),_c('li',[_c('a',{attrs:{"href":"publish"},on:{"click":function($event){$event.preventDefault();_vm.saveTest(1)}}},[_vm._v("Опубликовать")])])])]),_vm._v(" "),_c('form',{staticClass:"new-test-form"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.testTitle),expression:"testTitle"}],staticClass:"new-test-form__title",attrs:{"type":"text","placeholder":"Название теста"},domProps:{"value":(_vm.testTitle)},on:{"input":function($event){if($event.target.composing){ return; }_vm.testTitle=$event.target.value}}}),_vm._v(" "),_c('div',{staticClass:"new-test-form__options"},[_c('h3',[_vm._v("Описание:")]),_vm._v(" "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.testDescription),expression:"testDescription"}],staticClass:"new-test-form__description",attrs:{"name":"test_description"},domProps:{"value":(_vm.testDescription)},on:{"input":function($event){if($event.target.composing){ return; }_vm.testDescription=$event.target.value}}}),_vm._v(" "),_c('div',{staticClass:"new-test-form__inputs"},[_c('img',{attrs:{"src":_vm.timeToggle,"alt":""}}),_vm._v(" "),_c('label',{class:_vm.labelTime,attrs:{"for":"time_limit"}},[_vm._v("Лимит по времени")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.testOptions.timeLimit),expression:"testOptions.timeLimit"}],attrs:{"type":"checkbox","name":"time_limit","id":"time_limit"},domProps:{"checked":Array.isArray(_vm.testOptions.timeLimit)?_vm._i(_vm.testOptions.timeLimit,null)>-1:(_vm.testOptions.timeLimit)},on:{"change":function($event){var $$a=_vm.testOptions.timeLimit,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.testOptions.timeLimit=$$a.concat([$$v]))}else{$$i>-1&&(_vm.testOptions.timeLimit=$$a.slice(0,$$i).concat($$a.slice($$i+1)))}}else{_vm.$set(_vm.testOptions, "timeLimit", $$c)}}}}),_vm._v(" "),_c('transition',{attrs:{"name":"fade"}},[(_vm.testOptions.timeLimit)?_c('img',{attrs:{"src":"img/stopwatch.svg","alt":""}}):_vm._e()]),_vm._v(" "),_c('transition',{attrs:{"name":"fade"}},[(_vm.testOptions.timeLimit)?_c('label',{staticClass:"active",attrs:{"for":"time"}},[_vm._v("Время в мин.:")]):_vm._e()]),_vm._v(" "),_c('transition',{attrs:{"name":"fade"}},[(_vm.testOptions.timeLimit)?_c('input',{attrs:{"type":"text","name":"time","id":"time","value":"60"},on:{"input":_vm.validTimeLimit}}):_vm._e()]),_vm._v(" "),_c('img',{attrs:{"src":_vm.anonymToggle,"alt":""}}),_vm._v(" "),_c('label',{class:_vm.labelAnonym,attrs:{"for":"anonym"}},[_vm._v("Анонимное прохождение")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.testOptions.anonym),expression:"testOptions.anonym"}],attrs:{"type":"checkbox","name":"anonym","id":"anonym"},domProps:{"checked":Array.isArray(_vm.testOptions.anonym)?_vm._i(_vm.testOptions.anonym,null)>-1:(_vm.testOptions.anonym)},on:{"change":[function($event){var $$a=_vm.testOptions.anonym,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.testOptions.anonym=$$a.concat([$$v]))}else{$$i>-1&&(_vm.testOptions.anonym=$$a.slice(0,$$i).concat($$a.slice($$i+1)))}}else{_vm.$set(_vm.testOptions, "anonym", $$c)}},_vm.check]}})],1)]),_vm._v(" "),_vm._l((_vm.questions),function(question){return _c('new-question',{key:question.id,attrs:{"questiontype":question.type,"questiontext":question.text,"questionid":question.id,"questiondbid":question.db_id,"questionvars":question.vars},on:{"delete-question":_vm.deleteQuestionHandler,"udpate-question":_vm.updateQuestionInfo}})}),_vm._v(" "),_c('button',{staticClass:"new-test__add-question",attrs:{"type":"button","name":"button"},on:{"click":_vm.addQuestion}},[_vm._v("\n            добавить вопрос")]),_vm._v(" "),_c('transition',{attrs:{"name":"fade"}},[(_vm.flashMsg.text.length > 0)?_c('flash-message',{attrs:{"code":_vm.flashMsg.status,"text":_vm.flashMsg.text}}):_vm._e()],1)],2)])],1)}
-var staticRenderFns = []
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-
-/***/ }),
-
-/***/ 69:
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19959,36 +19848,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 
 /***/ }),
-
-/***/ 7:
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 70:
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19996,9 +19856,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_73f86392_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flashmessage_vue__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_73f86392_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flashmessage_vue__ = __webpack_require__(74);
 function injectStyle (ssrContext) {
-  __webpack_require__(71)
+  __webpack_require__(72)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -20027,22 +19887,20 @@ var Component = normalizeComponent(
 
 
 /***/ }),
-
-/***/ 71:
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(72);
+var content = __webpack_require__(73);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var update = __webpack_require__(1)("d33660c8", content, true);
 
 /***/ }),
-
-/***/ 72:
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -20056,8 +19914,7 @@ exports.push([module.i, ".test-flasgMesg{position:fixed;max-width:30%;top:40px;r
 
 
 /***/ }),
-
-/***/ 73:
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20067,8 +19924,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 
 /***/ }),
-
-/***/ 74:
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20252,62 +20108,30 @@ function checkMultiVarsText(vars) {
 }
 
 /***/ }),
-
-/***/ 749:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(750);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(1)("60abba01", content, true);
-
-/***/ }),
-
-/***/ 750:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".variant-item input[type=checkbox],.variant-item input[type=radio]{display:none}.variant-item label{cursor:pointer;text-decoration:none;color:var(--purple);opacity:.5;transition:all .3s ease-in-out}.variant-item input[type=checkbox]:checked~label,.variant-item input[type=radio]:checked~label{opacity:1;text-decoration-color:var(--purple);text-decoration:underline}.variant-item{width:100%;display:flex;flex-wrap:wrap;justify-content:space-between}.variant-item>div{width:50%;text-align:center;margin:20px 0}.variant-item label{font-size:1.3rem}.variant-item .variant-item__string{display:block;width:90%;margin:20px auto;text-align:center;border:none;border-bottom:1px solid var(--blue);font-size:1.3rem}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 751:
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"variants"},[(_vm.qstType == 1)?_c('div',{staticClass:"variant-item"},_vm._l((_vm.qstVars),function(variant){return _c('div',{key:variant.var_bd_id},[_c('input',{attrs:{"data-questionid":variant.question_db_id,"type":"radio","name":'single_var_'+variant.question_db_id,"id":variant.question_client_id},domProps:{"value":variant.question_client_id},on:{"change":_vm.updateAnswer}}),_vm._v(" "),_c('label',{attrs:{"for":variant.question_client_id}},[_vm._v(_vm._s(variant.var_text))])])})):(_vm.qstType == 2)?_c('div',{staticClass:"variant-item"},_vm._l((_vm.qstVars),function(variant){return _c('div',{key:variant.var_bd_id},[_c('input',{attrs:{"data-questionid":variant.question_db_id,"type":"checkbox","name":'multiple_var_'+variant.question_db_id,"id":variant.question_client_id},domProps:{"value":variant.question_client_id},on:{"change":_vm.updateAnswer}}),_vm._v(" "),_c('label',{attrs:{"for":variant.question_client_id}},[_vm._v(_vm._s(variant.var_text))])])})):_c('div',{staticClass:"variant-item"},[_c('input',{staticClass:"variant-item__string",attrs:{"data-questionid":_vm.qstId,"type":"text","placeholder":"Напишите ваш ответ"},on:{"change":_vm.updateAnswer}})])])}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"newtest-page"},[_c('side-menu'),_vm._v(" "),_c('section',{staticClass:"content"},[_c('nav',{staticClass:"new-test-nav"},[_c('ul',[_c('li',[_c('a',{attrs:{"href":"save"},on:{"click":function($event){$event.preventDefault();_vm.saveTest(0)}}},[_vm._v("Сохранить")])]),_vm._v(" "),_c('li',[_c('a',{attrs:{"href":"publish"},on:{"click":function($event){$event.preventDefault();_vm.saveTest(1)}}},[_vm._v("Опубликовать")])])])]),_vm._v(" "),_c('form',{staticClass:"new-test-form"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.testTitle),expression:"testTitle"}],staticClass:"new-test-form__title",attrs:{"type":"text","placeholder":"Название теста"},domProps:{"value":(_vm.testTitle)},on:{"input":function($event){if($event.target.composing){ return; }_vm.testTitle=$event.target.value}}}),_vm._v(" "),_c('div',{staticClass:"new-test-form__options"},[_c('h3',[_vm._v("Описание:")]),_vm._v(" "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.testDescription),expression:"testDescription"}],staticClass:"new-test-form__description",attrs:{"name":"test_description"},domProps:{"value":(_vm.testDescription)},on:{"input":function($event){if($event.target.composing){ return; }_vm.testDescription=$event.target.value}}}),_vm._v(" "),_c('div',{staticClass:"new-test-form__inputs"},[_c('img',{attrs:{"src":_vm.timeToggle,"alt":""}}),_vm._v(" "),_c('label',{class:_vm.labelTime,attrs:{"for":"time_limit"}},[_vm._v("Лимит по времени")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.testOptions.timeLimit),expression:"testOptions.timeLimit"}],attrs:{"type":"checkbox","name":"time_limit","id":"time_limit"},domProps:{"checked":Array.isArray(_vm.testOptions.timeLimit)?_vm._i(_vm.testOptions.timeLimit,null)>-1:(_vm.testOptions.timeLimit)},on:{"change":function($event){var $$a=_vm.testOptions.timeLimit,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.testOptions.timeLimit=$$a.concat([$$v]))}else{$$i>-1&&(_vm.testOptions.timeLimit=$$a.slice(0,$$i).concat($$a.slice($$i+1)))}}else{_vm.$set(_vm.testOptions, "timeLimit", $$c)}}}}),_vm._v(" "),_c('transition',{attrs:{"name":"fade"}},[(_vm.testOptions.timeLimit)?_c('img',{attrs:{"src":"img/stopwatch.svg","alt":""}}):_vm._e()]),_vm._v(" "),_c('transition',{attrs:{"name":"fade"}},[(_vm.testOptions.timeLimit)?_c('label',{staticClass:"active",attrs:{"for":"time"}},[_vm._v("Время в мин.:")]):_vm._e()]),_vm._v(" "),_c('transition',{attrs:{"name":"fade"}},[(_vm.testOptions.timeLimit)?_c('input',{attrs:{"type":"text","name":"time","id":"time","value":"60"},on:{"input":_vm.validTimeLimit}}):_vm._e()]),_vm._v(" "),_c('img',{attrs:{"src":_vm.anonymToggle,"alt":""}}),_vm._v(" "),_c('label',{class:_vm.labelAnonym,attrs:{"for":"anonym"}},[_vm._v("Анонимное прохождение")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.testOptions.anonym),expression:"testOptions.anonym"}],attrs:{"type":"checkbox","name":"anonym","id":"anonym"},domProps:{"checked":Array.isArray(_vm.testOptions.anonym)?_vm._i(_vm.testOptions.anonym,null)>-1:(_vm.testOptions.anonym)},on:{"change":[function($event){var $$a=_vm.testOptions.anonym,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.testOptions.anonym=$$a.concat([$$v]))}else{$$i>-1&&(_vm.testOptions.anonym=$$a.slice(0,$$i).concat($$a.slice($$i+1)))}}else{_vm.$set(_vm.testOptions, "anonym", $$c)}},_vm.check]}})],1)]),_vm._v(" "),_vm._l((_vm.questions),function(question){return _c('new-question',{key:question.id,attrs:{"questiontype":question.type,"questiontext":question.text,"questionid":question.id,"questiondbid":question.db_id,"questionvars":question.vars},on:{"delete-question":_vm.deleteQuestionHandler,"udpate-question":_vm.updateQuestionInfo}})}),_vm._v(" "),_c('button',{staticClass:"new-test__add-question",attrs:{"type":"button","name":"button"},on:{"click":_vm.addQuestion}},[_vm._v("\n            добавить вопрос")]),_vm._v(" "),_c('transition',{attrs:{"name":"fade"}},[(_vm.flashMsg.text.length > 0)?_c('flash-message',{attrs:{"code":_vm.flashMsg.status,"text":_vm.flashMsg.text}}):_vm._e()],1)],2)])],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 
 /***/ }),
-
-/***/ 76:
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(77);
+var content = __webpack_require__(78);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var update = __webpack_require__(1)("9f279500", content, true);
 
 /***/ }),
-
-/***/ 77:
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -20321,8 +20145,7 @@ exports.push([module.i, ".loading-indicator{display:flex;flex-wrap:wrap;justify-
 
 
 /***/ }),
-
-/***/ 78:
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20332,8 +20155,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 
 /***/ }),
-
-/***/ 79:
+/* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20341,9 +20163,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_item_vue__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_item_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_item_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_item_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_item_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1eda71ee_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_test_item_vue__ = __webpack_require__(556);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3f14db76_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_test_item_vue__ = __webpack_require__(83);
 function injectStyle (ssrContext) {
-  __webpack_require__(554)
+  __webpack_require__(81)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -20361,7 +20183,7 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_item_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1eda71ee_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_test_item_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3f14db76_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_test_item_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
@@ -20372,199 +20194,44 @@ var Component = normalizeComponent(
 
 
 /***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 8:
-/***/ (function(module, exports) {
+// style-loader: Adds some css to the DOM by adding a <style> tag
 
-// shim for using process in browser
-var process = module.exports = {};
+// load the styles
+var content = __webpack_require__(82);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("5919bdfc", content, true);
 
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
 
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
+exports = module.exports = __webpack_require__(0)(false);
+// imports
 
 
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
+// module
+exports.push([module.i, ".tests-list-item{position:relative;width:calc(var(--column) * 4);min-height:calc(var(--row) * 4);margin-bottom:calc(var(--row) * 1);border:1px solid var(--blue);box-shadow:3px 3px 8px var(--purple);cursor:pointer;background-color:#fff;transition:all .3s ease-in-out}.tests-list-item:hover{background-color:var(--purple)}.tests-list-item:hover .tests-list-item__img{opacity:0}.tests-list-item:hover .tests-list-item__desc{top:20px;opacity:1}.tests-list-item:hover .tests-list-item-info h3{color:#fff}.tests-list-item:hover .tests-list-item-info h3:before{background-color:#fff}.tests-list-item:hover .tests-list-item-info__link,.tests-list-item:hover .tests-list-item-info__resp{color:#fff}.tests-list-item:hover .tests-list-item-info__link svg,.tests-list-item:hover .tests-list-item-info__resp svg{fill:#fff}.tests-list-item-descr{position:relative;overflow:hidden}.tests-list-item__img{display:block;width:100%;max-height:200px;transition:opacity .1s ease-in-out}.tests-list-item__desc{position:absolute;top:-100%;padding:0 20px;opacity:0;color:#fff;font-size:.9rem;transition:all .3s ease-in-out}.tests-list-item-info{padding:20px;margin-bottom:30px}.tests-list-item-info h3{position:relative;color:var(--blue);min-height:4rem;transition:all .3s ease-in-out}.tests-list-item-info h3:before{display:block;position:absolute;content:\"\";top:-5px;left:0;width:50px;height:5px;background-color:var(--purple);transition:all .3s ease-in-out}.tests-list-item-info__link,.tests-list-item-info__resp{position:absolute;bottom:20px;padding-left:30px;display:block;color:var(--blue);font-size:.8rem;transition:all .3s ease-in}.tests-list-item-info__link{left:20px}.tests-list-item-info__resp{right:20px}.tests-list-item-info__link svg,.tests-list-item-info__resp svg{width:20px;position:absolute;top:0;left:0;fill:var(--purple);padding-right:5px;transition:all .3s ease-in-out}", ""]);
 
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
+// exports
 
 
 /***/ }),
+/* 83 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/***/ 83:
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tests-list-item",attrs:{"id":_vm.testId + '_tst'},on:{"click":_vm.showTest}},[_c('div',{staticClass:"tests-list-item-descr"},[_c('img',{staticClass:"tests-list-item__img",attrs:{"src":_vm.testImage,"alt":""}}),_vm._v(" "),_c('p',{staticClass:"tests-list-item__desc"},[_vm._v(_vm._s(_vm.testDescription))])]),_vm._v(" "),_c('div',{staticClass:"tests-list-item-info"},[_c('h3',[_vm._v(_vm._s(_vm.testTitle))]),_vm._v(" "),(_vm.testStatus == 1)?_c('a',{staticClass:"tests-list-item-info__link",attrs:{"href":"link"},on:{"click":function($event){$event.stopPropagation();$event.preventDefault();_vm.showLink($event)}}},[_c('svg',{staticStyle:{"enable-background":"new 0 0 20 20"},attrs:{"version":"1.1","id":"link","xmlns":"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink","x":"0px","y":"0px","viewBox":"0 0 20 20","xml:space":"preserve"}},[_c('g',[_c('path',{staticClass:"st0",attrs:{"d":"M17.3,2.4c-1.6-1.6-4.3-1.6-5.9,0l-3,3C8.2,5.6,8.2,6,8.4,6.2c0.3,0.3,0.7,0.3,0.9,0l3-3\n\t\tc0.5-0.5,1.3-0.8,2.1-0.8c0.8,0,1.5,0.3,2.1,0.8s0.8,1.3,0.8,2.1c0,0.8-0.3,1.5-0.8,2.1l-3.9,3.9c-1.1,1.1-3,1.1-4.1,0\n\t\tc-0.3-0.3-0.7-0.3-0.9,0s-0.3,0.7,0,0.9c0.8,0.8,1.9,1.2,3,1.2s2.1-0.4,3-1.2l3.9-3.9c0.8-0.8,1.2-1.8,1.2-3\n\t\tC18.6,4.2,18.1,3.1,17.3,2.4z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M9.6,14.2l-2.5,2.5c-0.5,0.5-1.3,0.8-2.1,0.8c-0.8,0-1.5-0.3-2.1-0.8c-1.1-1.1-1.1-3,0-4.1L6.6,9\n\t\tc0.5-0.5,1.3-0.8,2.1-0.8c0.8,0,1.5,0.3,2.1,0.8c0.3,0.3,0.7,0.3,0.9,0c0.3-0.3,0.3-0.7,0-0.9c-1.6-1.6-4.3-1.6-5.9,0L2,11.7\n\t\tc-0.8,0.8-1.2,1.8-1.2,3c0,1.1,0.4,2.2,1.2,3c0.8,0.8,1.8,1.2,3,1.2c1.1,0,2.2-0.4,3-1.2l2.5-2.5c0.3-0.3,0.3-0.7,0-0.9\n\t\tC10.2,14,9.8,14,9.6,14.2z"}})])]),_vm._v("Ссылка")]):_vm._e(),_vm._v(" "),(_vm.testStatus == 1)?_c('a',{staticClass:"tests-list-item-info__resp",attrs:{"href":""},on:{"ckick":function($event){$event.stopPropagation();$event.preventDefault();_vm.showResp($event)}}},[_c('svg',{staticStyle:{"enable-background":"new 0 0 20 20"},attrs:{"version":"1.1","id":"respondent","xmlns":"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink","x":"0px","y":"0px","viewBox":"0 0 20 20","xml:space":"preserve"}},[_c('g',[_c('g',[_c('path',{staticClass:"st0",attrs:{"d":"M7.9,11.9H4.9c-2.1,0-3.7,1.6-3.8,3.7c-0.1,0.6-0.3,1.7,0.1,2.1c1,1,3.4,1.4,5.2,1.4c1.8,0,4.1-0.4,5.2-1.4\n\t\t\tc0.4-0.4,0.2-1.5,0.1-2.1C11.6,13.5,10,11.9,7.9,11.9z M11.1,17.1c-0.7,0.7-2.5,1.2-4.6,1.2c-2.1,0-3.9-0.5-4.6-1.2\n\t\t\tc-0.1-0.2-0.4-4.3,3.1-4.5c0.8,0,3.1,0,3.1,0C11.4,12.6,11.1,16.9,11.1,17.1L11.1,17.1z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M6.4,11.2c1.7,0,3.1-1.4,3-3c0-1.7-1.3-3-3-3c-1.6,0-3,1.4-3,3C3.3,9.8,4.7,11.2,6.4,11.2z M6.4,5.9\n\t\t\tc1.3,0,2.3,1,2.3,2.3s-1,2.3-2.3,2.3s-2.3-1-2.3-2.3S5.1,5.9,6.4,5.9z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M9.9,1v5.6h1.2v2.7l2.7-2.7H19V1H9.9z M18.3,5.8h-4.8l-1.7,1.7V5.8h-1.2V1.8h7.6V5.8z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M14.4,2.8c0-0.1,0.1-0.1,0.2-0.1c0.1,0,0.2,0,0.2,0c0,0.1,0.1,0.2,0.1,0.2c0,0.1,0,0.2-0.1,0.2l-0.3,0.3\n\t\t\tc-0.1,0.1-0.2,0.2-0.2,0.3c0,0.1,0,0.2,0,0.3v0.3h0.7V4.2c0-0.1,0-0.2,0-0.2c0,0,0.1-0.1,0.2-0.2c0.1-0.1,0.2-0.2,0.2-0.2\n\t\t\tc0,0,0-0.1,0.1-0.1c0,0,0.1-0.1,0.1-0.1c0,0,0,0,0.1-0.1c0,0,0-0.2,0-0.3c0-0.3-0.1-0.5-0.3-0.7c-0.2-0.2-0.4-0.2-0.7-0.2\n\t\t\tc-0.3,0-0.5,0.1-0.7,0.3c-0.2,0.2-0.3,0.4-0.3,0.7h0.8C14.3,3,14.3,2.9,14.4,2.8L14.4,2.8z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M14.6,4.6c-0.1,0-0.2,0-0.3,0.1c-0.1,0.1-0.1,0.2-0.1,0.3c0,0.1,0,0.2,0.1,0.3c0.1,0.1,0.2,0.1,0.3,0.1\n\t\t\tc0.1,0,0.2,0,0.3-0.1C14.9,5.3,15,5.2,15,5.1c0-0.1,0-0.2-0.1-0.3S14.7,4.6,14.6,4.6z"}})])])]),_vm._v(_vm._s(_vm.testRespondents))]):_vm._e(),_vm._v(" "),(_vm.testStatus == 0)?_c('a',{staticClass:"tests-list-item-info__link",attrs:{"href":""},on:{"click":function($event){$event.stopPropagation();$event.preventDefault();_vm.editHandler($event)}}},[_c('svg',{staticStyle:{"enable-background":"new 0 0 20 20"},attrs:{"version":"1.1","id":"Layer_2","xmlns":"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink","x":"0px","y":"0px","viewBox":"0 0 20 20","xml:space":"preserve"}},[_c('path',{staticClass:"st0",attrs:{"d":"M18.6,1.4c-1.2-1.2-3.2-1.2-4.4,0L1.8,13.8c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0.1,0,0.1s0,0,0,0l0,0l-1.2,5.1\n\tc0,0,0,0,0,0.1l0,0c0,0,0,0.1,0,0.1c0,0,0,0,0,0s0,0.1,0.1,0.1c0,0,0.1,0.1,0.1,0.1c0,0,0.1,0,0.1,0c0,0,0.1,0,0.1,0L6,18.3h0h0\n\tc0,0,0,0,0.1,0c0,0,0,0,0,0l0,0L18.6,5.8C19.8,4.6,19.8,2.6,18.6,1.4z M18.1,1.9C19,2.7,19,4.1,18.4,5L15,1.6\n\tC15.9,1,17.3,1.1,18.1,1.9z M16.4,7L13,3.6l0.5-0.5l3.4,3.4L16.4,7z M2.2,17.8c-0.1-0.1-0.3-0.1-0.5,0l-0.3,0.2l0.9-3.7l1.5-0.2\n\tL3.7,16v0v0v0c0,0,0,0,0,0.1c0,0,0,0,0,0.1l0,0c0,0,0,0,0.1,0l0,0c0,0,0,0,0.1,0h0h0l0,0l0,0l0,0l0,0h0l1.8-0.2l-0.2,1.5l-3.7,0.9\n\tl0.3-0.3C2.4,18.2,2.4,18,2.2,17.8z M6.5,15.9l7.7-7.7c0.1-0.1,0.1-0.3,0-0.5c-0.1-0.1-0.3-0.1-0.5,0L6,15.4l-1.7,0.2L4.6,14\n\tl7.7-7.7c0.1-0.1,0.1-0.3,0-0.5c-0.1-0.1-0.3-0.1-0.5,0l-7.7,7.7L3,13.6l9.5-9.5l3.4,3.4L6.4,17L6.5,15.9z M17.4,6L14,2.6l0.5-0.5\n\tl3.4,3.4L17.4,6z"}})]),_vm._v("редактировать")]):_vm._e(),_vm._v(" "),(_vm.testStatus == 0)?_c('a',{staticClass:"tests-list-item-info__resp",attrs:{"href":""},on:{"click":function($event){$event.stopPropagation();$event.preventDefault();_vm.deleteHandler($event)}}},[_c('svg',{staticStyle:{"enable-background":"new 0 0 20 20"},attrs:{"version":"1.1","id":"delete","xmlns":"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink","x":"0px","y":"0px","viewBox":"0 0 20 20","xml:space":"preserve"}},[_c('g',[_c('g',[_c('g',[_c('path',{staticClass:"st0",attrs:{"d":"M15.5,6.4c0-0.2,0.1-0.3,0.3-0.3c0.2,0,0.3,0.1,0.3,0.3v10.8c0,0.5-0.2,0.9-0.5,1.2\n\t\t\t\tc-0.3,0.3-0.8,0.5-1.2,0.5H5.5c-0.5,0-0.9-0.2-1.2-0.5c-0.3-0.3-0.5-0.8-0.5-1.2V6.4c0-0.2,0.1-0.3,0.3-0.3s0.3,0.1,0.3,0.3v10.8\n\t\t\t\tc0,0.3,0.1,0.6,0.3,0.8c0.2,0.2,0.5,0.3,0.8,0.3h8.8c0.3,0,0.6-0.1,0.8-0.3s0.3-0.5,0.3-0.8L15.5,6.4L15.5,6.4z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M7.8,16.5c0,0.2-0.1,0.3-0.3,0.3c-0.2,0-0.3-0.1-0.3-0.3v-10c0-0.2,0.1-0.3,0.3-0.3c0.2,0,0.3,0.1,0.3,0.3\n\t\t\t\tV16.5z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M10.2,16.5c0,0.2-0.1,0.3-0.3,0.3c-0.2,0-0.3-0.1-0.3-0.3v-10c0-0.2,0.1-0.3,0.3-0.3c0.2,0,0.3,0.1,0.3,0.3\n\t\t\t\tV16.5z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M12.6,16.5c0,0.2-0.1,0.3-0.3,0.3S12,16.7,12,16.5v-10c0-0.2,0.1-0.3,0.3-0.3s0.3,0.1,0.3,0.3V16.5\n\t\t\t\tL12.6,16.5z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M7.6,2.6c0,0.2-0.1,0.3-0.3,0.3c-0.2,0-0.3-0.1-0.3-0.3c0-0.5,0.2-0.9,0.5-1.2c0.3-0.3,0.8-0.5,1.2-0.5H11\n\t\t\t\tc0.5,0,0.9,0.2,1.2,0.5c0.3,0.3,0.5,0.8,0.5,1.2c0,0.2-0.1,0.3-0.3,0.3s-0.3-0.1-0.3-0.3c0-0.3-0.1-0.6-0.3-0.8\n\t\t\t\tc-0.2-0.2-0.5-0.3-0.8-0.3H8.8C8.5,1.5,8.2,1.6,8,1.8C7.8,2,7.6,2.3,7.6,2.6z"}}),_vm._v(" "),_c('path',{staticClass:"st0",attrs:{"d":"M3.3,3.5h13.2c0.3,0,0.5,0.1,0.7,0.3l0,0c0.2,0.2,0.3,0.4,0.3,0.7v0.7c0,0.2-0.1,0.3-0.3,0.3h0H2.6\n\t\t\t\tc-0.2,0-0.3-0.1-0.3-0.3v0V4.5c0-0.3,0.1-0.5,0.3-0.7l0,0C2.8,3.6,3,3.5,3.3,3.5L3.3,3.5z M16.5,4H3.3C3.2,4,3.1,4.1,3,4.2l0,0\n\t\t\t\tC2.9,4.2,2.9,4.3,2.9,4.5v0.4h14V4.5c0-0.1,0-0.2-0.1-0.3l0,0C16.7,4.1,16.6,4,16.5,4z"}})])])])]),_vm._v("удалить")]):_vm._e()])])}
+var staticRenderFns = []
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+
+/***/ }),
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20572,9 +20239,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_test_vue__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_test_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_test_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_test_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_test_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6d1503f9_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_pop_up_test_vue__ = __webpack_require__(673);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6d1503f9_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_pop_up_test_vue__ = __webpack_require__(94);
 function injectStyle (ssrContext) {
-  __webpack_require__(671)
+  __webpack_require__(85)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -20603,29 +20270,53 @@ var Component = normalizeComponent(
 
 
 /***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 86:
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(86);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("dc96d806", content, true);
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__(4);
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".pop-up{z-index:105;position:fixed;top:0;left:0;width:100vw;height:100%;background-color:rgba(0,0,0,.8)}.pop-up,.pop-up>div{overflow-y:scroll}.pop-up-controls{position:fixed;display:flex;flex-wrap:wrap;max-width:50px;top:0;left:calc(25% - 100px);background-color:#fff}.pop-up-controls button{display:block;cursor:pointer;width:50px;height:50px;border:none;margin:10px 5px;background-color:#fff;background-repeat:no-repeat;background-position:50%;opacity:.5;transition:opacity .3s ease-in-out}.pop-up-controls button:hover{opacity:1}.pop-up-controls__publish{background-image:url(" + escape(__webpack_require__(87)) + ")}.pop-up-controls__edit{background-image:url(" + escape(__webpack_require__(88)) + ")}.pop-up-controls__delete{background-image:url(" + escape(__webpack_require__(89)) + ")}.pop-up-window{width:50%;background-color:#fff;margin:0 auto;padding:40px}.pop-up-window>h2,.pop-up-window>p{color:var(--blue)}.pop-up-window img{display:block;margin:0 auto;max-height:300px}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 87 */
 /***/ (function(module, exports) {
 
 module.exports = "img/../img/success.svg";
 
 /***/ }),
-
-/***/ 87:
+/* 88 */
 /***/ (function(module, exports) {
 
 module.exports = "img/../img/edit.svg";
 
 /***/ }),
-
-/***/ 88:
+/* 89 */
 /***/ (function(module, exports) {
 
 module.exports = "img/../img/dustbin.svg";
 
 /***/ }),
-
-/***/ 89:
+/* 90 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20633,9 +20324,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_question_vue__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_question_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_question_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_question_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_question_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_51193a26_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_pop_up_question_vue__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_51193a26_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_pop_up_question_vue__ = __webpack_require__(93);
 function injectStyle (ssrContext) {
-  __webpack_require__(90)
+  __webpack_require__(91)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -20664,51 +20355,20 @@ var Component = normalizeComponent(
 
 
 /***/ }),
-
-/***/ 9:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _axios = _interopRequireDefault(__webpack_require__(3));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _default = {
-  //Проверка авторизации пользователя
-  checkUser: function checkUser() {
-    return _axios.default.get('php/checkauth.php').then(function (res) {
-      return res.data === 1;
-    }).catch(function (err) {
-      console.log(err);
-    }); // return false;
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 90:
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(91);
+var content = __webpack_require__(92);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var update = __webpack_require__(1)("1f68abd7", content, true);
 
 /***/ }),
-
-/***/ 91:
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -20722,8 +20382,7 @@ exports.push([module.i, ".pop-up-question{display:flex;flex-wrap:wrap;border-bot
 
 
 /***/ }),
-
-/***/ 92:
+/* 93 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20733,8 +20392,27 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 
 /***/ }),
+/* 94 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/***/ 95:
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pop-up",on:{"click":_vm.closeWindow}},[_c('div',[_c('div',{staticClass:"pop-up-window",on:{"click":function($event){$event.stopPropagation();}}},[_c('div',{staticClass:"pop-up-controls"},[(!_vm.testStatus)?_c('button',{staticClass:"pop-up-controls__publish",attrs:{"type":"button","name":"button","title":"опубликовать"},on:{"click":_vm.publish}}):_vm._e(),_vm._v(" "),(!_vm.testStatus)?_c('button',{staticClass:"pop-up-controls__edit",attrs:{"type":"button","name":"button","title":"редактировать"},on:{"click":_vm.edit}}):_vm._e(),_vm._v(" "),_c('button',{staticClass:"pop-up-controls__delete",attrs:{"type":"button","name":"button","title":"удалить"},on:{"click":_vm.deleteTest}})]),_vm._v(" "),(_vm.testStatus == 1)?_c('p',{staticClass:"link"},[_vm._v(_vm._s(_vm.testLink))]):_vm._e(),_vm._v(" "),_c('h2',[_vm._v(_vm._s(_vm.testTitle))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(_vm.testDescription))]),_vm._v(" "),_c('img',{attrs:{"src":_vm.testImage,"alt":""}}),_vm._v(" "),_vm._l((_vm.questions),function(question){return _c('question-item',{key:question.question_id,attrs:{"qsttitle":question.question_description,"vars":question.vars,"answer":question.question_answer,"qsttype":question.question_type_id}})})],2)])])}
+var staticRenderFns = []
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+
+/***/ }),
+/* 95 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tester-page"},[_c('side-menu'),_vm._v(" "),_c('section',{staticClass:"content"},[_c('transition',{attrs:{"name":"fade"}},[(_vm.popUp)?_c('pop-up',{attrs:{"testtite":_vm.currentTest.test_name,"description":_vm.currentTest.test_description,"imglink":_vm.currentTest.test_image,"anonym":_vm.currentTest.test_anonym,"time":_vm.currentTest.test_time,"status":_vm.currentTest.test_status,"testquestions":_vm.currentTest.questions,"testid":_vm.currentTest.test_id},on:{"close-window":_vm.closePopUp,"edit-test":_vm.editTestHandler,"delete-test":_vm.deleteTestHandler}}):_vm._e()],1),_vm._v(" "),_c('nav',{staticClass:"new-test-nav"},[_c('ul',[_c('li',[_c('a',{attrs:{"href":"save"},on:{"click":function($event){$event.preventDefault();_vm.showPublished($event)}}},[_vm._v("Опубликованные")])]),_vm._v(" "),_c('li',[_c('a',{attrs:{"href":"publish"},on:{"click":function($event){$event.preventDefault();_vm.showDrafts($event)}}},[_vm._v("Черновики")])])])]),_vm._v(" "),(_vm.loading)?_c('div',{staticClass:"loading"},[_c('loading-indicator')],1):_c('div',{staticClass:"tests-list-main"},[(_vm.currentSection)?_c('div',{key:_vm.sectionOne,staticClass:"tests-list"},[_vm._l((_vm.tests.published),function(test){return _c('test-item',{key:_vm.test_id,attrs:{"description":test.test_description,"testtitle":test.test_name,"testid":test.test_id,"imglink":test.test_img,"status":test.test_status,"respondents":test.respondents},on:{"show-test":_vm.showTestHandler,"delete-info":_vm.deleteTest}})}),_vm._v(" "),_c('button',{staticClass:"add-new-test",attrs:{"type":"button","name":"button"},on:{"click":_vm.newTest}})],2):_c('div',{key:_vm.sectionTwo,staticClass:"tests-list"},[_vm._l((_vm.tests.drafts),function(test){return _c('test-item',{key:_vm.test_id,attrs:{"description":test.test_description,"testtitle":test.test_name,"testid":test.test_id,"imglink":test.test_img,"status":test.test_status},on:{"show-test":_vm.showTestHandler,"delete-info":_vm.deleteTest}})}),_vm._v(" "),_c('button',{staticClass:"add-new-test",attrs:{"type":"button","name":"button"},on:{"click":_vm.newTest}})],2)]),_vm._v(" "),_c('transition',{attrs:{"name":"fade"}},[(_vm.flashMsg.text.length > 0)?_c('flash-message',{attrs:{"code":_vm.flashMsg.status,"text":_vm.flashMsg.text}}):_vm._e()],1)],1)],1)}
+var staticRenderFns = []
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+
+/***/ }),
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20742,9 +20420,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3d44c388_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_exec_vue__ = __webpack_require__(1119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3d44c388_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_exec_vue__ = __webpack_require__(111);
 function injectStyle (ssrContext) {
-  __webpack_require__(1117)
+  __webpack_require__(97)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -20773,8 +20451,34 @@ var Component = normalizeComponent(
 
 
 /***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 98:
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(98);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("441a89ec", content, true);
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".exec-page{width:100%;display:flex}.exec-page .content{margin-left:calc(var(--column) * 2);margin-right:calc(var(--column) * 2);width:calc(var(--column) * 16);display:flex}.exec-page>div{display:flex}.content>div{width:100%;padding-top:calc(var(--row) * 2);color:var(--blue)}.test-descr,.test-title{text-align:center}.test-title{position:relative}.test-title:after{position:absolute;left:30%;bottom:-10px;display:block;content:\"\";width:40%;height:3px;background-color:var(--purple)}.warning{align-self:center}.test-nav{position:fixed;padding-bottom:40px;width:calc(var(--column) * 20);z-index:102;bottom:0;right:0;background-color:#fff}.test-nav,.test-nav ul{display:flex;justify-content:center}.test-nav ul{position:relative;width:calc(var(--column) * 16);min-height:0 20px;list-style:none;margin:0 auto}.test-nav li{position:relative;display:block;cursor:pointer;width:20px;height:20px;margin:0 20px;text-align:center;padding:5px;border:1px solid var(--purple);background-color:var(--purple);color:#fff;border-radius:20px;transition:all .3s ease-in-out}.test-nav li:after,.test-nav li:before{width:40px;position:absolute;content:\"\";display:block;height:3px;background-color:var(--purple)}.test-nav li:before{top:14px;left:-41px}.test-nav li:after{top:14px;right:-41px}.test-nav li:first-child{margin-left:0}.test-nav li:first-child:before{display:none}.test-nav li:last-child{margin-right:0}.test-nav li:last-child:after{display:none}.test-nav li.active{background-color:#fff;color:var(--purple)}.test-info{max-width:65%;padding-top:20px;display:flex;justify-content:flex-end;align-items:center}.test-info li{display:block;position:relative;margin-left:50px;font-size:1.2rem}.test-info li img{position:absolute;top:-10px;left:-15px}.time-limit img{width:40px}.test-info .question{opacity:1;color:var(--blue)}.test-info .question span:last-child{opacity:.5;color:var(--purple)}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20782,9 +20486,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_40ed25dc_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_test_menu_vue__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_40ed25dc_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_test_menu_vue__ = __webpack_require__(102);
 function injectStyle (ssrContext) {
-  __webpack_require__(99)
+  __webpack_require__(100)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -20813,20 +20517,204 @@ var Component = normalizeComponent(
 
 
 /***/ }),
-
-/***/ 99:
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(100);
+var content = __webpack_require__(101);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var update = __webpack_require__(1)("3abf8e00", content, true);
 
-/***/ })
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/******/ });
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".menu,.side-menu-test{width:calc(var(--column) * 4);height:100vh}.side-menu-test{z-index:102;position:fixed;top:0;left:0;background-color:var(--purple);color:#fff}.side-menu-test h2{padding:20px 10px;text-align:center;position:relative}.side-menu-test h2:after{position:absolute;left:25%;width:50%;height:3px;bottom:-10px;display:block;content:\"\";background-color:#fff}.side-menu-test p{padding:20px 10px;text-align:center}.side-menu-test button{font-family:marta,sans-serif;position:absolute;width:40%;left:30%;bottom:40px;background-color:var(--purple);border:3px solid #fff;padding:10px;color:#fff}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 102 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"menu"},[_c('aside',{staticClass:"side-menu-test"},[_c('h2',[_vm._v(_vm._s(_vm.title))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(_vm.description))]),_vm._v(" "),_c('button',{attrs:{"type":"button","name":"button"},on:{"click":_vm.sendTest}},[_vm._v("Готово")])])])}
+var staticRenderFns = []
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+
+/***/ }),
+/* 103 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5f255f14_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_variants_vue__ = __webpack_require__(106);
+function injectStyle (ssrContext) {
+  __webpack_require__(104)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5f255f14_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_variants_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(105);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("60abba01", content, true);
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".variant-item input[type=checkbox],.variant-item input[type=radio]{display:none}.variant-item label{cursor:pointer;text-decoration:none;color:var(--purple);opacity:.5;transition:all .3s ease-in-out}.variant-item input[type=checkbox]:checked~label,.variant-item input[type=radio]:checked~label{opacity:1;text-decoration-color:var(--purple);text-decoration:underline}.variant-item{width:100%;display:flex;flex-wrap:wrap;justify-content:space-between}.variant-item>div{width:50%;text-align:center;margin:20px 0}.variant-item label{font-size:1.3rem}.variant-item .variant-item__string{display:block;width:90%;margin:20px auto;text-align:center;border:none;border-bottom:1px solid var(--blue);font-size:1.3rem}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 106 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"variants"},[(_vm.qstType == 1)?_c('div',{staticClass:"variant-item"},_vm._l((_vm.qstVars),function(variant){return _c('div',{key:variant.var_bd_id},[_c('input',{attrs:{"data-questionid":variant.question_db_id,"type":"radio","name":'single_var_'+variant.question_db_id,"id":variant.question_client_id},domProps:{"value":variant.question_client_id},on:{"change":_vm.updateAnswer}}),_vm._v(" "),_c('label',{attrs:{"for":variant.question_client_id}},[_vm._v(_vm._s(variant.var_text))])])})):(_vm.qstType == 2)?_c('div',{staticClass:"variant-item"},_vm._l((_vm.qstVars),function(variant){return _c('div',{key:variant.var_bd_id},[_c('input',{attrs:{"data-questionid":variant.question_db_id,"type":"checkbox","name":'multiple_var_'+variant.question_db_id,"id":variant.question_client_id},domProps:{"value":variant.question_client_id},on:{"change":_vm.updateAnswer}}),_vm._v(" "),_c('label',{attrs:{"for":variant.question_client_id}},[_vm._v(_vm._s(variant.var_text))])])})):_c('div',{staticClass:"variant-item"},[_c('input',{staticClass:"variant-item__string",attrs:{"data-questionid":_vm.qstId,"type":"text","placeholder":"Напишите ваш ответ"},on:{"change":_vm.updateAnswer}})])])}
+var staticRenderFns = []
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+
+/***/ }),
+/* 107 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58ce7670_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_pop_up_exec_vue__ = __webpack_require__(110);
+function injectStyle (ssrContext) {
+  __webpack_require__(108)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58ce7670_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_pop_up_exec_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(109);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("60d172f3", content, true);
+
+/***/ }),
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".pop-up-exec{left:calc(var(--column) * 6);top:0;width:calc(var(--column) * 15);min-height:50vh;z-index:200}.pop-up-exec,.pop-up-exec-container{position:fixed;background-color:#fff}.pop-up-exec-container{width:50%;min-height:50%;top:25%;left:25%;box-shadow:3px 3px 8px var(--purple);z-index:202}.background{width:52%;min-height:52%;position:fixed;top:24%;left:24%;overflow:hidden}.background div{height:100vh;width:100vw;left:-50%;top:-50%;position:absolute;background-image:linear-gradient(#656695,#956565);animation:a 5s ease-in-out infinite}.pop-up-info{padding:40px;text-align:center;color:var(--blue);margin:20px 0}.pop-up-info p{font-size:1.2rem;font-weight:700;margin-bottom:20px}.pop-up-info button{text-align:center;padding:5px;background-color:#fff;border:3px solid var(--purple);cursor:pointer;font-family:marta,sans-serif;font-weight:700}@keyframes a{0%{left:-60%;top:-60%}25%{left:0;top:0}50%{left:0;top:-50%}to{left:-50%;top:-50%}}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 110 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pop-up-exec"},[_c('div',{staticClass:"pop-up-exec-container"},[_c('div',{staticClass:"pop-up-info"},[_c('h2',[_vm._v("Результаты вашейго теста")]),_vm._v(" "),_c('p',[_vm._v("Количество правильных ответов: "+_vm._s(_vm.right))]),_vm._v(" "),_c('p',[_vm._v("Количество неправильных ответов: "+_vm._s(_vm.wrong))]),_vm._v(" "),_c('p',[_vm._v("Время затраченое на прохождение: "+_vm._s(_vm.timeLeft))]),_vm._v(" "),_c('button',{attrs:{"type":"button","name":"button"},on:{"click":_vm.endTest}},[_vm._v("Завершить тестирование")])])]),_vm._v(" "),_vm._m(0)])}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"background"},[_c('div')])}]
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+
+/***/ }),
+/* 111 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"exec-page"},[(!_vm.loaded)?_c('div',[_c('loading')],1):_c('div',[_c('test-menu',{attrs:{"testname":_vm.test.test_name,"testdescription":_vm.test.test_description},on:{"send-test":function($event){_vm.sendTestHander(false)}}}),_vm._v(" "),_c('section',{staticClass:"content"},[_c('nav',{staticClass:"new-test-nav"},[_c('ul',{staticClass:"test-info"},[_c('li',{staticClass:"question"},[_vm._v("Вы ответили на "),_c('span',[_vm._v(_vm._s(_vm.answers.length))]),_c('span',[_vm._v("/")]),_c('span',[_vm._v(_vm._s(_vm.questions.length))])]),_vm._v(" "),(_vm.timeLimit)?_c('li',{staticClass:"time-limit"},[_c('img',{attrs:{"src":"img/stopwatch.svg","alt":""}}),_vm._v(_vm._s(_vm.timeLeft)+":00")]):_vm._e()])]),_vm._v(" "),(!_vm.authorized)?_c('div',{staticClass:"warning"},[_c('loading'),_vm._v(" "),_c('p',[_vm._v(" Данный тест доступен только зарегистрированным пользователям. Сейчас вы будете перенаправленны на страницу авторизации и регистрации. После входа в систему вы автоматически вернетесь к прохождению теста")])],1):_c('div',[_c('h2',{staticClass:"test-title"},[_vm._v(_vm._s(_vm.test.questions[_vm.userProgress.currentQstId].question_description))]),_vm._v(" "),_c('p',{staticClass:"test-descr"},[_vm._v(_vm._s(_vm.questionDescr))]),_vm._v(" "),_c('variants',{attrs:{"type":_vm.currentQstType,"questions":_vm.questions,"answersarr":_vm.answers,"currentqst":_vm.userProgress.currentQstId},on:{"update-answer":_vm.updateAnswerHandler}}),_vm._v(" "),_c('div',{staticClass:"test-nav"},[_c('ul',_vm._l((_vm.test.questions.length),function(n){return _c('li',{class:{active: n==1},attrs:{"id":'qst_'+n},on:{"click":_vm.changeQst}},[_vm._v(_vm._s(n))])}))])],1),_vm._v(" "),(_vm.popUp)?_c('pop-up',{attrs:{"results":_vm.testResults,"timestart":_vm.timeStart}}):_vm._e()],1)],1)])}
+var staticRenderFns = []
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+
+/***/ })
+/******/ ]);
 //# sourceMappingURL=build.js.map
