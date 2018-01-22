@@ -160,16 +160,19 @@ export default {
             .then( (res) => {
                 if(!res.data.success) {
                     console.log(res);
-                    // throw new Error(res.data.errorMsg);
+                    throw new Error(res.data.errorMsg);
                 }
                 else {
                     let query = localStorage.getItem('query');
+                    localStorage.setItem('user_email', res.data.email);
+                    console.log(res.data);
                     !query ? this.$router.push({path: '/tester'}) : window.location.href = window.location.origin + '/exec?' + query;
                 }
             })
             .catch( (err) => {
                 console.log(err);
                 this.loginFormErr = err.message;
+                setTimeout( () => this.regFormErr = '', 4000);
             });
         },
 
@@ -178,7 +181,7 @@ export default {
             let res = Registration.checkData(this.regFormData);
             if(!res.success) {
                 this.regFormErr = res.errorMsg;
-                //TODO: Сброс текст ошибки по таймауту
+                setTimeout( () => this.regFormErr = '', 4000);
             }
             else {
                 axios.post('php/reg.php', this.regFormData)
@@ -189,6 +192,8 @@ export default {
                     }
                     else {
                         let query = localStorage.getItem('query');
+                        localStorage.setItem('user_email', res.data.email);
+                        console.log(res.data);
                         !query ? this.$router.push({path: '/tester'}) : window.location.href = window.location.origin + '/exec?' + query;
                     }
                 })
@@ -216,6 +221,7 @@ export default {
         width: 100%;
         height: 100vh;
         display: flex;
+        font-weight: bold;
 
     }
 

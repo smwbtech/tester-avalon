@@ -79,6 +79,7 @@
 
                             setcookie('token', $token, time() + 60 * 60 * 24, '/');
 
+                            $res['email'] = $userEmail;
                             echo json_encode($res);
 
                         }

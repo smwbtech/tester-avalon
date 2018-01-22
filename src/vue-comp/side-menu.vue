@@ -3,7 +3,7 @@
     <div class="menu">
 
         <aside class="side-menu">
-            <p><a href="#">profile</a></p>
+            <p><a href="#">{{email}}</a></p>
 
             <nav class="side-menu-nav">
                 <ul>
@@ -34,11 +34,18 @@ export default {
 
         //Выход их профиля
         logout() {
+            localStorage.clear();
             axios.get('php/logout.php')
             .then( (res) => this.$router.push('/auth') )
             .catch( (err) => console.log(err));
         }
 
+    },
+
+    computed: {
+        email() {
+            return localStorage.getItem('user_email');
+        }
     }
 
 }
@@ -58,6 +65,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
+
     width: calc(var(--column) * 4);
     height: 100vh;
     background-color: var(--purple);
@@ -74,6 +82,7 @@ export default {
     list-style: none;
     margin-bottom: 20px;
     padding-left: 40px;
+    font-weight: bold;
 }
 
 .side-menu-nav li:before {
@@ -97,4 +106,16 @@ export default {
 .side-menu-nav a {
     color: #fff;
 }
+
+.side-menu p {
+    text-align: center;
+}
+
+.side-menu p:first-child a{
+    color: #fff;
+    opacity: .6;
+    text-align: center;
+    font-weight: bold;
+}
+
 </style>
