@@ -69,7 +69,7 @@ export default {
     box-shadow: inset -4px 0px 3px rgba(0,0,0,0.2);
     width: calc(var(--column) * 4);
     height: 100vh;
-    background-color: var(--purple);
+    background-color: #313149;
     color: #fff;
 }
 
@@ -81,27 +81,37 @@ export default {
 .side-menu-nav li {
     position: relative;
     list-style: none;
-    margin-bottom: 20px;
+    padding: 20px 0px;
     padding-left: 40px;
     font-weight: bold;
+    background-color: rgba(0,0,0,0);
+    -webkit-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.side-menu-nav li:hover {
+    background-color: rgba(0,0,0,.4);
 }
 
 .side-menu-nav li:before {
     position: absolute;
-    left: -60px;
-    top: 2px;
+    left: 0px;
+    top: 0px;
     display: block;
+    transform: scale(0);
+    transform-origin: center;
     content: '';
-    width: 20px;
-    height: 1rem;
+    width: 3px;
+    height: 100%;
     background-color: #fff;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out .2s;
+    -o-transition: all .2s ease-in-out .2s;
+    transition: all .2s ease-in-out .2s;
 }
 
 .side-menu-nav li:hover:before {
-    left: 0px;
+    transform: scale(1);
 }
 
 .side-menu-nav a {

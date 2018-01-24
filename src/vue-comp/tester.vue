@@ -244,6 +244,7 @@ export default {
     width: 100%;
     padding-top: calc(var(--row) * 2);
     display: flex;
+    background-color: #fbfbfb;
 }
 
 .content {
@@ -278,10 +279,10 @@ export default {
     width: calc(var(--column) * 4);
     max-height: calc(var(--row) * 4);
     min-height: calc(var(--row) * 4);
-    -webkit-box-shadow: 3px 3px 8px var(--purple);
-    box-shadow: 3px 3px 8px var(--purple);
+    -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
     cursor: pointer;
-    background-color: #fff;
+    background-color: #fbfbfb;
     border: none;
     opacity: .2;
     background-image: url('./../img/add.svg');
@@ -295,6 +296,8 @@ export default {
 
 .add-new-test:hover {
     opacity: 1;
+    -webkit-box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
 }
 
 .fix {
