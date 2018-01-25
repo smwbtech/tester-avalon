@@ -69,9 +69,10 @@ export default {
     box-shadow: inset -4px 0px 3px rgba(0,0,0,0.2);
     width: calc(var(--column) * 4);
     height: 100vh;
-    background-color: #313149;
+    background-color: var(--darkpurple);
     color: #fff;
 }
+
 
 .side-menu-nav {
     padding-top: 40px;

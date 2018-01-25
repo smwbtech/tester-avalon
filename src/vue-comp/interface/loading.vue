@@ -16,6 +16,8 @@ export default {
 
 <style lang="css">
 
+    @import './../../css/variables.css';
+
     .loading-indicator {
         display: flex;
         flex-wrap: wrap;

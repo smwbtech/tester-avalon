@@ -44,6 +44,8 @@ export default {
 
 <style lang="css">
 
+@import './../../css/variables.css';
+
     .question-var {
         display: flex;
         width: calc(var(--column) * 10);

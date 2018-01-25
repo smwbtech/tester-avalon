@@ -63,6 +63,8 @@ export default {
 
 <style lang="css">
 
+    @import './../../css/variables.css';
+
     .stat-item {
         display: flex;
         width: 90%;

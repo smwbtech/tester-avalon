@@ -37,6 +37,8 @@ export default {
 
 <style lang="css">
 
+@import './../../css/variables.css';
+
     .menu {
         width: calc(var(--column) * 4);
         height: 100vh;

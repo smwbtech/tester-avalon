@@ -76,6 +76,7 @@
 
 <script>
 
+import variables from './../css/variables.css';
 import Registration from './../js/reg.js';
 import axios from './../../node_modules/axios/dist/axios.js';
 

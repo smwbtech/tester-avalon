@@ -130,7 +130,7 @@ export default {
    },
 
    computed: {
-       
+
        // Объект класса переключателя ограничения по вреиени
        timeToggle() {
            return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';
@@ -345,6 +345,8 @@ export default {
 </script>
 
 <style lang="css">
+
+@import './../css/variables.css';
 
     .newtest-page {
         /* margin-left: calc(var(--column) * 6); */

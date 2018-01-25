@@ -135,6 +135,8 @@ export default {
 
 <style lang="css">
 
+    @import './../../css/variables.css';
+
     .pop-up {
         z-index: 105;
         position: fixed;

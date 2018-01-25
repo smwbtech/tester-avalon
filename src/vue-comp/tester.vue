@@ -114,6 +114,8 @@
 
 <script>
 
+import variables from './../css/variables.css';
+
 import sideMenu from './side-menu.vue';
 import newTest from './new-test.vue';
 import loadingIndicator from './interface/loading.vue';
@@ -233,6 +235,8 @@ export default {
 </script>
 
 <style lang="css">
+
+@import './../css/variables.css';
 
 .content {
     margin-left: calc(var(--column) * 2);

@@ -41,6 +41,8 @@ export default {
 
 <style lang="css">
 
+    @import './../../css/variables.css';
+
     .pop-up-question {
         display: flex;
         flex-wrap: wrap;

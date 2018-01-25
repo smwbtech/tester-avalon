@@ -164,6 +164,8 @@ export default {
 
 <style lang="css">
 
+    @import './../../css/variables.css';
+
     .variant-item input[type="checkbox"],
     .variant-item input[type="radio"] {
         display: none;

@@ -300,6 +300,8 @@ export default {
 
 <style lang="css">
 
+    @import './../css/variables.css';
+
     .question {
         position: relative;
         margin-top: 40px;

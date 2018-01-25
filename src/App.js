@@ -4,6 +4,7 @@ import Vue from './../node_modules/vue/dist/vue.js';
 import Router from './../node_modules/vue-router/dist/vue-router.js';
 import Auth from './js/auth.js';
 import smoothscroll from './js/smoothscroll.min.js';
+import Promise from './js/Promise.min.js';
 
 window.__forceSmoothScrollPolyfill__ = true;
 

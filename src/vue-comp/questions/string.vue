@@ -28,6 +28,8 @@ export default {
 
 <style lang="css">
 
+@import './../../css/variables.css';
+
 .question-var-str {
     display: flex;
     flex-wrap: wrap;

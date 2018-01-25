@@ -29,6 +29,8 @@
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.8",
     "file-loader": "^1.1.6",
+    "postcss": "^6.0.16",
+    "postcss-css-variables": "^0.8.0",
     "postcss-cssnext": "^3.0.2",
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.10",

@@ -299,6 +299,8 @@ export default {
 
 <style lang="css">
 
+@import './../css/variables.css';
+
     .exec-page{
         width: 100%;
         display: flex;

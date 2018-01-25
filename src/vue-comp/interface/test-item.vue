@@ -151,6 +151,8 @@ export default {
 
 <style lang="css">
 
+@import './../../css/variables.css';
+
 .tests-list-item {
     position: relative;
     width: calc(var(--column) * 4);

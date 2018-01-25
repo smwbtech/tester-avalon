@@ -36,6 +36,8 @@ export default {
 
 <style lang="css">
 
+    @import './../../css/variables.css';
+
     .test-flasgMesg {
         position: fixed;
         max-width: 30%;

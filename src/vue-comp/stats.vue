@@ -75,6 +75,8 @@ export default {
 
 <style lang="css">
 
+@import './../css/variables.css';
+
 .content {
     margin-left: calc(var(--column) * 2);
     margin-right: calc(var(--column) * 2);

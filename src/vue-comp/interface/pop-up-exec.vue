@@ -76,6 +76,8 @@ export default {
 
 <style lang="css">
 
+    @import './../../css/variables.css';
+
     .pop-up-exec {
         position: fixed;
         left: calc(var(--column) * 6);
