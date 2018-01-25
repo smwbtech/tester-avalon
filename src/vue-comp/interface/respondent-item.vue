@@ -1,6 +1,8 @@
 <template lang="html">
 
-    div.
+    <div class="user-try">
+
+    </div>
 
 </template>
 
@@ -12,6 +14,12 @@ export default {
     data() {
         return {
             answers: this.result
+        }
+    },
+
+    computed: {
+        userEmail() {
+            return
         }
     }
 }

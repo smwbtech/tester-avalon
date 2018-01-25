@@ -36,9 +36,10 @@ if(checkUser()) {
             $test_id = $test['test_id'];
 
             $tries = mysqli_query($db, '
-                SELECT *
-                FROM test_answers
-                WHERE test_answer_test_id = "'.$test_id.'";
+            SELECT test_answers.*, user.user_email
+            FROM test_answers
+            LEFT JOIN user ON user_id = test_answers.test_answer_user_id
+            WHERE test_answers.test_answer_test_id = "'.$test_id.'";
             ');
 
             $res['tests'][$key]['tries'] = mysqli_fetch_all($tries, MYSQLI_ASSOC);

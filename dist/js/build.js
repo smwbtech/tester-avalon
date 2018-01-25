@@ -24109,12 +24109,19 @@ exports.default = void 0;
 //
 //
 //
+//
+//
 var _default = {
   props: ['result'],
   data: function data() {
     return {
       answers: this.result
     };
+  },
+  computed: {
+    userEmail: function userEmail() {
+      return;
+    }
   }
 };
 exports.default = _default;
@@ -24222,7 +24229,15 @@ exports.push([module.i, "", "", {"version":3,"sources":[],"names":[],"mappings":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var esExports = {render:function(){},staticRenderFns: []}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "user-try" })
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 if (false) {
   module.hot.accept()
