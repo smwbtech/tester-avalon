@@ -16,6 +16,7 @@ import login from './vue-comp/login.vue';
 import tester from './vue-comp/tester.vue';
 import newTest from './vue-comp/new-test.vue';
 import execTest from './vue-comp/exec.vue';
+import respondents from './vue-comp/respondents.vue';
 import stats from './vue-comp/stats.vue';
 
 
@@ -51,6 +52,14 @@ const router = new Router({
         {
             path: '/newtest',
             component: newTest,
+            meta: {
+                requiredAuth: true
+            }
+        },
+
+        {
+            path: '/respondents',
+            component: respondents,
             meta: {
                 requiredAuth: true
             }

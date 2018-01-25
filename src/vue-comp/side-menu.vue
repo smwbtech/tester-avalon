@@ -9,7 +9,7 @@
                 <ul>
                     <li><router-link to="/tester">Мои тесты</router-link></li>
                     <li><router-link to="/newtest">Новый тест</router-link></li>
-                    <li><router-link to="/tester/respondents">Респонденты</router-link></li>
+                    <li><router-link to="/respondents">Респонденты</router-link></li>
                     <li><router-link to="/stats">Статистика</router-link></li>
                     <li><a
                             href="exit"
