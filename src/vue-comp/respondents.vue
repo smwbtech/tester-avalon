@@ -17,14 +17,13 @@
                     class="resondents-test-item"
                     v-for="test in testsArr"
                     :key="test.test_id"
-                    :tries="test.tries"
                 >
 
                     <h2>{{test.test_name}}</h2>
                     <respondent-item
                         v-for="singleTry in test.tries"
                         :key="singleTry.test_answer_id"
-                        :result="singleTry.results"
+                        :result="singleTry"
                     >
 
                     </respondent-item>
@@ -108,6 +107,17 @@ export default {
         display: flex;
         flex-flow: column;
         justify-content: center;
+    }
+
+    .resondents-test-item {
+        max-height: calc(var(--row) * 4);
+        overflow: hidden;
+        margin-bottom: 40px;
+        padding: 20px;
+        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+        cursor: pointer;
+        background-color: #fff;
     }
 
 

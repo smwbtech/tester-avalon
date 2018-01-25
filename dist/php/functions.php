@@ -130,7 +130,9 @@ function checkTest($test_answer_id) {
         foreach ($answers as $key => $answer) {
             $result = array(
                 "question_id" => $answer['question_id'],
-                "result" => false
+                "result" => false,
+                "user_answer" => $answer['user_answer'],
+                "rigth_answer" => $answer['question_answer']
             );
             switch (+$answer['question_type']) {
                 case 1:

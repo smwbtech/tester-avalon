@@ -2,6 +2,11 @@
 
     <div class="user-try">
 
+
+            <p class="user-try__id">{{results.test_answer_id}}</p>
+            <p class="user-try__email">{{userEmail}}</p>
+
+
     </div>
 
 </template>
@@ -13,17 +18,32 @@ export default {
 
     data() {
         return {
-            answers: this.result
+            results: this.result
         }
     },
 
     computed: {
         userEmail() {
-            return
+            return this.results.user_email ? this.results.user_email : 'Anonym';
         }
+    },
+
+    created() {
+        console.log(this.results);
     }
+
 }
 </script>
 
 <style lang="css">
+
+    .user-try {
+        display: flex;
+        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+        cursor: pointer;
+        background-color: #fff;
+    }
+
+
 </style>
