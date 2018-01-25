@@ -9,6 +9,7 @@
     --yellow: #EFDA7B;
     --green: #9DBE87;
     --red: #c74545;
+    --background: #e6e5e5;
     --column: calc(100vw / 24);
     --row: calc(100vh / 12);
     --column-mobile: calc(100vw / 12);

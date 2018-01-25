@@ -248,7 +248,7 @@ export default {
     width: 100%;
     padding-top: calc(var(--row) * 2);
     display: flex;
-    background-color: #fbfbfb;
+    background-color: var(--background);
 }
 
 .content {
@@ -286,7 +286,7 @@ export default {
     -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
     box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
     cursor: pointer;
-    background-color: #fbfbfb;
+    background-color: var(--background);
     border: none;
     opacity: .2;
     background-image: url('./../img/add.svg');
