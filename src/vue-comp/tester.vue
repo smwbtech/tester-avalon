@@ -271,11 +271,11 @@ export default {
     flex-wrap: wrap;
 }
 
-.tests-list > div:nth-child(3n+1) {
+.tests-list > *:nth-child(3n+1) {
     margin-right: calc(var(--column) * 1);
 }
 
-.tests-list > div:nth-child(3n+3) {
+.tests-list > *:nth-child(3n+3) {
     margin-left: calc(var(--column) * 1);
 }
 

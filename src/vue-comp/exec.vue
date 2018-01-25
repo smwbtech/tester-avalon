@@ -258,6 +258,9 @@ export default {
                 token: this.token ? this.token : btoa(date.getTime()),
                 answers: this.answers
             };
+            console.log('test');
+            console.log(test);
+            // return test;
             if(!autoEnd && window.confirm('Вы готовы отправить ответы на проверку?')) {
                 axios.post('php/saveexectest.php', test)
                 .then( (res) => {

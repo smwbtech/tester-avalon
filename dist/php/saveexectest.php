@@ -62,7 +62,7 @@
             else {
 
                 $res["success"] = false;
-                $res["errorMsg"] = "Ошибка сохранения результата, попробуйте зарегистрироваться позже";
+                $res["errorMsg"] = "Ошибка сохранения результата, попробуйте позже";
                 $res["errorText"] = mysqli_connect_error();
                 echo json_encode($res);
                 exit();

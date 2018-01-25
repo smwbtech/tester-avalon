@@ -107,16 +107,20 @@ function checkTest($test_answer_id) {
 
         mysqli_set_charset($db, 'UTF8');
         $query = mysqli_query($db, '
-        SELECT user_answers.user_answers_answer AS user_answer,
-        question_answer.question_answer_answer AS question_answer,
-        question.question_type_id AS question_type,
-        question.question_id AS question_id,
-        question.question_id AS question_id
-        FROM user_answers
-        JOIN question_answer
-        ON user_answers.user_answers_question_id = question_answer.question_answe_question_id
-        JOIN question ON question.question_id = user_answers.user_answers_question_id
-        WHERE user_answers.user_answers_test_answers_id = "'.$test_answer_id.'";
+        SELECT 	test.test_id AS test_id,
+		test_answers.test_answer_id AS test_answers_id,
+		question.question_id AS question_id,
+		question.question_type_id AS question_type,
+		question_answer_answer AS question_answer,
+		user_answers.user_answers_answer AS user_answer
+		FROM test_answers
+		LEFT JOIN test ON test.test_id = test_answers.test_answer_test_id
+		LEFT JOIN question ON question.question_test_id = test.test_id
+		LEFT JOIN question_answer ON question_answe_question_id = question.question_id
+		LEFT JOIN user_answers ON user_answers.user_answers_question_id = question.question_id
+        AND user_answers.user_answers_test_answers_id = "'.$test_answer_id.'"
+		WHERE test_answers.test_answer_id = "'.$test_answer_id.'"
+		GROUP BY question_id;
         ');
 
         $answers = mysqli_fetch_all($query, MYSQLI_ASSOC);
@@ -141,10 +145,15 @@ function checkTest($test_answer_id) {
                     break;
                 case 3:
                     $user_answer = $answer['user_answer'];
-                    $right_answer = $answer['question_answer'];
-                    $pattern = "/$user_answer/i";
-                    $result['result'] = (bool)preg_match($pattern, $right_answer);
-                    break;
+                    if(is_null($user_answer)) {
+                        $result['result'] = false;
+                    }
+                    else {
+                        $right_answer = $answer['question_answer'];
+                        $pattern = "/$user_answer/i";
+                        $result['result'] = (bool)preg_match($pattern, $right_answer);
+                        break;
+                    }
             }
             array_push($res['answers'], $result);
         }
