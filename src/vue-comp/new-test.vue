@@ -23,9 +23,9 @@
 
             <form class="new-test-form">
 
-                <input type="text" class="new-test-form__title" placeholder="Название теста" v-model="testTitle">
 
                 <div class="new-test-form__options">
+                    <input type="text" class="new-test-form__title" placeholder="Название теста" v-model="testTitle">
                     <h3>Описание:</h3>
                     <textarea v-model="testDescription" class="new-test-form__description" name="test_description"></textarea>
 
@@ -350,7 +350,7 @@ export default {
 
     .newtest-page {
         /* margin-left: calc(var(--column) * 6); */
-
+        background-color: var(--background);
         display: flex;
     }
 
@@ -380,9 +380,8 @@ export default {
 
     .new-test-form__options {
         background-color: #fff;
-        border: 1px solid var(--blue);
-        -webkit-box-shadow: 3px 3px 8px var(--purple);
-        box-shadow: 3px 3px 8px var(--purple);
+        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
         padding: 20px;
     }
 
@@ -451,7 +450,7 @@ export default {
         background-image: url('./../img/add.svg');
         background-repeat: no-repeat;
         background-position: left;
-        background-color: #fff;
+        background-color: var(--background);
         color: var(--purple);
         opacity: 0.5;
         -webkit-transition: opacity .2s ease-in-out;

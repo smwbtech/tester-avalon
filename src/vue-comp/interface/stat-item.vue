@@ -69,9 +69,8 @@ export default {
         display: flex;
         width: 90%;
         margin-bottom: 40px;
-        border: 1px solid var(--blue);
-        -webkit-box-shadow: 3px 3px 8px var(--purple);
-        box-shadow: 3px 3px 8px var(--purple);
+        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
         cursor: pointer;
         background-color: #fff;
         font-weight: bold;

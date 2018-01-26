@@ -87,6 +87,7 @@ export default {
     width: 100%;
     padding-top: calc(var(--row) * 2);
     display: flex;
+    background-color: var(--background);
 }
 
 .stats-list {
