@@ -137,6 +137,12 @@ export default {
         /* height: auto; */
     }
 
+    .resondents-test-item__active.resondents-test-item__active:after {
+        opacity: 0;
+        visibility: hidden;
+        top: 120%;
+    }
+
     .resondents-test-item h2 {
         margin-bottom: 20px;
         color: var(--blue);
@@ -150,6 +156,9 @@ export default {
         height: 100px;
         top: calc(var(--row) * 4 - 100px);
         background-image: linear-gradient(to top, #fff, rgba(255,255,255,0.6));
+        -webkit-transition: all .8s ease-in-out;
+        -o-transition: all .8s ease-in-out;
+        transition: all .8s ease-in-out;
     }
 
     .resondents-test-item__show {
