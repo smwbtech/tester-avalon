@@ -37,12 +37,16 @@ export default {
 
 <style lang="css">
 
+    @import './../../css/variables.css';
+
     .user-try {
         display: flex;
         -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
-        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+        box-shadow: 0px 0px 4px rgba(0,0,0,0.1);
+        border-radius: 10px;
         cursor: pointer;
         background-color: #fff;
+        margin-bottom: 20px;
     }
 
 

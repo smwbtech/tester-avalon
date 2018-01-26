@@ -19,14 +19,15 @@
                     :key="test.test_id"
                 >
 
+                    <a class="resondents-test-item__show" @click.prevent="showListHandler" href="">список <img src="img/arrow-down.svg" alt=""></a>
                     <h2>{{test.test_name}}</h2>
                     <respondent-item
                         v-for="singleTry in test.tries"
                         :key="singleTry.test_answer_id"
                         :result="singleTry"
                     >
-
                     </respondent-item>
+
 
                 </div>
 
@@ -75,7 +76,14 @@ export default {
                 this.loading = false;
                 console.log(err);
             });
+        },
+
+        //Разворачиваем список респондентов
+        showListHandler(e) {
+            e.target.parentNode.classList.toggle('resondents-test-item__active');
+            e.target.classList.toggle('active');
         }
+
     },
 
     created() {
@@ -112,12 +120,61 @@ export default {
     .resondents-test-item {
         max-height: calc(var(--row) * 4);
         overflow: hidden;
+        position: relative;
         margin-bottom: 40px;
         padding: 20px;
         -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
         box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
         cursor: pointer;
         background-color: #fff;
+        -webkit-transition: all 1s ease-in-out;
+        -o-transition: all 1s ease-in-out;
+        transition: all 1s ease-in-out;
+    }
+
+    .resondents-test-item__active {
+        max-height: 10000px;
+        /* height: auto; */
+    }
+
+    .resondents-test-item h2 {
+        margin-bottom: 20px;
+        color: var(--blue);
+    }
+
+    .resondents-test-item:after {
+        display: block;
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100px;
+        top: calc(var(--row) * 4 - 100px);
+        background-image: linear-gradient(to top, #fff, rgba(255,255,255,0.6));
+    }
+
+    .resondents-test-item__show {
+        color: var(--purple);
+        font-size: .9rem;
+        font-weight: bold;
+        position: absolute;
+        padding-left: 30px;
+        right: 20px;
+        top: 20px;
+    }
+
+    .resondents-test-item__show.active img{
+        transform: rotate(180deg);
+    }
+
+    .resondents-test-item__show img {
+        max-width: 20px;
+        position: absolute;
+        top: 2px;
+        left: 0;
+        transform: rotate(0deg);
+        -webkit-transition: all .5s ease-in-out;
+        -o-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
     }
 
 
