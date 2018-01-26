@@ -10,10 +10,13 @@
 
 
                     </div>
-                    <p v-if="testStatus == 1" class="link">{{testLink}}</p>
-                    <h2>{{testTitle}}</h2>
-                    <p>{{testDescription}}</p>
-                    <img :src="testImage" alt="">
+
+                    <div class="pop-up-general">
+                        <p v-if="testStatus == 1" class="link">Ссылка на тест: {{testLink}}</p>
+                        <h2>{{testTitle}}</h2>
+                        <p>{{testDescription}}</p>
+                        <img :src="testImage" alt="">
+                    </div>
 
                     <question-item
                     v-for="question in questions"
@@ -160,7 +163,7 @@ export default {
         flex-wrap: wrap;
         max-width: 50px;
         top: 0;
-        left: calc(25% - 100px);
+        left: calc(25% - 60px);
         background-color: #fff;
     }
 
@@ -202,17 +205,30 @@ export default {
         background-color: #fff;
         margin: 0 auto;
         padding: 40px;
+        position: relative;
     }
 
-    .pop-up-window > h2,
-    .pop-up-window > p {
+    .pop-up-general {
+        text-align: center;
         color: var(--blue);
+        padding-top: calc(var(--column) * 2);
     }
 
     .pop-up-window img {
         display: block;
         margin: 0 auto;
+        margin-bottom: 40px;
         max-height: 300px;
+    }
+
+    .link {
+        position: absolute;
+        background-color: var(--purple);
+        color: #fff;
+        margin: 0;
+        padding: 23px;
+        left: 0;
+        top: 0;
     }
 
 </style>

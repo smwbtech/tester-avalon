@@ -46,20 +46,34 @@ export default {
     .pop-up-question {
         display: flex;
         flex-wrap: wrap;
-        border-bottom: 1px solid var(--purple);
+        margin-bottom: 20px;
+        padding: 20px;
+        -webkit-box-shadow: 0px 0px 4px rgba(101, 102, 149,0.3);
+        box-shadow: 0px 0px 4px rgba(101, 102, 149,0.3);
+        border-bottom: 6px solid rgba(101, 102, 149, .5);
+        border-right: 3px solid rgba(101, 102, 149, .5);;
+        border-radius: 20px;
     }
-
-    .pop-up-question:last-of-type {
-        border-bottom: none;
-    }
-
 
     .pop-up-question h3 {
         width: 100%;
+        position: relative;
         text-align: left;
         margin-bottom: 20px;
         color: var(--blue);
         padding-top: 20px;
+        text-align: center;
+    }
+
+    .pop-up-question h3:after {
+        position: absolute;
+        display: block;
+        height: 3px;
+        background-color: var(--purple);
+        content: '';
+        left: 45%;
+        bottom: -10px;
+        width: 10%;
     }
 
     .pop-up-question ul {

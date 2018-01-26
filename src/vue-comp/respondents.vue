@@ -227,5 +227,13 @@ export default {
         transition: all .5s ease-in-out;
     }
 
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to {
+      opacity: 0;
+    }
+
+
 
 </style>
