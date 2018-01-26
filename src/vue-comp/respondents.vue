@@ -5,6 +5,23 @@
         <side-menu></side-menu>
         <section class="content">
 
+            <transition name="fade">
+              <pop-up
+                  v-if="popUp"
+                  :testtite="currentTest.test_name"
+                  :description="currentTest.test_description"
+                  :imglink="currentTest.test_image"
+                  :anonym="currentTest.test_anonym"
+                  :time="currentTest.test_time"
+                  :status="currentTest.test_status"
+                  :testquestions="currentTest.questions"
+                  :testid="currentTest.test_id"
+                  @close-window="closePopUp"
+              >
+
+              </pop-up>
+          </transition>
+
             <div class="loading" v-if="loading">
 
                 <loading-indicator></loading-indicator>
@@ -25,6 +42,7 @@
                         v-for="singleTry in test.tries"
                         :key="singleTry.test_answer_id"
                         :result="singleTry"
+                        @show-info="showTryInfo"
                     >
                     </respondent-item>
 
@@ -45,6 +63,7 @@
 import sideMenu from './side-menu.vue';
 import loadingIndicator from './interface/loading.vue';
 import respondentItem from './interface/respondent-item.vue';
+import popUpElem from './interface/pop-up-test.vue';
 import axios from './../../node_modules/axios/dist/axios.js';
 
 export default {
@@ -52,13 +71,16 @@ export default {
     components: {
         'side-menu': sideMenu,
         'loading-indicator': loadingIndicator,
-        'respondent-item': respondentItem
+        'respondent-item': respondentItem,
+        'pop-up': popUpElem
     },
 
     data() {
         return {
             loading: false,
-            testsArr: null
+            testsArr: null,
+            currentTest: null,
+            popUp: false
         }
     },
 
@@ -67,6 +89,7 @@ export default {
             this.loading = true;
             axios.get('php/getstats.php')
             .then( (res) => {
+                console.log(res);
                 this.loading = false;
                 this.testsArr = res.data.tests;
                 console.log(this.testsArr);
@@ -82,6 +105,24 @@ export default {
         showListHandler(e) {
             e.target.parentNode.classList.toggle('resondents-test-item__active');
             e.target.classList.toggle('active');
+        },
+
+        //Показываем всплывающее окно с подробностями о результатах пользователя
+        showTryInfo(id, answers){
+            console.log(id);
+            console.log(answers);
+            axios.get(`php/gettest.php?test_id=${id}`)
+            .then( (res) => {
+                this.currentTest = res.data.test;
+                this.popUp = true;
+                console.log(this.currentTest);
+            })
+            .catch( (err) => console.log(err));
+        },
+
+        //Закрываем всплывающее окно
+        closePopUp() {
+            this.popUp = false;
         }
 
     },

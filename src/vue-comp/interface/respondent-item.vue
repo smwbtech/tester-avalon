@@ -24,7 +24,10 @@ export default {
             rightAnswers: 0,
             falseAnswers: 0,
             percents: 0,
-            testAnswerId: this.result.test_answer_id
+            testAnswerId: this.result.test_answer_id,
+            testId: this.result.test_answer_test_id,
+            answers: this.result.result.answers
+
         }
     },
 
@@ -41,13 +44,17 @@ export default {
 
         //показываем окно с информацией о тесте
         showTestHander() {
-            console.log(this.testAnswerId);
+            // console.log(this.testAnswerId + ' - testAnswerId');
+            // console.log(this.testId + ' - testId');
+            // console.log(this.answers);
+            this.$emit('show-info', this.testId, this.answers);
+
         }
 
     },
 
     created() {
-        console.log(this.results.result);
+        // console.log(this.results.result);
         for(let i = 0; i < this.results.result.answers.length; i++) {
             this.results.result.answers[i].result ? this.rightAnswers++ : this.falseAnswers++;
         }

@@ -5315,6 +5315,8 @@ var _loading = _interopRequireDefault(__webpack_require__(6));
 
 var _respondentItem = _interopRequireDefault(__webpack_require__(120));
 
+var _popUpTest = _interopRequireDefault(__webpack_require__(89));
+
 var _axios = _interopRequireDefault(__webpack_require__(3));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -5361,16 +5363,37 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   components: {
     'side-menu': _sideMenu.default,
     'loading-indicator': _loading.default,
-    'respondent-item': _respondentItem.default
+    'respondent-item': _respondentItem.default,
+    'pop-up': _popUpTest.default
   },
   data: function data() {
     return {
       loading: false,
-      testsArr: null
+      testsArr: null,
+      currentTest: null,
+      popUp: false
     };
   },
   methods: {
@@ -5380,6 +5403,7 @@ var _default = {
       this.loading = true;
 
       _axios.default.get('php/getstats.php').then(function (res) {
+        console.log(res);
         _this.loading = false;
         _this.testsArr = res.data.tests;
         console.log(_this.testsArr);
@@ -5392,6 +5416,25 @@ var _default = {
     showListHandler: function showListHandler(e) {
       e.target.parentNode.classList.toggle('resondents-test-item__active');
       e.target.classList.toggle('active');
+    },
+    //Показываем всплывающее окно с подробностями о результатах пользователя
+    showTryInfo: function showTryInfo(id, answers) {
+      var _this2 = this;
+
+      console.log(id);
+      console.log(answers);
+
+      _axios.default.get("php/gettest.php?test_id=".concat(id)).then(function (res) {
+        _this2.currentTest = res.data.test;
+        _this2.popUp = true;
+        console.log(_this2.currentTest);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    //Закрываем всплывающее окно
+    closePopUp: function closePopUp() {
+      this.popUp = false;
     }
   },
   created: function created() {
@@ -5434,7 +5477,9 @@ var _default = {
       rightAnswers: 0,
       falseAnswers: 0,
       percents: 0,
-      testAnswerId: this.result.test_answer_id
+      testAnswerId: this.result.test_answer_id,
+      testId: this.result.test_answer_test_id,
+      answers: this.result.result.answers
     };
   },
   computed: {
@@ -5446,12 +5491,14 @@ var _default = {
   methods: {
     //показываем окно с информацией о тесте
     showTestHander: function showTestHander() {
-      console.log(this.testAnswerId);
+      // console.log(this.testAnswerId + ' - testAnswerId');
+      // console.log(this.testId + ' - testId');
+      // console.log(this.answers);
+      this.$emit('show-info', this.testId, this.answers);
     }
   },
   created: function created() {
-    console.log(this.results.result);
-
+    // console.log(this.results.result);
     for (var i = 0; i < this.results.result.answers.length; i++) {
       this.results.result.answers[i].result ? this.rightAnswers++ : this.falseAnswers++;
     }
@@ -23807,7 +23854,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.content{margin-left:calc(4.16667vw * 2);margin-right:calc(4.16667vw * 2);width:calc(4.16667vw * 16)\n}\n.respondents-page{width:100%;padding-top:calc(8.33333vh * 2);display:flex;background-color:#e6e5e5\n}\n.respondents-list{width:100%;display:flex;flex-flow:column;justify-content:center\n}\n.resondents-test-item{max-height:calc(8.33333vh * 4);overflow:hidden;position:relative;margin-bottom:40px;padding:20px;box-shadow:1px 1px 4px rgba(0,0,0,.1);cursor:pointer;background-color:#fff;transition:all 1s ease-in-out\n}\n.resondents-test-item__active{max-height:10000px\n}\n.resondents-test-item__active.resondents-test-item__active:after{opacity:0;visibility:hidden;top:120%\n}\n.resondents-test-item h2{margin-bottom:20px;color:#092e64\n}\n.resondents-test-item:after{display:block;position:absolute;content:\"\";width:100%;height:100px;top:calc(8.33333vh * 4 - 100px);background-image:linear-gradient(0deg,#fff,hsla(0,0%,100%,.6));transition:all .8s ease-in-out\n}\n.resondents-test-item__show{color:#656695;font-size:.9rem;font-weight:700;position:absolute;padding-left:30px;right:20px;top:20px\n}\n.resondents-test-item__show.active img{transform:rotate(180deg)\n}\n.resondents-test-item__show img{max-width:20px;position:absolute;top:2px;left:0;transform:rotate(0deg);transition:all .5s ease-in-out\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/css/variables.css","D:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/respondents.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;ACkFD,SACA,gCAAA,iCACA,0BACA;CACA;AAEA,kBACA,WAAA,gCACA,aACA,wBACA;CACA;AAEA,kBACA,WAAA,aACA,iBACA,sBACA;CACA;AAEA,sBACA,+BAAA,gBACA,kBACA,mBACA,aACA,sCAEA,eACA,sBACA,6BAGA;CACA;AAEA,8BACA,kBAAA;CAEA;AAEA,iEACA,UAAA,kBACA,QACA;CACA;AAEA,yBACA,mBAAA,aACA;CACA;AAEA,4BACA,cAAA,kBACA,WACA,WACA,aACA,gCACA,+DACA,8BAGA;CACA;AAEA,4BACA,cAAA,gBACA,gBACA,kBACA,kBACA,WACA,QACA;CACA;AAEA,uCACA,wBAAA;CACA;AAEA,gCACA,eAAA,kBACA,QACA,OACA,uBACA,8BAGA;CACA","file":"respondents.vue","sourcesContent":[":root {\r\n    font-family: 'Marta';\r\n    font-size: 16px;\r\n    line-height: 1.4;\r\n    --blue: #092E64;\r\n    --purple: #656695;\r\n    --darkpurple: #313149;\r\n    --marine: #3493A8;\r\n    --yellow: #EFDA7B;\r\n    --green: #9DBE87;\r\n    --red: #c74545;\r\n    --background: #e6e5e5;\r\n    --column: calc(100vw / 24);\r\n    --row: calc(100vh / 12);\r\n    --column-mobile: calc(100vw / 12);\r\n    --row-mobile: calc(100vh / 24);\r\n}\r\n","<template lang=\"html\">\r\n\r\n    <div class=\"respondents-page\">\r\n\r\n        <side-menu></side-menu>\r\n        <section class=\"content\">\r\n\r\n            <div class=\"loading\" v-if=\"loading\">\r\n\r\n                <loading-indicator></loading-indicator>\r\n\r\n            </div>\r\n\r\n            <div class=\"respondents-list\">\r\n\r\n                <div\r\n                    class=\"resondents-test-item\"\r\n                    v-for=\"test in testsArr\"\r\n                    :key=\"test.test_id\"\r\n                >\r\n\r\n                    <a class=\"resondents-test-item__show\" @click.prevent=\"showListHandler\" href=\"\">список <img src=\"img/arrow-down.svg\" alt=\"\"></a>\r\n                    <h2>{{test.test_name}}</h2>\r\n                    <respondent-item\r\n                        v-for=\"singleTry in test.tries\"\r\n                        :key=\"singleTry.test_answer_id\"\r\n                        :result=\"singleTry\"\r\n                    >\r\n                    </respondent-item>\r\n\r\n\r\n                </div>\r\n\r\n            </div>\r\n\r\n\r\n        </section>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport sideMenu from './side-menu.vue';\r\nimport loadingIndicator from './interface/loading.vue';\r\nimport respondentItem from './interface/respondent-item.vue';\r\nimport axios from './../../node_modules/axios/dist/axios.js';\r\n\r\nexport default {\r\n\r\n    components: {\r\n        'side-menu': sideMenu,\r\n        'loading-indicator': loadingIndicator,\r\n        'respondent-item': respondentItem\r\n    },\r\n\r\n    data() {\r\n        return {\r\n            loading: false,\r\n            testsArr: null\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        fetchData() {\r\n            this.loading = true;\r\n            axios.get('php/getstats.php')\r\n            .then( (res) => {\r\n                this.loading = false;\r\n                this.testsArr = res.data.tests;\r\n                console.log(this.testsArr);\r\n\r\n            })\r\n            .catch( (err) => {\r\n                this.loading = false;\r\n                console.log(err);\r\n            });\r\n        },\r\n\r\n        //Разворачиваем список респондентов\r\n        showListHandler(e) {\r\n            e.target.parentNode.classList.toggle('resondents-test-item__active');\r\n            e.target.classList.toggle('active');\r\n        }\r\n\r\n    },\r\n\r\n    created() {\r\n        this.fetchData();\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n@import './../css/variables.css';\r\n\r\n    .content {\r\n        margin-left: calc(var(--column) * 2);\r\n        margin-right: calc(var(--column) * 2);\r\n        width: calc(var(--column) * 16);\r\n    }\r\n\r\n    .respondents-page {\r\n        width: 100%;\r\n        padding-top: calc(var(--row) * 2);\r\n        display: flex;\r\n        background-color: var(--background);\r\n    }\r\n\r\n    .respondents-list {\r\n        width: 100%;\r\n        display: flex;\r\n        flex-flow: column;\r\n        justify-content: center;\r\n    }\r\n\r\n    .resondents-test-item {\r\n        max-height: calc(var(--row) * 4);\r\n        overflow: hidden;\r\n        position: relative;\r\n        margin-bottom: 40px;\r\n        padding: 20px;\r\n        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\r\n        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\r\n        cursor: pointer;\r\n        background-color: #fff;\r\n        -webkit-transition: all 1s ease-in-out;\r\n        -o-transition: all 1s ease-in-out;\r\n        transition: all 1s ease-in-out;\r\n    }\r\n\r\n    .resondents-test-item__active {\r\n        max-height: 10000px;\r\n        /* height: auto; */\r\n    }\r\n\r\n    .resondents-test-item__active.resondents-test-item__active:after {\r\n        opacity: 0;\r\n        visibility: hidden;\r\n        top: 120%;\r\n    }\r\n\r\n    .resondents-test-item h2 {\r\n        margin-bottom: 20px;\r\n        color: var(--blue);\r\n    }\r\n\r\n    .resondents-test-item:after {\r\n        display: block;\r\n        position: absolute;\r\n        content: '';\r\n        width: 100%;\r\n        height: 100px;\r\n        top: calc(var(--row) * 4 - 100px);\r\n        background-image: linear-gradient(to top, #fff, rgba(255,255,255,0.6));\r\n        -webkit-transition: all .8s ease-in-out;\r\n        -o-transition: all .8s ease-in-out;\r\n        transition: all .8s ease-in-out;\r\n    }\r\n\r\n    .resondents-test-item__show {\r\n        color: var(--purple);\r\n        font-size: .9rem;\r\n        font-weight: bold;\r\n        position: absolute;\r\n        padding-left: 30px;\r\n        right: 20px;\r\n        top: 20px;\r\n    }\r\n\r\n    .resondents-test-item__show.active img{\r\n        transform: rotate(180deg);\r\n    }\r\n\r\n    .resondents-test-item__show img {\r\n        max-width: 20px;\r\n        position: absolute;\r\n        top: 2px;\r\n        left: 0;\r\n        transform: rotate(0deg);\r\n        -webkit-transition: all .5s ease-in-out;\r\n        -o-transition: all .5s ease-in-out;\r\n        transition: all .5s ease-in-out;\r\n    }\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.content{margin-left:calc(4.16667vw * 2);margin-right:calc(4.16667vw * 2);width:calc(4.16667vw * 16)\n}\n.respondents-page{width:100%;padding-top:calc(8.33333vh * 2);display:flex;background-color:#e6e5e5\n}\n.respondents-list{width:100%;display:flex;flex-flow:column;justify-content:center\n}\n.resondents-test-item{max-height:calc(8.33333vh * 4);overflow:hidden;position:relative;margin-bottom:40px;padding:20px;box-shadow:1px 1px 4px rgba(0,0,0,.1);cursor:pointer;background-color:#fff;transition:all 1s ease-in-out\n}\n.resondents-test-item__active{max-height:10000px\n}\n.resondents-test-item__active.resondents-test-item__active:after{opacity:0;visibility:hidden;top:120%\n}\n.resondents-test-item h2{margin-bottom:20px;color:#092e64\n}\n.resondents-test-item:after{display:block;position:absolute;content:\"\";width:100%;height:100px;top:calc(8.33333vh * 4 - 100px);background-image:linear-gradient(0deg,#fff,hsla(0,0%,100%,.6));transition:all .8s ease-in-out\n}\n.resondents-test-item__show{color:#656695;font-size:.9rem;font-weight:700;position:absolute;padding-left:30px;right:20px;top:20px\n}\n.resondents-test-item__show.active img{transform:rotate(180deg)\n}\n.resondents-test-item__show img{max-width:20px;position:absolute;top:2px;left:0;transform:rotate(0deg);transition:all .5s ease-in-out\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/css/variables.css","D:/xampp/htdocs/tester-avalon/src/vue-comp/src/vue-comp/respondents.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;AC2HD,SACA,gCAAA,iCACA,0BACA;CACA;AAEA,kBACA,WAAA,gCACA,aACA,wBACA;CACA;AAEA,kBACA,WAAA,aACA,iBACA,sBACA;CACA;AAEA,sBACA,+BAAA,gBACA,kBACA,mBACA,aACA,sCAEA,eACA,sBACA,6BAGA;CACA;AAEA,8BACA,kBAAA;CAEA;AAEA,iEACA,UAAA,kBACA,QACA;CACA;AAEA,yBACA,mBAAA,aACA;CACA;AAEA,4BACA,cAAA,kBACA,WACA,WACA,aACA,gCACA,+DACA,8BAGA;CACA;AAEA,4BACA,cAAA,gBACA,gBACA,kBACA,kBACA,WACA,QACA;CACA;AAEA,uCACA,wBAAA;CACA;AAEA,gCACA,eAAA,kBACA,QACA,OACA,uBACA,8BAGA;CACA","file":"respondents.vue","sourcesContent":[":root {\r\n    font-family: 'Marta';\r\n    font-size: 16px;\r\n    line-height: 1.4;\r\n    --blue: #092E64;\r\n    --purple: #656695;\r\n    --darkpurple: #313149;\r\n    --marine: #3493A8;\r\n    --yellow: #EFDA7B;\r\n    --green: #9DBE87;\r\n    --red: #c74545;\r\n    --background: #e6e5e5;\r\n    --column: calc(100vw / 24);\r\n    --row: calc(100vh / 12);\r\n    --column-mobile: calc(100vw / 12);\r\n    --row-mobile: calc(100vh / 24);\r\n}\r\n","<template lang=\"html\">\r\n\r\n    <div class=\"respondents-page\">\r\n\r\n        <side-menu></side-menu>\r\n        <section class=\"content\">\r\n\r\n            <transition name=\"fade\">\r\n              <pop-up\r\n                  v-if=\"popUp\"\r\n                  :testtite=\"currentTest.test_name\"\r\n                  :description=\"currentTest.test_description\"\r\n                  :imglink=\"currentTest.test_image\"\r\n                  :anonym=\"currentTest.test_anonym\"\r\n                  :time=\"currentTest.test_time\"\r\n                  :status=\"currentTest.test_status\"\r\n                  :testquestions=\"currentTest.questions\"\r\n                  :testid=\"currentTest.test_id\"\r\n                  @close-window=\"closePopUp\"\r\n              >\r\n\r\n              </pop-up>\r\n          </transition>\r\n\r\n            <div class=\"loading\" v-if=\"loading\">\r\n\r\n                <loading-indicator></loading-indicator>\r\n\r\n            </div>\r\n\r\n            <div class=\"respondents-list\">\r\n\r\n                <div\r\n                    class=\"resondents-test-item\"\r\n                    v-for=\"test in testsArr\"\r\n                    :key=\"test.test_id\"\r\n                >\r\n\r\n                    <a class=\"resondents-test-item__show\" @click.prevent=\"showListHandler\" href=\"\">список <img src=\"img/arrow-down.svg\" alt=\"\"></a>\r\n                    <h2>{{test.test_name}}</h2>\r\n                    <respondent-item\r\n                        v-for=\"singleTry in test.tries\"\r\n                        :key=\"singleTry.test_answer_id\"\r\n                        :result=\"singleTry\"\r\n                        @show-info=\"showTryInfo\"\r\n                    >\r\n                    </respondent-item>\r\n\r\n\r\n                </div>\r\n\r\n            </div>\r\n\r\n\r\n        </section>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\n\r\nimport sideMenu from './side-menu.vue';\r\nimport loadingIndicator from './interface/loading.vue';\r\nimport respondentItem from './interface/respondent-item.vue';\r\nimport popUpElem from './interface/pop-up-test.vue';\r\nimport axios from './../../node_modules/axios/dist/axios.js';\r\n\r\nexport default {\r\n\r\n    components: {\r\n        'side-menu': sideMenu,\r\n        'loading-indicator': loadingIndicator,\r\n        'respondent-item': respondentItem,\r\n        'pop-up': popUpElem\r\n    },\r\n\r\n    data() {\r\n        return {\r\n            loading: false,\r\n            testsArr: null,\r\n            currentTest: null,\r\n            popUp: false\r\n        }\r\n    },\r\n\r\n    methods: {\r\n        fetchData() {\r\n            this.loading = true;\r\n            axios.get('php/getstats.php')\r\n            .then( (res) => {\r\n                console.log(res);\r\n                this.loading = false;\r\n                this.testsArr = res.data.tests;\r\n                console.log(this.testsArr);\r\n\r\n            })\r\n            .catch( (err) => {\r\n                this.loading = false;\r\n                console.log(err);\r\n            });\r\n        },\r\n\r\n        //Разворачиваем список респондентов\r\n        showListHandler(e) {\r\n            e.target.parentNode.classList.toggle('resondents-test-item__active');\r\n            e.target.classList.toggle('active');\r\n        },\r\n\r\n        //Показываем всплывающее окно с подробностями о результатах пользователя\r\n        showTryInfo(id, answers){\r\n            console.log(id);\r\n            console.log(answers);\r\n            axios.get(`php/gettest.php?test_id=${id}`)\r\n            .then( (res) => {\r\n                this.currentTest = res.data.test;\r\n                this.popUp = true;\r\n                console.log(this.currentTest);\r\n            })\r\n            .catch( (err) => console.log(err));\r\n        },\r\n\r\n        //Закрываем всплывающее окно\r\n        closePopUp() {\r\n            this.popUp = false;\r\n        }\r\n\r\n    },\r\n\r\n    created() {\r\n        this.fetchData();\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n@import './../css/variables.css';\r\n\r\n    .content {\r\n        margin-left: calc(var(--column) * 2);\r\n        margin-right: calc(var(--column) * 2);\r\n        width: calc(var(--column) * 16);\r\n    }\r\n\r\n    .respondents-page {\r\n        width: 100%;\r\n        padding-top: calc(var(--row) * 2);\r\n        display: flex;\r\n        background-color: var(--background);\r\n    }\r\n\r\n    .respondents-list {\r\n        width: 100%;\r\n        display: flex;\r\n        flex-flow: column;\r\n        justify-content: center;\r\n    }\r\n\r\n    .resondents-test-item {\r\n        max-height: calc(var(--row) * 4);\r\n        overflow: hidden;\r\n        position: relative;\r\n        margin-bottom: 40px;\r\n        padding: 20px;\r\n        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\r\n        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\r\n        cursor: pointer;\r\n        background-color: #fff;\r\n        -webkit-transition: all 1s ease-in-out;\r\n        -o-transition: all 1s ease-in-out;\r\n        transition: all 1s ease-in-out;\r\n    }\r\n\r\n    .resondents-test-item__active {\r\n        max-height: 10000px;\r\n        /* height: auto; */\r\n    }\r\n\r\n    .resondents-test-item__active.resondents-test-item__active:after {\r\n        opacity: 0;\r\n        visibility: hidden;\r\n        top: 120%;\r\n    }\r\n\r\n    .resondents-test-item h2 {\r\n        margin-bottom: 20px;\r\n        color: var(--blue);\r\n    }\r\n\r\n    .resondents-test-item:after {\r\n        display: block;\r\n        position: absolute;\r\n        content: '';\r\n        width: 100%;\r\n        height: 100px;\r\n        top: calc(var(--row) * 4 - 100px);\r\n        background-image: linear-gradient(to top, #fff, rgba(255,255,255,0.6));\r\n        -webkit-transition: all .8s ease-in-out;\r\n        -o-transition: all .8s ease-in-out;\r\n        transition: all .8s ease-in-out;\r\n    }\r\n\r\n    .resondents-test-item__show {\r\n        color: var(--purple);\r\n        font-size: .9rem;\r\n        font-weight: bold;\r\n        position: absolute;\r\n        padding-left: 30px;\r\n        right: 20px;\r\n        top: 20px;\r\n    }\r\n\r\n    .resondents-test-item__show.active img{\r\n        transform: rotate(180deg);\r\n    }\r\n\r\n    .resondents-test-item__show img {\r\n        max-width: 20px;\r\n        position: absolute;\r\n        top: 2px;\r\n        left: 0;\r\n        transform: rotate(0deg);\r\n        -webkit-transition: all .5s ease-in-out;\r\n        -o-transition: all .5s ease-in-out;\r\n        transition: all .5s ease-in-out;\r\n    }\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -23905,7 +23952,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.user-try{display:flex;justify-content:space-around;box-shadow:0 0 4px rgba(0,0,0,.1);border-radius:10px;cursor:pointer;background-color:#fff;margin-bottom:20px;transform:scale(.95);transition:all .3s ease-in-out\n}\n.user-try:hover{box-shadow:0 0 6px rgba(0,0,0,.3);transform:scale(1)\n}\n.user-try__false,.user-try__right{width:30px;height:30px;text-align:center;border-radius:20px;padding:3px 9px;font-weight:700;color:#fff\n}\n.user-try__right{background-color:#9dbe87\n}\n.user-try__false{background-color:#c74545\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/css/variables.css","D:/xampp/htdocs/tester-avalon/src/vue-comp/interface/src/vue-comp/interface/respondent-item.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;AC+CD,UACA,aAAA,6BACA,kCAEA,mBACA,eACA,sBACA,mBACA,qBACA,8BAGA;CACA;AAEA,gBAEA,kCAAA,kBACA;CACA;AAEA,kCAEA,WAAA,YACA,kBACA,mBACA,gBACA,gBACA,UACA;CACA;AAEA,iBACA,wBAAA;CACA;AAEA,iBACA,wBAAA;CACA","file":"respondent-item.vue","sourcesContent":[":root {\r\n    font-family: 'Marta';\r\n    font-size: 16px;\r\n    line-height: 1.4;\r\n    --blue: #092E64;\r\n    --purple: #656695;\r\n    --darkpurple: #313149;\r\n    --marine: #3493A8;\r\n    --yellow: #EFDA7B;\r\n    --green: #9DBE87;\r\n    --red: #c74545;\r\n    --background: #e6e5e5;\r\n    --column: calc(100vw / 24);\r\n    --row: calc(100vh / 12);\r\n    --column-mobile: calc(100vw / 12);\r\n    --row-mobile: calc(100vh / 24);\r\n}\r\n","<template lang=\"html\">\r\n\r\n    <div class=\"user-try\" @click=\"showTestHander\">\r\n\r\n\r\n            <p class=\"user-try__id\">{{results.test_answer_id}}</p>\r\n            <p class=\"user-try__email\">{{userEmail}}</p>\r\n            <p class=\"user-try__total\">{{percents}}%</p>\r\n            <p class=\"user-try__right\">{{rightAnswers}}</p>\r\n            <p class=\"user-try__false\">{{falseAnswers}}</p>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n\r\n    props: ['result'],\r\n\r\n    data() {\r\n        return {\r\n            results: this.result,\r\n            rightAnswers: 0,\r\n            falseAnswers: 0,\r\n            percents: 0,\r\n            testAnswerId: this.result.test_answer_id\r\n        }\r\n    },\r\n\r\n    computed: {\r\n\r\n        //Email пользователя\r\n        userEmail() {\r\n            return this.results.user_email ? this.results.user_email : 'Anonym';\r\n        },\r\n\r\n    },\r\n\r\n    methods: {\r\n\r\n        //показываем окно с информацией о тесте\r\n        showTestHander() {\r\n            console.log(this.testAnswerId);\r\n        }\r\n\r\n    },\r\n\r\n    created() {\r\n        console.log(this.results.result);\r\n        for(let i = 0; i < this.results.result.answers.length; i++) {\r\n            this.results.result.answers[i].result ? this.rightAnswers++ : this.falseAnswers++;\r\n        }\r\n        this.percents = this.rightAnswers / this.results.result.answers.length * 100;\r\n\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    @import './../../css/variables.css';\r\n\r\n    .user-try {\r\n        display: flex;\r\n        justify-content: space-around;\r\n        -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.1);\r\n        box-shadow: 0px 0px 4px rgba(0,0,0,0.1);\r\n        border-radius: 10px;\r\n        cursor: pointer;\r\n        background-color: #fff;\r\n        margin-bottom: 20px;\r\n        transform: scale(.95);\r\n        -webkit-transition: all .3s ease-in-out;\r\n        -o-transition: all .3s ease-in-out;\r\n        transition: all .3s ease-in-out;\r\n    }\r\n\r\n    .user-try:hover {\r\n        -webkit-box-shadow: 0px 0px 6px rgba(0,0,0,0.3);\r\n        box-shadow: 0px 0px 6px rgba(0,0,0,0.3);\r\n        transform: scale(1);\r\n    }\r\n\r\n    .user-try__right,\r\n    .user-try__false {\r\n        width: 30px;\r\n        height: 30px;\r\n        text-align: center;\r\n        border-radius: 20px;\r\n        padding: 3px 9px;\r\n        font-weight: bold;\r\n        color: #fff;\r\n    }\r\n\r\n    .user-try__right {\r\n        background-color: var(--green);\r\n    }\r\n\r\n    .user-try__false {\r\n        background-color: var(--red);\r\n    }\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.user-try{display:flex;justify-content:space-around;box-shadow:0 0 4px rgba(0,0,0,.1);border-radius:10px;cursor:pointer;background-color:#fff;margin-bottom:20px;transform:scale(.95);transition:all .3s ease-in-out\n}\n.user-try:hover{box-shadow:0 0 6px rgba(0,0,0,.3);transform:scale(1)\n}\n.user-try__false,.user-try__right{width:30px;height:30px;text-align:center;border-radius:20px;padding:3px 9px;font-weight:700;color:#fff\n}\n.user-try__right{background-color:#9dbe87\n}\n.user-try__false{background-color:#c74545\n}", "", {"version":3,"sources":["D:/xampp/htdocs/tester-avalon/src/css/variables.css","D:/xampp/htdocs/tester-avalon/src/vue-comp/interface/src/vue-comp/interface/respondent-item.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;ACsDD,UACA,aAAA,6BACA,kCAEA,mBACA,eACA,sBACA,mBACA,qBACA,8BAGA;CACA;AAEA,gBAEA,kCAAA,kBACA;CACA;AAEA,kCAEA,WAAA,YACA,kBACA,mBACA,gBACA,gBACA,UACA;CACA;AAEA,iBACA,wBAAA;CACA;AAEA,iBACA,wBAAA;CACA","file":"respondent-item.vue","sourcesContent":[":root {\r\n    font-family: 'Marta';\r\n    font-size: 16px;\r\n    line-height: 1.4;\r\n    --blue: #092E64;\r\n    --purple: #656695;\r\n    --darkpurple: #313149;\r\n    --marine: #3493A8;\r\n    --yellow: #EFDA7B;\r\n    --green: #9DBE87;\r\n    --red: #c74545;\r\n    --background: #e6e5e5;\r\n    --column: calc(100vw / 24);\r\n    --row: calc(100vh / 12);\r\n    --column-mobile: calc(100vw / 12);\r\n    --row-mobile: calc(100vh / 24);\r\n}\r\n","<template lang=\"html\">\r\n\r\n    <div class=\"user-try\" @click=\"showTestHander\">\r\n\r\n\r\n            <p class=\"user-try__id\">{{results.test_answer_id}}</p>\r\n            <p class=\"user-try__email\">{{userEmail}}</p>\r\n            <p class=\"user-try__total\">{{percents}}%</p>\r\n            <p class=\"user-try__right\">{{rightAnswers}}</p>\r\n            <p class=\"user-try__false\">{{falseAnswers}}</p>\r\n\r\n    </div>\r\n\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n\r\n    props: ['result'],\r\n\r\n    data() {\r\n        return {\r\n            results: this.result,\r\n            rightAnswers: 0,\r\n            falseAnswers: 0,\r\n            percents: 0,\r\n            testAnswerId: this.result.test_answer_id,\r\n            testId: this.result.test_answer_test_id,\r\n            answers: this.result.result.answers\r\n\r\n        }\r\n    },\r\n\r\n    computed: {\r\n\r\n        //Email пользователя\r\n        userEmail() {\r\n            return this.results.user_email ? this.results.user_email : 'Anonym';\r\n        },\r\n\r\n    },\r\n\r\n    methods: {\r\n\r\n        //показываем окно с информацией о тесте\r\n        showTestHander() {\r\n            // console.log(this.testAnswerId + ' - testAnswerId');\r\n            // console.log(this.testId + ' - testId');\r\n            // console.log(this.answers);\r\n            this.$emit('show-info', this.testId, this.answers);\r\n\r\n        }\r\n\r\n    },\r\n\r\n    created() {\r\n        // console.log(this.results.result);\r\n        for(let i = 0; i < this.results.result.answers.length; i++) {\r\n            this.results.result.answers[i].result ? this.rightAnswers++ : this.falseAnswers++;\r\n        }\r\n        this.percents = this.rightAnswers / this.results.result.answers.length * 100;\r\n\r\n    }\r\n\r\n}\r\n</script>\r\n\r\n<style lang=\"css\">\r\n\r\n    @import './../../css/variables.css';\r\n\r\n    .user-try {\r\n        display: flex;\r\n        justify-content: space-around;\r\n        -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.1);\r\n        box-shadow: 0px 0px 4px rgba(0,0,0,0.1);\r\n        border-radius: 10px;\r\n        cursor: pointer;\r\n        background-color: #fff;\r\n        margin-bottom: 20px;\r\n        transform: scale(.95);\r\n        -webkit-transition: all .3s ease-in-out;\r\n        -o-transition: all .3s ease-in-out;\r\n        transition: all .3s ease-in-out;\r\n    }\r\n\r\n    .user-try:hover {\r\n        -webkit-box-shadow: 0px 0px 6px rgba(0,0,0,0.3);\r\n        box-shadow: 0px 0px 6px rgba(0,0,0,0.3);\r\n        transform: scale(1);\r\n    }\r\n\r\n    .user-try__right,\r\n    .user-try__false {\r\n        width: 30px;\r\n        height: 30px;\r\n        text-align: center;\r\n        border-radius: 20px;\r\n        padding: 3px 9px;\r\n        font-weight: bold;\r\n        color: #fff;\r\n    }\r\n\r\n    .user-try__right {\r\n        background-color: var(--green);\r\n    }\r\n\r\n    .user-try__false {\r\n        background-color: var(--red);\r\n    }\r\n\r\n\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -23971,51 +24018,87 @@ var render = function() {
     [
       _c("side-menu"),
       _vm._v(" "),
-      _c("section", { staticClass: "content" }, [
-        _vm.loading
-          ? _c("div", { staticClass: "loading" }, [_c("loading-indicator")], 1)
-          : _vm._e(),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "respondents-list" },
-          _vm._l(_vm.testsArr, function(test) {
-            return _c(
-              "div",
-              { key: test.test_id, staticClass: "resondents-test-item" },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "resondents-test-item__show",
-                    attrs: { href: "" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.showListHandler($event)
-                      }
-                    }
-                  },
-                  [
-                    _vm._v("список "),
-                    _c("img", { attrs: { src: "img/arrow-down.svg", alt: "" } })
-                  ]
-                ),
-                _vm._v(" "),
-                _c("h2", [_vm._v(_vm._s(test.test_name))]),
-                _vm._v(" "),
-                _vm._l(test.tries, function(singleTry) {
-                  return _c("respondent-item", {
-                    key: singleTry.test_answer_id,
-                    attrs: { result: singleTry }
+      _c(
+        "section",
+        { staticClass: "content" },
+        [
+          _c(
+            "transition",
+            { attrs: { name: "fade" } },
+            [
+              _vm.popUp
+                ? _c("pop-up", {
+                    attrs: {
+                      testtite: _vm.currentTest.test_name,
+                      description: _vm.currentTest.test_description,
+                      imglink: _vm.currentTest.test_image,
+                      anonym: _vm.currentTest.test_anonym,
+                      time: _vm.currentTest.test_time,
+                      status: _vm.currentTest.test_status,
+                      testquestions: _vm.currentTest.questions,
+                      testid: _vm.currentTest.test_id
+                    },
+                    on: { "close-window": _vm.closePopUp }
                   })
-                })
-              ],
-              2
-            )
-          })
-        )
-      ])
+                : _vm._e()
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm.loading
+            ? _c(
+                "div",
+                { staticClass: "loading" },
+                [_c("loading-indicator")],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "respondents-list" },
+            _vm._l(_vm.testsArr, function(test) {
+              return _c(
+                "div",
+                { key: test.test_id, staticClass: "resondents-test-item" },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "resondents-test-item__show",
+                      attrs: { href: "" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.showListHandler($event)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v("список "),
+                      _c("img", {
+                        attrs: { src: "img/arrow-down.svg", alt: "" }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("h2", [_vm._v(_vm._s(test.test_name))]),
+                  _vm._v(" "),
+                  _vm._l(test.tries, function(singleTry) {
+                    return _c("respondent-item", {
+                      key: singleTry.test_answer_id,
+                      attrs: { result: singleTry },
+                      on: { "show-info": _vm.showTryInfo }
+                    })
+                  })
+                ],
+                2
+              )
+            })
+          )
+        ],
+        1
+      )
     ],
     1
   )
