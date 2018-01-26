@@ -292,7 +292,7 @@ export default {
     background-image: url('./../img/add.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: auto;
     -webkit-transition: opacity .3s ease-in-out;
     -o-transition: opacity .3s ease-in-out;
     transition: opacity .3s ease-in-out;

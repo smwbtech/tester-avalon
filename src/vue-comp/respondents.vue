@@ -89,10 +89,10 @@ export default {
             this.loading = true;
             axios.get('php/getstats.php')
             .then( (res) => {
-                console.log(res);
+                // console.log(res);
                 this.loading = false;
                 this.testsArr = res.data.tests;
-                console.log(this.testsArr);
+                // console.log(this.testsArr);
 
             })
             .catch( (err) => {
@@ -109,13 +109,22 @@ export default {
 
         //Показываем всплывающее окно с подробностями о результатах пользователя
         showTryInfo(id, answers){
-            console.log(id);
-            console.log(answers);
+            // console.log(id);
+            // console.log(answers);
             axios.get(`php/gettest.php?test_id=${id}`)
             .then( (res) => {
-                this.currentTest = res.data.test;
+                let data = res.data.test;
+                data.questions.forEach( (val,ind,arr) => {
+                    answers.forEach( (v,i,a) => {
+                        if(val.question_id === v.question_id) {
+                            data.questions[ind].user_answer = v.user_answer;
+                            data.questions[ind].check_status = v.result;
+                        }
+                    });
+                });
+                this.currentTest = data;
                 this.popUp = true;
-                console.log(this.currentTest);
+                console.log(data);
             })
             .catch( (err) => console.log(err));
         },

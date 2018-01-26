@@ -8,7 +8,7 @@
             <li
                 v-for="item in variants"
                 :key="item.var_bd_id"
-                :class="[right.indexOf(item.question_client_id) >= 0 ? 'right' : 'false']"
+                :class="[right.indexOf(item.question_client_id) >= 0 ? 'right' : 'false', !userAnswers ? '' : userAnswers.indexOf(item.question_client_id) >=0 ? 'userCheck' : '']"
             >{{item.var_text}}</li>
         </ul>
         <p class="string_right" v-else>{{right}}</p>
@@ -19,14 +19,24 @@
 <script>
 export default {
 
-    props: ['qsttitle', 'vars', 'answer', 'qsttype'],
+    props: [
+        'qsttitle',
+        'vars',
+        'answer',
+        'qsttype',
+        'useranswer',
+        'checkstatus'
+
+    ],
 
     data() {
         return {
             title: this.qsttitle,
             variants: this.vars,
             right: this.answer,
-            type: +this.qsttype
+            type: +this.qsttype,
+            check: this.checkstatus,
+            userAnswers: this.useranswer
         }
     },
 
@@ -51,7 +61,7 @@ export default {
         -webkit-box-shadow: 0px 0px 4px rgba(101, 102, 149,0.3);
         box-shadow: 0px 0px 4px rgba(101, 102, 149,0.3);
         border-bottom: 6px solid rgba(101, 102, 149, .5);
-        border-right: 3px solid rgba(101, 102, 149, .5);;
+        border-right: 3px solid rgba(101, 102, 149, .5);
         border-radius: 20px;
     }
 
@@ -90,16 +100,32 @@ export default {
         text-align: left;
         color: var(--purple);
         opacity: .5;
+        padding: 5px;
     }
 
     .pop-up-question li.right {
         opacity: 1;
+        color: var(--green);
         text-decoration: underline;
     }
 
     .string_right {
         color: var(--purple);
         /* text-decoration: underline; */
+    }
+
+    .pop-up-question li.right.userCheck {
+        background-color: var(--green);
+        color: #fff;
+        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .false.userCheck  {
+        background-color: var(--red);
+        color: #fff;
+        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
     }
 
 

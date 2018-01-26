@@ -25,6 +25,8 @@
                     :vars="question.vars"
                     :answer="question.question_answer"
                     :qsttype="question.question_type_id"
+                    :useranswer="question.user_answer"
+                    :checkstatus="question.check_status"
                     >
 
                 </question-item>
