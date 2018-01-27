@@ -100,5 +100,12 @@ export default {
         opacity: 1;
     }
 
+    @media screen and (max-width: 812px) {
+
+        .question-var {
+            width: 100%;
+        }
+    }
+
 
 </style>

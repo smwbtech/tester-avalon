@@ -397,4 +397,31 @@ export default {
         opacity: 1;
     }
 
+    @media screen and (max-width: 812px) {
+        .question {
+            width: 90%;
+            margin: 20px auto;
+            padding-top: 60px;
+        }
+
+        .question__description {
+            width: 100%;
+            max-width: none;
+            min-width: none;
+        }
+
+        .question-controls {
+            bottom: none;
+            right: none;
+            width: 50%;
+            top: 10px;
+            left: 10px;
+            max-height: 30px;
+        }
+
+        .question-controls img {
+            max-width: 20px;
+        }
+    }
+
 </style>

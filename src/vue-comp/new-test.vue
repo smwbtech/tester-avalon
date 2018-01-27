@@ -494,6 +494,65 @@ export default {
         opacity: 0;
     }
 
+    @media screen and (max-width: 812px) {
+
+        .newtest-page .content{
+            width: 100%;
+            margin: 0;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .new-test-nav {
+            padding: 10px;
+        }
+
+        .new-test-nav ul {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .new-test-nav li {
+            min-width: calc(var(--column-mobile) * 3);
+            font-size: .8rem;
+        }
+
+        .new-test-nav li:last-child {
+            padding-left: 10px;
+        }
+
+        .new-test-form {
+            padding-top: calc(var(--row-mobile) * 4);
+        }
+
+        .new-test-form__options {
+            width: 90%;
+            margin: 0 auto;
+
+        }
+
+        .new-test-form__inputs img {
+            float: left;
+            clear: left;
+            margin-bottom: 1px;
+        }
+
+        .new-test-form__options label {
+            font-size: .8rem;
+            padding-left: 40px;
+            margin-bottom: 12px;
+        }
+
+        .new-test__add-question {
+            display: block;
+            margin: 40px auto;
+        }
+
+
+
+
+    }
+
 
 
 </style>

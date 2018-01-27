@@ -233,4 +233,46 @@ export default {
         top: 0;
     }
 
+    @media screen and (max-width: 812px) {
+
+        .pop-up {
+            z-index: 111;
+        }
+
+        .pop-up-window {
+            width: 80%;
+            padding: 10px;
+        }
+
+        .pop-up-window h2 {
+            font-size: 1.2rem;
+        }
+
+        .pop-up-window h3 {
+            font-size: 1rem;
+        }
+
+        .pop-up-general {
+            padding-top: calc(var(--row-mobile) * 6);
+        }
+
+        .pop-up-controls {
+            top: 90%;
+            left: 10%;
+            z-index: 111;
+            min-width: 80%;
+            max-width: 0;
+            height: 10%;
+            background-color: #fff;
+            box-shadow: 0px -2px 4px rgba(0,0,0,.1);
+            z-index: 112;
+            justify-content: center;
+        }
+
+        .pop-up-controls button {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
 </style>

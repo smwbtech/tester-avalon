@@ -41,4 +41,11 @@ export default {
     border-bottom: 1px solid var(--blue);
 }
 
+@media screen and (max-width: 812px) {
+    .var-string {
+        width: 100%;
+        text-align: center;
+    }
+}
+
 </style>
