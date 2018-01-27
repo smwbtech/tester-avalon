@@ -289,6 +289,16 @@ export default {
     transition: all .3s ease-in-out;
 }
 
+@media screen and (max-width: 812px) {
+
+    .tests-list-item {
+        margin: 0;
+        margin-bottom: 40px;
+        width: 90%;
+    }
+
+}
+
 
 
 

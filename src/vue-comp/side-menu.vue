@@ -2,7 +2,13 @@
 
     <div class="menu">
 
-        <aside class="side-menu">
+        <a href="" :class="triggerClass" @click.prevent="menuTrigger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+
+        <aside :class="sideMenuStyle">
             <p><a href="#">{{email}}</a></p>
 
             <nav class="side-menu-nav">
@@ -30,6 +36,12 @@ import axios from './../../node_modules/axios/dist/axios.js';
 
 export default {
 
+    data() {
+        return {
+            mobileMenu: false
+        }
+    },
+
     methods: {
 
         //Выход их профиля
@@ -38,6 +50,11 @@ export default {
             axios.get('php/logout.php')
             .then( (res) => this.$router.push('/auth') )
             .catch( (err) => console.log(err));
+        },
+
+        menuTrigger() {
+            this.mobileMenu ? this.mobileMenu = false : this.mobileMenu = true;
+            console.log(this.mobileMenu);
         }
 
     },
@@ -45,6 +62,20 @@ export default {
     computed: {
         email() {
             return localStorage.getItem('user_email');
+        },
+
+        sideMenuStyle() {
+            return {
+                'side-menu': true,
+                'side-menu__active': this.mobileMenu
+            }
+        },
+
+        triggerClass() {
+            return {
+                'trigger': true,
+                'trigger_active': this.mobileMenu
+            }
         }
     }
 
@@ -128,6 +159,69 @@ export default {
     opacity: .6;
     text-align: center;
     font-weight: bold;
+}
+
+.trigger {
+    display: none;
+}
+
+@media screen and (max-width: 812px) {
+    .menu {
+        width: 0;
+    }
+
+    .trigger {
+        display: block;
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        z-index: 110;
+    }
+
+    .trigger span {
+        display: block;
+        width: 40px;
+        height: 5px;
+        background-color: var(--darkpurple);
+        -webkit-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+    }
+
+    .trigger_active span {
+        background-color: #fff;
+    }
+
+    .trigger span:nth-child(2) {
+        margin: 10px 0px;
+    }
+
+
+    .side-menu {
+        width: calc(var(--column-mobile) * 8);
+        left: -100%;
+        transition: left .3s ease-in-out;
+    }
+
+    .side-menu-nav {
+        padding-top: 60px;
+    }
+
+    .side-menu p {
+        position: absolute;
+        font-size: .7rem;
+        bottom: 10px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .side-menu p a {
+        display: block;
+    }
+
+    .side-menu__active {
+        left: 0;
+    }
 }
 
 </style>

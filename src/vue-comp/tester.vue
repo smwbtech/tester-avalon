@@ -318,4 +318,54 @@ export default {
   opacity: 0;
 }
 
+@media screen and (max-width: 812px) {
+
+    .tester-page .content{
+        flex-flow: column;
+        margin: 0;
+        width: calc(var(--column-mobile) * 12);
+    }
+
+    .tests-list {
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .tests-list > *:nth-child(3n+1) {
+        margin-right: 0;
+    }
+
+    .tests-list > *:nth-child(3n+3) {
+        margin-left: 0;
+    }
+
+    .new-test-nav {
+        padding: 10px;
+    }
+
+    .new-test-nav ul {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .new-test-nav li {
+        min-width: calc(var(--column-mobile) * 3);
+        font-size: .8rem;
+    }
+
+    .new-test-nav li:last-child {
+        padding-left: 10px;
+    }
+
+    .add-new-test {
+        width: calc(var(--column-mobile) * 12 - 40px);
+        max-height: 0;
+        min-height: 300px;
+        margin: 0;
+    }
+
+}
+
 </style>

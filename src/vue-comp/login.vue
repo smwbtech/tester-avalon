@@ -311,5 +311,37 @@ export default {
         color: var(--red);
     }
 
+    @media screen and (max-width: 812px) {
+        .auth-page {
+            flex-direction: column;
+            height: auto;
+        }
+
+        .forms,
+        .info {
+            width: 100%;
+            height: auto;
+        }
+
+        .forms-nav a {
+            font-size: 1.1rem;
+        }
+
+        .forms-nav a.from-nav__link_inactive {
+            font-size: .9rem;
+        }
+
+        .auth-page ul {
+            text-align: center;
+            list-style: none;
+        }
+
+        .auth-page li{
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+    }
+
 
 </style>
