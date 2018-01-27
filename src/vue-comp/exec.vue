@@ -57,6 +57,12 @@
                         </div>
                     </div>
 
+                    <div class="mobile-nav">
+                        <button class="back" @click="mobileNavQst(-1)"></button>
+                        <button class="send" @click="sendTestHander(false)">Готово</button>
+                        <button class="forward" @click="mobileNavQst(1)"></button>
+                    </div>
+
                     <pop-up v-if="popUp"
                         :results="testResults"
                         :timestart="timeStart"
@@ -226,6 +232,22 @@ export default {
             console.log(this.answers);
         },
 
+        mobileNavQst(ind) {
+
+            if(ind < 0) {
+                let elem = document.querySelector('.active').previousSibling;
+                if(elem) {
+                    elem.click();
+                }
+            }
+            else {
+                let elem = document.querySelector('.active').nextSibling;
+                if(elem) {
+                    elem.click();
+                }
+            }
+        },
+
         //Обновляем информацию ответов и сохраняем объект теста в localStorage
         updateAnswerHandler(answers) {
             this.answers = answers;
@@ -303,6 +325,10 @@ export default {
 <style lang="css">
 
 @import './../css/variables.css';
+
+    .mobile-nav {
+        display: none;
+    }
 
     .exec-page{
         width: 100%;
@@ -464,6 +490,78 @@ export default {
     .test-info .question span:last-child {
         opacity: .5;
         color: var(--purple);
+    }
+
+    @media screen and (max-width: 812px) {
+
+        .exec-page .content {
+            width: 100%;
+            margin: 0;
+        }
+
+        .exec-page .menu{
+            display: none;
+        }
+
+        .new-test-nav {
+            padding: 10px;
+        }
+
+        .test-info {
+            width: 100%;
+        }
+
+        .new-test-nav li:last-child {
+            padding: 0px;
+            font-size: .8rem;
+        }
+
+        .test-info li {
+            margin: 0;
+        }
+
+        .variants .variant-item label{
+            font-size: .8rem;
+        }
+
+        .test-nav {
+            opacity: 0;
+            bottom: -100%;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            padding-bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .mobile-nav .forward,
+        .mobile-nav .back {
+            width: 30px;
+            height: 30px;
+            display: block;
+            background-color: #fff;
+            border: none;
+        }
+
+        .send {
+            display: block;
+        }
+
+
+
+        .mobile-nav .back {
+
+            background-image: url('./../img/arrow-right.svg');
+        }
+
+        .mobile-nav .forward {
+            background-image: url('./../img/arrow-left.svg');
+        }
     }
 
 
