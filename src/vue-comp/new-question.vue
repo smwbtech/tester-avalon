@@ -355,7 +355,7 @@ export default {
     .question-controls {
         position: absolute;
         bottom: 20px;
-        right: 0px;
+        right: 10px;
         width: calc(var(--column) * 2);
     }
     .question-controls img {
@@ -373,7 +373,7 @@ export default {
     }
 
     .question-controls img:nth-child(2) {
-        padding: 0 10px;
+        margin: 0 10px;
     }
 
     .question__add-var-button {

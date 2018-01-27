@@ -420,7 +420,7 @@ export default {
     .new-test-form__inputs img {
         max-width: 30px;
         margin-bottom: -10px;
-        padding-left: 20px;
+        margin-left: 20px;
     }
 
     .new-test-form__inputs img:first-child {

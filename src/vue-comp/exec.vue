@@ -380,7 +380,6 @@ export default {
         height: 20px;
         margin: 0px 20px;
         text-align: center;
-        padding: 5px;
         border: 1px solid var(--purple);
         background-color: var(--purple);
         color: #fff;
@@ -401,12 +400,12 @@ export default {
     }
 
     .test-nav li:before {
-        top: 14px;
+        top: 9px;
         left: -41px;
     }
 
     .test-nav li:after {
-        top: 14px;
+        top: 9px;
         right: -41px;
     }
 
