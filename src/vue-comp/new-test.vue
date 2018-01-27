@@ -44,7 +44,7 @@
                         </transition>
                         <img :src="anonymToggle" alt="">
                         <label for="anonym" :class="labelAnonym">Анонимное прохождение</label>
-                        <input type="checkbox" name="anonym" id="anonym" v-model="testOptions.anonym" @change="check">
+                        <input type="checkbox" name="anonym" id="anonym" v-model="testOptions.anonym">
                     </div>
 
                 </div>

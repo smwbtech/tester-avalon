@@ -8,12 +8,11 @@
     // axios отправляет данные в виде json файла, принимаем его из потока и сохраняем, как глобальны массив $_POST
     $_POST = json_decode(file_get_contents('php://input'), true);
 
-    $user_id = getUserId($_COOKIE["token"], $_COOKIE["PHPSESSID"]);
 
     if(isset($_POST['test_db_id']) && isset($_POST['anonym']) && isset($_POST['token']) && isset($_POST['answers'])) {
 
         $anonym = (int)$_POST['anonym'];
-        $user_id = $anonym == 1 ? getUserId($_COOKIE["token"], $_COOKIE["PHPSESSID"]) : 0;
+        $user_id = $anonym == 1 ? 0 : getUserId($_COOKIE["token"], $_COOKIE["PHPSESSID"]);
         $test_id = $_POST['test_db_id'];
         $answers = $_POST['answers'];
         $token = htmlspecialchars($_POST['token']);

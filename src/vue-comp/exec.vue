@@ -112,9 +112,9 @@ export default {
             currentQstType: 1,
             answers: [],
             timeStart: 0,
-            time: 0,
+            time: 60,
             timeLimit: false,
-            timeLeft: 0,
+            timeLeft: 60,
             popUp: false,
             testResults: {}
         }
@@ -186,11 +186,11 @@ export default {
                         // Если тест на время, то будет отсчитывать время
                         if(+res.data.test.test_time > 0) {
                             console.log('Это тест на время');
-                            var test = 'dsadasda';
                             this.timeLimit = true;
                             this.time = res.data.test.test_time;
                             let date = new Date(this.timeStart);
 
+                            //Проверка времени
                             let timeStart = date.getMinutes();
                             console.log(timeStart);
                             setInterval( () => {
@@ -201,7 +201,7 @@ export default {
                                 console.log(timeDifference);
                                 this.timeLeft = this.time - timeDifference;
                                 if(timeDifference < this.time) {
-                                    window.alert('Время теста истекло, ваши данные отправлены на сервер');
+                                    console.log('Время теста истекло, ваши данные отправлены на сервер');
 
 
                                 }

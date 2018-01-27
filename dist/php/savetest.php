@@ -18,7 +18,7 @@
             $description = htmlspecialchars($_POST['description']);
             $questions = $_POST['questions'];
             $timelimit = $_POST['options']['timeLimit'] ? (int)$_POST['options']['time'] : 0;
-            $anonym = $_POST['options']['anonym'] ? 1 : 0;
+            $anonym = $_POST['options']['anonym'];
             $test_status = (int)$_POST['status'];
             $testId = isset($_POST['testId']) ? (int)$_POST['testId'] : false;
 
