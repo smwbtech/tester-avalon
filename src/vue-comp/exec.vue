@@ -192,7 +192,7 @@ export default {
 
                             //Проверка времени
                             let timeStart = date.getMinutes();
-                            setInterval( () => {
+                            let interval = setInterval( () => {
                                 let newDate = new Date();
                                 let timeNow = newDate.getMinutes();
                                 let timeDifference = timeNow - timeStart;
@@ -202,7 +202,7 @@ export default {
                                     console.log('Время теста истекло, ваши данные отправлены на сервер');
                                     window.alert('Время теста истекло, ваши данные отправлены на сервер');
                                     this.sendTestHander(true);
-
+                                    clearInterval(interval);
                                 }
 
                             }, 1000);

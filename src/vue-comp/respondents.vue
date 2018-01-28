@@ -243,6 +243,41 @@ export default {
       opacity: 0;
     }
 
+    @media screen and (max-width: 812px) {
+
+        .respondents-page .content {
+            width: 100%;
+            margin: 0;
+        }
+
+        .respondents-list {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .resondents-test-item {
+            max-height: calc(var(--row-mobile) * 16);
+        }
+
+        .resondents-test-item__active {
+            max-height: 10000px;
+        }
+
+        .resondents-test-item__show {
+            right: 40%;
+        }
+
+        .resondents-test-item:after {
+            top: calc(var(--row-mobile) * 16 - 100px);
+        }
+
+        .resondents-test-item h2 {
+            font-size: 1.1rem;
+            padding-top: 40px;
+        }
+
+    }
+
 
 
 </style>

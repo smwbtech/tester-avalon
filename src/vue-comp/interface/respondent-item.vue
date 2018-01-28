@@ -109,5 +109,36 @@ export default {
         background-color: var(--red);
     }
 
+    .user-try__email {
+        max-width: none;
+        min-width: 30%;
+    }
+
+    @media screen and (max-width: 812px) {
+
+        .resondents-test-item {
+            width: 90%;
+            padding: 10px;
+        }
+
+        .user-try {
+            font-size: .6rem;
+        }
+
+        .user-try__false, .user-try__right {
+            width: 15px;
+            height: 15px;
+            padding: 1px;
+        }
+
+        .user-try__id {
+            display: none;
+        }
+
+        .user-try__email {
+            min-width: 60%;
+        }
+    }
+
 
 </style>
