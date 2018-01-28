@@ -20,7 +20,9 @@
                 :testid="currentTest.test_id"
                 @close-window="closePopUp"
                 @edit-test="editTestHandler"
+                @update-test="updateTestHandler"
                 @delete-test="deleteTestHandler"
+
             >
 
             </pop-up>
@@ -63,7 +65,7 @@
                     :description = "test.test_description"
                     :testtitle="test.test_name"
                     :testid="test.test_id"
-                    :key="test_id"
+                    :key="test.test_id"
                     :imglink="test.test_img"
                     :status="test.test_status"
                     :respondents="test.respondents"
@@ -82,11 +84,12 @@
                     :description = "test.test_description"
                     :testtitle="test.test_name"
                     :testid="test.test_id"
-                    :key="test_id"
+                    :key="test.test_id"
                     :imglink="test.test_img"
                     :status="test.test_status"
                     @show-test="showTestHandler"
                     @delete-info="deleteTest"
+                    @edit-test-new="editNewTestHandler"
                     ></test-item>
                     <button type="button" name="button" class="add-new-test" @click="newTest"><img src="img/add.svg" alt=""></button>
 
@@ -199,9 +202,20 @@ export default {
        // Выводим подтверждение того, что тест удален
 
        deleteTestHandler(code, msg) {
-           this.flashMsg(code, msg);
+           this.showFlashMsg(code, msg);
            this.fetchData();
-           this.$router.replace('/tester');
+           setTimeout( () => {
+               this.$router.replace('/tester');
+           }, 3000)
+       },
+
+       //Выводим сообщение о том, что тест опубликован
+       updateTestHandler(code, msg) {
+           this.showFlashMsg(code, msg);
+           this.fetchData();
+           setTimeout( () => {
+               this.$router.replace('/tester');
+           }, 3000)
        },
 
        // Выводим подтверждение того, что ссылка скопирована
@@ -234,6 +248,18 @@ export default {
            .catch( (err) => console.log(err));
        },
 
+       // Редактируем тест из черновиков по быстрой ссылке
+       editNewTestHandler(id) {
+           let query = `?test_id=${id}`;
+           axios.get(`php/gettest.php${query}`)
+           .then( (res) => {
+               this.currentTest = res.data.test;
+               localStorage.setItem('test', JSON.stringify(this.currentTest));
+               this.$router.push('/newtest');
+           })
+           .catch( (err) => console.log(err));
+       },
+
        //Закрываем всплывающее окно
        closePopUp() {
            this.popUp = false;
@@ -249,6 +275,9 @@ export default {
        deleteTest(code, msg) {
            this.showFlashMsg(code, msg);
            this.fetchData();
+           setTimeout( () => {
+               this.$router.replace('/tester');
+           }, 3000)
        }
    }
 

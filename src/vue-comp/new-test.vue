@@ -371,9 +371,9 @@ export default {
 
     .new-test-form__title {
         display: block;
-        width: 100%;
+        width: 98%;
         border: none;
-        border-bottom: 1px solid var(--blue);
+        border-bottom: 3px solid rgba(0,0,0,0.1);
         margin-bottom: 40px;
         font-family: 'marta';
         font-size: 3rem;
@@ -404,7 +404,7 @@ export default {
         max-height: calc(var(--row) * 2);
         min-height: calc(var(--row) * 2);
         height: calc(var(--row) * 2);
-        border: 1px solid var(--blue);
+        border: 3px solid rgba(0,0,0,0.1);
     }
 
     .new-test-form__options label {

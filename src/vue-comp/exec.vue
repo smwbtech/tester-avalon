@@ -458,6 +458,7 @@ export default {
     .test-info {
         max-width: 100%;
         padding-top: 20px;
+        padding-right: 40px;
         display: flex;
         justify-content: flex-end;
         align-items: center;
@@ -517,6 +518,7 @@ export default {
 
         .test-info {
             width: 100%;
+            padding-right: 0px;
             max-width: none;
             display: flex;
             justify-content: space-between;

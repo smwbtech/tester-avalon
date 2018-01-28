@@ -30,13 +30,13 @@
             ');
 
             if(mysqli_affected_rows($db) > 0) {
-                echo $res;
+                echo json_encode($res);
             }
 
             else {
                 $res['success'] = false;
                 $res['errorMsg'] = 'Операция обновления отклонена!';
-                echo $res;
+                echo json_encode($res);
             }
         }
 

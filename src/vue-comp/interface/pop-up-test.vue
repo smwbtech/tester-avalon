@@ -91,7 +91,9 @@ export default {
                 let query = this.testId;
                 axios.get(`php/deletetest.php?test_id=${query}`)
                 .then( (res) => {
-                    if(res.data.status) {
+                    console.log('server response on delete');
+                    console.log(res);
+                    if(res.data.success) {
                         let msg = 'Тест успешно удален из базы данных';
                         this.$emit('delete-test', 3, msg);
                         this.closeWindow();
@@ -111,14 +113,16 @@ export default {
             let query = this.testId;
             axios.get(`php/changeteststatus.php?test_id=${query}`)
             .then( (res) => {
-                if(res.data.status) {
+                console.log('server response on update');
+                console.log(res);
+                if(res.data.success) {
                     let msg = 'Тест успешно опубликован';
                     this.$emit('update-test', 3, msg);
                     this.closeWindow();
                 }
                 else {
                     let msg = 'Ошибка базы данных, попробуйте позже';
-                    this.$emit('update-test', 3, msg);
+                    this.$emit('update-test', 1, msg);
                     this.closeWindow();
                 }
             })
@@ -242,6 +246,7 @@ export default {
         .pop-up-window {
             width: 80%;
             padding: 10px;
+            margin-bottom: 40px;
         }
 
         .pop-up-window h2 {

@@ -283,11 +283,11 @@ export default {
         switch(this.questiontype) {
             case 1:
                 this.single.vars = this.questionvars;
-                this.single.nextVarId = this.questionvars[this.questionvars.length-1].id;
+                this.single.nextVarId = this.questionvars[this.questionvars.length-1] ? this.questionvars[this.questionvars.length-1].id : 1;
                 break;
             case 2:
                 this.multiple.vars = this.questionvars;
-                this.multiple.nextVarId = this.questionvars[this.questionvars.length-1].id;
+                this.multiple.nextVarId = this.questionvars[this.questionvars.length-1] ? this.questionvars[this.questionvars.length-1].id : 1;
                 break;
             case 3:
                 this.string.answer = this.questionvars;
@@ -349,7 +349,7 @@ export default {
         max-height: calc(var(--row) * 1);
         margin-bottom: 20px;
         border: none;
-        border: 1px solid var(--blue);
+        border: 3px solid rgba(0,0,0,.1);
     }
 
     .question-controls {

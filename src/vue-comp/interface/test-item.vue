@@ -131,7 +131,7 @@ export default {
 
         // Событие - редактирование теста
         editHandler() {
-
+            this.$emit('edit-test-new', this.testId);
         },
 
         // Событие - удаление теста
@@ -140,6 +140,8 @@ export default {
                 let query = this.testId;
                 axios.get(`php/deletetest.php?test_id=${query}`)
                 .then( (res) => {
+                    console.log('Server response after test deletion');
+                    console.log(res.data);
                     if(res.data.status) {
                         let msg = 'Тест успешно удален из базы данных';
                         this.$emit('delete-info', 3, msg);
