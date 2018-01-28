@@ -71,7 +71,7 @@
                     @delete-info="deleteTest"
                     @copy-link="copyLinkHander"
                     ></test-item>
-                    <button type="button" name="button" class="add-new-test" @click="newTest"></button>
+                    <button type="button" name="button" class="add-new-test" @click="newTest"><img src="img/add.svg" alt=""></button>
 
                 </div>
 
@@ -88,7 +88,7 @@
                     @show-test="showTestHandler"
                     @delete-info="deleteTest"
                     ></test-item>
-                    <button type="button" name="button" class="add-new-test" @click="newTest"></button>
+                    <button type="button" name="button" class="add-new-test" @click="newTest"><img src="img/add.svg" alt=""></button>
 
                 </div>
 
@@ -305,22 +305,29 @@ export default {
     width: calc(var(--column) * 4);
     max-height: calc(var(--row) * 4);
     min-height: calc(var(--row) * 4);
-    -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
     cursor: pointer;
     background-color: var(--background);
     border: none;
-    opacity: .2;
-    background-image: url('./../img/add.svg');
+
+    /* background-image: url('./../img/add.svg'); */
     background-repeat: no-repeat;
     background-position: center;
     background-size: auto;
+
+}
+
+.add-new-test img {
+    display: block;
+    width: 100%;
+    -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+    opacity: .2;
     -webkit-transition: opacity .3s ease-in-out;
     -o-transition: opacity .3s ease-in-out;
     transition: opacity .3s ease-in-out;
 }
 
-.add-new-test:hover {
+.add-new-test img:hover {
     opacity: 1;
     -webkit-box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
