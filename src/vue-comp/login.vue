@@ -61,9 +61,9 @@
             <h1>Добро пожаловать в Tester</h1>
             <p>Tester – это удобная платформа для быстрого создания опроса или тестирования. Вы можете быстро создать свой тест через веб-интерфейс и посмотреть статистику ответов. Гибкая настройка вопросов, возможность ограничить тестирование по времени. </p>
             <ul>
-                <li>Гибкая настройка вопросов</li>
-                <li>Общая статистика по каждому тесту</li>
-                <li>Возможность ограничить тестирование по времени</li>
+                <li><img src="img/settings_main.svg" alt=""> Гибкая настройка вопросов</li>
+                <li><img src="img/graph.svg" alt=""> Общая статистика по каждому тесту</li>
+                <li><img src="img/watch_main.svg" alt="">Возможность ограничить тестирование по времени</li>
             </ul>
         </div>
 
@@ -236,7 +236,26 @@ export default {
 
     .info {
         background-color: var(--purple);
+        background-image: linear-gradient(to top, var(--darkpurple), var(--purple) 95%);
         color: #fff;
+    }
+
+    .info ul {
+        list-style: none;
+        margin-top: 40px;
+    }
+
+    .info li {
+        position: relative;
+        margin-bottom: 40px;
+        padding-left: 60px;
+    }
+
+    .info li img {
+        position: absolute;
+        left: 0;
+        top: -10px;
+        max-width: 40px;
     }
 
     .forms-nav {
@@ -321,6 +340,19 @@ export default {
         .info {
             width: 100%;
             height: auto;
+        }
+
+        .info li {
+            text-align: left;
+        }
+
+        .info li img {
+            max-width: 30px;
+            top: -10px;
+        }
+
+        .info li:nth-of-type(2) img {
+            top: 0px;
         }
 
         .forms-nav a {

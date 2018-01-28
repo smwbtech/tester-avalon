@@ -251,6 +251,9 @@ export default {
     position: relative;
     color: var(--blue);
     min-height: 4rem;
+    max-height: 4.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
     -webkit-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;

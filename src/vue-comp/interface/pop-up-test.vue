@@ -91,8 +91,6 @@ export default {
                 let query = this.testId;
                 axios.get(`php/deletetest.php?test_id=${query}`)
                 .then( (res) => {
-                    console.log('server response on delete');
-                    console.log(res);
                     if(res.data.success) {
                         let msg = 'Тест успешно удален из базы данных';
                         this.$emit('delete-test', 3, msg);
@@ -113,8 +111,6 @@ export default {
             let query = this.testId;
             axios.get(`php/changeteststatus.php?test_id=${query}`)
             .then( (res) => {
-                console.log('server response on update');
-                console.log(res);
                 if(res.data.success) {
                     let msg = 'Тест успешно опубликован';
                     this.$emit('update-test', 3, msg);
