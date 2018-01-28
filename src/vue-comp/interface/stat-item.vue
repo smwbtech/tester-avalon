@@ -164,4 +164,38 @@ export default {
         font-size: 2rem;
     }
 
+    @media screen and (max-width: 812px) {
+
+        .stat-item {
+            flex-direction: column;
+        }
+
+        .stat-item-title,
+        .stat-item-stat {
+            width: 100%;
+        }
+
+        .stat-item-stat {
+            padding: 10px;
+        }
+
+        .stat-item-stat li {
+            font-size: .6rem;
+        }
+
+        .stat-item:hover .stat-item-title h3:after {
+            left: 40%;
+        }
+
+        .stat-item-title h3:after {
+            width: 20%;
+        }
+
+        li[class^=stat-item-stat] {
+            font-size: 1.2rem;
+        }
+
+
+    }
+
 </style>

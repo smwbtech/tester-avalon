@@ -97,4 +97,17 @@ export default {
     justify-content: center;
 }
 
+@media screen and (max-width: 812px) {
+
+    .stats-page .content {
+        width: 100%;
+        margin: 0;
+    }
+
+    .stats-list {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 </style>
