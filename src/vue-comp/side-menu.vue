@@ -101,6 +101,7 @@ export default {
     width: calc(var(--column) * 4);
     height: 100vh;
     background-color: var(--darkpurple);
+    background-image: linear-gradient(to top, var(--darkpurple), var(--purple) 95%);
     color: #fff;
 }
 
@@ -148,6 +149,7 @@ export default {
 
 .side-menu-nav a {
     color: #fff;
+    display: block;
 }
 
 .side-menu p {

@@ -90,6 +90,10 @@ ul {
     box-shadow: 1px 1px 9px rgba(0, 0, 0, 0.4);
 }
 
+.test-flasgMesg {
+    z-index: 210;
+}
+
 @media screen and (max-width: 812px) {
     h1, h2, h3, h4, h5, h6 {
         text-align: center;

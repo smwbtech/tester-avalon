@@ -90,7 +90,7 @@
 
 import sideMenu from './side-menu.vue';
 import newQuestion from './new-question.vue';
-import flashMessage from './interface/flashmessage.vue'
+import flashMessage from './interface/flashmessage.vue';
 import testCheck from './../js/test.js';
 import axios from './../../node_modules/axios/dist/axios.js';
 
@@ -463,6 +463,7 @@ export default {
     }
 
     .test-flasgMesg {
+        z-index: 201;
         position: fixed;
         max-width: 30%;
         top: 40px;

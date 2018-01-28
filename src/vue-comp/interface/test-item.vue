@@ -81,6 +81,8 @@
 
         </div>
 
+        <input :class="[testLink]"></input>
+
     </div>
 
 </template>
@@ -100,14 +102,26 @@ export default {
             testStatus: this.status,
             testId: this.testid,
             testImage: this.imglink ? this.imglink : 'img/default_test.svg',
-            testRespondents: this.respondents
+            testRespondents: this.respondents,
+            testLink: 'testLink-' + this.testid
+        }
+    },
+
+    computed: {
+        testLinkText() {
+            return (window.location.origin + '/exec?' + encodeURIComponent(btoa('test_id=' + (+this.testid))));
         }
     },
 
     methods: {
         // Событие - показать ссылку на тест
         showLink() {
-            console.log(this.testId);
+            var elem = document.querySelector('.testLink-' + this.testId);
+            elem.value = window.location.origin + '/exec?' + encodeURIComponent(btoa('test_id=' + (+this.testid)));
+            elem.select();
+            document.execCommand('copy');
+            let msg = 'Ссылка скопирована в буфер обмена';
+            this.$emit('copy-link',msg);
         },
 
         // Событие - показать респондентов, которые прошли данный тест
@@ -287,6 +301,11 @@ export default {
     -webkit-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
+}
+
+input[class^="testLink"] {
+    position: fixed;
+    right: -200%;
 }
 
 @media screen and (max-width: 812px) {

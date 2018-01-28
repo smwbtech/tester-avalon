@@ -69,6 +69,7 @@
                     :respondents="test.respondents"
                     @show-test="showTestHandler"
                     @delete-info="deleteTest"
+                    @copy-link="copyLinkHander"
                     ></test-item>
                     <button type="button" name="button" class="add-new-test" @click="newTest"></button>
 
@@ -121,6 +122,7 @@ import newTest from './new-test.vue';
 import loadingIndicator from './interface/loading.vue';
 import testItem from './interface/test-item.vue';
 import popUpElem from './interface/pop-up-test.vue';
+import flashMessage from './interface/flashmessage.vue';
 import axios from './../../node_modules/axios/dist/axios.js';
 
 export default {
@@ -129,7 +131,8 @@ export default {
        'side-menu': sideMenu,
        'loading-indicator': loadingIndicator,
        'test-item': testItem,
-       'pop-up': popUpElem
+       'pop-up': popUpElem,
+      'flash-message': flashMessage
    },
 
    data() {
@@ -145,6 +148,18 @@ export default {
            },
            sectionOne: 1,
            sectionTwo: 2
+       }
+   },
+
+   computed: {
+       //Всплывающие сообщения
+       flashMsgClass() {
+           return {
+               'test-flasgMesg' : true,
+               'test-flasgMesg_error' : this.flashMsg.status == 1,
+               'test-flasgMesg_warn' : this.flashMsg.status == 2,
+               'test-flasgMesg_succes' : this.flashMsg.status == 3
+           }
        }
    },
 
@@ -174,17 +189,24 @@ export default {
                console.log(err);
            });
        },
-
-       deleteTestHandler(code, msg) {
-           this.flashMsg(code, msg);
-           this.fetchData();
-       },
-
        //Вывод сообщения
        showFlashMsg(status, text) {
            this.flashMsg.status = status;
            this.flashMsg.text = text;
            setTimeout( () => this.flashMsg.text = '', 10000);
+       },
+
+       // Выводим подтверждение того, что тест удален
+
+       deleteTestHandler(code, msg) {
+           this.flashMsg(code, msg);
+           this.fetchData();
+           this.$router.replace('/tester');
+       },
+
+       // Выводим подтверждение того, что ссылка скопирована
+       copyLinkHander(msg) {
+           this.showFlashMsg(3, msg);
        },
 
        // Добовление теста
