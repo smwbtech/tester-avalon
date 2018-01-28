@@ -30,6 +30,8 @@
 
             <div class="respondents-list">
 
+                <input type="text" class="respondents-search" @input="searchTest" placeholder="Введите название теста">
+
                 <div
                     class="resondents-test-item"
                     v-for="test in testsArr"
@@ -101,6 +103,24 @@ export default {
             });
         },
 
+
+        //Поиск по тесту
+        searchTest(e) {
+            console.log(e.target.value);
+            let pattern = new RegExp(e.target.value, 'i');
+            let elemList = document.querySelectorAll('.resondents-test-item h2');
+            for(let i = 0; i < elemList.length; i++) {
+                console.log(elemList[i].innerHTML);
+                console.log(i);
+                if(!pattern.test(elemList[i].innerHTML)) {
+                    elemList[i].parentNode.classList.contains('resondents-test-item__hide') ? false : elemList[i].parentNode.classList.add('resondents-test-item__hide');
+                }
+                else {
+                    elemList[i].parentNode.classList.contains('resondents-test-item__hide') ? elemList[i].parentNode.classList.remove('resondents-test-item__hide') : false;
+                }
+            }
+        },
+
         //Разворачиваем список респондентов
         showListHandler(e) {
             e.target.parentNode.classList.toggle('resondents-test-item__active');
@@ -155,9 +175,20 @@ export default {
 
     .respondents-page {
         width: 100%;
+        position: relative;
         padding-top: calc(var(--row) * 2);
         display: flex;
         background-color: var(--background);
+    }
+
+    .respondents-search {
+        position: absolute;
+        top: 20px;
+        width: calc(var(--column) * 16);
+        background-color: var(--background);
+        font-size: 2rem;
+        border:none;
+        border-bottom: 3px solid rgba(0,0,0,.1);
     }
 
     .respondents-list {
@@ -185,6 +216,15 @@ export default {
     .resondents-test-item__active {
         max-height: 10000px;
         /* height: auto; */
+    }
+
+    .resondents-test-item__hide {
+        max-height: 0px;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        padding: 0;
+        margin: 0;
     }
 
     .resondents-test-item__active.resondents-test-item__active:after {
@@ -255,10 +295,19 @@ export default {
             align-items: center;
         }
 
+
         .resondents-test-item {
             max-height: calc(var(--row-mobile) * 16);
         }
 
+        .resondents-test-item__hide {
+            max-height: 0px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            padding: 0;
+            margin: 0;
+        }
         .resondents-test-item__active {
             max-height: 10000px;
         }

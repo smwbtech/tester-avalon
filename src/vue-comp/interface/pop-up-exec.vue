@@ -8,14 +8,10 @@
                 <h2>Результаты вашейго теста</h2>
                 <p>Количество правильных ответов: {{right}}</p>
                 <p>Количество неправильных ответов: {{wrong}}</p>
-                <p>Время затраченое на прохождение: {{timeLeft}}</p>
+                <!-- <p>Время затраченое на прохождение: {{timeLeft}}</p> -->
                 <button type="button" name="button" @click="endTest">Завершить тестирование</button>
             </div>
 
-        </div>
-
-        <div class="background">
-            <div></div>
         </div>
 </div>
 
@@ -80,11 +76,13 @@ export default {
 
     .pop-up-exec {
         position: fixed;
-        left: calc(var(--column) * 6);
+        left: 0px;
         top: 0;
         width: calc(var(--column) * 15);
-        min-height: 50vh;
+        min-height: 100vh;
+        min-width: 100vw;
         background-color: #fff;
+        background-image: linear-gradient(to top, var(--darkpurple), var(--purple) 95%);
         z-index: 200;
     }
 
@@ -95,29 +93,9 @@ export default {
         top: 25%;
         left: 25%;
         background-color: #fff;
-        -webkit-box-shadow: 3px 3px 8px var(--purple);
-        box-shadow: 3px 3px 8px var(--purple);
+        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
         z-index: 202;
-    }
-
-    .background {
-        width: 52%;
-        min-height: 52%;
-        position: fixed;
-        top: 24%;
-        left: 24%;
-        overflow: hidden;
-    }
-
-    .background div {
-        height: 100vh;
-        width: 100vw;
-        left: -50%;
-        top: -50%;
-        position: absolute;
-        background-image: linear-gradient(#656695, #956565);
-        -webkit-animation: bgMove 5s ease-in-out infinite;
-        animation: bgMove 5s ease-in-out infinite;
     }
 
     .pop-up-info {

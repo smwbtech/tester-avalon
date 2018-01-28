@@ -147,13 +147,14 @@ function checkTest($test_answer_id) {
                     break;
                 case 3:
                     $user_answer = $answer['user_answer'];
-                    if(is_null($user_answer)) {
+
+                    if(strlen($user_answer) == 0) {
                         $result['result'] = false;
                     }
                     else {
                         $right_answer = $answer['question_answer'];
                         $pattern = "/$user_answer/i";
-                        $result['result'] = (bool)preg_match($pattern, $right_answer);
+                        $result['result'] = preg_match($pattern, $right_answer);
                         break;
                     }
             }
