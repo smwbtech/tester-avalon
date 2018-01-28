@@ -4806,13 +4806,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _testMenu = _interopRequireDefault(__webpack_require__(104));
+var _testMenu = _interopRequireDefault(__webpack_require__(106));
 
 var _loading = _interopRequireDefault(__webpack_require__(6));
 
-var _variants = _interopRequireDefault(__webpack_require__(108));
+var _variants = _interopRequireDefault(__webpack_require__(110));
 
-var _popUpExec = _interopRequireDefault(__webpack_require__(112));
+var _popUpExec = _interopRequireDefault(__webpack_require__(114));
 
 var _axios = _interopRequireDefault(__webpack_require__(3));
 
@@ -4998,17 +4998,18 @@ var _default = {
 
               var timeStart = _date.getMinutes();
 
-              console.log(timeStart);
               setInterval(function () {
                 var newDate = new Date();
                 var timeNow = newDate.getMinutes();
                 var timeDifference = timeNow - timeStart;
                 var minutes = new Date(timeDifference * 1000);
-                console.log(timeDifference);
                 _this.timeLeft = _this.time - timeDifference;
 
-                if (timeDifference < _this.time) {
+                if (_this.timeLeft <= 0) {
                   console.log('Время теста истекло, ваши данные отправлены на сервер');
+                  window.alert('Время теста истекло, ваши данные отправлены на сервер');
+
+                  _this.sendTestHander(true);
                 }
               }, 1000);
             }
@@ -5426,7 +5427,7 @@ var _sideMenu = _interopRequireDefault(__webpack_require__(5));
 
 var _loading = _interopRequireDefault(__webpack_require__(6));
 
-var _respondentItem = _interopRequireDefault(__webpack_require__(120));
+var _respondentItem = _interopRequireDefault(__webpack_require__(122));
 
 var _popUpTest = _interopRequireDefault(__webpack_require__(26));
 
@@ -5644,7 +5645,7 @@ var _sideMenu = _interopRequireDefault(__webpack_require__(5));
 
 var _loading = _interopRequireDefault(__webpack_require__(6));
 
-var _statItem = _interopRequireDefault(__webpack_require__(128));
+var _statItem = _interopRequireDefault(__webpack_require__(130));
 
 var _axios = _interopRequireDefault(__webpack_require__(3));
 
@@ -5809,9 +5810,9 @@ var _newTest = _interopRequireDefault(__webpack_require__(17));
 
 var _exec = _interopRequireDefault(__webpack_require__(101));
 
-var _respondents = _interopRequireDefault(__webpack_require__(117));
+var _respondents = _interopRequireDefault(__webpack_require__(119));
 
-var _stats = _interopRequireDefault(__webpack_require__(125));
+var _stats = _interopRequireDefault(__webpack_require__(127));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23149,7 +23150,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6f51c001_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_exec_vue__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6f51c001_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_exec_vue__ = __webpack_require__(118);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -23234,13 +23235,25 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.mobile-nav{display:none\n}\n.exec-page{width:100%;display:flex\n}\n.exec-page .content{margin-left:calc(4.16667vw * 2);margin-right:calc(4.16667vw * 2);width:calc(4.16667vw * 16);display:flex\n}\n.exec-page>div{display:flex\n}\n.content>div{width:100%;padding-top:calc(8.33333vh * 2);color:#092e64\n}\n.test-descr,.test-title{text-align:center\n}\n.test-title{position:relative\n}\n.test-title:after{position:absolute;left:30%;bottom:-10px;display:block;content:\"\";width:40%;height:3px;background-color:#656695\n}\n.warning{align-self:center\n}\n.test-nav{position:fixed;padding-bottom:40px;width:calc(4.16667vw * 20);z-index:102;bottom:0;right:0;background-color:#fff\n}\n.test-nav,.test-nav ul{display:flex;justify-content:center\n}\n.test-nav ul{position:relative;width:calc(4.16667vw * 16);min-height:0 20px;list-style:none;margin:0 auto\n}\n.test-nav li{position:relative;display:block;cursor:pointer;width:20px;height:20px;margin:0 20px;text-align:center;border:1px solid #656695;background-color:#656695;color:#fff;border-radius:20px;transition:all .3s ease-in-out\n}\n.test-nav li:after{width:40px;position:absolute;content:\"\";display:block;height:3px;background-color:#656695\n}\n.test-nav li:before{width:40px;position:absolute;content:\"\";display:block;height:3px;background-color:#656695\n}\n.test-nav li:before{top:9px;left:-41px\n}\n.test-nav li:after{top:9px;right:-41px\n}\n.test-nav li:first-child{margin-left:0\n}\n.test-nav li:first-child:before{display:none\n}\n.test-nav li:last-child{margin-right:0\n}\n.test-nav li:last-child:after{display:none\n}\n.test-nav li.active{background-color:#fff;color:#656695\n}\n.test-info{max-width:65%;padding-top:20px;display:flex;justify-content:flex-end;align-items:center\n}\n.test-info li{display:block;position:relative;margin-left:50px;font-size:1.2rem\n}\n.test-info li img{position:absolute;top:-10px;left:-15px\n}\n.time-limit img{width:40px\n}\n.test-info .question{opacity:1;color:#092e64\n}\n.test-info .question span:last-child{opacity:.5;color:#656695\n}\n@media screen and (max-width:812px){\n.exec-page .content{width:100%;margin:0\n}\n.exec-page .menu{display:none\n}\n.new-test-nav{padding:10px\n}\n.test-info{width:100%\n}\n.new-test-nav li:last-child{padding:0;font-size:.8rem\n}\n.test-info li{margin:0\n}\n.variants .variant-item label{font-size:.8rem\n}\n.test-nav{opacity:0;bottom:-100%\n}\n.mobile-nav{position:fixed;bottom:0;left:0;padding-bottom:10px;width:100%;display:flex;justify-content:space-around\n}\n.mobile-nav .back,.mobile-nav .forward{width:30px;height:30px;display:block;background-color:#fff;border:none\n}\n.send{display:block\n}\n.mobile-nav .back{background-image:url(" + escape(__webpack_require__(133)) + ")\n}\n.mobile-nav .forward{background-image:url(" + escape(__webpack_require__(134)) + ")\n}\n}", "", {"version":3,"sources":["/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/css/variables.css","/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/vue-comp/src/vue-comp/exec.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;ACuTD,YACA,YAAA;CACA;AAEA,WACA,WAAA,YACA;CACA;AAEA,oBACA,gCAAA,iCACA,2BACA,YACA;CACA;AAEA,eACA,YAAA;CACA;AAEA,aACA,WAAA,gCACA,aACA;CACA;AAEA,wBACA,iBAAA;CACA;AAEA,YACA,iBAAA;CACA;AAEA,kBACA,kBAAA,SACA,aACA,cACA,WACA,UACA,WACA,wBACA;CACA;AAGA,SACA,iBAAA;CACA;AAEA,UACA,eAAA,oBAEA,2BAEA,YACA,SACA,QACA,qBACA;CACA;AAEA,uBAVA,aAAA,sBAEA;CAgBA;AARA,aACA,kBAAA,2BAGA,kBACA,gBACA,aACA;CACA;AAEA,aACA,kBAAA,cACA,eACA,WACA,YACA,cACA,kBACA,yBACA,yBACA,WACA,mBACA,8BAGA;CACA;AAEA,mBAEA,WAAA,kBACA,WACA,cACA,WACA,wBACA;CACA;AARA,oBAEA,WAAA,kBACA,WACA,cACA,WACA,wBACA;CACA;AAEA,oBACA,QAAA,UACA;CACA;AAEA,mBACA,QAAA,WACA;CACA;AAEA,yBACA,aAAA;CACA;AAEA,gCACA,YAAA;CACA;AAEA,wBACA,cAAA;CACA;AAEA,8BACA,YAAA;CACA;AAEA,oBACA,sBAAA,aACA;CACA;AAEA,WACA,cAAA,iBACA,aACA,yBACA,kBACA;CAEA;AAEA,cACA,cAAA,kBACA,iBACA,gBACA;CAEA;AAEA,kBACA,kBAAA,UACA,UACA;CACA;AAEA,gBACA,UAAA;CACA;AACA,qBACA,UAAA,aACA;CACA;AAEA,qCACA,WAAA,aACA;CACA;AAEA;AAEA,oBACA,WAAA,QACA;CACA;AAEA,iBACA,YAAA;CACA;AAEA,cACA,YAAA;CACA;AAEA,WACA,UAAA;CACA;AAEA,4BACA,UAAA,eACA;CACA;AAEA,cACA,QAAA;CACA;AAEA,8BACA,eAAA;CACA;AAEA,UACA,UAAA,YACA;CACA;AAEA,YACA,eAAA,SACA,OACA,oBACA,WACA,aACA,4BACA;CACA;AAEA,uCAEA,WAAA,YACA,cACA,sBACA,WACA;CACA;AAEA,MACA,aAAA;CACA;AAIA,kBAEA,8CAAA;CACA;AAEA,qBACA,8CAAA;CACA;CACA","file":"exec.vue","sourcesContent":[":root {\n    font-family: 'Marta';\n    font-size: 16px;\n    line-height: 1.4;\n    --blue: #092E64;\n    --purple: #656695;\n    --darkpurple: #313149;\n    --marine: #3493A8;\n    --yellow: #EFDA7B;\n    --green: #9DBE87;\n    --red: #c74545;\n    --background: #e6e5e5;\n    --column: calc(100vw / 24);\n    --row: calc(100vh / 12);\n    --column-mobile: calc(100vw / 12);\n    --row-mobile: calc(100vh / 24);\n}\n","<template lang=\"html\">\n\n    <div class=\"exec-page\">\n\n        <div v-if=\"!loaded\">\n\n            <loading></loading>\n\n        </div>\n\n        <div v-else>\n\n            <test-menu\n                :testname=\"test.test_name\"\n                :testdescription=\"test.test_description\"\n                @send-test=\"sendTestHander(false)\"\n            >\n\n            </test-menu>\n\n            <section class=\"content\">\n\n                <nav class=\"new-test-nav\">\n                    <ul class=\"test-info\">\n                        <li class=\"question\">Вы ответили на <span>{{answers.length}}</span><span>/</span><span>{{questions.length}}</span></li>\n                        <li class=\"time-limit\" v-if=\"timeLimit\"><img src=\"img/stopwatch.svg\" alt=\"\">{{timeLeft}}:00</li>\n                    </ul>\n                </nav>\n\n                    <div v-if=\"!authorized\" class=\"warning\">\n                        <loading></loading>\n                        <p> Данный тест доступен только зарегистрированным пользователям. Сейчас вы будете перенаправленны на страницу авторизации и регистрации. После входа в систему вы автоматически вернетесь к прохождению теста</p>\n                    </div>\n\n                    <div v-else>\n\n                        <h2 class=\"test-title\">{{test.questions[userProgress.currentQstId].question_description}}</h2>\n                        <p class=\"test-descr\">{{questionDescr}}</p>\n                        <variants\n                            :type=\"currentQstType\"\n                            :questions=\"questions\"\n                            :answersarr=\"answers\"\n                            :currentqst=\"userProgress.currentQstId\"\n                            @update-answer=\"updateAnswerHandler\"\n\n                        ></variants>\n\n                        <div class=\"test-nav\">\n                            <ul>\n                                <li\n                                v-for=\"n in test.questions.length\"\n                                :id=\"'qst_'+n\"\n                                :class=\"{active: n==1}\"\n                                @click=\"changeQst\"\n                                >{{n}}</li>\n                            </ul>\n                        </div>\n                    </div>\n\n                    <div class=\"mobile-nav\">\n                        <button class=\"back\" @click=\"mobileNavQst(-1)\"></button>\n                        <button class=\"send\" @click=\"sendTestHander(false)\">Готово</button>\n                        <button class=\"forward\" @click=\"mobileNavQst(1)\"></button>\n                    </div>\n\n                    <pop-up v-if=\"popUp\"\n                        :results=\"testResults\"\n                        :timestart=\"timeStart\"\n                    ></pop-up>\n\n            </section>\n\n        </div>\n\n    </div>\n\n</template>\n\n<script>\n\nimport testMenu from './interface/test-menu.vue';\nimport loadingElem from './interface/loading.vue';\nimport variantsElem from './interface/variants.vue';\nimport popUpExec from './interface/pop-up-exec.vue';\nimport axios from './../../node_modules/axios/dist/axios.js';\nimport Auth from './../js/auth.js';\n\nexport default {\n\n    components: {\n        'test-menu': testMenu,\n        'loading': loadingElem,\n        'variants': variantsElem,\n        'pop-up': popUpExec\n    },\n\n    // Когда компонент создан, получаем тест, проверяем, аторизацию пользвателя\n    created() {\n        this.fetchData();\n    },\n\n    data() {\n        return {\n\n            test: null,\n            questions: null,\n            authorized: false,\n            loaded: false,\n            userProgress: {\n                currentQstId: 0\n            },\n            currentQstType: 1,\n            answers: [],\n            timeStart: 0,\n            time: 60,\n            timeLimit: false,\n            timeLeft: 60,\n            popUp: false,\n            testResults: {}\n        }\n    },\n\n    computed: {\n\n        //Описание вопроса в зависимости от типа\n        questionDescr() {\n            switch (+this.questions[this.userProgress.currentQstId].question_type_id) {\n                case 1:\n                    return 'Выберите один вариант ответа';\n                    break;\n                case 2:\n                    return 'Выберите несколько вариантов';\n                    break;\n                case 3:\n                    return 'Напишите вариант ответа';\n                    break;\n                default:\n\n            }\n        }\n    },\n\n    methods: {\n        //Получаем данные с сервер, сверяем авторизацию пользователя и возможность анонимного прохождения\n        fetchData() {\n            let query = \"?\" + atob(decodeURIComponent(window.location.search.slice(1)));\n            Auth.checkUser()\n            .then( (res) => {\n                let auth = res;\n                //Если тест уже есть в localStorage берем данные от туда, в противном случае, загружаем их с сервера\n                axios.get(`php/getexectest.php${query}`)\n                .then( (res) => {\n                    console.log(res);\n                    let date = new Date();\n                    let testId = +query.slice(9);\n                    let testData = JSON.parse(localStorage.getItem('current_test'));\n\n                    // Устанавливани все параметры теста\n                    this.test = res.data.test;\n                    this.questions = res.data.test.questions;\n\n                    this.timeStart = testData && +testData.test_db_id == testId? testData.time_start : date.getTime();\n                    this.answers = testData && +testData.test_db_id == testId? testData.answers : [];\n                    this.currentQstType = testData && +testData.test_db_id == testId? testData.currentQstType : +res.data.test.questions[0].question_type_id;\n                    this.currentQstId = testData && +testData.test_db_id == testId? testData.currentQstId : 0;\n                    this.loaded = true;\n\n                    setTimeout( () => {\n                        let id = this.currentQstId + 1;\n                        let elem = document.getElementById(`qst_${id}`);\n                        elem.click();\n                    }, 0);\n\n                    if(+res.data.test.test_anonym == 0 && !auth) {\n                        console.log('Просим авторизоваться');\n                        this.authorized = false;\n                        window.localStorage.setItem('query', window.location.search.slice(1));\n                        setTimeout( () => {\n                            this.$router.replace('/auth');\n                        },8000)\n                    }\n                    else {\n                        console.log('Показываем тест');\n                        this.authorized = true;\n\n                        // Если тест на время, то будет отсчитывать время\n                        if(+res.data.test.test_time > 0) {\n                            console.log('Это тест на время');\n                            this.timeLimit = true;\n                            this.time = res.data.test.test_time;\n                            let date = new Date(this.timeStart);\n\n                            //Проверка времени\n                            let timeStart = date.getMinutes();\n                            console.log(timeStart);\n                            setInterval( () => {\n                                let newDate = new Date();\n                                let timeNow = newDate.getMinutes();\n                                let timeDifference = timeNow - timeStart;\n                                let minutes = new Date(timeDifference * 1000);\n                                console.log(timeDifference);\n                                this.timeLeft = this.time - timeDifference;\n                                if(timeDifference < this.time) {\n                                    console.log('Время теста истекло, ваши данные отправлены на сервер');\n\n\n                                }\n\n                            }, 1000);\n                        }\n                    }\n                })\n                .catch( (err) => console.log(err));\n\n            })\n            .catch( (err) => console.log(err));\n        },\n\n        //Навигация по вопросам\n        changeQst(e) {\n            let elemId = e.target.id;\n            let children = e.target.parentElement.children;\n            e.target.classList.contains('active') ? false : e.target.classList.add('active');\n            for(let i = 0; i < children.length; i++) {\n                if(children[i].id !== elemId) {\n                    children[i].classList.contains('active') ? children[i].classList.remove('active') : false;\n                }\n            }\n            this.userProgress.currentQstId = +e.target.id.slice(4) - 1;\n            this.currentQstType = +this.test.questions[this.userProgress.currentQstId].question_type_id;\n            this.saveLocalStorage();\n            console.log(this.answers);\n        },\n\n        mobileNavQst(ind) {\n\n            if(ind < 0) {\n                let elem = document.querySelector('.active').previousSibling;\n                if(elem) {\n                    elem.click();\n                }\n            }\n            else {\n                let elem = document.querySelector('.active').nextSibling;\n                if(elem) {\n                    elem.click();\n                }\n            }\n        },\n\n        //Обновляем информацию ответов и сохраняем объект теста в localStorage\n        updateAnswerHandler(answers) {\n            this.answers = answers;\n            this.saveLocalStorage();\n        },\n\n        saveLocalStorage() {\n            let date = new Date();\n            let test = {\n                test_db_id: this.test.test_id,\n                test: this.test,\n                anonym:  this.test.test_anonym,\n                token: this.test.token ? this.test.token : btoa(date.getTime()),\n                answers: this.answers,\n                time_start: this.timeStart,\n                currentQstType: this.currentQstType,\n                currentQstId: this.userProgress.currentQstId\n            };\n\n            localStorage.setItem('current_test', JSON.stringify(test));\n        },\n\n        // Отправляем тест\n        sendTestHander(autoEnd) {\n            localStorage.removeItem('current_test');\n            let date = new Date();\n            let test = {\n                test_db_id: this.test.test_id,\n                anonym:  this.test.test_anonym,\n                token: this.token ? this.token : btoa(date.getTime()),\n                answers: this.answers\n            };\n            console.log('test');\n            console.log(test);\n            // return test;\n            if(!autoEnd && window.confirm('Вы готовы отправить ответы на проверку?')) {\n                axios.post('php/saveexectest.php', test)\n                .then( (res) => {\n                    console.log(res);\n                    this.testResults = res.data;\n                    this.popUp = true;\n                })\n                .catch( (err) => {\n                    console.log(err);\n                });\n            }\n            else {\n                axios.post('php/saveexectest.php', test)\n                .then( (res) => {\n                    console.log(res);\n                    this.popUp = true;\n                })\n                .catch( (err) => {\n                    console.log(err);\n                });\n            }\n        }\n    },\n\n    // Перед тем, как пользователь попадет на страницу, проверим, установлено ли id вопроса\n    beforeRouteEnter (to, from, next) {\n        let check = decodeURIComponent(window.location.search.slice(1));\n        if(/test_id/.test(atob(check))) {\n            next();\n        }\n        else {\n            window.location.pathname = '/tester';\n        }\n    }\n\n}\n\n</script>\n\n<style lang=\"css\">\n\n@import './../css/variables.css';\n\n    .mobile-nav {\n        display: none;\n    }\n\n    .exec-page{\n        width: 100%;\n        display: flex;\n    }\n\n    .exec-page .content {\n        margin-left: calc(var(--column) * 2);\n        margin-right: calc(var(--column) * 2);\n        width: calc(var(--column) * 16);\n        display: flex;\n    }\n\n    .exec-page > div {\n        display: flex;\n    }\n\n    .content > div {\n        width: 100%;\n        padding-top: calc(var(--row) * 2);\n        color: var(--blue);\n    }\n\n    .test-title, .test-descr {\n        text-align: center;\n    }\n\n    .test-title {\n        position: relative;\n    }\n\n    .test-title:after {\n        position: absolute;\n        left: 30%;\n        bottom: -10px;\n        display: block;\n        content: '';\n        width: 40%;\n        height: 3px;\n        background-color: var(--purple);\n    }\n\n\n    .warning {\n        align-self: center;\n    }\n\n    .test-nav {\n        position: fixed;\n        display: flex;\n        padding-bottom: 40px;\n        justify-content: center;\n        width: calc(var(--column) * 20);\n        z-index: 102;\n        bottom: 0;\n        right: 0;\n        background-color: #fff;\n    }\n\n    .test-nav ul {\n        position: relative;\n        display: flex;\n        justify-content: center;\n        width: calc(var(--column) * 16);\n        min-height: 0 20px;\n        list-style: none;\n        margin: 0 auto;\n    }\n\n    .test-nav li {\n        position: relative;\n        display: block;\n        cursor: pointer;\n        width: 20px;\n        height: 20px;\n        margin: 0px 20px;\n        text-align: center;\n        border: 1px solid var(--purple);\n        background-color: var(--purple);\n        color: #fff;\n        border-radius: 20px;\n        -webkit-transition: all .3s ease-in-out;\n        -o-transition: all .3s ease-in-out;\n        transition: all .3s ease-in-out;\n    }\n\n    .test-nav li:before,\n    .test-nav li:after {\n        width: 40px;\n        position: absolute;\n        content: '';\n        display: block;\n        height: 3px;\n        background-color: var(--purple);\n    }\n\n    .test-nav li:before {\n        top: 9px;\n        left: -41px;\n    }\n\n    .test-nav li:after {\n        top: 9px;\n        right: -41px;\n    }\n\n    .test-nav li:first-child {\n        margin-left: 0;\n    }\n\n    .test-nav li:first-child:before {\n        display: none;\n    }\n\n    .test-nav li:last-child {\n        margin-right: 0;\n    }\n\n    .test-nav li:last-child:after {\n        display: none;\n    }\n\n    .test-nav li.active {\n        background-color: #fff;\n        color: var(--purple);\n    }\n\n    .test-info {\n        max-width: 65%;\n        padding-top: 20px;\n        display: flex;\n        justify-content: flex-end;\n        align-items: center;\n\n    }\n\n    .test-info li {\n        display: block;\n        position: relative;\n        margin-left: 50px;\n        font-size: 1.2rem;\n\n    }\n\n    .test-info li img {\n        position: absolute;\n        top: -10px;\n        left: -15px;\n    }\n\n    .time-limit img {\n        width: 40px;\n    }\n    .test-info .question {\n        opacity: 1;\n        color: var(--blue);\n    }\n\n    .test-info .question span:last-child {\n        opacity: .5;\n        color: var(--purple);\n    }\n\n    @media screen and (max-width: 812px) {\n\n        .exec-page .content {\n            width: 100%;\n            margin: 0;\n        }\n\n        .exec-page .menu{\n            display: none;\n        }\n\n        .new-test-nav {\n            padding: 10px;\n        }\n\n        .test-info {\n            width: 100%;\n        }\n\n        .new-test-nav li:last-child {\n            padding: 0px;\n            font-size: .8rem;\n        }\n\n        .test-info li {\n            margin: 0;\n        }\n\n        .variants .variant-item label{\n            font-size: .8rem;\n        }\n\n        .test-nav {\n            opacity: 0;\n            bottom: -100%;\n        }\n\n        .mobile-nav {\n            position: fixed;\n            bottom: 0;\n            left: 0;\n            padding-bottom: 10px;\n            width: 100%;\n            display: flex;\n            justify-content: space-around;\n        }\n\n        .mobile-nav .forward,\n        .mobile-nav .back {\n            width: 30px;\n            height: 30px;\n            display: block;\n            background-color: #fff;\n            border: none;\n        }\n\n        .send {\n            display: block;\n        }\n\n\n\n        .mobile-nav .back {\n\n            background-image: url('./../img/arrow-right.svg');\n        }\n\n        .mobile-nav .forward {\n            background-image: url('./../img/arrow-left.svg');\n        }\n    }\n\n\n</style>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.mobile-nav{display:none\n}\n.exec-page{width:100%;display:flex\n}\n.exec-page .content{margin-left:calc(4.16667vw * 2);margin-right:calc(4.16667vw * 2);width:calc(4.16667vw * 16);display:flex\n}\n.exec-page>div{display:flex\n}\n.content>div{width:100%;padding-top:calc(8.33333vh * 2);color:#092e64\n}\n.test-descr,.test-title{text-align:center\n}\n.test-title{position:relative\n}\n.test-title:after{position:absolute;left:30%;bottom:-10px;display:block;content:\"\";width:40%;height:3px;background-color:#656695\n}\n.warning{align-self:center\n}\n.test-nav{position:fixed;padding-bottom:40px;width:calc(4.16667vw * 20);z-index:102;bottom:0;right:0;background-color:#fff\n}\n.test-nav,.test-nav ul{display:flex;justify-content:center\n}\n.test-nav ul{position:relative;width:calc(4.16667vw * 16);min-height:0 20px;list-style:none;margin:0 auto\n}\n.test-nav li{position:relative;display:block;cursor:pointer;width:20px;height:20px;margin:0 20px;text-align:center;border:1px solid #656695;background-color:#656695;color:#fff;border-radius:20px;transition:all .3s ease-in-out\n}\n.test-nav li:after{width:40px;position:absolute;content:\"\";display:block;height:3px;background-color:#656695\n}\n.test-nav li:before{width:40px;position:absolute;content:\"\";display:block;height:3px;background-color:#656695\n}\n.test-nav li:before{top:9px;left:-41px\n}\n.test-nav li:after{top:9px;right:-41px\n}\n.test-nav li:first-child{margin-left:0\n}\n.test-nav li:first-child:before{display:none\n}\n.test-nav li:last-child{margin-right:0\n}\n.test-nav li:last-child:after{display:none\n}\n.test-nav li.active{background-color:#fff;color:#656695\n}\n.test-info{max-width:100%;padding-top:20px;display:flex;justify-content:flex-end;align-items:center\n}\n.test-info li{display:block;position:relative;margin-left:50px;font-size:1.2rem\n}\n.test-info li img{position:absolute;top:-10px;left:-5px\n}\n.time-limit img{width:40px\n}\n.time-limit{padding-left:0\n}\n.test-info .question{opacity:1;color:#092e64\n}\n.test-info .question span:last-child{opacity:.5;color:#656695\n}\n@media screen and (max-width:812px){\n.exec-page>div{width:100%\n}\n.exec-page .content{width:100%;padding-top:calc(4.16667vh * 3);margin:0\n}\n.exec-page .menu{display:none\n}\n.new-test-nav{padding:10px\n}\n.test-info{width:100%;max-width:none;display:flex;justify-content:space-between\n}\n.new-test-nav li:last-child{padding:0;font-size:.8rem\n}\n.test-info li{margin:0\n}\n.test-info li img{max-width:25px;left:-25px\n}\n.test-info .question{width:50%;font-size:.9rem\n}\n.variants .variant-item label{font-size:.8rem\n}\n.test-nav{opacity:0;bottom:-100%\n}\n.mobile-nav{position:fixed;bottom:0;left:0;padding-bottom:10px;width:100%;display:flex;justify-content:space-around\n}\n.mobile-nav .back,.mobile-nav .forward{width:30px;height:30px;display:block;background-color:#fff;border:none\n}\n.send{display:block\n}\n.mobile-nav .back{background-image:url(" + escape(__webpack_require__(104)) + ")\n}\n.mobile-nav .forward{background-image:url(" + escape(__webpack_require__(105)) + ")\n}\n}", "", {"version":3,"sources":["/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/css/variables.css","/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/vue-comp/src/vue-comp/exec.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;ACsTD,YACA,YAAA;CACA;AAEA,WACA,WAAA,YACA;CACA;AAEA,oBACA,gCAAA,iCACA,2BACA,YACA;CACA;AAEA,eACA,YAAA;CACA;AAEA,aACA,WAAA,gCACA,aACA;CACA;AAEA,wBACA,iBAAA;CACA;AAEA,YACA,iBAAA;CACA;AAEA,kBACA,kBAAA,SACA,aACA,cACA,WACA,UACA,WACA,wBACA;CACA;AAGA,SACA,iBAAA;CACA;AAEA,UACA,eAAA,oBAEA,2BAEA,YACA,SACA,QACA,qBACA;CACA;AAEA,uBAVA,aAAA,sBAEA;CAgBA;AARA,aACA,kBAAA,2BAGA,kBACA,gBACA,aACA;CACA;AAEA,aACA,kBAAA,cACA,eACA,WACA,YACA,cACA,kBACA,yBACA,yBACA,WACA,mBACA,8BAGA;CACA;AAEA,mBAEA,WAAA,kBACA,WACA,cACA,WACA,wBACA;CACA;AARA,oBAEA,WAAA,kBACA,WACA,cACA,WACA,wBACA;CACA;AAEA,oBACA,QAAA,UACA;CACA;AAEA,mBACA,QAAA,WACA;CACA;AAEA,yBACA,aAAA;CACA;AAEA,gCACA,YAAA;CACA;AAEA,wBACA,cAAA;CACA;AAEA,8BACA,YAAA;CACA;AAEA,oBACA,sBAAA,aACA;CACA;AAEA,WACA,eAAA,iBACA,aACA,yBACA,kBACA;CAEA;AAEA,cACA,cAAA,kBACA,iBACA,gBACA;CAEA;AAEA,kBACA,kBAAA,UACA,SACA;CACA;AAEA,gBACA,UAAA;CACA;AAEA,YACA,cAAA;CACA;AACA,qBACA,UAAA,aACA;CACA;AAEA,qCACA,WAAA,aACA;CACA;AAEA;AAEA,eACA,UAAA;CACA;AAEA,oBACA,WAAA,gCACA,QACA;CACA;AAEA,iBACA,YAAA;CACA;AAEA,cACA,YAAA;CACA;AAEA,WACA,WAAA,eACA,aACA,6BACA;CACA;AAEA,4BACA,UAAA,eACA;CACA;AAEA,cACA,QAAA;CACA;AAEA,kBACA,eAAA,UACA;CACA;AAEA,qBACA,UAAA,eACA;CACA;AAEA,8BACA,eAAA;CACA;AAEA,UACA,UAAA,YACA;CACA;AAEA,YACA,eAAA,SACA,OACA,oBACA,WACA,aACA,4BACA;CACA;AAEA,uCAEA,WAAA,YACA,cACA,sBACA,WACA;CACA;AAEA,MACA,aAAA;CACA;AAIA,kBAEA,8CAAA;CACA;AAEA,qBACA,8CAAA;CACA;CACA","file":"exec.vue","sourcesContent":[":root {\n    font-family: 'Marta';\n    font-size: 16px;\n    line-height: 1.4;\n    --blue: #092E64;\n    --purple: #656695;\n    --darkpurple: #313149;\n    --marine: #3493A8;\n    --yellow: #EFDA7B;\n    --green: #9DBE87;\n    --red: #c74545;\n    --background: #e6e5e5;\n    --column: calc(100vw / 24);\n    --row: calc(100vh / 12);\n    --column-mobile: calc(100vw / 12);\n    --row-mobile: calc(100vh / 24);\n}\n","<template lang=\"html\">\n\n    <div class=\"exec-page\">\n\n        <div v-if=\"!loaded\">\n\n            <loading></loading>\n\n        </div>\n\n        <div v-else>\n\n            <test-menu\n                :testname=\"test.test_name\"\n                :testdescription=\"test.test_description\"\n                @send-test=\"sendTestHander(false)\"\n            >\n\n            </test-menu>\n\n            <section class=\"content\">\n\n                <nav class=\"new-test-nav\">\n                    <ul class=\"test-info\">\n                        <li class=\"question\">Вы ответили на <span>{{answers.length}}</span><span>/</span><span>{{questions.length}}</span></li>\n                        <li class=\"time-limit\" v-if=\"timeLimit\"><img src=\"img/stopwatch.svg\" alt=\"\">{{timeLeft}}:00</li>\n                    </ul>\n                </nav>\n\n                    <div v-if=\"!authorized\" class=\"warning\">\n                        <loading></loading>\n                        <p> Данный тест доступен только зарегистрированным пользователям. Сейчас вы будете перенаправленны на страницу авторизации и регистрации. После входа в систему вы автоматически вернетесь к прохождению теста</p>\n                    </div>\n\n                    <div v-else>\n\n                        <h2 class=\"test-title\">{{test.questions[userProgress.currentQstId].question_description}}</h2>\n                        <p class=\"test-descr\">{{questionDescr}}</p>\n                        <variants\n                            :type=\"currentQstType\"\n                            :questions=\"questions\"\n                            :answersarr=\"answers\"\n                            :currentqst=\"userProgress.currentQstId\"\n                            @update-answer=\"updateAnswerHandler\"\n\n                        ></variants>\n\n                        <div class=\"test-nav\">\n                            <ul>\n                                <li\n                                v-for=\"n in test.questions.length\"\n                                :id=\"'qst_'+n\"\n                                :class=\"{active: n==1}\"\n                                @click=\"changeQst\"\n                                >{{n}}</li>\n                            </ul>\n                        </div>\n                    </div>\n\n                    <div class=\"mobile-nav\">\n                        <button class=\"back\" @click=\"mobileNavQst(-1)\"></button>\n                        <button class=\"send\" @click=\"sendTestHander(false)\">Готово</button>\n                        <button class=\"forward\" @click=\"mobileNavQst(1)\"></button>\n                    </div>\n\n                    <pop-up v-if=\"popUp\"\n                        :results=\"testResults\"\n                        :timestart=\"timeStart\"\n                    ></pop-up>\n\n            </section>\n\n        </div>\n\n    </div>\n\n</template>\n\n<script>\n\nimport testMenu from './interface/test-menu.vue';\nimport loadingElem from './interface/loading.vue';\nimport variantsElem from './interface/variants.vue';\nimport popUpExec from './interface/pop-up-exec.vue';\nimport axios from './../../node_modules/axios/dist/axios.js';\nimport Auth from './../js/auth.js';\n\nexport default {\n\n    components: {\n        'test-menu': testMenu,\n        'loading': loadingElem,\n        'variants': variantsElem,\n        'pop-up': popUpExec\n    },\n\n    // Когда компонент создан, получаем тест, проверяем, аторизацию пользвателя\n    created() {\n        this.fetchData();\n    },\n\n    data() {\n        return {\n\n            test: null,\n            questions: null,\n            authorized: false,\n            loaded: false,\n            userProgress: {\n                currentQstId: 0\n            },\n            currentQstType: 1,\n            answers: [],\n            timeStart: 0,\n            time: 60,\n            timeLimit: false,\n            timeLeft: 60,\n            popUp: false,\n            testResults: {}\n        }\n    },\n\n    computed: {\n\n        //Описание вопроса в зависимости от типа\n        questionDescr() {\n            switch (+this.questions[this.userProgress.currentQstId].question_type_id) {\n                case 1:\n                    return 'Выберите один вариант ответа';\n                    break;\n                case 2:\n                    return 'Выберите несколько вариантов';\n                    break;\n                case 3:\n                    return 'Напишите вариант ответа';\n                    break;\n                default:\n\n            }\n        }\n    },\n\n    methods: {\n        //Получаем данные с сервер, сверяем авторизацию пользователя и возможность анонимного прохождения\n        fetchData() {\n            let query = \"?\" + atob(decodeURIComponent(window.location.search.slice(1)));\n            Auth.checkUser()\n            .then( (res) => {\n                let auth = res;\n                //Если тест уже есть в localStorage берем данные от туда, в противном случае, загружаем их с сервера\n                axios.get(`php/getexectest.php${query}`)\n                .then( (res) => {\n                    console.log(res);\n                    let date = new Date();\n                    let testId = +query.slice(9);\n                    let testData = JSON.parse(localStorage.getItem('current_test'));\n\n                    // Устанавливани все параметры теста\n                    this.test = res.data.test;\n                    this.questions = res.data.test.questions;\n\n                    this.timeStart = testData && +testData.test_db_id == testId? testData.time_start : date.getTime();\n                    this.answers = testData && +testData.test_db_id == testId? testData.answers : [];\n                    this.currentQstType = testData && +testData.test_db_id == testId? testData.currentQstType : +res.data.test.questions[0].question_type_id;\n                    this.currentQstId = testData && +testData.test_db_id == testId? testData.currentQstId : 0;\n                    this.loaded = true;\n\n                    setTimeout( () => {\n                        let id = this.currentQstId + 1;\n                        let elem = document.getElementById(`qst_${id}`);\n                        elem.click();\n                    }, 0);\n\n                    if(+res.data.test.test_anonym == 0 && !auth) {\n                        console.log('Просим авторизоваться');\n                        this.authorized = false;\n                        window.localStorage.setItem('query', window.location.search.slice(1));\n                        setTimeout( () => {\n                            this.$router.replace('/auth');\n                        },8000)\n                    }\n                    else {\n                        console.log('Показываем тест');\n                        this.authorized = true;\n\n                        // Если тест на время, то будет отсчитывать время\n                        if(+res.data.test.test_time > 0) {\n                            console.log('Это тест на время');\n                            this.timeLimit = true;\n                            this.time = res.data.test.test_time;\n                            let date = new Date(this.timeStart);\n\n                            //Проверка времени\n                            let timeStart = date.getMinutes();\n                            setInterval( () => {\n                                let newDate = new Date();\n                                let timeNow = newDate.getMinutes();\n                                let timeDifference = timeNow - timeStart;\n                                let minutes = new Date(timeDifference * 1000);\n                                this.timeLeft = this.time - timeDifference;\n                                if(this.timeLeft <= 0) {\n                                    console.log('Время теста истекло, ваши данные отправлены на сервер');\n                                    window.alert('Время теста истекло, ваши данные отправлены на сервер');\n                                    this.sendTestHander(true);\n\n                                }\n\n                            }, 1000);\n                        }\n                    }\n                })\n                .catch( (err) => console.log(err));\n\n            })\n            .catch( (err) => console.log(err));\n        },\n\n        //Навигация по вопросам\n        changeQst(e) {\n            let elemId = e.target.id;\n            let children = e.target.parentElement.children;\n            e.target.classList.contains('active') ? false : e.target.classList.add('active');\n            for(let i = 0; i < children.length; i++) {\n                if(children[i].id !== elemId) {\n                    children[i].classList.contains('active') ? children[i].classList.remove('active') : false;\n                }\n            }\n            this.userProgress.currentQstId = +e.target.id.slice(4) - 1;\n            this.currentQstType = +this.test.questions[this.userProgress.currentQstId].question_type_id;\n            this.saveLocalStorage();\n            console.log(this.answers);\n        },\n\n        mobileNavQst(ind) {\n\n            if(ind < 0) {\n                let elem = document.querySelector('.active').previousSibling;\n                if(elem) {\n                    elem.click();\n                }\n            }\n            else {\n                let elem = document.querySelector('.active').nextSibling;\n                if(elem) {\n                    elem.click();\n                }\n            }\n        },\n\n        //Обновляем информацию ответов и сохраняем объект теста в localStorage\n        updateAnswerHandler(answers) {\n            this.answers = answers;\n            this.saveLocalStorage();\n        },\n\n        saveLocalStorage() {\n            let date = new Date();\n            let test = {\n                test_db_id: this.test.test_id,\n                test: this.test,\n                anonym:  this.test.test_anonym,\n                token: this.test.token ? this.test.token : btoa(date.getTime()),\n                answers: this.answers,\n                time_start: this.timeStart,\n                currentQstType: this.currentQstType,\n                currentQstId: this.userProgress.currentQstId\n            };\n\n            localStorage.setItem('current_test', JSON.stringify(test));\n        },\n\n        // Отправляем тест\n        sendTestHander(autoEnd) {\n            localStorage.removeItem('current_test');\n            let date = new Date();\n            let test = {\n                test_db_id: this.test.test_id,\n                anonym:  this.test.test_anonym,\n                token: this.token ? this.token : btoa(date.getTime()),\n                answers: this.answers\n            };\n            console.log('test');\n            console.log(test);\n            // return test;\n            if(!autoEnd && window.confirm('Вы готовы отправить ответы на проверку?')) {\n                axios.post('php/saveexectest.php', test)\n                .then( (res) => {\n                    console.log(res);\n                    this.testResults = res.data;\n                    this.popUp = true;\n                })\n                .catch( (err) => {\n                    console.log(err);\n                });\n            }\n            else {\n                axios.post('php/saveexectest.php', test)\n                .then( (res) => {\n                    console.log(res);\n                    this.popUp = true;\n                })\n                .catch( (err) => {\n                    console.log(err);\n                });\n            }\n        }\n    },\n\n    // Перед тем, как пользователь попадет на страницу, проверим, установлено ли id вопроса\n    beforeRouteEnter (to, from, next) {\n        let check = decodeURIComponent(window.location.search.slice(1));\n        if(/test_id/.test(atob(check))) {\n            next();\n        }\n        else {\n            window.location.pathname = '/tester';\n        }\n    }\n\n}\n\n</script>\n\n<style lang=\"css\">\n\n@import './../css/variables.css';\n\n    .mobile-nav {\n        display: none;\n    }\n\n    .exec-page{\n        width: 100%;\n        display: flex;\n    }\n\n    .exec-page .content {\n        margin-left: calc(var(--column) * 2);\n        margin-right: calc(var(--column) * 2);\n        width: calc(var(--column) * 16);\n        display: flex;\n    }\n\n    .exec-page > div {\n        display: flex;\n    }\n\n    .content > div {\n        width: 100%;\n        padding-top: calc(var(--row) * 2);\n        color: var(--blue);\n    }\n\n    .test-title, .test-descr {\n        text-align: center;\n    }\n\n    .test-title {\n        position: relative;\n    }\n\n    .test-title:after {\n        position: absolute;\n        left: 30%;\n        bottom: -10px;\n        display: block;\n        content: '';\n        width: 40%;\n        height: 3px;\n        background-color: var(--purple);\n    }\n\n\n    .warning {\n        align-self: center;\n    }\n\n    .test-nav {\n        position: fixed;\n        display: flex;\n        padding-bottom: 40px;\n        justify-content: center;\n        width: calc(var(--column) * 20);\n        z-index: 102;\n        bottom: 0;\n        right: 0;\n        background-color: #fff;\n    }\n\n    .test-nav ul {\n        position: relative;\n        display: flex;\n        justify-content: center;\n        width: calc(var(--column) * 16);\n        min-height: 0 20px;\n        list-style: none;\n        margin: 0 auto;\n    }\n\n    .test-nav li {\n        position: relative;\n        display: block;\n        cursor: pointer;\n        width: 20px;\n        height: 20px;\n        margin: 0px 20px;\n        text-align: center;\n        border: 1px solid var(--purple);\n        background-color: var(--purple);\n        color: #fff;\n        border-radius: 20px;\n        -webkit-transition: all .3s ease-in-out;\n        -o-transition: all .3s ease-in-out;\n        transition: all .3s ease-in-out;\n    }\n\n    .test-nav li:before,\n    .test-nav li:after {\n        width: 40px;\n        position: absolute;\n        content: '';\n        display: block;\n        height: 3px;\n        background-color: var(--purple);\n    }\n\n    .test-nav li:before {\n        top: 9px;\n        left: -41px;\n    }\n\n    .test-nav li:after {\n        top: 9px;\n        right: -41px;\n    }\n\n    .test-nav li:first-child {\n        margin-left: 0;\n    }\n\n    .test-nav li:first-child:before {\n        display: none;\n    }\n\n    .test-nav li:last-child {\n        margin-right: 0;\n    }\n\n    .test-nav li:last-child:after {\n        display: none;\n    }\n\n    .test-nav li.active {\n        background-color: #fff;\n        color: var(--purple);\n    }\n\n    .test-info {\n        max-width: 100%;\n        padding-top: 20px;\n        display: flex;\n        justify-content: flex-end;\n        align-items: center;\n\n    }\n\n    .test-info li {\n        display: block;\n        position: relative;\n        margin-left: 50px;\n        font-size: 1.2rem;\n\n    }\n\n    .test-info li img {\n        position: absolute;\n        top: -10px;\n        left: -5px;\n    }\n\n    .time-limit img {\n        width: 40px;\n    }\n\n    .time-limit {\n        padding-left: 0px;\n    }\n    .test-info .question {\n        opacity: 1;\n        color: var(--blue);\n    }\n\n    .test-info .question span:last-child {\n        opacity: .5;\n        color: var(--purple);\n    }\n\n    @media screen and (max-width: 812px) {\n\n        .exec-page > div {\n            width: 100%;\n        }\n\n        .exec-page .content {\n            width: 100%;\n            padding-top: calc(var(--row-mobile) * 3);\n            margin: 0;\n        }\n\n        .exec-page .menu{\n            display: none;\n        }\n\n        .new-test-nav {\n            padding: 10px;\n        }\n\n        .test-info {\n            width: 100%;\n            max-width: none;\n            display: flex;\n            justify-content: space-between;\n        }\n\n        .new-test-nav li:last-child {\n            padding: 0px;\n            font-size: .8rem;\n        }\n\n        .test-info li {\n            margin: 0;\n        }\n\n        .test-info li img {\n            max-width: 25px;\n            left: -25px;\n        }\n\n        .test-info .question {\n            width: 50%;\n            font-size: .9rem;\n        }\n\n        .variants .variant-item label{\n            font-size: .8rem;\n        }\n\n        .test-nav {\n            opacity: 0;\n            bottom: -100%;\n        }\n\n        .mobile-nav {\n            position: fixed;\n            bottom: 0;\n            left: 0;\n            padding-bottom: 10px;\n            width: 100%;\n            display: flex;\n            justify-content: space-around;\n        }\n\n        .mobile-nav .forward,\n        .mobile-nav .back {\n            width: 30px;\n            height: 30px;\n            display: block;\n            background-color: #fff;\n            border: none;\n        }\n\n        .send {\n            display: block;\n        }\n\n\n\n        .mobile-nav .back {\n\n            background-image: url('./../img/arrow-right.svg');\n        }\n\n        .mobile-nav .forward {\n            background-image: url('./../img/arrow-left.svg');\n        }\n    }\n\n\n</style>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
 /* 104 */
+/***/ (function(module, exports) {
+
+module.exports = "img/../img/arrow-right.svg";
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports) {
+
+module.exports = "img/../img/arrow-left.svg";
+
+/***/ }),
+/* 106 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23248,11 +23261,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6fc53ca4_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_test_menu_vue__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6fc53ca4_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_test_menu_vue__ = __webpack_require__(109);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(105)
+  __webpack_require__(107)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -23298,13 +23311,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 105 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(106);
+var content = __webpack_require__(108);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -23324,7 +23337,7 @@ if(false) {
 }
 
 /***/ }),
-/* 106 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -23338,7 +23351,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 107 */
+/* 109 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23375,7 +23388,7 @@ if (false) {
 }
 
 /***/ }),
-/* 108 */
+/* 110 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23383,11 +23396,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98e75ed8_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_variants_vue__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98e75ed8_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_variants_vue__ = __webpack_require__(113);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(109)
+  __webpack_require__(111)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -23433,13 +23446,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 109 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(110);
+var content = __webpack_require__(112);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -23459,7 +23472,7 @@ if(false) {
 }
 
 /***/ }),
-/* 110 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -23473,7 +23486,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 111 */
+/* 113 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23553,7 +23566,7 @@ if (false) {
 }
 
 /***/ }),
-/* 112 */
+/* 114 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23561,11 +23574,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98f7a61e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_pop_up_exec_vue__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98f7a61e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_pop_up_exec_vue__ = __webpack_require__(117);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(113)
+  __webpack_require__(115)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -23611,13 +23624,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 113 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(114);
+var content = __webpack_require__(116);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -23637,7 +23650,7 @@ if(false) {
 }
 
 /***/ }),
-/* 114 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -23651,7 +23664,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 115 */
+/* 117 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23709,7 +23722,7 @@ if (false) {
 }
 
 /***/ }),
-/* 116 */
+/* 118 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23881,7 +23894,7 @@ if (false) {
 }
 
 /***/ }),
-/* 117 */
+/* 119 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23889,11 +23902,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondents_vue__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondents_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondents_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondents_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondents_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_437af6bd_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_respondents_vue__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_437af6bd_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_respondents_vue__ = __webpack_require__(126);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(118)
+  __webpack_require__(120)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -23939,13 +23952,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 118 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(119);
+var content = __webpack_require__(121);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -23965,7 +23978,7 @@ if(false) {
 }
 
 /***/ }),
-/* 119 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -23979,7 +23992,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23987,11 +24000,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondent_item_vue__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondent_item_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondent_item_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondent_item_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondent_item_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_8fb18898_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_respondent_item_vue__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_8fb18898_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_respondent_item_vue__ = __webpack_require__(125);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(121)
+  __webpack_require__(123)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -24037,13 +24050,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 121 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(122);
+var content = __webpack_require__(124);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -24063,7 +24076,7 @@ if(false) {
 }
 
 /***/ }),
-/* 122 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -24077,7 +24090,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 123 */
+/* 125 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24123,7 +24136,7 @@ if (false) {
 }
 
 /***/ }),
-/* 124 */
+/* 126 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24234,7 +24247,7 @@ if (false) {
 }
 
 /***/ }),
-/* 125 */
+/* 127 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24242,11 +24255,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stats_vue__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stats_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stats_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stats_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stats_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4434b55f_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_stats_vue__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4434b55f_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_stats_vue__ = __webpack_require__(134);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(126)
+  __webpack_require__(128)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -24292,13 +24305,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 126 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(127);
+var content = __webpack_require__(129);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -24318,7 +24331,7 @@ if(false) {
 }
 
 /***/ }),
-/* 127 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -24332,7 +24345,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 128 */
+/* 130 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24340,11 +24353,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stat_item_vue__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stat_item_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stat_item_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stat_item_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stat_item_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_327a7e54_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_stat_item_vue__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_327a7e54_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_stat_item_vue__ = __webpack_require__(133);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(129)
+  __webpack_require__(131)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -24390,13 +24403,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 129 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(130);
+var content = __webpack_require__(132);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -24416,7 +24429,7 @@ if(false) {
 }
 
 /***/ }),
-/* 130 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -24430,7 +24443,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 131 */
+/* 133 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24478,7 +24491,7 @@ if (false) {
 }
 
 /***/ }),
-/* 132 */
+/* 134 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24517,18 +24530,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-4434b55f", esExports)
   }
 }
-
-/***/ }),
-/* 133 */
-/***/ (function(module, exports) {
-
-module.exports = "img/../img/arrow-right.svg";
-
-/***/ }),
-/* 134 */
-/***/ (function(module, exports) {
-
-module.exports = "img/../img/arrow-left.svg";
 
 /***/ })
 /******/ ]);

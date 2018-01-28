@@ -192,17 +192,16 @@ export default {
 
                             //Проверка времени
                             let timeStart = date.getMinutes();
-                            console.log(timeStart);
                             setInterval( () => {
                                 let newDate = new Date();
                                 let timeNow = newDate.getMinutes();
                                 let timeDifference = timeNow - timeStart;
                                 let minutes = new Date(timeDifference * 1000);
-                                console.log(timeDifference);
                                 this.timeLeft = this.time - timeDifference;
-                                if(timeDifference < this.time) {
+                                if(this.timeLeft <= 0) {
                                     console.log('Время теста истекло, ваши данные отправлены на сервер');
-
+                                    window.alert('Время теста истекло, ваши данные отправлены на сервер');
+                                    this.sendTestHander(true);
 
                                 }
 
@@ -457,7 +456,7 @@ export default {
     }
 
     .test-info {
-        max-width: 65%;
+        max-width: 100%;
         padding-top: 20px;
         display: flex;
         justify-content: flex-end;
@@ -476,11 +475,15 @@ export default {
     .test-info li img {
         position: absolute;
         top: -10px;
-        left: -15px;
+        left: -5px;
     }
 
     .time-limit img {
         width: 40px;
+    }
+
+    .time-limit {
+        padding-left: 0px;
     }
     .test-info .question {
         opacity: 1;
@@ -494,8 +497,13 @@ export default {
 
     @media screen and (max-width: 812px) {
 
+        .exec-page > div {
+            width: 100%;
+        }
+
         .exec-page .content {
             width: 100%;
+            padding-top: calc(var(--row-mobile) * 3);
             margin: 0;
         }
 
@@ -509,6 +517,9 @@ export default {
 
         .test-info {
             width: 100%;
+            max-width: none;
+            display: flex;
+            justify-content: space-between;
         }
 
         .new-test-nav li:last-child {
@@ -518,6 +529,16 @@ export default {
 
         .test-info li {
             margin: 0;
+        }
+
+        .test-info li img {
+            max-width: 25px;
+            left: -25px;
+        }
+
+        .test-info .question {
+            width: 50%;
+            font-size: .9rem;
         }
 
         .variants .variant-item label{
