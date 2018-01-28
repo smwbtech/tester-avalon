@@ -40,7 +40,7 @@
                         <label class="active" for="time" v-if="testOptions.timeLimit">Время в мин.:</label>
                         </transition>
                         <transition name="fade">
-                        <input type="text" name="time" id="time" value="60" v-if="testOptions.timeLimit" @input="validTimeLimit">
+                        <input type="text" name="time" id="time" value="60" v-if="testOptions.timeLimit" @change="validTimeLimit">
                         </transition>
                         <img :src="anonymToggle" alt="">
                         <label for="anonym" :class="labelAnonym">Анонимное прохождение</label>
@@ -214,7 +214,7 @@ export default {
 
        // Валидация лимита времени
        validTimeLimit(e) {
-           let data = e.inputType === 'deleteContentBackward' ? e.target.value : e.data;
+           let data = e.target.value;
            if(!/\d/i.test(data)) {
                let msg = "Лимит времени задается только в числовом эквиваленте и не должен превышать разумных пределов";
                this.showFlashMsg(1, msg);
@@ -225,8 +225,10 @@ export default {
                    let msg = "Вы установили очень большой лимит времени, подумайте, может стоит отключить эту опцию.";
                    this.showFlashMsg(2, msg);
                    this.testOptions.time = +e.target.value;
+                   e.target.value = 60;
                }
                else if(+e.target.value < 10) {
+                   e.target.value = 10;
                    let msg = "Вы установили очень низкий лимит времени!";
                    this.showFlashMsg(1, msg);
                }
