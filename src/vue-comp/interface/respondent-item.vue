@@ -58,7 +58,7 @@ export default {
         for(let i = 0; i < this.results.result.answers.length; i++) {
             this.results.result.answers[i].result ? this.rightAnswers++ : this.falseAnswers++;
         }
-        this.percents = this.rightAnswers / this.results.result.answers.length * 100;
+        this.percents = Math.round(this.rightAnswers / this.results.result.answers.length * 100);
 
     }
 

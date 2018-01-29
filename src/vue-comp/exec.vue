@@ -297,6 +297,7 @@ export default {
                 axios.post('php/saveexectest.php', test)
                 .then( (res) => {
                     console.log(res);
+                    this.testResults = res.data;
                     this.popUp = true;
                 })
                 .catch( (err) => {
