@@ -154,6 +154,7 @@ export default {
 
 .side-menu p {
     text-align: center;
+    font-size: .8rem;
 }
 
 .side-menu p:first-child a{

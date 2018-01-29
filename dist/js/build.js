@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 37);
+/******/ 	return __webpack_require__(__webpack_require__.s = 38);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -165,7 +165,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(50)
+var listToStyles = __webpack_require__(51)
 
 /*
 type StyleObject = {
@@ -2080,41 +2080,22 @@ return /******/ (function(modules) { // webpackBootstrap
 });
 ;
 //# sourceMappingURL=axios.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-module.exports = function escape(url) {
-    // If url is already wrapped in quotes, remove them
-    if (/^['"].*['"]$/.test(url)) {
-        url = url.slice(1, -1);
-    }
-    // Should url be wrapped?
-    // See https://drafts.csswg.org/css-values-3/#urls
-    if (/["'() \t\n]/.test(url)) {
-        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
-    }
-
-    return url
-}
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_side_menu_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_d1896c56_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_side_menu_vue__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_d1896c56_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_side_menu_vue__ = __webpack_require__(59);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(56)
+  __webpack_require__(57)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -2160,12 +2141,31 @@ if (false) {(function () {
 
 
 /***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = function escape(url) {
+    // If url is already wrapped in quotes, remove them
+    if (/^['"].*['"]$/.test(url)) {
+        url = url.slice(1, -1);
+    }
+    // Should url be wrapped?
+    // See https://drafts.csswg.org/css-values-3/#urls
+    if (/["'() \t\n]/.test(url)) {
+        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
+    }
+
+    return url
+}
+
+
+/***/ }),
 /* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_loading_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_9bbc88b4_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_loading_vue__ = __webpack_require__(85);
@@ -2224,7 +2224,7 @@ if (false) {(function () {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(38);
+var content = __webpack_require__(39);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -2232,7 +2232,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(9)(content, options);
+var update = __webpack_require__(8)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -2250,12 +2250,6 @@ if(false) {
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports) {
-
-module.exports = "img/../img/add.svg";
-
-/***/ }),
-/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -2311,7 +2305,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(39);
+var	fixUrls = __webpack_require__(40);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -2627,7 +2621,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports) {
 
 var g;
@@ -2654,7 +2648,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -2707,13 +2701,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(43);
+__webpack_require__(44);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -2903,7 +2897,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2931,7 +2925,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2944,7 +2938,7 @@ exports.default = void 0;
 
 var _variables = _interopRequireDefault(__webpack_require__(7));
 
-var _reg = _interopRequireDefault(__webpack_require__(51));
+var _reg = _interopRequireDefault(__webpack_require__(52));
 
 var _axios = _interopRequireDefault(__webpack_require__(3));
 
@@ -3150,7 +3144,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3163,17 +3157,17 @@ exports.default = void 0;
 
 var _variables = _interopRequireDefault(__webpack_require__(7));
 
-var _sideMenu = _interopRequireDefault(__webpack_require__(5));
+var _sideMenu = _interopRequireDefault(__webpack_require__(4));
 
-var _newTest = _interopRequireDefault(__webpack_require__(17));
+var _newTest = _interopRequireDefault(__webpack_require__(16));
 
 var _loading = _interopRequireDefault(__webpack_require__(6));
 
 var _testItem = _interopRequireDefault(__webpack_require__(86));
 
-var _popUpTest = _interopRequireDefault(__webpack_require__(26));
+var _popUpTest = _interopRequireDefault(__webpack_require__(27));
 
-var _flashmessage = _interopRequireDefault(__webpack_require__(77));
+var _flashmessage = _interopRequireDefault(__webpack_require__(23));
 
 var _axios = _interopRequireDefault(__webpack_require__(3));
 
@@ -3453,7 +3447,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3545,7 +3539,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3557,7 +3551,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(59)
+  __webpack_require__(60)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -3603,6 +3597,12 @@ if (false) {(function () {
 
 
 /***/ }),
+/* 17 */
+/***/ (function(module, exports) {
+
+module.exports = "img/../img/add.svg";
+
+/***/ }),
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3614,11 +3614,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _sideMenu = _interopRequireDefault(__webpack_require__(5));
+var _sideMenu = _interopRequireDefault(__webpack_require__(4));
 
-var _newQuestion = _interopRequireDefault(__webpack_require__(61));
+var _newQuestion = _interopRequireDefault(__webpack_require__(62));
 
-var _flashmessage = _interopRequireDefault(__webpack_require__(77));
+var _flashmessage = _interopRequireDefault(__webpack_require__(23));
 
 var _test = _interopRequireDefault(__webpack_require__(81));
 
@@ -3966,11 +3966,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _single = _interopRequireDefault(__webpack_require__(64));
+var _single = _interopRequireDefault(__webpack_require__(65));
 
-var _multiple = _interopRequireDefault(__webpack_require__(68));
+var _multiple = _interopRequireDefault(__webpack_require__(69));
 
-var _string = _interopRequireDefault(__webpack_require__(72));
+var _string = _interopRequireDefault(__webpack_require__(73));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4380,6 +4380,64 @@ exports.default = _default;
 
 /***/ }),
 /* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7367be9d_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flashmessage_vue__ = __webpack_require__(80);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(78)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7367be9d_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flashmessage_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/vue-comp/interface/flashmessage.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7367be9d", Component.options)
+  } else {
+    hotAPI.reload("data-v-7367be9d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4421,7 +4479,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4446,7 +4504,7 @@ var _default = {};
 exports.default = _default;
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4619,12 +4677,12 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_test_vue__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_test_vue__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_test_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_test_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_test_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_test_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_151a5f1c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_pop_up_test_vue__ = __webpack_require__(99);
@@ -4677,7 +4735,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4824,7 +4882,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4873,7 +4931,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4894,7 +4952,7 @@ var _popUpExec = _interopRequireDefault(__webpack_require__(114));
 
 var _axios = _interopRequireDefault(__webpack_require__(3));
 
-var _auth = _interopRequireDefault(__webpack_require__(13));
+var _auth = _interopRequireDefault(__webpack_require__(12));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5199,7 +5257,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5242,7 +5300,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5415,7 +5473,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5488,7 +5546,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5499,13 +5557,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _sideMenu = _interopRequireDefault(__webpack_require__(5));
+var _sideMenu = _interopRequireDefault(__webpack_require__(4));
 
 var _loading = _interopRequireDefault(__webpack_require__(6));
 
 var _respondentItem = _interopRequireDefault(__webpack_require__(122));
 
-var _popUpTest = _interopRequireDefault(__webpack_require__(26));
+var _popUpTest = _interopRequireDefault(__webpack_require__(27));
 
 var _axios = _interopRequireDefault(__webpack_require__(3));
 
@@ -5660,7 +5718,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5725,7 +5783,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5736,7 +5794,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _sideMenu = _interopRequireDefault(__webpack_require__(5));
+var _sideMenu = _interopRequireDefault(__webpack_require__(4));
 
 var _loading = _interopRequireDefault(__webpack_require__(6));
 
@@ -5810,7 +5868,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5877,7 +5935,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5885,23 +5943,23 @@ exports.default = _default;
 
 var _variables = _interopRequireDefault(__webpack_require__(7));
 
-var _style = _interopRequireDefault(__webpack_require__(40));
+var _style = _interopRequireDefault(__webpack_require__(41));
 
-var _vue = _interopRequireDefault(__webpack_require__(42));
+var _vue = _interopRequireDefault(__webpack_require__(43));
 
-var _vueRouter = _interopRequireDefault(__webpack_require__(44));
+var _vueRouter = _interopRequireDefault(__webpack_require__(45));
 
-var _auth = _interopRequireDefault(__webpack_require__(13));
+var _auth = _interopRequireDefault(__webpack_require__(12));
 
-var _smoothscrollMin = _interopRequireDefault(__webpack_require__(45));
+var _smoothscrollMin = _interopRequireDefault(__webpack_require__(46));
 
-var _PromiseMin = _interopRequireDefault(__webpack_require__(46));
+var _PromiseMin = _interopRequireDefault(__webpack_require__(47));
 
-var _login = _interopRequireDefault(__webpack_require__(47));
+var _login = _interopRequireDefault(__webpack_require__(48));
 
-var _tester = _interopRequireDefault(__webpack_require__(53));
+var _tester = _interopRequireDefault(__webpack_require__(54));
 
-var _newTest = _interopRequireDefault(__webpack_require__(17));
+var _newTest = _interopRequireDefault(__webpack_require__(16));
 
 var _exec = _interopRequireDefault(__webpack_require__(101));
 
@@ -6000,7 +6058,7 @@ var app = new _vue.default({
 }).$mount('#app');
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -6014,7 +6072,7 @@ exports.push([module.i, ":root{font-family:Marta;font-size:16px;line-height:1.4}
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports) {
 
 
@@ -6109,13 +6167,13 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(41);
+var content = __webpack_require__(42);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -6123,7 +6181,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(9)(content, options);
+var update = __webpack_require__(8)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -6140,7 +6198,7 @@ if(false) {
 }
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -6154,7 +6212,7 @@ exports.push([module.i, ":root{font-family:Marta;font-size:16px;line-height:1.4}
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
@@ -16956,10 +17014,10 @@ return Vue$3;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(11).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(10).setImmediate))
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -17149,10 +17207,10 @@ return Vue$3;
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(11)))
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -19789,7 +19847,7 @@ return VueRouter;
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -19924,7 +19982,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 }();
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(setImmediate) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -20074,22 +20132,22 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     void 0 !== console && console && console.warn("Possible Unhandled Promise Rejection:", e);
   }, t;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10).setImmediate))
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_59496b29_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_login_vue__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_59496b29_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_login_vue__ = __webpack_require__(53);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(48)
+  __webpack_require__(49)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -20135,13 +20193,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(49);
+var content = __webpack_require__(50);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -20161,7 +20219,7 @@ if(false) {
 }
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -20175,7 +20233,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports) {
 
 /**
@@ -20208,7 +20266,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20269,7 +20327,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20628,19 +20686,19 @@ if (false) {
 }
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tester_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7f9081a2_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_tester_vue__ = __webpack_require__(100);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(54)
+  __webpack_require__(55)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -20686,13 +20744,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(55);
+var content = __webpack_require__(56);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -20712,7 +20770,7 @@ if(false) {
 }
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -20726,13 +20784,13 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(57);
+var content = __webpack_require__(58);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -20752,7 +20810,7 @@ if(false) {
 }
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -20760,13 +20818,13 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.menu{width:calc(4.16667vw * 4);height:100vh\n}\n.side-menu{width:calc(4.16667vw * 4);height:100vh\n}\n.side-menu{z-index:102;position:fixed;top:0;left:0;box-shadow:inset -4px 0 3px rgba(0,0,0,.2);background-color:#313149;background-image:linear-gradient(0deg,#313149,#656695 95%);color:#fff\n}\n.side-menu-nav{padding-top:40px\n}\n.side-menu-nav li{position:relative;list-style:none;padding:20px 0;padding-left:40px;font-weight:700;background-color:transparent;transition:all .3s ease-in-out\n}\n.side-menu-nav li:hover{background-color:rgba(0,0,0,.4)\n}\n.side-menu-nav li:before{position:absolute;left:0;top:0;display:block;transform:scale(0);transform-origin:center;content:\"\";width:3px;height:100%;background-color:#fff;transition:all .2s ease-in-out .2s\n}\n.side-menu-nav li:hover:before{transform:scale(1)\n}\n.side-menu-nav a{color:#fff;display:block\n}\n.side-menu p{text-align:center\n}\n.side-menu p:first-child a{color:#fff;opacity:.6;text-align:center;font-weight:700\n}\n.trigger{display:none\n}\n@media screen and (max-width:812px){\n.menu{width:0\n}\n.trigger{display:block;position:fixed;left:10px;top:10px;z-index:110\n}\n.trigger span{display:block;width:40px;height:5px;background-color:#313149;transition:all .3s ease-in-out\n}\n.trigger_active span{background-color:#fff\n}\n.trigger span:nth-child(2){margin:10px 0\n}\n.side-menu{width:calc(8.33333vw * 8);left:-100%;transition:left .3s ease-in-out\n}\n.side-menu-nav{padding-top:60px\n}\n.side-menu p{position:absolute;font-size:.7rem;bottom:10px;text-align:center;width:100%\n}\n.side-menu p a{display:block\n}\n.side-menu__active{left:0\n}\n}", "", {"version":3,"sources":["/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/css/variables.css","/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/vue-comp/src/vue-comp/side-menu.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;AC4ED,MAJA,0BAAA,YACA;CAeA;AAZA,WAJA,0BAAA,YACA;CAeA;AAZA,WACA,YAAA,eACA,MACA,OACA,2CAEA,yBAGA,2DACA,UACA;CACA;AAGA,eACA,gBAAA;CACA;AAGA,kBACA,kBAAA,gBACA,eACA,kBACA,gBACA,6BACA,8BAGA;CACA;AAEA,wBACA,+BAAA;CACA;AAEA,yBACA,kBAAA,OACA,MACA,cACA,mBACA,wBACA,WACA,UACA,YACA,sBACA,kCAGA;CACA;AAEA,+BACA,kBAAA;CACA;AAEA,iBACA,WAAA,aACA;CACA;AAEA,aACA,iBAAA;CACA;AAEA,2BACA,WAAA,WACA,kBACA,eACA;CACA;AAEA,SACA,YAAA;CACA;AAEA;AACA,MACA,OAAA;CACA;AAEA,SACA,cAAA,eACA,UACA,SACA,WACA;CACA;AAEA,cACA,cAAA,WACA,WACA,yBACA,8BAGA;CACA;AAEA,qBACA,qBAAA;CACA;AAEA,2BACA,aAAA;CACA;AAGA,WACA,0BAAA,WACA,+BACA;CACA;AAEA,eACA,gBAAA;CACA;AAEA,aACA,kBAAA,gBACA,YACA,kBACA,UACA;CACA;AAEA,eACA,aAAA;CACA;AAEA,mBACA,MAAA;CACA;CACA","file":"side-menu.vue","sourcesContent":[":root {\n    font-family: 'Marta';\n    font-size: 16px;\n    line-height: 1.4;\n    --blue: #092E64;\n    --purple: #656695;\n    --darkpurple: #313149;\n    --marine: #3493A8;\n    --yellow: #EFDA7B;\n    --green: #9DBE87;\n    --red: #c74545;\n    --background: #e6e5e5;\n    --column: calc(100vw / 24);\n    --row: calc(100vh / 12);\n    --column-mobile: calc(100vw / 12);\n    --row-mobile: calc(100vh / 24);\n}\n","<template lang=\"html\">\n\n    <div class=\"menu\">\n\n        <a href=\"\" :class=\"triggerClass\" @click.prevent=\"menuTrigger\">\n            <span></span>\n            <span></span>\n            <span></span>\n        </a>\n\n        <aside :class=\"sideMenuStyle\">\n            <p><a href=\"#\">{{email}}</a></p>\n\n            <nav class=\"side-menu-nav\">\n                <ul>\n                    <li><router-link to=\"/tester\">Мои тесты</router-link></li>\n                    <li><router-link to=\"/newtest\">Новый тест</router-link></li>\n                    <li><router-link to=\"/respondents\">Респонденты</router-link></li>\n                    <li><router-link to=\"/stats\">Статистика</router-link></li>\n                    <li><a\n                            href=\"exit\"\n                            @click.prevent=\"logout\"\n                        >\n                        Выход</a></li>\n                </ul>\n            </nav>\n\n        </aside>\n    </div>\n\n</template>\n\n<script>\n\nimport axios from './../../node_modules/axios/dist/axios.js';\n\nexport default {\n\n    data() {\n        return {\n            mobileMenu: false\n        }\n    },\n\n    methods: {\n\n        //Выход их профиля\n        logout() {\n            localStorage.clear();\n            axios.get('php/logout.php')\n            .then( (res) => this.$router.push('/auth') )\n            .catch( (err) => console.log(err));\n        },\n\n        menuTrigger() {\n            this.mobileMenu ? this.mobileMenu = false : this.mobileMenu = true;\n            console.log(this.mobileMenu);\n        }\n\n    },\n\n    computed: {\n        email() {\n            return localStorage.getItem('user_email');\n        },\n\n        sideMenuStyle() {\n            return {\n                'side-menu': true,\n                'side-menu__active': this.mobileMenu\n            }\n        },\n\n        triggerClass() {\n            return {\n                'trigger': true,\n                'trigger_active': this.mobileMenu\n            }\n        }\n    }\n\n}\n</script>\n\n<style lang=\"css\">\n\n@import './../css/variables.css';\n\n.menu {\n    width: calc(var(--column) * 4);\n    height: 100vh;\n}\n\n.side-menu {\n    z-index: 102;\n    position: fixed;\n    top: 0;\n    left: 0;\n    -webkit-box-shadow: inset -4px 0px 3px rgba(0,0,0,0.2);\n    box-shadow: inset -4px 0px 3px rgba(0,0,0,0.2);\n    width: calc(var(--column) * 4);\n    height: 100vh;\n    background-color: var(--darkpurple);\n    background-image: linear-gradient(to top, var(--darkpurple), var(--purple) 95%);\n    color: #fff;\n}\n\n\n.side-menu-nav {\n    padding-top: 40px;\n}\n\n\n.side-menu-nav li {\n    position: relative;\n    list-style: none;\n    padding: 20px 0px;\n    padding-left: 40px;\n    font-weight: bold;\n    background-color: rgba(0,0,0,0);\n    -webkit-transition: all .3s ease-in-out;\n    -o-transition: all .3s ease-in-out;\n    transition: all .3s ease-in-out;\n}\n\n.side-menu-nav li:hover {\n    background-color: rgba(0,0,0,.4);\n}\n\n.side-menu-nav li:before {\n    position: absolute;\n    left: 0px;\n    top: 0px;\n    display: block;\n    transform: scale(0);\n    transform-origin: center;\n    content: '';\n    width: 3px;\n    height: 100%;\n    background-color: #fff;\n    -webkit-transition: all .2s ease-in-out .2s;\n    -o-transition: all .2s ease-in-out .2s;\n    transition: all .2s ease-in-out .2s;\n}\n\n.side-menu-nav li:hover:before {\n    transform: scale(1);\n}\n\n.side-menu-nav a {\n    color: #fff;\n    display: block;\n}\n\n.side-menu p {\n    text-align: center;\n}\n\n.side-menu p:first-child a{\n    color: #fff;\n    opacity: .6;\n    text-align: center;\n    font-weight: bold;\n}\n\n.trigger {\n    display: none;\n}\n\n@media screen and (max-width: 812px) {\n    .menu {\n        width: 0;\n    }\n\n    .trigger {\n        display: block;\n        position: fixed;\n        left: 10px;\n        top: 10px;\n        z-index: 110;\n    }\n\n    .trigger span {\n        display: block;\n        width: 40px;\n        height: 5px;\n        background-color: var(--darkpurple);\n        -webkit-transition: all .3s ease-in-out;\n        -o-transition: all .3s ease-in-out;\n        transition: all .3s ease-in-out;\n    }\n\n    .trigger_active span {\n        background-color: #fff;\n    }\n\n    .trigger span:nth-child(2) {\n        margin: 10px 0px;\n    }\n\n\n    .side-menu {\n        width: calc(var(--column-mobile) * 8);\n        left: -100%;\n        transition: left .3s ease-in-out;\n    }\n\n    .side-menu-nav {\n        padding-top: 60px;\n    }\n\n    .side-menu p {\n        position: absolute;\n        font-size: .7rem;\n        bottom: 10px;\n        text-align: center;\n        width: 100%;\n    }\n\n    .side-menu p a {\n        display: block;\n    }\n\n    .side-menu__active {\n        left: 0;\n    }\n}\n\n</style>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.menu{width:calc(4.16667vw * 4);height:100vh\n}\n.side-menu{width:calc(4.16667vw * 4);height:100vh\n}\n.side-menu{z-index:102;position:fixed;top:0;left:0;box-shadow:inset -4px 0 3px rgba(0,0,0,.2);background-color:#313149;background-image:linear-gradient(0deg,#313149,#656695 95%);color:#fff\n}\n.side-menu-nav{padding-top:40px\n}\n.side-menu-nav li{position:relative;list-style:none;padding:20px 0;padding-left:40px;font-weight:700;background-color:transparent;transition:all .3s ease-in-out\n}\n.side-menu-nav li:hover{background-color:rgba(0,0,0,.4)\n}\n.side-menu-nav li:before{position:absolute;left:0;top:0;display:block;transform:scale(0);transform-origin:center;content:\"\";width:3px;height:100%;background-color:#fff;transition:all .2s ease-in-out .2s\n}\n.side-menu-nav li:hover:before{transform:scale(1)\n}\n.side-menu-nav a{color:#fff;display:block\n}\n.side-menu p{text-align:center;font-size:.8rem\n}\n.side-menu p:first-child a{color:#fff;opacity:.6;text-align:center;font-weight:700\n}\n.trigger{display:none\n}\n@media screen and (max-width:812px){\n.menu{width:0\n}\n.trigger{display:block;position:fixed;left:10px;top:10px;z-index:110\n}\n.trigger span{display:block;width:40px;height:5px;background-color:#313149;transition:all .3s ease-in-out\n}\n.trigger_active span{background-color:#fff\n}\n.trigger span:nth-child(2){margin:10px 0\n}\n.side-menu{width:calc(8.33333vw * 8);left:-100%;transition:left .3s ease-in-out\n}\n.side-menu-nav{padding-top:60px\n}\n.side-menu p{position:absolute;font-size:.7rem;bottom:10px;text-align:center;width:100%\n}\n.side-menu p a{display:block\n}\n.side-menu__active{left:0\n}\n}", "", {"version":3,"sources":["/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/css/variables.css","/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/vue-comp/src/vue-comp/side-menu.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;AC4ED,MAJA,0BAAA,YACA;CAeA;AAZA,WAJA,0BAAA,YACA;CAeA;AAZA,WACA,YAAA,eACA,MACA,OACA,2CAEA,yBAGA,2DACA,UACA;CACA;AAGA,eACA,gBAAA;CACA;AAGA,kBACA,kBAAA,gBACA,eACA,kBACA,gBACA,6BACA,8BAGA;CACA;AAEA,wBACA,+BAAA;CACA;AAEA,yBACA,kBAAA,OACA,MACA,cACA,mBACA,wBACA,WACA,UACA,YACA,sBACA,kCAGA;CACA;AAEA,+BACA,kBAAA;CACA;AAEA,iBACA,WAAA,aACA;CACA;AAEA,aACA,kBAAA,eACA;CACA;AAEA,2BACA,WAAA,WACA,kBACA,eACA;CACA;AAEA,SACA,YAAA;CACA;AAEA;AACA,MACA,OAAA;CACA;AAEA,SACA,cAAA,eACA,UACA,SACA,WACA;CACA;AAEA,cACA,cAAA,WACA,WACA,yBACA,8BAGA;CACA;AAEA,qBACA,qBAAA;CACA;AAEA,2BACA,aAAA;CACA;AAGA,WACA,0BAAA,WACA,+BACA;CACA;AAEA,eACA,gBAAA;CACA;AAEA,aACA,kBAAA,gBACA,YACA,kBACA,UACA;CACA;AAEA,eACA,aAAA;CACA;AAEA,mBACA,MAAA;CACA;CACA","file":"side-menu.vue","sourcesContent":[":root {\n    font-family: 'Marta';\n    font-size: 16px;\n    line-height: 1.4;\n    --blue: #092E64;\n    --purple: #656695;\n    --darkpurple: #313149;\n    --marine: #3493A8;\n    --yellow: #EFDA7B;\n    --green: #9DBE87;\n    --red: #c74545;\n    --background: #e6e5e5;\n    --column: calc(100vw / 24);\n    --row: calc(100vh / 12);\n    --column-mobile: calc(100vw / 12);\n    --row-mobile: calc(100vh / 24);\n}\n","<template lang=\"html\">\n\n    <div class=\"menu\">\n\n        <a href=\"\" :class=\"triggerClass\" @click.prevent=\"menuTrigger\">\n            <span></span>\n            <span></span>\n            <span></span>\n        </a>\n\n        <aside :class=\"sideMenuStyle\">\n            <p><a href=\"#\">{{email}}</a></p>\n\n            <nav class=\"side-menu-nav\">\n                <ul>\n                    <li><router-link to=\"/tester\">Мои тесты</router-link></li>\n                    <li><router-link to=\"/newtest\">Новый тест</router-link></li>\n                    <li><router-link to=\"/respondents\">Респонденты</router-link></li>\n                    <li><router-link to=\"/stats\">Статистика</router-link></li>\n                    <li><a\n                            href=\"exit\"\n                            @click.prevent=\"logout\"\n                        >\n                        Выход</a></li>\n                </ul>\n            </nav>\n\n        </aside>\n    </div>\n\n</template>\n\n<script>\n\nimport axios from './../../node_modules/axios/dist/axios.js';\n\nexport default {\n\n    data() {\n        return {\n            mobileMenu: false\n        }\n    },\n\n    methods: {\n\n        //Выход их профиля\n        logout() {\n            localStorage.clear();\n            axios.get('php/logout.php')\n            .then( (res) => this.$router.push('/auth') )\n            .catch( (err) => console.log(err));\n        },\n\n        menuTrigger() {\n            this.mobileMenu ? this.mobileMenu = false : this.mobileMenu = true;\n            console.log(this.mobileMenu);\n        }\n\n    },\n\n    computed: {\n        email() {\n            return localStorage.getItem('user_email');\n        },\n\n        sideMenuStyle() {\n            return {\n                'side-menu': true,\n                'side-menu__active': this.mobileMenu\n            }\n        },\n\n        triggerClass() {\n            return {\n                'trigger': true,\n                'trigger_active': this.mobileMenu\n            }\n        }\n    }\n\n}\n</script>\n\n<style lang=\"css\">\n\n@import './../css/variables.css';\n\n.menu {\n    width: calc(var(--column) * 4);\n    height: 100vh;\n}\n\n.side-menu {\n    z-index: 102;\n    position: fixed;\n    top: 0;\n    left: 0;\n    -webkit-box-shadow: inset -4px 0px 3px rgba(0,0,0,0.2);\n    box-shadow: inset -4px 0px 3px rgba(0,0,0,0.2);\n    width: calc(var(--column) * 4);\n    height: 100vh;\n    background-color: var(--darkpurple);\n    background-image: linear-gradient(to top, var(--darkpurple), var(--purple) 95%);\n    color: #fff;\n}\n\n\n.side-menu-nav {\n    padding-top: 40px;\n}\n\n\n.side-menu-nav li {\n    position: relative;\n    list-style: none;\n    padding: 20px 0px;\n    padding-left: 40px;\n    font-weight: bold;\n    background-color: rgba(0,0,0,0);\n    -webkit-transition: all .3s ease-in-out;\n    -o-transition: all .3s ease-in-out;\n    transition: all .3s ease-in-out;\n}\n\n.side-menu-nav li:hover {\n    background-color: rgba(0,0,0,.4);\n}\n\n.side-menu-nav li:before {\n    position: absolute;\n    left: 0px;\n    top: 0px;\n    display: block;\n    transform: scale(0);\n    transform-origin: center;\n    content: '';\n    width: 3px;\n    height: 100%;\n    background-color: #fff;\n    -webkit-transition: all .2s ease-in-out .2s;\n    -o-transition: all .2s ease-in-out .2s;\n    transition: all .2s ease-in-out .2s;\n}\n\n.side-menu-nav li:hover:before {\n    transform: scale(1);\n}\n\n.side-menu-nav a {\n    color: #fff;\n    display: block;\n}\n\n.side-menu p {\n    text-align: center;\n    font-size: .8rem;\n}\n\n.side-menu p:first-child a{\n    color: #fff;\n    opacity: .6;\n    text-align: center;\n    font-weight: bold;\n}\n\n.trigger {\n    display: none;\n}\n\n@media screen and (max-width: 812px) {\n    .menu {\n        width: 0;\n    }\n\n    .trigger {\n        display: block;\n        position: fixed;\n        left: 10px;\n        top: 10px;\n        z-index: 110;\n    }\n\n    .trigger span {\n        display: block;\n        width: 40px;\n        height: 5px;\n        background-color: var(--darkpurple);\n        -webkit-transition: all .3s ease-in-out;\n        -o-transition: all .3s ease-in-out;\n        transition: all .3s ease-in-out;\n    }\n\n    .trigger_active span {\n        background-color: #fff;\n    }\n\n    .trigger span:nth-child(2) {\n        margin: 10px 0px;\n    }\n\n\n    .side-menu {\n        width: calc(var(--column-mobile) * 8);\n        left: -100%;\n        transition: left .3s ease-in-out;\n    }\n\n    .side-menu-nav {\n        padding-top: 60px;\n    }\n\n    .side-menu p {\n        position: absolute;\n        font-size: .7rem;\n        bottom: 10px;\n        text-align: center;\n        width: 100%;\n    }\n\n    .side-menu p a {\n        display: block;\n    }\n\n    .side-menu__active {\n        left: 0;\n    }\n}\n\n</style>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20867,13 +20925,13 @@ if (false) {
 }
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(60);
+var content = __webpack_require__(61);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -20893,22 +20951,22 @@ if(false) {
 }
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var escape = __webpack_require__(4);
+var escape = __webpack_require__(5);
 exports = module.exports = __webpack_require__(0)(true);
 // imports
 
 
 // module
-exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.newtest-page{background-color:#e6e5e5;display:flex\n}\n.newtest-page .content{margin-left:calc(4.16667vw * 2);margin-right:calc(4.16667vw * 2);width:calc(4.16667vw * 16)\n}\n.new-test-form{padding-top:calc(4.16667vw * 2);position:relative\n}\n.new-test-form__title{display:block;width:98%;border:none;border-bottom:3px solid rgba(0,0,0,.1);margin-bottom:40px;font-family:marta;font-size:3rem;color:#092e64\n}\n.new-test-form__options{background-color:#fff;box-shadow:1px 1px 4px rgba(0,0,0,.1);padding:20px\n}\n.new-test-form__options h3{padding:0;margin:0;margin-bottom:20px;color:#8496b1\n}\n.new-test-form__description{padding:10px;border:none;margin-bottom:20px;width:98%;max-width:98%;min-width:98%;max-height:calc(8.33333vh * 2);min-height:calc(8.33333vh * 2);height:calc(8.33333vh * 2);border:3px solid rgba(0,0,0,.1)\n}\n.new-test-form__options label{color:#8496b1\n}\n.new-test-form__options label.active{color:#656695\n}\n.new-test-form__inputs>*{display:inline-block\n}\n.new-test-form__inputs img{max-width:30px;margin-bottom:-10px;margin-left:20px\n}\n.new-test-form__inputs img:first-child{padding-left:0\n}\n.new-test-form__inputs input[type=text]{background-color:#dddde8;border:none;border-bottom:1px solid #092e64;width:50px;text-align:center\n}\n.new-test-form__inputs input[type=checkbox]{display:none\n}\n.new-test__add-question{border:none;margin:40px 0;padding-left:40px;font-family:marta;font-size:1.2rem;font-weight:700;cursor:pointer;background-image:url(" + escape(__webpack_require__(8)) + ");background-repeat:no-repeat;background-position:0;background-color:#e6e5e5;color:#656695;opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test__add-question:hover{opacity:1\n}\n.test-flasgMesg{z-index:201;position:fixed;max-width:30%;top:40px;right:40px;padding:20px;color:#fff;font-size:1.1rem;text-align:center;font-weight:700\n}\n.test-flasgMesg_error{background-color:#c74545\n}\n.test-flasgMesg_warn{background-color:#efda7b\n}\n.test-flasgMesg_succes{background-color:#9dbe87\n}\n.fade-enter-active,.fade-leave-active{transition:opacity .3s ease-in-out\n}\n.fade-enter,.fade-leave-to{opacity:0\n}\n@media screen and (max-width:812px){\n.newtest-page .content{width:100%;margin:0;justify-content:center;align-items:center\n}\n.new-test-nav{padding:10px\n}\n.new-test-nav ul{display:flex;justify-content:flex-end\n}\n.new-test-nav li{min-width:calc(8.33333vw * 3);font-size:.8rem\n}\n.new-test-nav li:last-child{padding-left:10px\n}\n.new-test-form{padding-top:calc(4.16667vh * 4)\n}\n.new-test-form__options{width:90%;margin:0 auto\n}\n.new-test-form__inputs img{float:left;clear:left;margin-bottom:1px\n}\n.new-test-form__options label{font-size:.8rem;padding-left:40px;margin-bottom:12px\n}\n.new-test__add-question{display:block;margin:40px auto\n}\n}", "", {"version":3,"sources":["/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/css/variables.css","/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-test.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;AC+UD,cAEA,yBAAA,YACA;CACA;AAEA,uBACA,gCAAA,iCACA,0BACA;CACA;AAIA,eACA,gCAAA,iBACA;CACA;AAEA,sBACA,cAAA,UACA,YACA,uCACA,mBACA,kBACA,eACA,aACA;CACA;AAEA,wBACA,sBAAA,sCAEA,YACA;CACA;AAEA,2BACA,UAAA,SACA,mBACA,aACA;CACA;AAEA,4BACA,aAAA,YACA,mBACA,UACA,cACA,cACA,+BACA,+BACA,2BACA,+BACA;CACA;AAEA,8BACA,aAAA;CACA;AAEA,qCACA,aAAA;CACA;AAEA,yBACA,oBAAA;CACA;AAEA,2BACA,eAAA,oBACA,gBACA;CACA;AAEA,uCACA,cAAA;CACA;AAEA,wCACA,yBAAA,YACA,gCACA,WACA,iBACA;CACA;AAEA,4CACA,YAAA;CACA;AAEA,wBACA,YAAA,cACA,kBACA,kBACA,iBACA,gBACA,eACA,+CACA,4BACA,sBACA,yBACA,cACA,WACA,kCAGA;CACA;AAEA,8BACA,SAAA;CACA;AAEA,gBACA,YAAA,eACA,cACA,SACA,WACA,aACA,WACA,iBACA,kBACA,eACA;CACA;AAEA,sBACA,wBAAA;CACA;AAEA,qBACA,wBAAA;CACA;AAEA,uBACA,wBAAA;CACA;AAEA,sCACA,kCAAA;CACA;AAEA,2BACA,SAAA;CACA;AAEA;AAEA,uBACA,WAAA,SACA,uBACA,kBACA;CACA;AAEA,cACA,YAAA;CACA;AAEA,iBACA,aAAA,wBACA;CACA;AAEA,iBACA,8BAAA,eACA;CACA;AAEA,4BACA,iBAAA;CACA;AAEA,eACA,+BAAA;CACA;AAEA,wBACA,UAAA,aACA;CAEA;AAEA,2BACA,WAAA,WACA,iBACA;CACA;AAEA,8BACA,gBAAA,kBACA,kBACA;CACA;AAEA,wBACA,cAAA,gBACA;CACA;CAKA","file":"new-test.vue","sourcesContent":[":root {\n    font-family: 'Marta';\n    font-size: 16px;\n    line-height: 1.4;\n    --blue: #092E64;\n    --purple: #656695;\n    --darkpurple: #313149;\n    --marine: #3493A8;\n    --yellow: #EFDA7B;\n    --green: #9DBE87;\n    --red: #c74545;\n    --background: #e6e5e5;\n    --column: calc(100vw / 24);\n    --row: calc(100vh / 12);\n    --column-mobile: calc(100vw / 12);\n    --row-mobile: calc(100vh / 24);\n}\n","<template lang=\"html\">\n\n    <div class=\"newtest-page\">\n\n        <side-menu></side-menu>\n        <section class=\"content\">\n\n            <nav class=\"new-test-nav\">\n                <ul>\n                    <li>\n                        <a\n                            href=\"save\"\n                            @click.prevent=\"saveTest(0)\"\n                        >Сохранить</a>\n                    </li>\n                    <li>\n                        <a href=\"publish\"\n                        @click.prevent=\"saveTest(1)\"\n                    >Опубликовать</a>\n                    </li>\n                </ul>\n            </nav>\n\n            <form class=\"new-test-form\">\n\n\n                <div class=\"new-test-form__options\">\n                    <input type=\"text\" class=\"new-test-form__title\" placeholder=\"Название теста\" v-model=\"testTitle\">\n                    <h3>Описание:</h3>\n                    <textarea v-model=\"testDescription\" class=\"new-test-form__description\" name=\"test_description\"></textarea>\n\n                    <div class=\"new-test-form__inputs\">\n                        <img :src=\"timeToggle\" alt=\"\">\n                        <label for=\"time_limit\" :class=\"labelTime\">Лимит по времени</label>\n                        <input type=\"checkbox\" name=\"time_limit\" id=\"time_limit\" v-model=\"testOptions.timeLimit\">\n                        <transition name=\"fade\">\n                        <img src=\"img/stopwatch.svg\" alt=\"\" v-if=\"testOptions.timeLimit\">\n                        </transition>\n                        <transition name=\"fade\">\n                        <label class=\"active\" for=\"time\" v-if=\"testOptions.timeLimit\">Время в мин.:</label>\n                        </transition>\n                        <transition name=\"fade\">\n                        <input type=\"text\" name=\"time\" id=\"time\" value=\"60\" v-if=\"testOptions.timeLimit\" @change=\"validTimeLimit\">\n                        </transition>\n                        <img :src=\"anonymToggle\" alt=\"\">\n                        <label for=\"anonym\" :class=\"labelAnonym\">Анонимное прохождение</label>\n                        <input type=\"checkbox\" name=\"anonym\" id=\"anonym\" v-model=\"testOptions.anonym\">\n                    </div>\n\n                </div>\n\n                <new-question\n                    v-for=\"question in questions\"\n                    :key=\"question.id\"\n                    :questiontype=\"question.type\"\n                    :questiontext=\"question.text\"\n                    :questionid=\"question.id\"\n                    :questiondbid=\"question.db_id\"\n                    :questionvars=\"question.vars\"\n                    @delete-question=\"deleteQuestionHandler\"\n                    @udpate-question=\"updateQuestionInfo\"\n                ></new-question>\n\n                <button\n                    type=\"button\"\n                    name=\"button\"\n                    @click=\"addQuestion\"\n                    class=\"new-test__add-question\"\n                >\n                добавить вопрос</button>\n\n                <transition name=\"fade\">\n                   <flash-message\n                       v-if=\"flashMsg.text.length > 0\"\n                       :code=\"flashMsg.status\"\n                       :text=\"flashMsg.text\"\n                   >\n                   </flash-message>\n              </transition>\n\n            </form>\n\n        </section>\n\n    </div>\n\n</template>\n\n<script>\n\nimport sideMenu from './side-menu.vue';\nimport newQuestion from './new-question.vue';\nimport flashMessage from './interface/flashmessage.vue';\nimport testCheck from './../js/test.js';\nimport axios from './../../node_modules/axios/dist/axios.js';\n\n\nexport default {\n\n    components: {\n       'side-menu': sideMenu,\n       'new-question': newQuestion,\n       'flash-message': flashMessage\n   },\n\n   data() {\n       return {\n           testTitle: '',\n           testDescription: '',\n           testOptions: {\n               timeLimit: false,\n               time: 60,\n               anonym: false\n           },\n           questions: [\n               {\n                   type: 1,\n                   text: '',\n                   id: 1,\n                   vars: []\n               }\n           ],\n           nextQuestionId: 2,\n           flashMsg: {\n               text: '',\n               status: 1\n           },\n           testId: undefined\n       }\n   },\n\n   computed: {\n\n       // Объект класса переключателя ограничения по вреиени\n       timeToggle() {\n           return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\n       },\n\n       // Объект класса переключателя анонимного прохождения\n       anonymToggle() {\n           return this.testOptions.anonym === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\n       },\n\n       labelTime() {\n           return {\n               'active': this.testOptions.timeLimit\n           }\n       },\n\n       labelAnonym() {\n           return {\n               'active' : this.testOptions.anonym\n           }\n       },\n\n       //Всплывающие сообщения\n       flashMsgClass() {\n           return {\n               'test-flasgMesg' : true,\n               'test-flasgMesg_error' : this.flashMsg.status == 1,\n               'test-flasgMesg_warn' : this.flashMsg.status == 2,\n               'test-flasgMesg_succes' : this.flashMsg.status == 3\n           }\n       }\n   },\n\n   methods: {\n\n       // Устанавливаем данные теста из ДБ\n       fetchTestDb(test) {\n           this.testTitle = test.test_name;\n           this.testDescription = test.test_description;\n           this.testId = +test.test_id;\n           this.testOptions.timeLimit = +test.test_time ? true : false;\n           this.testOptions.time = +test.test_time;\n           this.testOptions.anonym = +test.test_anonym;\n           this.questions = [];\n           this.nextQuestionId = +test.questions[test.questions.length-1].question_client_id + 1;\n           for(let i = 0; i < test.questions.length; i++) {\n               this.questions[i] = {\n                   type: +test.questions[i].question_type_id,\n                   text: test.questions[i].question_description,\n                   id: +test.questions[i].question_client_id,\n                   db_id: +test.questions[i].question_id,\n                   vars: []\n               };\n               let type = +test.questions[i].question_type_id;\n               if(type === 1 || type == 2) {\n                   for(let j = 0; j < test.questions[i].vars.length; j++) {\n                       let answer = test.questions[i].question_answer.length === 1 ? [test.questions[i].question_answer] : test.questions[i].question_answer.split(',');\n                       this.questions[i].vars.push({\n                           text: test.questions[i].vars[j].var_text,\n                           id: +test.questions[i].vars[j].question_client_id,\n                           db_id: +test.questions[i].vars[j].question_client_id,\n                           isRight: answer.indexOf(test.questions[i].vars[j].question_client_id) >= 0 ? true : false\n                       });\n                   }\n               }\n               else {\n                   this.questions[i].vars =  test.questions[i].question_answer;\n               }\n\n\n\n           }\n       },\n\n       //Вывод сообщения\n       showFlashMsg(status, text) {\n           this.flashMsg.status = status;\n           this.flashMsg.text = text;\n           setTimeout( () => this.flashMsg.text = '', 10000);\n       },\n\n       // Валидация лимита времени\n       validTimeLimit(e) {\n           let data = e.target.value;\n           if(!/\\d/i.test(data)) {\n               let msg = \"Лимит времени задается только в числовом эквиваленте и не должен превышать разумных пределов\";\n               this.showFlashMsg(1, msg);\n               e.target.value = this.testOptions.time;\n           }\n           else {\n               if(+e.target.value > 240) {\n                   let msg = \"Вы установили очень большой лимит времени, подумайте, может стоит отключить эту опцию.\";\n                   this.showFlashMsg(2, msg);\n                   this.testOptions.time = +e.target.value;\n                   e.target.value = 60;\n               }\n               else if(+e.target.value < 10) {\n                   e.target.value = 10;\n                   let msg = \"Вы установили очень низкий лимит времени!\";\n                   this.showFlashMsg(1, msg);\n               }\n               else {\n                   this.testOptions.time = +e.target.value;\n               }\n           }\n       },\n\n       // Добавление нового вопроса\n       addQuestion() {\n           this.questions.push( {\n                type: 1,\n                text: '',\n                id: this.nextQuestionId,\n                vars: [{\n                    text: '',\n                    isRight: false,\n                    id: 1\n                }]\n            });\n            this.nextQuestionId++;\n       },\n\n       // Удаляем вопрос\n       deleteQuestionHandler(id) {\n           let index = this.questions.map( (v,i) => {\n               if(v.id === id) return i;\n           });\n           index.length > 1 ? index = index.filter( (v) => {if(typeof v == 'number') return v})[0] : index = index[0];\n           this.questions.splice(index, 1);\n       },\n\n       // Обновляем информацию вопроса\n       updateQuestionInfo(id, type, description, vars) {\n           for(let i = 0; i < this.questions.length; i++) {\n               if(this.questions[i].id === id) {\n                   this.questions[i].type = type;\n                   this.questions[i].text = description;\n                   this.questions[i].vars = vars;\n               }\n           }\n       },\n\n       publishTest() {\n           this.saveTest(1);\n       },\n\n       // Сохраняем тест\n       saveTest(status) {\n           var status = status ? status : 0;\n           let test = {\n               title: this.testTitle,\n               description: this.testDescription,\n               options: this.testOptions,\n               questions: this.questions,\n               status: status,\n               testId: this.testId\n           };\n\n           let res = testCheck.check(test);\n\n\n           if(res.status) {\n               axios.post('php/savetest.php', test)\n               .then( (res) => {\n                   console.log(res);\n                   if(!res.data.success) {\n                       this.showFlashMsg(1, res.data.errorMsg);\n                   }\n                   else {\n                       let msg = status == 0 ? 'Тест успешно сохранен в базе данных' : 'Тест опубликован';\n                       this.showFlashMsg(3, msg);\n                       setTimeout( () => this.$router.push('/tester'), 2000);\n                   }\n               })\n               .catch( (err) => console.log(err));\n           }\n           else {\n               console.log('мы здесь');\n               this.showFlashMsg(res.code, res.msg);\n               document.querySelector('.new-test-form__title').scrollIntoView({ behavior: 'smooth' });\n               if(res.questionId) {\n                   for(let i = 0; i < this.$children.length; i++) {\n                       if(this.$children[i].id === res.questionId) {\n                           let elem = this.$children[i].$el;\n                           elem.scrollIntoView({ behavior: 'smooth' });\n                           elem.classList.add('question_error');\n                           setTimeout( () => {\n                               elem.classList.remove('question_error');\n                           }, 8000)\n                       }\n                   }\n               }\n           }\n\n       }\n\n   },\n\n   // При создании компонента, проверяем localStorage и если в нем есть объект тест выводим его данные\n   created() {\n       if(localStorage.getItem('test')) {\n           let test = JSON.parse(localStorage.getItem('test'));\n           this.fetchTestDb(test);\n       }\n   },\n\n   // Перед уходом очищаем localStorage;\n   beforeRouteLeave(to, from, next) {\n       localStorage.getItem('test') ? localStorage.removeItem('test') : false;\n       next();\n   }\n\n}\n</script>\n\n<style lang=\"css\">\n\n@import './../css/variables.css';\n\n    .newtest-page {\n        /* margin-left: calc(var(--column) * 6); */\n        background-color: var(--background);\n        display: flex;\n    }\n\n    .newtest-page .content {\n        margin-left: calc(var(--column) * 2);\n        margin-right: calc(var(--column) * 2);\n        width: calc(var(--column) * 16);\n    }\n\n\n\n    .new-test-form {\n        padding-top: calc(var(--column) * 2);\n        position: relative;\n    }\n\n    .new-test-form__title {\n        display: block;\n        width: 98%;\n        border: none;\n        border-bottom: 3px solid rgba(0,0,0,0.1);\n        margin-bottom: 40px;\n        font-family: 'marta';\n        font-size: 3rem;\n        color: var(--blue);\n    }\n\n    .new-test-form__options {\n        background-color: #fff;\n        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        padding: 20px;\n    }\n\n    .new-test-form__options h3 {\n        padding: 0;\n        margin: 0;\n        margin-bottom: 20px;\n        color: #8496b1;\n    }\n\n    .new-test-form__description {\n        padding: 10px;\n        border: none;\n        margin-bottom: 20px;\n        width: 98%;\n        max-width: 98%;\n        min-width: 98%;\n        max-height: calc(var(--row) * 2);\n        min-height: calc(var(--row) * 2);\n        height: calc(var(--row) * 2);\n        border: 3px solid rgba(0,0,0,0.1);\n    }\n\n    .new-test-form__options label {\n        color: #8496b1;\n    }\n\n    .new-test-form__options label.active {\n        color: var(--purple);\n    }\n\n    .new-test-form__inputs > * {\n        display: inline-block;\n    }\n\n    .new-test-form__inputs img {\n        max-width: 30px;\n        margin-bottom: -10px;\n        margin-left: 20px;\n    }\n\n    .new-test-form__inputs img:first-child {\n        padding-left: 0px;\n    }\n\n    .new-test-form__inputs input[type=\"text\"] {\n        background-color: #dddde8;\n        border: none;\n        border-bottom: 1px solid var(--blue);\n        width: 50px;\n        text-align: center;\n    }\n\n    .new-test-form__inputs input[type=\"checkbox\"] {\n        display: none;\n    }\n\n    .new-test__add-question {\n        border: none;\n        margin: 40px 0px;\n        padding-left: 40px;\n        font-family: 'marta';\n        font-size: 1.2rem;\n        font-weight: bold;\n        cursor: pointer;\n        background-image: url('./../img/add.svg');\n        background-repeat: no-repeat;\n        background-position: left;\n        background-color: var(--background);\n        color: var(--purple);\n        opacity: 0.5;\n        -webkit-transition: opacity .2s ease-in-out;\n        -o-transition: opacity .2s ease-in-out;\n        transition: opacity .2s ease-in-out;\n    }\n\n    .new-test__add-question:hover {\n        opacity: 1;\n    }\n\n    .test-flasgMesg {\n        z-index: 201;\n        position: fixed;\n        max-width: 30%;\n        top: 40px;\n        right: 40px;\n        padding: 20px;\n        color: #fff;\n        font-size: 1.1rem;\n        text-align: center;\n        font-weight: bold;\n    }\n\n    .test-flasgMesg_error {\n        background-color: var(--red);\n    }\n\n    .test-flasgMesg_warn {\n        background-color: var(--yellow);\n    }\n\n    .test-flasgMesg_succes {\n        background-color: var(--green);\n    }\n\n    .fade-enter-active, .fade-leave-active {\n        transition: opacity .3s ease-in-out;\n    }\n\n    .fade-enter, .fade-leave-to {\n        opacity: 0;\n    }\n\n    @media screen and (max-width: 812px) {\n\n        .newtest-page .content{\n            width: 100%;\n            margin: 0;\n            justify-content: center;\n            align-items: center;\n        }\n\n        .new-test-nav {\n            padding: 10px;\n        }\n\n        .new-test-nav ul {\n            display: flex;\n            justify-content: flex-end;\n        }\n\n        .new-test-nav li {\n            min-width: calc(var(--column-mobile) * 3);\n            font-size: .8rem;\n        }\n\n        .new-test-nav li:last-child {\n            padding-left: 10px;\n        }\n\n        .new-test-form {\n            padding-top: calc(var(--row-mobile) * 4);\n        }\n\n        .new-test-form__options {\n            width: 90%;\n            margin: 0 auto;\n\n        }\n\n        .new-test-form__inputs img {\n            float: left;\n            clear: left;\n            margin-bottom: 1px;\n        }\n\n        .new-test-form__options label {\n            font-size: .8rem;\n            padding-left: 40px;\n            margin-bottom: 12px;\n        }\n\n        .new-test__add-question {\n            display: block;\n            margin: 40px auto;\n        }\n\n\n\n\n    }\n\n\n\n</style>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.newtest-page{background-color:#e6e5e5;display:flex\n}\n.newtest-page .content{margin-left:calc(4.16667vw * 2);margin-right:calc(4.16667vw * 2);width:calc(4.16667vw * 16)\n}\n.new-test-form{padding-top:calc(4.16667vw * 2);position:relative\n}\n.new-test-form__title{display:block;width:98%;border:none;border-bottom:3px solid rgba(0,0,0,.1);margin-bottom:40px;font-family:marta;font-size:3rem;color:#092e64\n}\n.new-test-form__options{background-color:#fff;box-shadow:1px 1px 4px rgba(0,0,0,.1);padding:20px\n}\n.new-test-form__options h3{padding:0;margin:0;margin-bottom:20px;color:#8496b1\n}\n.new-test-form__description{padding:10px;border:none;margin-bottom:20px;width:98%;max-width:98%;min-width:98%;max-height:calc(8.33333vh * 2);min-height:calc(8.33333vh * 2);height:calc(8.33333vh * 2);border:3px solid rgba(0,0,0,.1)\n}\n.new-test-form__options label{color:#8496b1\n}\n.new-test-form__options label.active{color:#656695\n}\n.new-test-form__inputs>*{display:inline-block\n}\n.new-test-form__inputs img{max-width:30px;margin-bottom:-10px;margin-left:20px\n}\n.new-test-form__inputs img:first-child{padding-left:0\n}\n.new-test-form__inputs input[type=text]{background-color:#dddde8;border:none;border-bottom:1px solid #092e64;width:50px;text-align:center\n}\n.new-test-form__inputs input[type=checkbox]{display:none\n}\n.new-test__add-question{border:none;margin:40px 0;padding-left:40px;font-family:marta;font-size:1.2rem;font-weight:700;cursor:pointer;background-image:url(" + escape(__webpack_require__(17)) + ");background-repeat:no-repeat;background-position:0;background-color:#e6e5e5;color:#656695;opacity:.5;transition:opacity .2s ease-in-out\n}\n.new-test__add-question:hover{opacity:1\n}\n.test-flasgMesg{z-index:201;position:fixed;max-width:30%;top:40px;right:40px;padding:20px;color:#fff;font-size:1.1rem;text-align:center;font-weight:700\n}\n.test-flasgMesg_error{background-color:#c74545\n}\n.test-flasgMesg_warn{background-color:#efda7b\n}\n.test-flasgMesg_succes{background-color:#9dbe87\n}\n.fade-enter-active,.fade-leave-active{transition:opacity .3s ease-in-out\n}\n.fade-enter,.fade-leave-to{opacity:0\n}\n@media screen and (max-width:812px){\n.newtest-page .content{width:100%;margin:0;justify-content:center;align-items:center\n}\n.new-test-nav{padding:10px\n}\n.new-test-nav ul{display:flex;justify-content:flex-end\n}\n.new-test-nav li{min-width:calc(8.33333vw * 3);font-size:.8rem\n}\n.new-test-nav li:last-child{padding-left:10px\n}\n.new-test-form{padding-top:calc(4.16667vh * 4)\n}\n.new-test-form__options{width:90%;margin:0 auto\n}\n.new-test-form__inputs img{float:left;clear:left;margin-bottom:1px\n}\n.new-test-form__options label{font-size:.8rem;padding-left:40px;margin-bottom:12px\n}\n.new-test__add-question{display:block;margin:40px auto\n}\n}", "", {"version":3,"sources":["/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/css/variables.css","/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-test.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;AC+UD,cAEA,yBAAA,YACA;CACA;AAEA,uBACA,gCAAA,iCACA,0BACA;CACA;AAIA,eACA,gCAAA,iBACA;CACA;AAEA,sBACA,cAAA,UACA,YACA,uCACA,mBACA,kBACA,eACA,aACA;CACA;AAEA,wBACA,sBAAA,sCAEA,YACA;CACA;AAEA,2BACA,UAAA,SACA,mBACA,aACA;CACA;AAEA,4BACA,aAAA,YACA,mBACA,UACA,cACA,cACA,+BACA,+BACA,2BACA,+BACA;CACA;AAEA,8BACA,aAAA;CACA;AAEA,qCACA,aAAA;CACA;AAEA,yBACA,oBAAA;CACA;AAEA,2BACA,eAAA,oBACA,gBACA;CACA;AAEA,uCACA,cAAA;CACA;AAEA,wCACA,yBAAA,YACA,gCACA,WACA,iBACA;CACA;AAEA,4CACA,YAAA;CACA;AAEA,wBACA,YAAA,cACA,kBACA,kBACA,iBACA,gBACA,eACA,+CACA,4BACA,sBACA,yBACA,cACA,WACA,kCAGA;CACA;AAEA,8BACA,SAAA;CACA;AAEA,gBACA,YAAA,eACA,cACA,SACA,WACA,aACA,WACA,iBACA,kBACA,eACA;CACA;AAEA,sBACA,wBAAA;CACA;AAEA,qBACA,wBAAA;CACA;AAEA,uBACA,wBAAA;CACA;AAEA,sCACA,kCAAA;CACA;AAEA,2BACA,SAAA;CACA;AAEA;AAEA,uBACA,WAAA,SACA,uBACA,kBACA;CACA;AAEA,cACA,YAAA;CACA;AAEA,iBACA,aAAA,wBACA;CACA;AAEA,iBACA,8BAAA,eACA;CACA;AAEA,4BACA,iBAAA;CACA;AAEA,eACA,+BAAA;CACA;AAEA,wBACA,UAAA,aACA;CAEA;AAEA,2BACA,WAAA,WACA,iBACA;CACA;AAEA,8BACA,gBAAA,kBACA,kBACA;CACA;AAEA,wBACA,cAAA,gBACA;CACA;CAKA","file":"new-test.vue","sourcesContent":[":root {\n    font-family: 'Marta';\n    font-size: 16px;\n    line-height: 1.4;\n    --blue: #092E64;\n    --purple: #656695;\n    --darkpurple: #313149;\n    --marine: #3493A8;\n    --yellow: #EFDA7B;\n    --green: #9DBE87;\n    --red: #c74545;\n    --background: #e6e5e5;\n    --column: calc(100vw / 24);\n    --row: calc(100vh / 12);\n    --column-mobile: calc(100vw / 12);\n    --row-mobile: calc(100vh / 24);\n}\n","<template lang=\"html\">\n\n    <div class=\"newtest-page\">\n\n        <side-menu></side-menu>\n        <section class=\"content\">\n\n            <nav class=\"new-test-nav\">\n                <ul>\n                    <li>\n                        <a\n                            href=\"save\"\n                            @click.prevent=\"saveTest(0)\"\n                        >Сохранить</a>\n                    </li>\n                    <li>\n                        <a href=\"publish\"\n                        @click.prevent=\"saveTest(1)\"\n                    >Опубликовать</a>\n                    </li>\n                </ul>\n            </nav>\n\n            <form class=\"new-test-form\">\n\n\n                <div class=\"new-test-form__options\">\n                    <input type=\"text\" class=\"new-test-form__title\" placeholder=\"Название теста\" v-model=\"testTitle\">\n                    <h3>Описание:</h3>\n                    <textarea v-model=\"testDescription\" class=\"new-test-form__description\" name=\"test_description\"></textarea>\n\n                    <div class=\"new-test-form__inputs\">\n                        <img :src=\"timeToggle\" alt=\"\">\n                        <label for=\"time_limit\" :class=\"labelTime\">Лимит по времени</label>\n                        <input type=\"checkbox\" name=\"time_limit\" id=\"time_limit\" v-model=\"testOptions.timeLimit\">\n                        <transition name=\"fade\">\n                        <img src=\"img/stopwatch.svg\" alt=\"\" v-if=\"testOptions.timeLimit\">\n                        </transition>\n                        <transition name=\"fade\">\n                        <label class=\"active\" for=\"time\" v-if=\"testOptions.timeLimit\">Время в мин.:</label>\n                        </transition>\n                        <transition name=\"fade\">\n                        <input type=\"text\" name=\"time\" id=\"time\" value=\"60\" v-if=\"testOptions.timeLimit\" @change=\"validTimeLimit\">\n                        </transition>\n                        <img :src=\"anonymToggle\" alt=\"\">\n                        <label for=\"anonym\" :class=\"labelAnonym\">Анонимное прохождение</label>\n                        <input type=\"checkbox\" name=\"anonym\" id=\"anonym\" v-model=\"testOptions.anonym\">\n                    </div>\n\n                </div>\n\n                <new-question\n                    v-for=\"question in questions\"\n                    :key=\"question.id\"\n                    :questiontype=\"question.type\"\n                    :questiontext=\"question.text\"\n                    :questionid=\"question.id\"\n                    :questiondbid=\"question.db_id\"\n                    :questionvars=\"question.vars\"\n                    @delete-question=\"deleteQuestionHandler\"\n                    @udpate-question=\"updateQuestionInfo\"\n                ></new-question>\n\n                <button\n                    type=\"button\"\n                    name=\"button\"\n                    @click=\"addQuestion\"\n                    class=\"new-test__add-question\"\n                >\n                добавить вопрос</button>\n\n                <transition name=\"fade\">\n                   <flash-message\n                       v-if=\"flashMsg.text.length > 0\"\n                       :code=\"flashMsg.status\"\n                       :text=\"flashMsg.text\"\n                   >\n                   </flash-message>\n              </transition>\n\n            </form>\n\n        </section>\n\n    </div>\n\n</template>\n\n<script>\n\nimport sideMenu from './side-menu.vue';\nimport newQuestion from './new-question.vue';\nimport flashMessage from './interface/flashmessage.vue';\nimport testCheck from './../js/test.js';\nimport axios from './../../node_modules/axios/dist/axios.js';\n\n\nexport default {\n\n    components: {\n       'side-menu': sideMenu,\n       'new-question': newQuestion,\n       'flash-message': flashMessage\n   },\n\n   data() {\n       return {\n           testTitle: '',\n           testDescription: '',\n           testOptions: {\n               timeLimit: false,\n               time: 60,\n               anonym: false\n           },\n           questions: [\n               {\n                   type: 1,\n                   text: '',\n                   id: 1,\n                   vars: []\n               }\n           ],\n           nextQuestionId: 2,\n           flashMsg: {\n               text: '',\n               status: 1\n           },\n           testId: undefined\n       }\n   },\n\n   computed: {\n\n       // Объект класса переключателя ограничения по вреиени\n       timeToggle() {\n           return this.testOptions.timeLimit === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\n       },\n\n       // Объект класса переключателя анонимного прохождения\n       anonymToggle() {\n           return this.testOptions.anonym === false ? 'img/switch_left.svg' : 'img/switch_rigth.svg';\n       },\n\n       labelTime() {\n           return {\n               'active': this.testOptions.timeLimit\n           }\n       },\n\n       labelAnonym() {\n           return {\n               'active' : this.testOptions.anonym\n           }\n       },\n\n       //Всплывающие сообщения\n       flashMsgClass() {\n           return {\n               'test-flasgMesg' : true,\n               'test-flasgMesg_error' : this.flashMsg.status == 1,\n               'test-flasgMesg_warn' : this.flashMsg.status == 2,\n               'test-flasgMesg_succes' : this.flashMsg.status == 3\n           }\n       }\n   },\n\n   methods: {\n\n       // Устанавливаем данные теста из ДБ\n       fetchTestDb(test) {\n           this.testTitle = test.test_name;\n           this.testDescription = test.test_description;\n           this.testId = +test.test_id;\n           this.testOptions.timeLimit = +test.test_time ? true : false;\n           this.testOptions.time = +test.test_time;\n           this.testOptions.anonym = +test.test_anonym;\n           this.questions = [];\n           this.nextQuestionId = +test.questions[test.questions.length-1].question_client_id + 1;\n           for(let i = 0; i < test.questions.length; i++) {\n               this.questions[i] = {\n                   type: +test.questions[i].question_type_id,\n                   text: test.questions[i].question_description,\n                   id: +test.questions[i].question_client_id,\n                   db_id: +test.questions[i].question_id,\n                   vars: []\n               };\n               let type = +test.questions[i].question_type_id;\n               if(type === 1 || type == 2) {\n                   for(let j = 0; j < test.questions[i].vars.length; j++) {\n                       let answer = test.questions[i].question_answer.length === 1 ? [test.questions[i].question_answer] : test.questions[i].question_answer.split(',');\n                       this.questions[i].vars.push({\n                           text: test.questions[i].vars[j].var_text,\n                           id: +test.questions[i].vars[j].question_client_id,\n                           db_id: +test.questions[i].vars[j].question_client_id,\n                           isRight: answer.indexOf(test.questions[i].vars[j].question_client_id) >= 0 ? true : false\n                       });\n                   }\n               }\n               else {\n                   this.questions[i].vars =  test.questions[i].question_answer;\n               }\n\n\n\n           }\n       },\n\n       //Вывод сообщения\n       showFlashMsg(status, text) {\n           this.flashMsg.status = status;\n           this.flashMsg.text = text;\n           setTimeout( () => this.flashMsg.text = '', 10000);\n       },\n\n       // Валидация лимита времени\n       validTimeLimit(e) {\n           let data = e.target.value;\n           if(!/\\d/i.test(data)) {\n               let msg = \"Лимит времени задается только в числовом эквиваленте и не должен превышать разумных пределов\";\n               this.showFlashMsg(1, msg);\n               e.target.value = this.testOptions.time;\n           }\n           else {\n               if(+e.target.value > 240) {\n                   let msg = \"Вы установили очень большой лимит времени, подумайте, может стоит отключить эту опцию.\";\n                   this.showFlashMsg(2, msg);\n                   this.testOptions.time = +e.target.value;\n                   e.target.value = 60;\n               }\n               else if(+e.target.value < 10) {\n                   e.target.value = 10;\n                   let msg = \"Вы установили очень низкий лимит времени!\";\n                   this.showFlashMsg(1, msg);\n               }\n               else {\n                   this.testOptions.time = +e.target.value;\n               }\n           }\n       },\n\n       // Добавление нового вопроса\n       addQuestion() {\n           this.questions.push( {\n                type: 1,\n                text: '',\n                id: this.nextQuestionId,\n                vars: [{\n                    text: '',\n                    isRight: false,\n                    id: 1\n                }]\n            });\n            this.nextQuestionId++;\n       },\n\n       // Удаляем вопрос\n       deleteQuestionHandler(id) {\n           let index = this.questions.map( (v,i) => {\n               if(v.id === id) return i;\n           });\n           index.length > 1 ? index = index.filter( (v) => {if(typeof v == 'number') return v})[0] : index = index[0];\n           this.questions.splice(index, 1);\n       },\n\n       // Обновляем информацию вопроса\n       updateQuestionInfo(id, type, description, vars) {\n           for(let i = 0; i < this.questions.length; i++) {\n               if(this.questions[i].id === id) {\n                   this.questions[i].type = type;\n                   this.questions[i].text = description;\n                   this.questions[i].vars = vars;\n               }\n           }\n       },\n\n       publishTest() {\n           this.saveTest(1);\n       },\n\n       // Сохраняем тест\n       saveTest(status) {\n           var status = status ? status : 0;\n           let test = {\n               title: this.testTitle,\n               description: this.testDescription,\n               options: this.testOptions,\n               questions: this.questions,\n               status: status,\n               testId: this.testId\n           };\n\n           let res = testCheck.check(test);\n\n\n           if(res.status) {\n               axios.post('php/savetest.php', test)\n               .then( (res) => {\n                   console.log(res);\n                   if(!res.data.success) {\n                       this.showFlashMsg(1, res.data.errorMsg);\n                   }\n                   else {\n                       let msg = status == 0 ? 'Тест успешно сохранен в базе данных' : 'Тест опубликован';\n                       this.showFlashMsg(3, msg);\n                       setTimeout( () => this.$router.push('/tester'), 2000);\n                   }\n               })\n               .catch( (err) => console.log(err));\n           }\n           else {\n               console.log('мы здесь');\n               this.showFlashMsg(res.code, res.msg);\n               document.querySelector('.new-test-form__title').scrollIntoView({ behavior: 'smooth' });\n               if(res.questionId) {\n                   for(let i = 0; i < this.$children.length; i++) {\n                       if(this.$children[i].id === res.questionId) {\n                           let elem = this.$children[i].$el;\n                           elem.scrollIntoView({ behavior: 'smooth' });\n                           elem.classList.add('question_error');\n                           setTimeout( () => {\n                               elem.classList.remove('question_error');\n                           }, 8000)\n                       }\n                   }\n               }\n           }\n\n       }\n\n   },\n\n   // При создании компонента, проверяем localStorage и если в нем есть объект тест выводим его данные\n   created() {\n       if(localStorage.getItem('test')) {\n           let test = JSON.parse(localStorage.getItem('test'));\n           this.fetchTestDb(test);\n       }\n   },\n\n   // Перед уходом очищаем localStorage;\n   beforeRouteLeave(to, from, next) {\n       localStorage.getItem('test') ? localStorage.removeItem('test') : false;\n       next();\n   }\n\n}\n</script>\n\n<style lang=\"css\">\n\n@import './../css/variables.css';\n\n    .newtest-page {\n        /* margin-left: calc(var(--column) * 6); */\n        background-color: var(--background);\n        display: flex;\n    }\n\n    .newtest-page .content {\n        margin-left: calc(var(--column) * 2);\n        margin-right: calc(var(--column) * 2);\n        width: calc(var(--column) * 16);\n    }\n\n\n\n    .new-test-form {\n        padding-top: calc(var(--column) * 2);\n        position: relative;\n    }\n\n    .new-test-form__title {\n        display: block;\n        width: 98%;\n        border: none;\n        border-bottom: 3px solid rgba(0,0,0,0.1);\n        margin-bottom: 40px;\n        font-family: 'marta';\n        font-size: 3rem;\n        color: var(--blue);\n    }\n\n    .new-test-form__options {\n        background-color: #fff;\n        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        padding: 20px;\n    }\n\n    .new-test-form__options h3 {\n        padding: 0;\n        margin: 0;\n        margin-bottom: 20px;\n        color: #8496b1;\n    }\n\n    .new-test-form__description {\n        padding: 10px;\n        border: none;\n        margin-bottom: 20px;\n        width: 98%;\n        max-width: 98%;\n        min-width: 98%;\n        max-height: calc(var(--row) * 2);\n        min-height: calc(var(--row) * 2);\n        height: calc(var(--row) * 2);\n        border: 3px solid rgba(0,0,0,0.1);\n    }\n\n    .new-test-form__options label {\n        color: #8496b1;\n    }\n\n    .new-test-form__options label.active {\n        color: var(--purple);\n    }\n\n    .new-test-form__inputs > * {\n        display: inline-block;\n    }\n\n    .new-test-form__inputs img {\n        max-width: 30px;\n        margin-bottom: -10px;\n        margin-left: 20px;\n    }\n\n    .new-test-form__inputs img:first-child {\n        padding-left: 0px;\n    }\n\n    .new-test-form__inputs input[type=\"text\"] {\n        background-color: #dddde8;\n        border: none;\n        border-bottom: 1px solid var(--blue);\n        width: 50px;\n        text-align: center;\n    }\n\n    .new-test-form__inputs input[type=\"checkbox\"] {\n        display: none;\n    }\n\n    .new-test__add-question {\n        border: none;\n        margin: 40px 0px;\n        padding-left: 40px;\n        font-family: 'marta';\n        font-size: 1.2rem;\n        font-weight: bold;\n        cursor: pointer;\n        background-image: url('./../img/add.svg');\n        background-repeat: no-repeat;\n        background-position: left;\n        background-color: var(--background);\n        color: var(--purple);\n        opacity: 0.5;\n        -webkit-transition: opacity .2s ease-in-out;\n        -o-transition: opacity .2s ease-in-out;\n        transition: opacity .2s ease-in-out;\n    }\n\n    .new-test__add-question:hover {\n        opacity: 1;\n    }\n\n    .test-flasgMesg {\n        z-index: 201;\n        position: fixed;\n        max-width: 30%;\n        top: 40px;\n        right: 40px;\n        padding: 20px;\n        color: #fff;\n        font-size: 1.1rem;\n        text-align: center;\n        font-weight: bold;\n    }\n\n    .test-flasgMesg_error {\n        background-color: var(--red);\n    }\n\n    .test-flasgMesg_warn {\n        background-color: var(--yellow);\n    }\n\n    .test-flasgMesg_succes {\n        background-color: var(--green);\n    }\n\n    .fade-enter-active, .fade-leave-active {\n        transition: opacity .3s ease-in-out;\n    }\n\n    .fade-enter, .fade-leave-to {\n        opacity: 0;\n    }\n\n    @media screen and (max-width: 812px) {\n\n        .newtest-page .content{\n            width: 100%;\n            margin: 0;\n            justify-content: center;\n            align-items: center;\n        }\n\n        .new-test-nav {\n            padding: 10px;\n        }\n\n        .new-test-nav ul {\n            display: flex;\n            justify-content: flex-end;\n        }\n\n        .new-test-nav li {\n            min-width: calc(var(--column-mobile) * 3);\n            font-size: .8rem;\n        }\n\n        .new-test-nav li:last-child {\n            padding-left: 10px;\n        }\n\n        .new-test-form {\n            padding-top: calc(var(--row-mobile) * 4);\n        }\n\n        .new-test-form__options {\n            width: 90%;\n            margin: 0 auto;\n\n        }\n\n        .new-test-form__inputs img {\n            float: left;\n            clear: left;\n            margin-bottom: 1px;\n        }\n\n        .new-test-form__options label {\n            font-size: .8rem;\n            padding-left: 40px;\n            margin-bottom: 12px;\n        }\n\n        .new-test__add-question {\n            display: block;\n            margin: 40px auto;\n        }\n\n\n\n\n    }\n\n\n\n</style>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20916,11 +20974,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_new_question_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1868d7e3_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_question_vue__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1868d7e3_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_new_question_vue__ = __webpack_require__(77);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(62)
+  __webpack_require__(63)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -20966,13 +21024,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(63);
+var content = __webpack_require__(64);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -20992,22 +21050,22 @@ if(false) {
 }
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var escape = __webpack_require__(4);
+var escape = __webpack_require__(5);
 exports = module.exports = __webpack_require__(0)(true);
 // imports
 
 
 // module
-exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.question{position:relative;margin-top:40px;padding:20px;background-color:#fff;box-shadow:1px 1px 4px rgba(0,0,0,.1);transition:all .3s ease-in-out\n}\n.question_error{border:1px solid #c74545;box-shadow:3px 3px 8px #c74545\n}\n.question h3{margin-bottom:20px;color:#8496b1\n}\n.question-type{position:absolute;right:-1px;top:-1px;border:none;background-color:#656695;color:#fff;font-family:marta;padding:10px\n}\n.question-type option{padding:10px\n}\n.question__description{width:calc(4.16667vw * 10);max-width:calc(4.16667vw * 10);min-width:calc(4.16667vw * 10);height:calc(8.33333vh * 1);min-height:calc(8.33333vh * 1);max-height:calc(8.33333vh * 1);margin-bottom:20px;border:none;border:3px solid rgba(0,0,0,.1)\n}\n.question-controls{position:absolute;bottom:20px;right:10px;width:calc(4.16667vw * 2)\n}\n.question-controls img{cursor:pointer;max-width:30px;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-controls img:hover{opacity:1\n}\n.question-controls img:nth-child(2){margin:0 10px\n}\n.question__add-var-button{border:none;padding-left:30px;cursor:pointer;font-family:marta;font-weight:700;background-image:url(" + escape(__webpack_require__(8)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:#656695;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question__add-var-button:hover{opacity:1\n}\n@media screen and (max-width:812px){\n.question{width:90%;margin:20px auto;padding-top:60px\n}\n.question__description{width:100%;max-width:none;min-width:none\n}\n.question-controls{bottom:none;right:none;width:50%;top:10px;left:10px;max-height:30px\n}\n.question-controls img{max-width:20px\n}\n}", "", {"version":3,"sources":["/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/css/variables.css","/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-question.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;AC+RD,UACA,kBAAA,gBACA,aACA,sBACA,sCAEA,8BAGA;CACA;AAEA,gBACA,yBAAA,8BAEA;CACA;AAEA,aACA,mBAAA,aACA;CACA;AAEA,eACA,kBAAA,WACA,SACA,YACA,yBACA,WACA,kBACA,YACA;CACA;AAEA,sBACA,YAAA;CACA;AAEA,uBACA,2BAAA,+BACA,+BACA,2BACA,+BACA,+BACA,mBACA,YACA,+BACA;CACA;AAEA,mBACA,kBAAA,YACA,WACA,yBACA;CACA;AACA,uBACA,eAAA,eACA,qBACA,WACA,kCAGA;CACA;AAEA,6BACA,SAAA;CACA;AAEA,oCACA,aAAA;CACA;AAEA,0BACA,YAAA,kBACA,eACA,kBACA,gBACA,+CACA,4BACA,sBACA,sBACA,cACA,WACA,kCAGA;CACA;AAEA,gCACA,SAAA;CACA;AAEA;AACA,UACA,UAAA,iBACA,gBACA;CACA;AAEA,uBACA,WAAA,eACA,cACA;CACA;AAEA,mBACA,YAAA,WACA,UACA,SACA,UACA,eACA;CACA;AAEA,uBACA,cAAA;CACA;CACA","file":"new-question.vue","sourcesContent":[":root {\n    font-family: 'Marta';\n    font-size: 16px;\n    line-height: 1.4;\n    --blue: #092E64;\n    --purple: #656695;\n    --darkpurple: #313149;\n    --marine: #3493A8;\n    --yellow: #EFDA7B;\n    --green: #9DBE87;\n    --red: #c74545;\n    --background: #e6e5e5;\n    --column: calc(100vw / 24);\n    --row: calc(100vh / 12);\n    --column-mobile: calc(100vw / 12);\n    --row-mobile: calc(100vh / 24);\n}\n","<template lang=\"html\">\n\n    <div class=\"question\">\n\n        <h3>Текст вопроса:</h3>\n        <textarea class=\"question__description\" v-model=\"description\" @input=\"updateDescription\"></textarea>\n\n        <select class=\"\" name=\"\" class=\"question-type\" @change=\"changeType\">\n            <option value=\"1\">Один из списка</option>\n            <option value=\"2\">Несколько из списка</option>\n            <option value=\"3\">Строка</option>\n        </select>\n\n        <div class=\"variants\">\n\n            <div v-if=\"questionType === 1\" key=\"single-question\">\n                <single\n                    v-for=\"(variant, index) in single.vars\"\n                    :text=\"variant.text\"\n                    :status=\"variant.isRight\"\n                    :id=\"variant.id\"\n                    :key=\"variant.id\"\n                    @removeVar=\"removeVarHandler\"\n                    @updateVar=\"singleUpdateVarHandler\"\n                    @updateRightVar=\"singleUpdateRightVarHandler\"\n                ></single>\n                <button key=\"add-single\"  class=\"question__add-var-button sngl\" type=\"button\" name=\"button\" @click=\"singleAddVar\">добавить вариант</button>\n            </div>\n\n            <div v-else-if=\"questionType === 2\" key=\"multiple-question\">\n                <multiple\n\n                    v-for=\"(variant, index) in multiple.vars\"\n                    :text=\"variant.text\"\n                    :status=\"variant.isRight\"\n                    :id=\"variant.id\"\n                    :key=\"variant.id\"\n                    @removeVar=\"multipleRemoveVarHandler\"\n                    @updateVar=\"multipleUpdateVarHandler\"\n                    @updateRightVar=\"multipleUpdateRightVarHandler\"\n                >\n                </multiple>\n                <button key=\"add-multiple\" class=\"question__add-var-button mlt\" type=\"button\" name=\"button\" @click=\"multipleAddVar\">добавить вариант</button>\n            </div>\n\n            <div v-else key=\"string-question\">\n                <string\n                    :text=\"string.answer\"\n                    @updateVar=\"stringUpdateVarHandler\"\n                ></string>\n            </div>\n\n        </div>\n\n\n\n        <div class=\"question-controls\">\n            <img src=\"img/success.svg\" alt=\"\">\n            <img src=\"img/edit.svg\" alt=\"\">\n            <img @click=\"deleteQuestion\" src=\"img/dustbin.svg\" alt=\"\">\n\n        </div>\n\n\n\n    </div>\n\n</template>\n\n<script>\n\nimport single from './questions/single.vue';\nimport multiple from './questions/multiple.vue';\nimport string from './questions/string.vue';\n\nexport default {\n\n    props: [\n        'questiontype',\n        'questiontext',\n        'questionid',\n        'questiondbid',\n        'questionvars'\n    ],\n\n    components: {\n       'single': single,\n       'multiple': multiple,\n       'string': string\n   },\n\n    data() {\n        return {\n            questionType: this.questiontype ? this.questiontype : 1,\n            id: this.questionid,\n            db_id: this.questiondbid,\n            description: this.questiontext ? this.questiontext : '',\n            // Вопросы с одним вариантом\n            single: {\n                vars: [\n                    {\n                        text: '',\n                        isRight: false,\n                        id: 1\n                    }\n                ],\n                nextVarId: 2\n            },\n            // Вопросы с несколькими вариантами ответа\n            multiple: {\n                vars: [\n                    {\n                        text: '',\n                        isRight: false,\n                        id: 1\n                    }\n                ],\n                nextVarId: 2\n            },\n            //Вопрос с вводом строки\n            string: {\n                answer: ''\n            }\n\n        }\n    },\n\n    methods: {\n\n        updateDescription() {\n            this.updateQuestionVars();\n        },\n\n\n        changeType(e) {\n\n            this.questionType = +e.target.value;\n\n            this.single = {\n                vars: [\n                    {\n                        text: '',\n                        isRight: false,\n                        id: 1\n                    }\n                ],\n                nextVarId: 2\n            };\n\n            this.multiple = {\n                vars: [\n                    {\n                        text: '',\n                        isRight: false,\n                        id: 1\n                    }\n                ],\n                nextVarId: 2\n            };\n        },\n\n        /*Вопросы с одним варианторм*/\n\n        //Добавляем вариант ответа\n        singleAddVar() {\n            this.single.nextVarId++;\n            this.single.vars.push({\n                text: '',\n                isRight: false,\n                id: this.single.nextVarId\n            });\n\n        },\n\n        // Удаление вариантами\n        removeVarHandler(id) {\n            let index;\n            for(let i = 0; i < this.single.vars.length; i++) {\n                if(this.single.vars[i].id === id) index = i;\n            }\n            this.single.vars.splice(index, 1);\n            this.updateQuestionVars();\n        },\n\n        //Обновляем текст варианта\n        singleUpdateVarHandler(id, text) {\n            let index;\n            for(let i = 0; i < this.single.vars.length; i++) {\n                if(this.single.vars[i].id === id) index = i;\n            }\n            this.single.vars[index].text = text;\n            this.updateQuestionVars();\n        },\n\n        //Выбираем правильный вариант вопроса\n        singleUpdateRightVarHandler(index) {\n            this.$children.forEach( (v,i) => {\n                if(i === index) {\n                    v.isRight ? v.isRight = false : v.isRight = true;\n                    this.single.vars[index].isRight ? this.single.vars[index].isRight = false : this.single.vars[index].isRight = true;\n                }\n                else {\n                    v.isRight = false;\n                    this.single.vars[i].isRight = false;\n                }\n            });\n            this.updateQuestionVars();\n        },\n\n        /*Вопросы с несолькими вариантами*/\n\n        //Добавляем вариант ответа\n        multipleAddVar() {\n            this.multiple.vars.push({\n                text: 'Вариант ответа',\n                isRight: false,\n                id: this.multiple.nextVarId\n            });\n            this.multiple.nextVarId++;\n        },\n\n        // Удаляем вариант ответа\n        multipleRemoveVarHandler(id) {\n            let index;\n            for(let i = 0; i < this.multiple.vars.length; i++) {\n                if(this.multiple.vars[i].id === id) index = i;\n            }\n            this.multiple.vars.splice(index, 1);\n            this.updateQuestionVars();\n        },\n\n        multipleUpdateVarHandler(id, text) {\n            let index;\n            for(let i = 0; i < this.multiple.vars.length; i++) {\n                if(this.multiple.vars[i].id === id) index = i;\n            }\n            this.multiple.vars[index].text = text;\n            this.updateQuestionVars();\n        },\n\n        //Выбираем правильный вариант вопроса\n        multipleUpdateRightVarHandler(index) {\n            this.$children.forEach( (v,i) => {\n                if(i === index) {\n                    v.isRight ? v.isRight = false : v.isRight = true;\n                    this.multiple.vars[index].isRight ? this.multiple.vars[index].isRight = false : this.multiple.vars[index].isRight = true;\n                }\n            });\n            this.updateQuestionVars();\n        },\n\n        /*Вопрос - строка*/\n\n        stringUpdateVarHandler(text) {\n            this.string.answer = text;\n            this.updateQuestionVars();\n        },\n\n        //Обновляем варианты в объекте вопроса в тесте\n        updateQuestionVars() {\n            switch (this.questionType) {\n                case 1:\n                    this.$emit('udpate-question', this.id, this.questionType, this.description, this.single.vars);\n                    break;\n                case 2:\n                    this.$emit('udpate-question', this.id, this.questionType, this.description, this.multiple.vars);\n                    break;\n                case 3:\n                    this.$emit('udpate-question', this.id, this.questionType, this.description, this.string.answer);\n                    break;\n                default:\n\n            }\n        },\n\n        //Событие удаления вопроса\n        deleteQuestion() {\n            this.$emit('delete-question', this.id);\n        }\n    },\n\n    created() {\n        switch(this.questiontype) {\n            case 1:\n                this.single.vars = this.questionvars;\n                this.single.nextVarId = this.questionvars[this.questionvars.length-1] ? this.questionvars[this.questionvars.length-1].id : 1;\n                break;\n            case 2:\n                this.multiple.vars = this.questionvars;\n                this.multiple.nextVarId = this.questionvars[this.questionvars.length-1] ? this.questionvars[this.questionvars.length-1].id : 1;\n                break;\n            case 3:\n                this.string.answer = this.questionvars;\n                break;\n        }\n    }\n\n}\n</script>\n\n<style lang=\"css\">\n\n    @import './../css/variables.css';\n\n    .question {\n        position: relative;\n        margin-top: 40px;\n        padding: 20px;\n        background-color: #fff;\n        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        -webkit-transition: all .3s ease-in-out;\n        -o-transition: all .3s ease-in-out;\n        transition: all .3s ease-in-out;\n    }\n\n    .question_error {\n        border: 1px solid var(--red);\n        -webkit-box-shadow: 3px 3px 8px var(--red);\n        box-shadow: 3px 3px 8px var(--red);\n    }\n\n    .question h3 {\n        margin-bottom: 20px;\n        color: #8496b1;\n    }\n\n    .question-type {\n        position: absolute;\n        right: -1px;\n        top: -1px;\n        border: none;\n        background-color: var(--purple);\n        color: #fff;\n        font-family: 'marta';\n        padding: 10px;\n    }\n\n    .question-type option{\n        padding: 10px;\n    }\n\n    .question__description {\n        width: calc(var(--column) * 10);\n        max-width: calc(var(--column) * 10);\n        min-width: calc(var(--column) * 10);\n        height: calc(var(--row) * 1);\n        min-height: calc(var(--row) * 1);\n        max-height: calc(var(--row) * 1);\n        margin-bottom: 20px;\n        border: none;\n        border: 3px solid rgba(0,0,0,.1);\n    }\n\n    .question-controls {\n        position: absolute;\n        bottom: 20px;\n        right: 10px;\n        width: calc(var(--column) * 2);\n    }\n    .question-controls img {\n        cursor: pointer;\n        max-width: 30px;\n        display: inline-block;\n        opacity: 0.5;\n        -webkit-transition: opacity 0.2s ease-in-out;\n        -o-transition: opacity 0.2s ease-in-out;\n        transition: opacity 0.2s ease-in-out;\n    }\n\n    .question-controls img:hover {\n        opacity: 1;\n    }\n\n    .question-controls img:nth-child(2) {\n        margin: 0 10px;\n    }\n\n    .question__add-var-button {\n        border: none;\n        padding-left: 30px;\n        cursor: pointer;\n        font-family: 'marta';\n        font-weight: bold;\n        background-image: url('./../img/add.svg');\n        background-repeat: no-repeat;\n        background-position: left;\n        background-color: #fff;\n        color: var(--purple);\n        opacity: 0.5;\n        -webkit-transition: opacity .2s ease-in-out;\n        -o-transition: opacity .2s ease-in-out;\n        transition: opacity .2s ease-in-out;\n    }\n\n    .question__add-var-button:hover {\n        opacity: 1;\n    }\n\n    @media screen and (max-width: 812px) {\n        .question {\n            width: 90%;\n            margin: 20px auto;\n            padding-top: 60px;\n        }\n\n        .question__description {\n            width: 100%;\n            max-width: none;\n            min-width: none;\n        }\n\n        .question-controls {\n            bottom: none;\n            right: none;\n            width: 50%;\n            top: 10px;\n            left: 10px;\n            max-height: 30px;\n        }\n\n        .question-controls img {\n            max-width: 20px;\n        }\n    }\n\n</style>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.question{position:relative;margin-top:40px;padding:20px;background-color:#fff;box-shadow:1px 1px 4px rgba(0,0,0,.1);transition:all .3s ease-in-out\n}\n.question_error{border:1px solid #c74545;box-shadow:3px 3px 8px #c74545\n}\n.question h3{margin-bottom:20px;color:#8496b1\n}\n.question-type{position:absolute;right:-1px;top:-1px;border:none;background-color:#656695;color:#fff;font-family:marta;padding:10px\n}\n.question-type option{padding:10px\n}\n.question__description{width:calc(4.16667vw * 10);max-width:calc(4.16667vw * 10);min-width:calc(4.16667vw * 10);height:calc(8.33333vh * 1);min-height:calc(8.33333vh * 1);max-height:calc(8.33333vh * 1);margin-bottom:20px;border:none;border:3px solid rgba(0,0,0,.1)\n}\n.question-controls{position:absolute;bottom:20px;right:10px;width:calc(4.16667vw * 2)\n}\n.question-controls img{cursor:pointer;max-width:30px;display:inline-block;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question-controls img:hover{opacity:1\n}\n.question-controls img:nth-child(2){margin:0 10px\n}\n.question__add-var-button{border:none;padding-left:30px;cursor:pointer;font-family:marta;font-weight:700;background-image:url(" + escape(__webpack_require__(17)) + ");background-repeat:no-repeat;background-position:0;background-color:#fff;color:#656695;opacity:.5;transition:opacity .2s ease-in-out\n}\n.question__add-var-button:hover{opacity:1\n}\n@media screen and (max-width:812px){\n.question{width:90%;margin:20px auto;padding-top:60px\n}\n.question__description{width:100%;max-width:none;min-width:none\n}\n.question-controls{bottom:none;right:none;width:50%;top:10px;left:10px;max-height:30px\n}\n.question-controls img{max-width:20px\n}\n}", "", {"version":3,"sources":["/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/css/variables.css","/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/vue-comp/src/vue-comp/new-question.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;AC+RD,UACA,kBAAA,gBACA,aACA,sBACA,sCAEA,8BAGA;CACA;AAEA,gBACA,yBAAA,8BAEA;CACA;AAEA,aACA,mBAAA,aACA;CACA;AAEA,eACA,kBAAA,WACA,SACA,YACA,yBACA,WACA,kBACA,YACA;CACA;AAEA,sBACA,YAAA;CACA;AAEA,uBACA,2BAAA,+BACA,+BACA,2BACA,+BACA,+BACA,mBACA,YACA,+BACA;CACA;AAEA,mBACA,kBAAA,YACA,WACA,yBACA;CACA;AACA,uBACA,eAAA,eACA,qBACA,WACA,kCAGA;CACA;AAEA,6BACA,SAAA;CACA;AAEA,oCACA,aAAA;CACA;AAEA,0BACA,YAAA,kBACA,eACA,kBACA,gBACA,+CACA,4BACA,sBACA,sBACA,cACA,WACA,kCAGA;CACA;AAEA,gCACA,SAAA;CACA;AAEA;AACA,UACA,UAAA,iBACA,gBACA;CACA;AAEA,uBACA,WAAA,eACA,cACA;CACA;AAEA,mBACA,YAAA,WACA,UACA,SACA,UACA,eACA;CACA;AAEA,uBACA,cAAA;CACA;CACA","file":"new-question.vue","sourcesContent":[":root {\n    font-family: 'Marta';\n    font-size: 16px;\n    line-height: 1.4;\n    --blue: #092E64;\n    --purple: #656695;\n    --darkpurple: #313149;\n    --marine: #3493A8;\n    --yellow: #EFDA7B;\n    --green: #9DBE87;\n    --red: #c74545;\n    --background: #e6e5e5;\n    --column: calc(100vw / 24);\n    --row: calc(100vh / 12);\n    --column-mobile: calc(100vw / 12);\n    --row-mobile: calc(100vh / 24);\n}\n","<template lang=\"html\">\n\n    <div class=\"question\">\n\n        <h3>Текст вопроса:</h3>\n        <textarea class=\"question__description\" v-model=\"description\" @input=\"updateDescription\"></textarea>\n\n        <select class=\"\" name=\"\" class=\"question-type\" @change=\"changeType\">\n            <option value=\"1\">Один из списка</option>\n            <option value=\"2\">Несколько из списка</option>\n            <option value=\"3\">Строка</option>\n        </select>\n\n        <div class=\"variants\">\n\n            <div v-if=\"questionType === 1\" key=\"single-question\">\n                <single\n                    v-for=\"(variant, index) in single.vars\"\n                    :text=\"variant.text\"\n                    :status=\"variant.isRight\"\n                    :id=\"variant.id\"\n                    :key=\"variant.id\"\n                    @removeVar=\"removeVarHandler\"\n                    @updateVar=\"singleUpdateVarHandler\"\n                    @updateRightVar=\"singleUpdateRightVarHandler\"\n                ></single>\n                <button key=\"add-single\"  class=\"question__add-var-button sngl\" type=\"button\" name=\"button\" @click=\"singleAddVar\">добавить вариант</button>\n            </div>\n\n            <div v-else-if=\"questionType === 2\" key=\"multiple-question\">\n                <multiple\n\n                    v-for=\"(variant, index) in multiple.vars\"\n                    :text=\"variant.text\"\n                    :status=\"variant.isRight\"\n                    :id=\"variant.id\"\n                    :key=\"variant.id\"\n                    @removeVar=\"multipleRemoveVarHandler\"\n                    @updateVar=\"multipleUpdateVarHandler\"\n                    @updateRightVar=\"multipleUpdateRightVarHandler\"\n                >\n                </multiple>\n                <button key=\"add-multiple\" class=\"question__add-var-button mlt\" type=\"button\" name=\"button\" @click=\"multipleAddVar\">добавить вариант</button>\n            </div>\n\n            <div v-else key=\"string-question\">\n                <string\n                    :text=\"string.answer\"\n                    @updateVar=\"stringUpdateVarHandler\"\n                ></string>\n            </div>\n\n        </div>\n\n\n\n        <div class=\"question-controls\">\n            <img src=\"img/success.svg\" alt=\"\">\n            <img src=\"img/edit.svg\" alt=\"\">\n            <img @click=\"deleteQuestion\" src=\"img/dustbin.svg\" alt=\"\">\n\n        </div>\n\n\n\n    </div>\n\n</template>\n\n<script>\n\nimport single from './questions/single.vue';\nimport multiple from './questions/multiple.vue';\nimport string from './questions/string.vue';\n\nexport default {\n\n    props: [\n        'questiontype',\n        'questiontext',\n        'questionid',\n        'questiondbid',\n        'questionvars'\n    ],\n\n    components: {\n       'single': single,\n       'multiple': multiple,\n       'string': string\n   },\n\n    data() {\n        return {\n            questionType: this.questiontype ? this.questiontype : 1,\n            id: this.questionid,\n            db_id: this.questiondbid,\n            description: this.questiontext ? this.questiontext : '',\n            // Вопросы с одним вариантом\n            single: {\n                vars: [\n                    {\n                        text: '',\n                        isRight: false,\n                        id: 1\n                    }\n                ],\n                nextVarId: 2\n            },\n            // Вопросы с несколькими вариантами ответа\n            multiple: {\n                vars: [\n                    {\n                        text: '',\n                        isRight: false,\n                        id: 1\n                    }\n                ],\n                nextVarId: 2\n            },\n            //Вопрос с вводом строки\n            string: {\n                answer: ''\n            }\n\n        }\n    },\n\n    methods: {\n\n        updateDescription() {\n            this.updateQuestionVars();\n        },\n\n\n        changeType(e) {\n\n            this.questionType = +e.target.value;\n\n            this.single = {\n                vars: [\n                    {\n                        text: '',\n                        isRight: false,\n                        id: 1\n                    }\n                ],\n                nextVarId: 2\n            };\n\n            this.multiple = {\n                vars: [\n                    {\n                        text: '',\n                        isRight: false,\n                        id: 1\n                    }\n                ],\n                nextVarId: 2\n            };\n        },\n\n        /*Вопросы с одним варианторм*/\n\n        //Добавляем вариант ответа\n        singleAddVar() {\n            this.single.nextVarId++;\n            this.single.vars.push({\n                text: '',\n                isRight: false,\n                id: this.single.nextVarId\n            });\n\n        },\n\n        // Удаление вариантами\n        removeVarHandler(id) {\n            let index;\n            for(let i = 0; i < this.single.vars.length; i++) {\n                if(this.single.vars[i].id === id) index = i;\n            }\n            this.single.vars.splice(index, 1);\n            this.updateQuestionVars();\n        },\n\n        //Обновляем текст варианта\n        singleUpdateVarHandler(id, text) {\n            let index;\n            for(let i = 0; i < this.single.vars.length; i++) {\n                if(this.single.vars[i].id === id) index = i;\n            }\n            this.single.vars[index].text = text;\n            this.updateQuestionVars();\n        },\n\n        //Выбираем правильный вариант вопроса\n        singleUpdateRightVarHandler(index) {\n            this.$children.forEach( (v,i) => {\n                if(i === index) {\n                    v.isRight ? v.isRight = false : v.isRight = true;\n                    this.single.vars[index].isRight ? this.single.vars[index].isRight = false : this.single.vars[index].isRight = true;\n                }\n                else {\n                    v.isRight = false;\n                    this.single.vars[i].isRight = false;\n                }\n            });\n            this.updateQuestionVars();\n        },\n\n        /*Вопросы с несолькими вариантами*/\n\n        //Добавляем вариант ответа\n        multipleAddVar() {\n            this.multiple.vars.push({\n                text: 'Вариант ответа',\n                isRight: false,\n                id: this.multiple.nextVarId\n            });\n            this.multiple.nextVarId++;\n        },\n\n        // Удаляем вариант ответа\n        multipleRemoveVarHandler(id) {\n            let index;\n            for(let i = 0; i < this.multiple.vars.length; i++) {\n                if(this.multiple.vars[i].id === id) index = i;\n            }\n            this.multiple.vars.splice(index, 1);\n            this.updateQuestionVars();\n        },\n\n        multipleUpdateVarHandler(id, text) {\n            let index;\n            for(let i = 0; i < this.multiple.vars.length; i++) {\n                if(this.multiple.vars[i].id === id) index = i;\n            }\n            this.multiple.vars[index].text = text;\n            this.updateQuestionVars();\n        },\n\n        //Выбираем правильный вариант вопроса\n        multipleUpdateRightVarHandler(index) {\n            this.$children.forEach( (v,i) => {\n                if(i === index) {\n                    v.isRight ? v.isRight = false : v.isRight = true;\n                    this.multiple.vars[index].isRight ? this.multiple.vars[index].isRight = false : this.multiple.vars[index].isRight = true;\n                }\n            });\n            this.updateQuestionVars();\n        },\n\n        /*Вопрос - строка*/\n\n        stringUpdateVarHandler(text) {\n            this.string.answer = text;\n            this.updateQuestionVars();\n        },\n\n        //Обновляем варианты в объекте вопроса в тесте\n        updateQuestionVars() {\n            switch (this.questionType) {\n                case 1:\n                    this.$emit('udpate-question', this.id, this.questionType, this.description, this.single.vars);\n                    break;\n                case 2:\n                    this.$emit('udpate-question', this.id, this.questionType, this.description, this.multiple.vars);\n                    break;\n                case 3:\n                    this.$emit('udpate-question', this.id, this.questionType, this.description, this.string.answer);\n                    break;\n                default:\n\n            }\n        },\n\n        //Событие удаления вопроса\n        deleteQuestion() {\n            this.$emit('delete-question', this.id);\n        }\n    },\n\n    created() {\n        switch(this.questiontype) {\n            case 1:\n                this.single.vars = this.questionvars;\n                this.single.nextVarId = this.questionvars[this.questionvars.length-1] ? this.questionvars[this.questionvars.length-1].id : 1;\n                break;\n            case 2:\n                this.multiple.vars = this.questionvars;\n                this.multiple.nextVarId = this.questionvars[this.questionvars.length-1] ? this.questionvars[this.questionvars.length-1].id : 1;\n                break;\n            case 3:\n                this.string.answer = this.questionvars;\n                break;\n        }\n    }\n\n}\n</script>\n\n<style lang=\"css\">\n\n    @import './../css/variables.css';\n\n    .question {\n        position: relative;\n        margin-top: 40px;\n        padding: 20px;\n        background-color: #fff;\n        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        -webkit-transition: all .3s ease-in-out;\n        -o-transition: all .3s ease-in-out;\n        transition: all .3s ease-in-out;\n    }\n\n    .question_error {\n        border: 1px solid var(--red);\n        -webkit-box-shadow: 3px 3px 8px var(--red);\n        box-shadow: 3px 3px 8px var(--red);\n    }\n\n    .question h3 {\n        margin-bottom: 20px;\n        color: #8496b1;\n    }\n\n    .question-type {\n        position: absolute;\n        right: -1px;\n        top: -1px;\n        border: none;\n        background-color: var(--purple);\n        color: #fff;\n        font-family: 'marta';\n        padding: 10px;\n    }\n\n    .question-type option{\n        padding: 10px;\n    }\n\n    .question__description {\n        width: calc(var(--column) * 10);\n        max-width: calc(var(--column) * 10);\n        min-width: calc(var(--column) * 10);\n        height: calc(var(--row) * 1);\n        min-height: calc(var(--row) * 1);\n        max-height: calc(var(--row) * 1);\n        margin-bottom: 20px;\n        border: none;\n        border: 3px solid rgba(0,0,0,.1);\n    }\n\n    .question-controls {\n        position: absolute;\n        bottom: 20px;\n        right: 10px;\n        width: calc(var(--column) * 2);\n    }\n    .question-controls img {\n        cursor: pointer;\n        max-width: 30px;\n        display: inline-block;\n        opacity: 0.5;\n        -webkit-transition: opacity 0.2s ease-in-out;\n        -o-transition: opacity 0.2s ease-in-out;\n        transition: opacity 0.2s ease-in-out;\n    }\n\n    .question-controls img:hover {\n        opacity: 1;\n    }\n\n    .question-controls img:nth-child(2) {\n        margin: 0 10px;\n    }\n\n    .question__add-var-button {\n        border: none;\n        padding-left: 30px;\n        cursor: pointer;\n        font-family: 'marta';\n        font-weight: bold;\n        background-image: url('./../img/add.svg');\n        background-repeat: no-repeat;\n        background-position: left;\n        background-color: #fff;\n        color: var(--purple);\n        opacity: 0.5;\n        -webkit-transition: opacity .2s ease-in-out;\n        -o-transition: opacity .2s ease-in-out;\n        transition: opacity .2s ease-in-out;\n    }\n\n    .question__add-var-button:hover {\n        opacity: 1;\n    }\n\n    @media screen and (max-width: 812px) {\n        .question {\n            width: 90%;\n            margin: 20px auto;\n            padding-top: 60px;\n        }\n\n        .question__description {\n            width: 100%;\n            max-width: none;\n            min-width: none;\n        }\n\n        .question-controls {\n            bottom: none;\n            right: none;\n            width: 50%;\n            top: 10px;\n            left: 10px;\n            max-height: 30px;\n        }\n\n        .question-controls img {\n            max-width: 20px;\n        }\n    }\n\n</style>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21015,11 +21073,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_single_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_36837b8c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_single_vue__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_36837b8c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_single_vue__ = __webpack_require__(68);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(65)
+  __webpack_require__(66)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -21065,13 +21123,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(66);
+var content = __webpack_require__(67);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -21091,7 +21149,7 @@ if(false) {
 }
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -21105,7 +21163,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21175,7 +21233,7 @@ if (false) {
 }
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21183,11 +21241,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_multiple_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_deac5cfc_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_multiple_vue__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_deac5cfc_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_multiple_vue__ = __webpack_require__(72);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(69)
+  __webpack_require__(70)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -21233,13 +21291,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(70);
+var content = __webpack_require__(71);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -21259,7 +21317,7 @@ if(false) {
 }
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -21273,7 +21331,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21343,7 +21401,7 @@ if (false) {
 }
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21351,11 +21409,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_string_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_50861183_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_string_vue__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_50861183_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_string_vue__ = __webpack_require__(76);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(73)
+  __webpack_require__(74)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -21401,13 +21459,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(74);
+var content = __webpack_require__(75);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -21427,7 +21485,7 @@ if(false) {
 }
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(true);
@@ -21441,7 +21499,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21499,7 +21557,7 @@ if (false) {
 }
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21656,64 +21714,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-1868d7e3", esExports)
   }
 }
-
-/***/ }),
-/* 77 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7367be9d_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flashmessage_vue__ = __webpack_require__(80);
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(78)
-}
-var normalizeComponent = __webpack_require__(2)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flashmessage_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7367be9d_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flashmessage_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "src/vue-comp/interface/flashmessage.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7367be9d", Component.options)
-  } else {
-    hotAPI.reload("data-v-7367be9d", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
 
 /***/ }),
 /* 78 */
@@ -22346,7 +22346,7 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_item_vue__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_item_vue__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_item_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_item_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_item_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_item_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4c1caf50_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_test_item_vue__ = __webpack_require__(89);
@@ -22787,7 +22787,7 @@ if(false) {
 /* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var escape = __webpack_require__(4);
+var escape = __webpack_require__(5);
 exports = module.exports = __webpack_require__(0)(true);
 // imports
 
@@ -22822,7 +22822,7 @@ module.exports = "img/../img/dustbin.svg";
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_question_vue__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_question_vue__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_question_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_question_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_question_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_question_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5af899c6_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_pop_up_question_vue__ = __webpack_require__(98);
@@ -23271,7 +23271,7 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_exec_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6f51c001_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_exec_vue__ = __webpack_require__(118);
@@ -23353,7 +23353,7 @@ if(false) {
 /* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var escape = __webpack_require__(4);
+var escape = __webpack_require__(5);
 exports = module.exports = __webpack_require__(0)(true);
 // imports
 
@@ -23382,7 +23382,7 @@ module.exports = "img/../img/arrow-left.svg";
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_test_menu_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6fc53ca4_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_test_menu_vue__ = __webpack_require__(109);
@@ -23517,7 +23517,7 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_variants_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98e75ed8_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_variants_vue__ = __webpack_require__(113);
@@ -23695,7 +23695,7 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_pop_up_exec_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98f7a61e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_pop_up_exec_vue__ = __webpack_require__(117);
@@ -24010,7 +24010,7 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondents_vue__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondents_vue__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondents_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondents_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondents_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondents_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_437af6bd_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_respondents_vue__ = __webpack_require__(126);
@@ -24097,7 +24097,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.content{margin-left:calc(4.16667vw * 2);margin-right:calc(4.16667vw * 2);width:calc(4.16667vw * 16)\n}\n.respondents-page{width:100%;position:relative;padding-top:calc(8.33333vh * 2);display:flex;background-color:#e6e5e5\n}\n.respondents-search{position:absolute;top:20px;width:calc(4.16667vw * 16);background-color:#e6e5e5;font-size:2rem;border:none;border-bottom:3px solid rgba(0,0,0,.1)\n}\n.respondents-list{width:100%;display:flex;flex-flow:column;justify-content:center\n}\n.resondents-test-item{max-height:calc(8.33333vh * 4);overflow:hidden;position:relative;margin-bottom:40px;padding:20px;box-shadow:1px 1px 4px rgba(0,0,0,.1);cursor:pointer;background-color:#fff;transition:all 1s ease-in-out\n}\n.resondents-test-item__active{max-height:10000px\n}\n.resondents-test-item__hide{max-height:0;overflow:hidden;opacity:0;visibility:hidden;padding:0;margin:0\n}\n.resondents-test-item__active.resondents-test-item__active:after{opacity:0;visibility:hidden;top:120%\n}\n.resondents-test-item h2{margin-bottom:20px;color:#092e64\n}\n.resondents-test-item:after{display:block;position:absolute;content:\"\";width:100%;height:100px;top:calc(8.33333vh * 4 - 100px);background-image:linear-gradient(0deg,#fff,hsla(0,0%,100%,.6));transition:all .8s ease-in-out\n}\n.resondents-test-item__show{color:#656695;font-size:.9rem;font-weight:700;position:absolute;padding-left:30px;right:20px;top:20px\n}\n.resondents-test-item__show.active img{transform:rotate(180deg)\n}\n.resondents-test-item__show img{max-width:20px;position:absolute;top:2px;left:0;transform:rotate(0deg);transition:all .5s ease-in-out\n}\n.fade-enter-active,.fade-leave-active{transition:opacity .5s\n}\n.fade-enter,.fade-leave-to{opacity:0\n}\n@media screen and (max-width:812px){\n.respondents-page .content{width:100%;margin:0\n}\n.respondents-list{justify-content:center;align-items:center\n}\n.resondents-test-item{max-height:calc(4.16667vh * 16)\n}\n.resondents-test-item__hide{max-height:0;overflow:hidden;opacity:0;visibility:hidden;padding:0;margin:0\n}\n.resondents-test-item__active{max-height:10000px\n}\n.resondents-test-item__show{right:40%\n}\n.resondents-test-item:after{top:calc(4.16667vh * 16 - 100px)\n}\n.resondents-test-item h2{font-size:1.1rem;padding-top:40px\n}\n}", "", {"version":3,"sources":["/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/css/variables.css","/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/vue-comp/src/vue-comp/respondents.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;ACwJD,SACA,gCAAA,iCACA,0BACA;CACA;AAEA,kBACA,WAAA,kBACA,gCACA,aACA,wBACA;CACA;AAEA,oBACA,kBAAA,SACA,2BACA,yBACA,eACA,YACA,sCACA;CACA;AAEA,kBACA,WAAA,aACA,iBACA,sBACA;CACA;AAEA,sBACA,+BAAA,gBACA,kBACA,mBACA,aACA,sCAEA,eACA,sBACA,6BAGA;CACA;AAEA,8BACA,kBAAA;CAEA;AAEA,4BACA,aAAA,gBACA,UACA,kBACA,UACA,QACA;CACA;AAEA,iEACA,UAAA,kBACA,QACA;CACA;AAEA,yBACA,mBAAA,aACA;CACA;AAEA,4BACA,cAAA,kBACA,WACA,WACA,aACA,gCACA,+DACA,8BAGA;CACA;AAEA,4BACA,cAAA,gBACA,gBACA,kBACA,kBACA,WACA,QACA;CACA;AAEA,uCACA,wBAAA;CACA;AAEA,gCACA,eAAA,kBACA,QACA,OACA,uBACA,8BAGA;CACA;AAEA,sCACA,sBAAA;CACA;AACA,2BACA,SAAA;CACA;AAEA;AAEA,2BACA,WAAA,QACA;CACA;AAEA,kBACA,uBAAA,kBACA;CACA;AAGA,sBACA,+BAAA;CACA;AAEA,4BACA,aAAA,gBACA,UACA,kBACA,UACA,QACA;CACA;AACA,8BACA,kBAAA;CACA;AAEA,4BACA,SAAA;CACA;AAEA,4BACA,gCAAA;CACA;AAEA,yBACA,iBAAA,gBACA;CACA;CAEA","file":"respondents.vue","sourcesContent":[":root {\n    font-family: 'Marta';\n    font-size: 16px;\n    line-height: 1.4;\n    --blue: #092E64;\n    --purple: #656695;\n    --darkpurple: #313149;\n    --marine: #3493A8;\n    --yellow: #EFDA7B;\n    --green: #9DBE87;\n    --red: #c74545;\n    --background: #e6e5e5;\n    --column: calc(100vw / 24);\n    --row: calc(100vh / 12);\n    --column-mobile: calc(100vw / 12);\n    --row-mobile: calc(100vh / 24);\n}\n","<template lang=\"html\">\n\n    <div class=\"respondents-page\">\n\n        <side-menu></side-menu>\n        <section class=\"content\">\n\n            <transition name=\"fade\">\n              <pop-up\n                  v-if=\"popUp\"\n                  :testtite=\"currentTest.test_name\"\n                  :description=\"currentTest.test_description\"\n                  :imglink=\"currentTest.test_image\"\n                  :anonym=\"currentTest.test_anonym\"\n                  :time=\"currentTest.test_time\"\n                  :status=\"currentTest.test_status\"\n                  :testquestions=\"currentTest.questions\"\n                  :testid=\"currentTest.test_id\"\n                  @close-window=\"closePopUp\"\n              >\n\n              </pop-up>\n          </transition>\n\n            <div class=\"loading\" v-if=\"loading\">\n\n                <loading-indicator></loading-indicator>\n\n            </div>\n\n            <div class=\"respondents-list\">\n\n                <input type=\"text\" class=\"respondents-search\" @input=\"searchTest\" placeholder=\"Введите название теста\">\n\n                <div\n                    class=\"resondents-test-item\"\n                    v-for=\"test in testsArr\"\n                    :key=\"test.test_id\"\n                >\n\n                    <a class=\"resondents-test-item__show\" @click.prevent=\"showListHandler\" href=\"\">список <img src=\"img/arrow-down.svg\" alt=\"\"></a>\n                    <h2>{{test.test_name}}</h2>\n                    <respondent-item\n                        v-for=\"singleTry in test.tries\"\n                        :key=\"singleTry.test_answer_id\"\n                        :result=\"singleTry\"\n                        @show-info=\"showTryInfo\"\n                    >\n                    </respondent-item>\n\n\n                </div>\n\n            </div>\n\n\n        </section>\n\n    </div>\n\n</template>\n\n<script>\n\nimport sideMenu from './side-menu.vue';\nimport loadingIndicator from './interface/loading.vue';\nimport respondentItem from './interface/respondent-item.vue';\nimport popUpElem from './interface/pop-up-test.vue';\nimport axios from './../../node_modules/axios/dist/axios.js';\n\nexport default {\n\n    components: {\n        'side-menu': sideMenu,\n        'loading-indicator': loadingIndicator,\n        'respondent-item': respondentItem,\n        'pop-up': popUpElem\n    },\n\n    data() {\n        return {\n            loading: false,\n            testsArr: null,\n            currentTest: null,\n            popUp: false\n        }\n    },\n\n    methods: {\n        fetchData() {\n            this.loading = true;\n            axios.get('php/getstats.php')\n            .then( (res) => {\n                // console.log(res);\n                this.loading = false;\n                this.testsArr = res.data.tests;\n                // console.log(this.testsArr);\n\n            })\n            .catch( (err) => {\n                this.loading = false;\n                console.log(err);\n            });\n        },\n\n\n        //Поиск по тесту\n        searchTest(e) {\n            console.log(e.target.value);\n            let pattern = new RegExp(e.target.value, 'i');\n            let elemList = document.querySelectorAll('.resondents-test-item h2');\n            for(let i = 0; i < elemList.length; i++) {\n                console.log(elemList[i].innerHTML);\n                console.log(i);\n                if(!pattern.test(elemList[i].innerHTML)) {\n                    elemList[i].parentNode.classList.contains('resondents-test-item__hide') ? false : elemList[i].parentNode.classList.add('resondents-test-item__hide');\n                }\n                else {\n                    elemList[i].parentNode.classList.contains('resondents-test-item__hide') ? elemList[i].parentNode.classList.remove('resondents-test-item__hide') : false;\n                }\n            }\n        },\n\n        //Разворачиваем список респондентов\n        showListHandler(e) {\n            e.target.parentNode.classList.toggle('resondents-test-item__active');\n            e.target.classList.toggle('active');\n        },\n\n        //Показываем всплывающее окно с подробностями о результатах пользователя\n        showTryInfo(id, answers){\n            // console.log(id);\n            // console.log(answers);\n            axios.get(`php/gettest.php?test_id=${id}`)\n            .then( (res) => {\n                let data = res.data.test;\n                data.questions.forEach( (val,ind,arr) => {\n                    answers.forEach( (v,i,a) => {\n                        if(val.question_id === v.question_id) {\n                            data.questions[ind].user_answer = v.user_answer;\n                            data.questions[ind].check_status = v.result;\n                        }\n                    });\n                });\n                this.currentTest = data;\n                this.popUp = true;\n                console.log(data);\n            })\n            .catch( (err) => console.log(err));\n        },\n\n        //Закрываем всплывающее окно\n        closePopUp() {\n            this.popUp = false;\n        }\n\n    },\n\n    created() {\n        this.fetchData();\n    }\n\n}\n</script>\n\n<style lang=\"css\">\n\n@import './../css/variables.css';\n\n    .content {\n        margin-left: calc(var(--column) * 2);\n        margin-right: calc(var(--column) * 2);\n        width: calc(var(--column) * 16);\n    }\n\n    .respondents-page {\n        width: 100%;\n        position: relative;\n        padding-top: calc(var(--row) * 2);\n        display: flex;\n        background-color: var(--background);\n    }\n\n    .respondents-search {\n        position: absolute;\n        top: 20px;\n        width: calc(var(--column) * 16);\n        background-color: var(--background);\n        font-size: 2rem;\n        border:none;\n        border-bottom: 3px solid rgba(0,0,0,.1);\n    }\n\n    .respondents-list {\n        width: 100%;\n        display: flex;\n        flex-flow: column;\n        justify-content: center;\n    }\n\n    .resondents-test-item {\n        max-height: calc(var(--row) * 4);\n        overflow: hidden;\n        position: relative;\n        margin-bottom: 40px;\n        padding: 20px;\n        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        cursor: pointer;\n        background-color: #fff;\n        -webkit-transition: all 1s ease-in-out;\n        -o-transition: all 1s ease-in-out;\n        transition: all 1s ease-in-out;\n    }\n\n    .resondents-test-item__active {\n        max-height: 10000px;\n        /* height: auto; */\n    }\n\n    .resondents-test-item__hide {\n        max-height: 0px;\n        overflow: hidden;\n        opacity: 0;\n        visibility: hidden;\n        padding: 0;\n        margin: 0;\n    }\n\n    .resondents-test-item__active.resondents-test-item__active:after {\n        opacity: 0;\n        visibility: hidden;\n        top: 120%;\n    }\n\n    .resondents-test-item h2 {\n        margin-bottom: 20px;\n        color: var(--blue);\n    }\n\n    .resondents-test-item:after {\n        display: block;\n        position: absolute;\n        content: '';\n        width: 100%;\n        height: 100px;\n        top: calc(var(--row) * 4 - 100px);\n        background-image: linear-gradient(to top, #fff, rgba(255,255,255,0.6));\n        -webkit-transition: all .8s ease-in-out;\n        -o-transition: all .8s ease-in-out;\n        transition: all .8s ease-in-out;\n    }\n\n    .resondents-test-item__show {\n        color: var(--purple);\n        font-size: .9rem;\n        font-weight: bold;\n        position: absolute;\n        padding-left: 30px;\n        right: 20px;\n        top: 20px;\n    }\n\n    .resondents-test-item__show.active img{\n        transform: rotate(180deg);\n    }\n\n    .resondents-test-item__show img {\n        max-width: 20px;\n        position: absolute;\n        top: 2px;\n        left: 0;\n        transform: rotate(0deg);\n        -webkit-transition: all .5s ease-in-out;\n        -o-transition: all .5s ease-in-out;\n        transition: all .5s ease-in-out;\n    }\n\n    .fade-enter-active, .fade-leave-active {\n      transition: opacity .5s;\n    }\n    .fade-enter, .fade-leave-to {\n      opacity: 0;\n    }\n\n    @media screen and (max-width: 812px) {\n\n        .respondents-page .content {\n            width: 100%;\n            margin: 0;\n        }\n\n        .respondents-list {\n            justify-content: center;\n            align-items: center;\n        }\n\n\n        .resondents-test-item {\n            max-height: calc(var(--row-mobile) * 16);\n        }\n\n        .resondents-test-item__hide {\n            max-height: 0px;\n            overflow: hidden;\n            opacity: 0;\n            visibility: hidden;\n            padding: 0;\n            margin: 0;\n        }\n        .resondents-test-item__active {\n            max-height: 10000px;\n        }\n\n        .resondents-test-item__show {\n            right: 40%;\n        }\n\n        .resondents-test-item:after {\n            top: calc(var(--row-mobile) * 16 - 100px);\n        }\n\n        .resondents-test-item h2 {\n            font-size: 1.1rem;\n            padding-top: 40px;\n        }\n\n    }\n\n\n\n</style>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.content{margin-left:calc(4.16667vw * 2);margin-right:calc(4.16667vw * 2);width:calc(4.16667vw * 16)\n}\n.respondents-page{width:100%;position:relative;padding-top:calc(8.33333vh * 2);display:flex;background-color:#e6e5e5\n}\n.respondents-search{position:absolute;top:20px;width:calc(4.16667vw * 16);background-color:#e6e5e5;font-size:2rem;border:none;border-bottom:3px solid rgba(0,0,0,.1)\n}\n.respondents-list{width:100%;display:flex;flex-flow:column;justify-content:center\n}\n.resondents-test-item{max-height:calc(8.33333vh * 4);overflow:hidden;position:relative;margin-bottom:40px;padding:20px;box-shadow:1px 1px 4px rgba(0,0,0,.1);cursor:pointer;background-color:#fff;transition:all 1s ease-in-out\n}\n.resondents-test-item__active{max-height:10000px\n}\n.resondents-test-item__hide{max-height:0;overflow:hidden;opacity:0;visibility:hidden;padding:0;margin:0\n}\n.resondents-test-item__active.resondents-test-item__active:after{opacity:0;visibility:hidden;top:none;bottom:0\n}\n.resondents-test-item h2{margin-bottom:20px;color:#092e64\n}\n.resondents-test-item:after{display:block;position:absolute;content:\"\";width:100%;height:100px;top:calc(8.33333vh * 4 - 100px);background-image:linear-gradient(0deg,#fff,hsla(0,0%,100%,.6));transition:all 1s ease-in-out\n}\n.resondents-test-item__show{color:#656695;font-size:.9rem;font-weight:700;position:absolute;padding-left:30px;right:20px;top:20px\n}\n.resondents-test-item__show.active img{transform:rotate(180deg)\n}\n.resondents-test-item__show img{max-width:20px;position:absolute;top:2px;left:0;transform:rotate(0deg);transition:all .5s ease-in-out\n}\n.fade-enter-active,.fade-leave-active{transition:opacity .5s\n}\n.fade-enter,.fade-leave-to{opacity:0\n}\n@media screen and (max-width:812px){\n.respondents-page .content{width:100%;margin:0\n}\n.respondents-list{justify-content:center;align-items:center\n}\n.resondents-test-item{max-height:calc(4.16667vh * 16)\n}\n.resondents-test-item__hide{max-height:0;overflow:hidden;opacity:0;visibility:hidden;padding:0;margin:0\n}\n.resondents-test-item__active{max-height:10000px\n}\n.resondents-test-item__show{right:40%\n}\n.resondents-test-item:after{top:calc(4.16667vh * 16 - 100px)\n}\n.resondents-test-item h2{font-size:1.1rem;padding-top:40px\n}\n}", "", {"version":3,"sources":["/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/css/variables.css","/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/vue-comp/src/vue-comp/respondents.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;ACwJD,SACA,gCAAA,iCACA,0BACA;CACA;AAEA,kBACA,WAAA,kBACA,gCACA,aACA,wBACA;CACA;AAEA,oBACA,kBAAA,SACA,2BACA,yBACA,eACA,YACA,sCACA;CACA;AAEA,kBACA,WAAA,aACA,iBACA,sBACA;CACA;AAEA,sBACA,+BAAA,gBACA,kBACA,mBACA,aACA,sCAEA,eACA,sBACA,6BAGA;CACA;AAEA,8BACA,kBAAA;CAEA;AAEA,4BACA,aAAA,gBACA,UACA,kBACA,UACA,QACA;CACA;AAEA,iEACA,UAAA,kBACA,SACA,QACA;CACA;AAEA,yBACA,mBAAA,aACA;CACA;AAEA,4BACA,cAAA,kBACA,WACA,WACA,aACA,gCACA,+DACA,6BAGA;CACA;AAEA,4BACA,cAAA,gBACA,gBACA,kBACA,kBACA,WACA,QACA;CACA;AAEA,uCACA,wBAAA;CACA;AAEA,gCACA,eAAA,kBACA,QACA,OACA,uBACA,8BAGA;CACA;AAEA,sCACA,sBAAA;CACA;AACA,2BACA,SAAA;CACA;AAEA;AAEA,2BACA,WAAA,QACA;CACA;AAEA,kBACA,uBAAA,kBACA;CACA;AAGA,sBACA,+BAAA;CACA;AAEA,4BACA,aAAA,gBACA,UACA,kBACA,UACA,QACA;CACA;AACA,8BACA,kBAAA;CACA;AAEA,4BACA,SAAA;CACA;AAEA,4BACA,gCAAA;CACA;AAEA,yBACA,iBAAA,gBACA;CACA;CAEA","file":"respondents.vue","sourcesContent":[":root {\n    font-family: 'Marta';\n    font-size: 16px;\n    line-height: 1.4;\n    --blue: #092E64;\n    --purple: #656695;\n    --darkpurple: #313149;\n    --marine: #3493A8;\n    --yellow: #EFDA7B;\n    --green: #9DBE87;\n    --red: #c74545;\n    --background: #e6e5e5;\n    --column: calc(100vw / 24);\n    --row: calc(100vh / 12);\n    --column-mobile: calc(100vw / 12);\n    --row-mobile: calc(100vh / 24);\n}\n","<template lang=\"html\">\n\n    <div class=\"respondents-page\">\n\n        <side-menu></side-menu>\n        <section class=\"content\">\n\n            <transition name=\"fade\">\n              <pop-up\n                  v-if=\"popUp\"\n                  :testtite=\"currentTest.test_name\"\n                  :description=\"currentTest.test_description\"\n                  :imglink=\"currentTest.test_image\"\n                  :anonym=\"currentTest.test_anonym\"\n                  :time=\"currentTest.test_time\"\n                  :status=\"currentTest.test_status\"\n                  :testquestions=\"currentTest.questions\"\n                  :testid=\"currentTest.test_id\"\n                  @close-window=\"closePopUp\"\n              >\n\n              </pop-up>\n          </transition>\n\n            <div class=\"loading\" v-if=\"loading\">\n\n                <loading-indicator></loading-indicator>\n\n            </div>\n\n            <div class=\"respondents-list\">\n\n                <input type=\"text\" class=\"respondents-search\" @input=\"searchTest\" placeholder=\"Введите название теста\">\n\n                <div\n                    class=\"resondents-test-item\"\n                    v-for=\"test in testsArr\"\n                    :key=\"test.test_id\"\n                >\n\n                    <a class=\"resondents-test-item__show\" @click.prevent=\"showListHandler\" href=\"\">список <img src=\"img/arrow-down.svg\" alt=\"\"></a>\n                    <h2>{{test.test_name}}</h2>\n                    <respondent-item\n                        v-for=\"singleTry in test.tries\"\n                        :key=\"singleTry.test_answer_id\"\n                        :result=\"singleTry\"\n                        @show-info=\"showTryInfo\"\n                    >\n                    </respondent-item>\n\n\n                </div>\n\n            </div>\n\n\n        </section>\n\n    </div>\n\n</template>\n\n<script>\n\nimport sideMenu from './side-menu.vue';\nimport loadingIndicator from './interface/loading.vue';\nimport respondentItem from './interface/respondent-item.vue';\nimport popUpElem from './interface/pop-up-test.vue';\nimport axios from './../../node_modules/axios/dist/axios.js';\n\nexport default {\n\n    components: {\n        'side-menu': sideMenu,\n        'loading-indicator': loadingIndicator,\n        'respondent-item': respondentItem,\n        'pop-up': popUpElem\n    },\n\n    data() {\n        return {\n            loading: false,\n            testsArr: null,\n            currentTest: null,\n            popUp: false\n        }\n    },\n\n    methods: {\n        fetchData() {\n            this.loading = true;\n            axios.get('php/getstats.php')\n            .then( (res) => {\n                // console.log(res);\n                this.loading = false;\n                this.testsArr = res.data.tests;\n                // console.log(this.testsArr);\n\n            })\n            .catch( (err) => {\n                this.loading = false;\n                console.log(err);\n            });\n        },\n\n\n        //Поиск по тесту\n        searchTest(e) {\n            console.log(e.target.value);\n            let pattern = new RegExp(e.target.value, 'i');\n            let elemList = document.querySelectorAll('.resondents-test-item h2');\n            for(let i = 0; i < elemList.length; i++) {\n                console.log(elemList[i].innerHTML);\n                console.log(i);\n                if(!pattern.test(elemList[i].innerHTML)) {\n                    elemList[i].parentNode.classList.contains('resondents-test-item__hide') ? false : elemList[i].parentNode.classList.add('resondents-test-item__hide');\n                }\n                else {\n                    elemList[i].parentNode.classList.contains('resondents-test-item__hide') ? elemList[i].parentNode.classList.remove('resondents-test-item__hide') : false;\n                }\n            }\n        },\n\n        //Разворачиваем список респондентов\n        showListHandler(e) {\n            e.target.parentNode.classList.toggle('resondents-test-item__active');\n            e.target.classList.toggle('active');\n        },\n\n        //Показываем всплывающее окно с подробностями о результатах пользователя\n        showTryInfo(id, answers){\n            // console.log(id);\n            // console.log(answers);\n            axios.get(`php/gettest.php?test_id=${id}`)\n            .then( (res) => {\n                let data = res.data.test;\n                data.questions.forEach( (val,ind,arr) => {\n                    answers.forEach( (v,i,a) => {\n                        if(val.question_id === v.question_id) {\n                            data.questions[ind].user_answer = v.user_answer;\n                            data.questions[ind].check_status = v.result;\n                        }\n                    });\n                });\n                this.currentTest = data;\n                this.popUp = true;\n                console.log(data);\n            })\n            .catch( (err) => console.log(err));\n        },\n\n        //Закрываем всплывающее окно\n        closePopUp() {\n            this.popUp = false;\n        }\n\n    },\n\n    created() {\n        this.fetchData();\n    }\n\n}\n</script>\n\n<style lang=\"css\">\n\n@import './../css/variables.css';\n\n    .content {\n        margin-left: calc(var(--column) * 2);\n        margin-right: calc(var(--column) * 2);\n        width: calc(var(--column) * 16);\n    }\n\n    .respondents-page {\n        width: 100%;\n        position: relative;\n        padding-top: calc(var(--row) * 2);\n        display: flex;\n        background-color: var(--background);\n    }\n\n    .respondents-search {\n        position: absolute;\n        top: 20px;\n        width: calc(var(--column) * 16);\n        background-color: var(--background);\n        font-size: 2rem;\n        border:none;\n        border-bottom: 3px solid rgba(0,0,0,.1);\n    }\n\n    .respondents-list {\n        width: 100%;\n        display: flex;\n        flex-flow: column;\n        justify-content: center;\n    }\n\n    .resondents-test-item {\n        max-height: calc(var(--row) * 4);\n        overflow: hidden;\n        position: relative;\n        margin-bottom: 40px;\n        padding: 20px;\n        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        cursor: pointer;\n        background-color: #fff;\n        -webkit-transition: all 1s ease-in-out;\n        -o-transition: all 1s ease-in-out;\n        transition: all 1s ease-in-out;\n    }\n\n    .resondents-test-item__active {\n        max-height: 10000px;\n        /* height: auto; */\n    }\n\n    .resondents-test-item__hide {\n        max-height: 0px;\n        overflow: hidden;\n        opacity: 0;\n        visibility: hidden;\n        padding: 0;\n        margin: 0;\n    }\n\n    .resondents-test-item__active.resondents-test-item__active:after {\n        opacity: 0;\n        visibility: hidden;\n        top: none;\n        bottom: 0px;\n    }\n\n    .resondents-test-item h2 {\n        margin-bottom: 20px;\n        color: var(--blue);\n    }\n\n    .resondents-test-item:after {\n        display: block;\n        position: absolute;\n        content: '';\n        width: 100%;\n        height: 100px;\n        top: calc(var(--row) * 4 - 100px);\n        background-image: linear-gradient(to top, #fff, rgba(255,255,255,0.6));\n        -webkit-transition: all 1s ease-in-out;\n        -o-transition: all 1s ease-in-out;\n        transition: all 1s ease-in-out;\n    }\n\n    .resondents-test-item__show {\n        color: var(--purple);\n        font-size: .9rem;\n        font-weight: bold;\n        position: absolute;\n        padding-left: 30px;\n        right: 20px;\n        top: 20px;\n    }\n\n    .resondents-test-item__show.active img{\n        transform: rotate(180deg);\n    }\n\n    .resondents-test-item__show img {\n        max-width: 20px;\n        position: absolute;\n        top: 2px;\n        left: 0;\n        transform: rotate(0deg);\n        -webkit-transition: all .5s ease-in-out;\n        -o-transition: all .5s ease-in-out;\n        transition: all .5s ease-in-out;\n    }\n\n    .fade-enter-active, .fade-leave-active {\n      transition: opacity .5s;\n    }\n    .fade-enter, .fade-leave-to {\n      opacity: 0;\n    }\n\n    @media screen and (max-width: 812px) {\n\n        .respondents-page .content {\n            width: 100%;\n            margin: 0;\n        }\n\n        .respondents-list {\n            justify-content: center;\n            align-items: center;\n        }\n\n\n        .resondents-test-item {\n            max-height: calc(var(--row-mobile) * 16);\n        }\n\n        .resondents-test-item__hide {\n            max-height: 0px;\n            overflow: hidden;\n            opacity: 0;\n            visibility: hidden;\n            padding: 0;\n            margin: 0;\n        }\n        .resondents-test-item__active {\n            max-height: 10000px;\n        }\n\n        .resondents-test-item__show {\n            right: 40%;\n        }\n\n        .resondents-test-item:after {\n            top: calc(var(--row-mobile) * 16 - 100px);\n        }\n\n        .resondents-test-item h2 {\n            font-size: 1.1rem;\n            padding-top: 40px;\n        }\n\n    }\n\n\n\n</style>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -24108,7 +24108,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondent_item_vue__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondent_item_vue__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondent_item_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondent_item_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondent_item_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_respondent_item_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_8fb18898_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_respondent_item_vue__ = __webpack_require__(125);
@@ -24372,7 +24372,7 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stats_vue__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stats_vue__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stats_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stats_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stats_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stats_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4434b55f_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_stats_vue__ = __webpack_require__(134);
@@ -24470,7 +24470,7 @@ exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stat_item_vue__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stat_item_vue__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stat_item_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stat_item_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stat_item_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_stat_item_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_327a7e54_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_stat_item_vue__ = __webpack_require__(133);
@@ -24557,7 +24557,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.stat-item{display:flex;width:90%;margin-bottom:40px;box-shadow:1px 1px 4px rgba(0,0,0,.1);cursor:pointer;background-color:#fff;font-weight:700;transition:all .3s ease-in-out\n}\n.stat-item:hover .stat-item-title:before{left:0\n}\n.stat-item:hover .stat-item-title h3{color:#fff\n}\n.stat-item:hover .stat-item-title h3:after{left:0\n}\n.stat-item:hover .stat-item-stat ul{color:#656695\n}\n.stat-item-title{padding:40px;width:50%;position:relative;overflow:hidden\n}\n.stat-item-title h3{color:#092e64;z-index:100;position:relative;transition:all .3s ease-in-out\n}\n.stat-item-title h3:after{bottom:-10px;width:40px;height:3px;background-color:#fff;transition:all .3s ease-in-out .1s\n}\n.stat-item-title:before,.stat-item-title h3:after{display:block;position:absolute;content:\"\";left:-100%\n}\n.stat-item-title:before{z-index:99;top:0;background-color:#656695;width:100%;height:100%;transition:all .3s ease-in-out\n}\n.stat-item-stat{padding:40px;width:50%\n}\n.stat-item-stat ul{list-style:none;display:flex;justify-content:space-around;flex-wrap:wrap;color:#092e64\n}\n.stat-item-stat li{display:block;width:30%;text-align:center\n}\nli[class^=stat-item-stat]{font-size:2rem\n}\n@media screen and (max-width:812px){\n.stat-item{flex-direction:column\n}\n.stat-item-stat,.stat-item-title{width:100%\n}\n.stat-item-stat{padding:10px\n}\n.stat-item-stat li{font-size:.6rem\n}\n.stat-item:hover .stat-item-title h3:after{left:40%\n}\n.stat-item-title h3:after{width:20%\n}\nli[class^=stat-item-stat]{font-size:1.2rem\n}\n}", "", {"version":3,"sources":["/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/css/variables.css","/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/vue-comp/interface/src/vue-comp/interface/stat-item.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;ACkDD,WACA,aAAA,UACA,mBACA,sCAEA,eACA,sBACA,gBACA,8BAGA;CACA;AAEA,yCACA,MAAA;CACA;AAEA,qCACA,UAAA;CACA;AAEA,2CACA,MAAA;CACA;AAEA,oCACA,aAAA;CACA;AAEA,iBACA,aAAA,UACA,kBACA,eACA;CACA;AAEA,oBACA,cAAA,YACA,kBACA,8BAGA;CACA;AAEA,0BAKA,aAAA,WACA,WACA,sBACA,kCAGA;CAEA;AAEA,kDAdA,cAAA,kBACA,WACA,UACA;CAwBA;AAbA,wBAGA,WAAA,MAEA,yBACA,WAEA,YACA,8BAGA;CACA;AAEA,gBACA,aAAA,SACA;CACA;AAEA,mBACA,gBAAA,aACA,6BACA,eACA,aACA;CACA;AAEA,mBACA,cAAA,UACA,iBACA;CACA;AAEA,0BACA,cAAA;CACA;AAEA;AAEA,WACA,qBAAA;CACA;AAEA,iCAEA,UAAA;CACA;AAEA,gBACA,YAAA;CACA;AAEA,mBACA,eAAA;CACA;AAEA,2CACA,QAAA;CACA;AAEA,0BACA,SAAA;CACA;AAEA,0BACA,gBAAA;CACA;CAGA","file":"stat-item.vue","sourcesContent":[":root {\n    font-family: 'Marta';\n    font-size: 16px;\n    line-height: 1.4;\n    --blue: #092E64;\n    --purple: #656695;\n    --darkpurple: #313149;\n    --marine: #3493A8;\n    --yellow: #EFDA7B;\n    --green: #9DBE87;\n    --red: #c74545;\n    --background: #e6e5e5;\n    --column: calc(100vw / 24);\n    --row: calc(100vh / 12);\n    --column-mobile: calc(100vw / 12);\n    --row-mobile: calc(100vh / 24);\n}\n","<template lang=\"html\">\n\n    <div class=\"stat-item\">\n\n        <div class=\"stat-item-title\">\n            <h3>{{testTitle}}</h3>\n        </div>\n        <div class=\"stat-item-stat\">\n            <ul>\n                <li class=\"stat-item-stat__1\">{{respondentsNum}}</li>\n                <li class=\"stat-item-stat__2\">{{rightAnswers}}</li>\n                <li class=\"stat-item-stat__3\">{{wrongAnswers}}</li>\n                <li>Респондентов</li>\n                <li>Правильных</li>\n                <li>Неправильных</li>\n            </ul>\n        </div>\n\n    </div>\n\n</template>\n\n<script>\nexport default {\n\n    props: ['tries'],\n\n    data() {\n        return {\n            respondents: this.tries,\n            testTitle: this.tries.test_name\n        }\n    },\n\n    computed: {\n        respondentsNum() {\n            return this.respondents.tries.length\n        },\n\n        rightAnswers() {\n            let right = 0;\n            this.respondents.tries.forEach( (val,ind,arr) => {\n                val.result.answers.forEach((v,i,a) => {\n                    if(v.result) right++;\n                });\n            });\n            return right;\n        },\n\n        wrongAnswers() {\n            let wrong = 0;\n            this.respondents.tries.forEach( (val,ind,arr) => {\n                val.result.answers.forEach((v,i,a) => {\n                    if(!v.result) wrong++;\n                });\n            });\n            return wrong;\n        }\n    }\n\n}\n</script>\n\n<style lang=\"css\">\n\n    @import './../../css/variables.css';\n\n    .stat-item {\n        display: flex;\n        width: 90%;\n        margin-bottom: 40px;\n        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        cursor: pointer;\n        background-color: #fff;\n        font-weight: bold;\n        -webkit-transition: all .3s ease-in-out;\n        -o-transition: all .3s ease-in-out;\n        transition: all .3s ease-in-out;\n    }\n\n    .stat-item:hover .stat-item-title:before {\n        left: 0;\n    }\n\n    .stat-item:hover .stat-item-title h3 {\n        color: #fff;\n    }\n\n    .stat-item:hover .stat-item-title h3:after {\n        left: 0;\n    }\n\n    .stat-item:hover .stat-item-stat ul {\n        color: var(--purple);\n    }\n\n    .stat-item-title {\n        padding: 40px;\n        width: 50%;\n        position: relative;\n        overflow: hidden;\n    }\n\n    .stat-item-title h3 {\n        color: var(--blue);\n        z-index: 100;\n        position: relative;\n        -webkit-transition: all .3s ease-in-out;\n        -o-transition: all .3s ease-in-out;\n        transition: all .3s ease-in-out;\n    }\n\n    .stat-item-title h3:after {\n        display: block;\n        position: absolute;\n        content: '';\n        left: -100%;\n        bottom: -10px;\n        width: 40px;\n        height: 3px;\n        background-color: #fff;\n        -webkit-transition: all .3s ease-in-out .1s;\n        -o-transition: all .3s ease-in-out .1s;\n        transition: all .3s ease-in-out .1s;\n\n    }\n\n    .stat-item-title:before {\n        display: block;\n        position: absolute;\n        z-index: 99;\n        left: -100%;\n        top: 0px;\n        background-color: var(--purple);\n        content: '';\n        width: 100%;\n        height: 100%;\n        -webkit-transition: all .3s ease-in-out;\n        -o-transition: all .3s ease-in-out;\n        transition: all .3s ease-in-out;\n    }\n\n    .stat-item-stat {\n        padding: 40px;\n        width: 50%;\n    }\n\n    .stat-item-stat ul{\n        list-style: none;\n        display: flex;\n        justify-content: space-around;\n        flex-wrap: wrap;\n        color: var(--blue);\n    }\n\n    .stat-item-stat li {\n        display: block;\n        width: 30%;\n        text-align: center;\n    }\n\n    li[class^=\"stat-item-stat\"] {\n        font-size: 2rem;\n    }\n\n    @media screen and (max-width: 812px) {\n\n        .stat-item {\n            flex-direction: column;\n        }\n\n        .stat-item-title,\n        .stat-item-stat {\n            width: 100%;\n        }\n\n        .stat-item-stat {\n            padding: 10px;\n        }\n\n        .stat-item-stat li {\n            font-size: .6rem;\n        }\n\n        .stat-item:hover .stat-item-title h3:after {\n            left: 40%;\n        }\n\n        .stat-item-title h3:after {\n            width: 20%;\n        }\n\n        li[class^=stat-item-stat] {\n            font-size: 1.2rem;\n        }\n\n\n    }\n\n</style>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n:root{font-family:Marta;font-size:16px;line-height:1.4\n}\n.stat-item{display:flex;width:90%;margin-bottom:40px;box-shadow:1px 1px 4px rgba(0,0,0,.1);cursor:pointer;background-color:#fff;font-weight:700;transition:all .3s ease-in-out\n}\n.stat-item:hover .stat-item-title:before{left:0\n}\n.stat-item:hover .stat-item-title h3{color:#fff\n}\n.stat-item:hover .stat-item-title h3:after{left:0\n}\n.stat-item:hover .stat-item-stat ul{color:#656695\n}\n.stat-item-title{padding:40px;width:50%;position:relative;overflow:hidden\n}\n.stat-item-title h3{color:#092e64;z-index:100;position:relative;transition:all .3s ease-in-out\n}\n.stat-item-title h3:after{bottom:-10px;width:40px;height:3px;background-color:#fff;transition:all .3s ease-in-out .1s\n}\n.stat-item-title:before,.stat-item-title h3:after{display:block;position:absolute;content:\"\";left:-100%\n}\n.stat-item-title:before{z-index:99;top:0;background-color:#656695;width:100%;height:100%;transition:all .3s ease-in-out\n}\n.stat-item-stat{padding:40px;width:50%\n}\n.stat-item-stat ul{list-style:none;display:flex;justify-content:space-around;flex-wrap:wrap;color:#092e64\n}\n.stat-item-stat li{display:block;width:30%;text-align:center;font-size:.8rem\n}\nli[class^=stat-item-stat]{font-size:2rem\n}\n@media screen and (max-width:812px){\n.stat-item{flex-direction:column\n}\n.stat-item-stat,.stat-item-title{width:100%\n}\n.stat-item-stat{padding:10px\n}\n.stat-item-stat li{font-size:.6rem\n}\n.stat-item:hover .stat-item-title h3:after{left:40%\n}\n.stat-item-title h3:after{width:20%\n}\nli[class^=stat-item-stat]{font-size:1.2rem\n}\n}", "", {"version":3,"sources":["/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/css/variables.css","/Applications/XAMPP/xamppfiles/htdocs/tester-avalon/src/vue-comp/interface/src/vue-comp/interface/stat-item.vue"],"names":[],"mappings":";AAAA,MACI,kBAAqB,eACL,eACC;CAapB;ACkDD,WACA,aAAA,UACA,mBACA,sCAEA,eACA,sBACA,gBACA,8BAGA;CACA;AAEA,yCACA,MAAA;CACA;AAEA,qCACA,UAAA;CACA;AAEA,2CACA,MAAA;CACA;AAEA,oCACA,aAAA;CACA;AAEA,iBACA,aAAA,UACA,kBACA,eACA;CACA;AAEA,oBACA,cAAA,YACA,kBACA,8BAGA;CACA;AAEA,0BAKA,aAAA,WACA,WACA,sBACA,kCAGA;CAEA;AAEA,kDAdA,cAAA,kBACA,WACA,UACA;CAwBA;AAbA,wBAGA,WAAA,MAEA,yBACA,WAEA,YACA,8BAGA;CACA;AAEA,gBACA,aAAA,SACA;CACA;AAEA,mBACA,gBAAA,aACA,6BACA,eACA,aACA;CACA;AAEA,mBACA,cAAA,UACA,kBACA,eACA;CACA;AAEA,0BACA,cAAA;CACA;AAEA;AAEA,WACA,qBAAA;CACA;AAEA,iCAEA,UAAA;CACA;AAEA,gBACA,YAAA;CACA;AAEA,mBACA,eAAA;CACA;AAEA,2CACA,QAAA;CACA;AAEA,0BACA,SAAA;CACA;AAEA,0BACA,gBAAA;CACA;CAGA","file":"stat-item.vue","sourcesContent":[":root {\n    font-family: 'Marta';\n    font-size: 16px;\n    line-height: 1.4;\n    --blue: #092E64;\n    --purple: #656695;\n    --darkpurple: #313149;\n    --marine: #3493A8;\n    --yellow: #EFDA7B;\n    --green: #9DBE87;\n    --red: #c74545;\n    --background: #e6e5e5;\n    --column: calc(100vw / 24);\n    --row: calc(100vh / 12);\n    --column-mobile: calc(100vw / 12);\n    --row-mobile: calc(100vh / 24);\n}\n","<template lang=\"html\">\n\n    <div class=\"stat-item\">\n\n        <div class=\"stat-item-title\">\n            <h3>{{testTitle}}</h3>\n        </div>\n        <div class=\"stat-item-stat\">\n            <ul>\n                <li class=\"stat-item-stat__1\">{{respondentsNum}}</li>\n                <li class=\"stat-item-stat__2\">{{rightAnswers}}</li>\n                <li class=\"stat-item-stat__3\">{{wrongAnswers}}</li>\n                <li>Респондентов</li>\n                <li>Правильных</li>\n                <li>Неправильных</li>\n            </ul>\n        </div>\n\n    </div>\n\n</template>\n\n<script>\nexport default {\n\n    props: ['tries'],\n\n    data() {\n        return {\n            respondents: this.tries,\n            testTitle: this.tries.test_name\n        }\n    },\n\n    computed: {\n        respondentsNum() {\n            return this.respondents.tries.length\n        },\n\n        rightAnswers() {\n            let right = 0;\n            this.respondents.tries.forEach( (val,ind,arr) => {\n                val.result.answers.forEach((v,i,a) => {\n                    if(v.result) right++;\n                });\n            });\n            return right;\n        },\n\n        wrongAnswers() {\n            let wrong = 0;\n            this.respondents.tries.forEach( (val,ind,arr) => {\n                val.result.answers.forEach((v,i,a) => {\n                    if(!v.result) wrong++;\n                });\n            });\n            return wrong;\n        }\n    }\n\n}\n</script>\n\n<style lang=\"css\">\n\n    @import './../../css/variables.css';\n\n    .stat-item {\n        display: flex;\n        width: 90%;\n        margin-bottom: 40px;\n        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        box-shadow: 1px 1px 4px rgba(0,0,0,0.1);\n        cursor: pointer;\n        background-color: #fff;\n        font-weight: bold;\n        -webkit-transition: all .3s ease-in-out;\n        -o-transition: all .3s ease-in-out;\n        transition: all .3s ease-in-out;\n    }\n\n    .stat-item:hover .stat-item-title:before {\n        left: 0;\n    }\n\n    .stat-item:hover .stat-item-title h3 {\n        color: #fff;\n    }\n\n    .stat-item:hover .stat-item-title h3:after {\n        left: 0;\n    }\n\n    .stat-item:hover .stat-item-stat ul {\n        color: var(--purple);\n    }\n\n    .stat-item-title {\n        padding: 40px;\n        width: 50%;\n        position: relative;\n        overflow: hidden;\n    }\n\n    .stat-item-title h3 {\n        color: var(--blue);\n        z-index: 100;\n        position: relative;\n        -webkit-transition: all .3s ease-in-out;\n        -o-transition: all .3s ease-in-out;\n        transition: all .3s ease-in-out;\n    }\n\n    .stat-item-title h3:after {\n        display: block;\n        position: absolute;\n        content: '';\n        left: -100%;\n        bottom: -10px;\n        width: 40px;\n        height: 3px;\n        background-color: #fff;\n        -webkit-transition: all .3s ease-in-out .1s;\n        -o-transition: all .3s ease-in-out .1s;\n        transition: all .3s ease-in-out .1s;\n\n    }\n\n    .stat-item-title:before {\n        display: block;\n        position: absolute;\n        z-index: 99;\n        left: -100%;\n        top: 0px;\n        background-color: var(--purple);\n        content: '';\n        width: 100%;\n        height: 100%;\n        -webkit-transition: all .3s ease-in-out;\n        -o-transition: all .3s ease-in-out;\n        transition: all .3s ease-in-out;\n    }\n\n    .stat-item-stat {\n        padding: 40px;\n        width: 50%;\n    }\n\n    .stat-item-stat ul{\n        list-style: none;\n        display: flex;\n        justify-content: space-around;\n        flex-wrap: wrap;\n        color: var(--blue);\n    }\n\n    .stat-item-stat li {\n        display: block;\n        width: 30%;\n        text-align: center;\n        font-size: .8rem;\n    }\n\n    li[class^=\"stat-item-stat\"] {\n        font-size: 2rem;\n    }\n\n    @media screen and (max-width: 812px) {\n\n        .stat-item {\n            flex-direction: column;\n        }\n\n        .stat-item-title,\n        .stat-item-stat {\n            width: 100%;\n        }\n\n        .stat-item-stat {\n            padding: 10px;\n        }\n\n        .stat-item-stat li {\n            font-size: .6rem;\n        }\n\n        .stat-item:hover .stat-item-title h3:after {\n            left: 40%;\n        }\n\n        .stat-item-title h3:after {\n            width: 20%;\n        }\n\n        li[class^=stat-item-stat] {\n            font-size: 1.2rem;\n        }\n\n\n    }\n\n</style>\n"],"sourceRoot":""}]);
 
 // exports
 

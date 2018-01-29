@@ -158,6 +158,7 @@ export default {
         display: block;
         width: 30%;
         text-align: center;
+        font-size: .8rem;
     }
 
     li[class^="stat-item-stat"] {
